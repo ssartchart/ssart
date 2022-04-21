@@ -1,17 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="자율" company="free" webLink="http://" view-date="2022-04-09" view-index="1" gantt-divider-location="566" resource-divider-location="435" version="3.2.3230" locale="ko_KR">
+<?xml version="1.0" encoding="UTF-8"?><project name="자율" company="free" webLink="http://" view-date="2022-04-09" view-index="0" gantt-divider-location="566" resource-divider-location="435" version="3.2.3230" locale="ko_KR">
     <description/>
     <view zooming-state="default:2" id="gantt-chart">
         <field id="tpd3" name="이름" width="323" order="0"/>
-        <field id="tpd4" name="시작일" width="122" order="1"/>
-        <field id="tpd5" name="종료일" width="120" order="2"/>
+        <field id="tpd4" name="시작일" width="123" order="1"/>
+        <field id="tpd5" name="종료일" width="119" order="2"/>
         <option id="filter.completedTasks" value="false"/>
         <timeline>
             <![CDATA[0]]>
         </timeline>
     </view>
     <view id="resource-table">
-        <field id="0" name="이름" width="334" order="0"/>
-        <field id="1" name="기본 역할" width="82" order="1"/>
+        <field id="0" name="이름" width="341" order="0"/>
+        <field id="1" name="기본 역할" width="90" order="1"/>
     </view>
     <!-- -->
     <calendars>
@@ -79,6 +79,7 @@
             <depend id="20" type="2" difference="0" hardness="Strong"/>
             <depend id="21" type="2" difference="0" hardness="Strong"/>
         </task>
+        <task id="32" name="testTask" meeting="false" start="2022-04-11" duration="1" complete="0" expand="true"/>
         <task id="15" name="line graph 개발" color="#8cb6ce" meeting="false" start="2022-04-27" duration="4" complete="0" thirdDate="2022-04-25" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <depend id="19" type="2" difference="0" hardness="Strong"/>
         </task>
