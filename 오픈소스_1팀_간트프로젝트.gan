@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="자율" company="free" webLink="http://" view-date="2022-04-09" view-index="1" gantt-divider-location="566" resource-divider-location="435" version="3.2.3230" locale="ko_KR">
+    <description/>
+    <view zooming-state="default:2" id="gantt-chart">
+        <field id="tpd3" name="이름" width="323" order="0"/>
+        <field id="tpd4" name="시작일" width="122" order="1"/>
+        <field id="tpd5" name="종료일" width="120" order="2"/>
+        <option id="filter.completedTasks" value="false"/>
+        <timeline>
+            <![CDATA[0]]>
+        </timeline>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="이름" width="334" order="0"/>
+        <field id="1" name="기본 역할" width="82" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="0" name="프로젝트 기획" color="#8cb6ce" meeting="false" start="2022-04-11" duration="3" complete="0" thirdDate="2022-04-11" thirdDate-constraint="0" priority="4" expand="true">
+            <depend id="8" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="8" name="프로젝트 설계 구체화" color="#8cb6ce" meeting="false" start="2022-04-14" duration="2" complete="0" thirdDate="2022-04-11" thirdDate-constraint="0" expand="true">
+            <depend id="9" type="2" difference="0" hardness="Strong"/>
+            <depend id="16" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="16" name="데이터 시각화 컴포넌트 기획/ 기술조사" color="#8cb6ce" meeting="false" start="2022-04-18" duration="5" complete="0" thirdDate="2022-03-29" thirdDate-constraint="0" expand="true">
+            <depend id="17" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="9" name="JS 라이브러리 개발 방법 공부" color="#8cb6ce" meeting="false" start="2022-04-18" duration="3" complete="0" thirdDate="2022-04-11" thirdDate-constraint="0" expand="true">
+            <depend id="10" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="17" name="bar graph UI/UX + UI/UX 규정" color="#8cb6ce" meeting="false" start="2022-04-25" duration="4" complete="0" thirdDate="2022-03-29" thirdDate-constraint="0" expand="true">
+            <depend id="23" type="2" difference="0" hardness="Strong"/>
+            <depend id="25" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="23" name="line graph UI/UX" color="#8cb6ce" meeting="false" start="2022-04-29" duration="4" complete="0" thirdDate="2022-04-29" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+            <depend id="27" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="24" name="area graph UI/UX" color="#8cb6ce" meeting="false" start="2022-05-10" duration="3" complete="0" thirdDate="2022-04-29" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+            <depend id="30" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="31" name="NPM 배포, Libarary 모듈 작업" color="#8cb6ce" meeting="false" start="2022-04-18" duration="2" complete="0" thirdDate="2022-04-11" thirdDate-constraint="0" expand="true"/>
+        <task id="25" name="scattor graph  UI/UX" color="#8cb6ce" meeting="false" start="2022-04-29" duration="4" complete="0" thirdDate="2022-04-29" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+            <depend id="28" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="26" name="bubble graph UI/UX" color="#8cb6ce" meeting="false" start="2022-05-10" duration="3" complete="0" thirdDate="2022-04-29" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+            <depend id="30" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="27" name="pie chart  UI/UX" color="#8cb6ce" meeting="false" start="2022-05-05" duration="3" complete="0" thirdDate="2022-04-29" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+            <depend id="24" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="28" name="donut chart  UI/UX" color="#8cb6ce" meeting="false" start="2022-05-05" duration="3" complete="0" thirdDate="2022-04-29" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+            <depend id="26" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="10" name="bar graph 개발 + coding convention 맞추기" color="#8cb6ce" meeting="false" start="2022-04-21" duration="4" complete="0" thirdDate="2022-04-11" thirdDate-constraint="0" expand="true">
+            <depend id="15" type="2" difference="0" hardness="Strong"/>
+            <depend id="18" type="2" difference="0" hardness="Strong"/>
+            <depend id="20" type="2" difference="0" hardness="Strong"/>
+            <depend id="21" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="15" name="line graph 개발" color="#8cb6ce" meeting="false" start="2022-04-27" duration="4" complete="0" thirdDate="2022-04-25" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+            <depend id="19" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="19" name="area graph 개발" color="#8cb6ce" meeting="false" start="2022-05-03" duration="4" complete="0" thirdDate="2022-05-02" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+            <depend id="29" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="18" name="scattor graph 개발" color="#8cb6ce" meeting="false" start="2022-04-27" duration="4" complete="0" thirdDate="2022-05-02" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+            <depend id="22" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="22" name="bubble graph 개발" color="#8cb6ce" meeting="false" start="2022-05-03" duration="4" complete="0" thirdDate="2022-05-02" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true"/>
+        <task id="21" name="pie chart 개발" color="#8cb6ce" meeting="false" start="2022-04-27" duration="6" complete="0" thirdDate="2022-05-02" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+            <depend id="11" type="2" difference="0" hardness="Strong"/>
+            <depend id="29" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="20" name="donut chart 개발" color="#8cb6ce" meeting="false" start="2022-04-27" duration="6" complete="0" thirdDate="2022-05-02" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+            <depend id="11" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="11" name="프로젝트 종합/ 테스트1" color="#8cb6ce" meeting="false" start="2022-05-05" duration="2" complete="0" thirdDate="2022-04-11" thirdDate-constraint="0" expand="true">
+            <depend id="29" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="29" name="프로젝트 종합/ 테스트2" color="#8cb6ce" meeting="false" start="2022-05-09" duration="2" complete="0" thirdDate="2022-05-09" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+            <depend id="30" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="30" name="프로젝트 종합/ 테스트3" color="#8cb6ce" meeting="false" start="2022-05-13" duration="2" complete="0" thirdDate="2022-05-09" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+            <depend id="12" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="12" name="배포 및 발표 준비" color="#8cb6ce" meeting="false" start="2022-05-17" duration="3" complete="0" thirdDate="2022-04-11" thirdDate-constraint="0" expand="true"/>
+    </tasks>
+    <resources>
+        <resource id="0" name="이정훈" function="SoftwareDevelopment:2" contacts="" phone=""/>
+        <resource id="1" name="김영진" function="SoftwareDevelopment:2" contacts="kimyj1288@naver.com" phone="01026177429"/>
+        <resource id="2" name="배용한" function="SoftwareDevelopment:2" contacts="" phone=""/>
+        <resource id="3" name="안재영" function="SoftwareDevelopment:2" contacts="" phone=""/>
+        <resource id="4" name="정해윤" function="SoftwareDevelopment:2" contacts="" phone=""/>
+        <resource id="5" name="조원빈" function="SoftwareDevelopment:2" contacts="" phone=""/>
+    </resources>
+    <allocations>
+        <allocation task-id="0" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="10" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="12" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="8" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="9" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="15" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="19" resource-id="0" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="29" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="30" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="0" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="8" resource-id="1" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="16" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="17" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="12" resource-id="1" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="23" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="24" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="27" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="30" resource-id="1" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="0" resource-id="2" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="8" resource-id="2" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="9" resource-id="2" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="10" resource-id="2" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="12" resource-id="2" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="18" resource-id="2" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="22" resource-id="2" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="29" resource-id="2" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="30" resource-id="2" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="31" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="0" resource-id="3" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="8" resource-id="3" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="16" resource-id="3" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="17" resource-id="3" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="12" resource-id="3" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="26" resource-id="3" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="25" resource-id="3" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="28" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="30" resource-id="3" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="0" resource-id="4" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="8" resource-id="4" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="9" resource-id="4" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="10" resource-id="4" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="11" resource-id="4" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="12" resource-id="4" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="21" resource-id="4" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="29" resource-id="4" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="30" resource-id="4" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="0" resource-id="5" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="8" resource-id="5" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="9" resource-id="5" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="10" resource-id="5" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="12" resource-id="5" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="11" resource-id="5" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="20" resource-id="5" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="29" resource-id="5" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="30" resource-id="5" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+    </allocations>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+    <roles roleset-name="SoftwareDevelopment"/>
+</project>
