@@ -1,6 +1,7 @@
 export { drawChart, drawBarChart };
 import * as d3 from "https://cdn.skypack.dev/d3@7";
 
+// 원형 차트 그리는 함수
 function drawChart(ctx, results) {
   // let sum = 0;
   let totalNumberOfPeople = results.reduce((sum, { total }) => sum + total, 0);
@@ -20,7 +21,7 @@ function drawChart(ctx, results) {
   }
 }
 
-// 수직 막대바 차트 그리기(초간단)
+// 수직 막대바 차트 그리는 함수(초간단)
 function drawBarChart(data) {
   const MARGINS = { top: 20, bottom: 10 };
   const CHART_WIDTH = 600;
