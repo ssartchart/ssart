@@ -1,4 +1,4 @@
-export { drawChart, drawBarChart };
+export { drawChart, drawBarChart, drawLegend };
 import * as d3 from "https://cdn.skypack.dev/d3@7";
 
 // 원형 차트 그리는 함수
@@ -109,6 +109,15 @@ function drawBarChart(data) {
         (d) => unselectedIds.indexOf(d.id) === -1);
       renderChart();
     });
+}
+function drawLegend () {
+  // select the svg area
+  const svg = d3.select("#my_dataviz")
+  // Handmade legend
+  svg.append("circle").attr("cx", 20).attr("cy", 30).attr("r", 6).style("fill", "#69b3a2")
+  svg.append("circle").attr("cx", 20).attr("cy", 60).attr("r", 6).style("fill", "#404080")
+  svg.append("text").attr("x", 40).attr("y", 30).text("variable A").style("font-size", "15px").attr("alignment-baseline", "middle")
+  svg.append("text").attr("x", 40).attr("y", 60).text("variable B").style("font-size", "15px").attr("alignment-baseline", "middle")  
 }
 
 // function draw(type, data) {  

@@ -63,14 +63,15 @@
   </div>
     
   <script type="module">    
-    import {drawBarChart, drawChart} from './main.js'    
+    import {drawBarChart, drawChart, drawLegend } from './main.js'    
     const data = [
       {"Country": "Russia", "Value": 4000, "id": 1},
       {"Country": "China", "Value": 10000, "id": 2},
       {"Country": "Japan", "Value": 100, "id": 3},
       {"Country": "United States", "Value": 500, "id": 4},
     ]
-    drawBarChart(data)
+    drawBarChart(data);
+    drawLegend();
     // draw('bar', data);
     // drawChart(document.getElementById('myviz').getContext('2d'), {});    
   </script>
