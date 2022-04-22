@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>  
+  <style>
+    html {
+        font-family: sans-serif;
+      }
+
+      #app {
+        display: flex;
+        margin: 2rem 1rem;
+      }
+
+      #chart {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+        padding: 1rem;
+      }
+
+      #chart,
+      #data {
+        margin: 0 2rem;
+      }
+
+      #data ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      #data li {
+        margin-bottom: 1rem;
+        padding: 1rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+        width: 10rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
+      }
+
+      .bar {
+        fill: #4f009e;
+      }
+
+      .label {
+        fill: #4f009e;
+      }
+  </style>
+</head>
+<body>
+  <!-- <div id="my_dataviz"></div> -->
+  <div id="app">
+    <div id="chart">
+      <svg></svg>  
+    </div>
+    <div id="data">
+      <ul></ul>
+    </div>
+  </div>
+    
+  <script type="module">    
+    import {drawBarChart, drawChart} from './main.js'    
+    const data = [
+      {"Country": "Russia", "Value": 4000, "id": 1},
+      {"Country": "China", "Value": 10000, "id": 2},
+      {"Country": "Japan", "Value": 100, "id": 3},
+      {"Country": "United States", "Value": 500, "id": 4},
+    ]
+    drawBarChart(data)
+    // draw('bar', data);
+    // drawChart(document.getElementById('myviz').getContext('2d'), {});    
+  </script>
+</body>
+
+</html>
