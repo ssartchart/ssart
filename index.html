@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://uicdn.toast.com/chart/latest/toastui-chart.min.css" />
+    <script src="https://uicdn.toast.com/chart/latest/toastui-chart.min.js"></script>
+    
+    <link rel="icon" type="image/png" href="http://example.com/myicon.png">
+    </head>
+<style>
+    body{padding: 5%;text-align: center;}
+
+    #bargraph {
+        position: relative;
+    }
+
+    #tooltip {
+        position: absolute;
+        opacity: 0;
+        width: 40px;
+        height: 20px;
+        line-height: 20px;
+        transition: all 0.3s;
+        border-radius: 5px;
+        text-align: center;
+        color: #d0d;
+        font-size: 14px;
+        font-weight: bold;
+    }
+</style>
+<body>
+
+    <div id="bargraph">
+        <div id = 'tooltip'></div>
+    </div>
+
+    <div id="bargraph2"></div>
+
+
+    <div id="bargraph3"></div>
+    <div id="bargraph4"></div>
+    <div id="bargraph5"></div>
+
+    <script src='https://d3js.org/d3.v5.min.js'></script>
+
+    <script>
+        
+        const width = 500;
+        const height = 500;
+        const margin = {top: 40, left: 40, bottom: 40, right: 40};
+        
+        const width2 = 700;
+        const height2 = 500;
+        const margin2 = {top: 40, left: 40, bottom: 40, right: 40};
+        const padding = 0;
+        const dataset = [
+            {
+                label: 'data1',
+                data : [
+                    {name: 'a', value: 10},
+                    {name: 'b', value: 29},
+                    {name: 'c', value: 32},
+                    {name: 'd', value: 25},
+                    {name: 'e', value: 23},
+                    {name: 'f', value: 15}
+                ]
+            }
+        ];
+        const labels = ['a','b','c','d','e','f'];
+        const dataset2 = [
+            {
+                label: 'data1',
+                data : [
+                    {name: 'a', value: 10},
+                    {name: 'b', value: 29},
+                    {name: 'c', value: 32},
+                    {name: 'd', value: 25},
+                    {name: 'e', value: 23},
+                    {name: 'f', value: 15}
+                ]
+            },
+            {
+                label: 'data2',
+                data : [
+                    {name: 'a', value: 15},
+                    {name: 'b', value: 23},
+                    {name: 'c', value: 25},
+                    {name: 'd', value: 32},
+                    {name: 'e', value: 29},
+                    {name: 'f', value: 10}
+                ]
+            }
+        ];
+
+
+        const dataset3 = [
+            {
+                label: 'data1',
+                data : [
+                    {name: 'a', value: 10},
+                    {name: 'b', value: 29},
+                    {name: 'c', value: 32},
+                    {name: 'd', value: 25},
+                    {name: 'e', value: 23},
+                    {name: 'f', value: 15}
+                ]
+            },
+            {
+                label: 'data2',
+                data : [
+                    {name: 'a', value: 15},
+                    {name: 'b', value: 23},
+                    {name: 'c', value: 25},
+                    {name: 'd', value: 32},
+                    {name: 'e', value: 29},
+                    {name: 'f', value: 10}
+                ]
+            },
+            {
+                label: 'data3',
+                data : [
+                    {name: 'a', value: 15},
+                    {name: 'b', value: 23},
+                    {name: 'd', value: 32},
+                    {name: 'e', value: 29},
+                    {name: 'f', value: 10}
+                ]
+            }
+        ];
+
+        const dataset4 = [
+            {
+                label: 'data1',
+                data : [
+                    {name: 'a', value: 10},
+                    {name: 'b', value: 29},
+                    {name: 'c', value: 32},
+                    {name: 'd', value: 25},
+                    {name: 'e', value: 23},
+                    {name: 'f', value: 15}
+                ]
+            },
+            {
+                label: 'data2',
+                data : [
+                    {name: 'a', value: 15},
+                    {name: 'b', value: 23},
+                    {name: 'c', value: 25},
+                    {name: 'd', value: 32},
+                    {name: 'e', value: 29},
+                    {name: 'f', value: 10}
+                ]
+            },
+            {
+                label: 'data3',
+                data : [
+                    {name: 'a', value: 15},
+                    {name: 'b', value: 23},
+                    {name: 'd', value: 32},
+                    {name: 'e', value: 29},
+                    {name: 'f', value: 10}
+                ]
+            },
+            {
+                label: 'data4',
+                data : [
+                    {name: 'a', value: 15},
+                    {name: 'b', value: 23},
+                    {name: 'c', value: 25},
+                    {name: 'd', value: 32},
+                    {name: 'f', value: 10}
+                ]
+            }
+        ];
+
+    </script>
+    <script type="module">
+
+        import * as Chart from './src/index.js';
+        
+
+        // Chart.Chart("bar",'#bargraph',dataset,width2,height2,margin2);
+        Chart.Chart2("bar",'#bargraph',labels,dataset,width2,height2,margin2,padding);
+        Chart.Chart2("bar",'#bargraph2',labels,dataset2,width2,height2,margin2,padding);
+        Chart.Chart2("bar",'#bargraph3',labels,dataset3,width2,height2,margin2,padding);
+        Chart.Chart2("bar",'#bargraph4',labels,dataset4,width2,height2,margin2,padding);
+    </script>
+    
+</body>
+</html>
