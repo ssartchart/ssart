@@ -1,1 +1,1 @@
-export {Chart} from './function.js';
+export {Chart, ChartH} from './function.js';

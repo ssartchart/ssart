@@ -38,6 +38,7 @@ export const BarChart = (svg,labels,dataset,width,height,margin,padding,y_max,y_
             .selectAll('rect').data(data.data).enter().append('rect')
             .attr('x', d => x(d.name) + (2/n*index)*(parseInt((x.bandwidth())/n))*(n/2)) 
             .attr('y', d => y(d.value))
+            .transition().duration(1000) //그려질때 애니메이션 효과 (아래에서 위로 하는 방법?)
             .attr('height', d => y(y_min) - y(d.value))
             .attr('width', parseInt((x.bandwidth())/n)- padding)
             .attr('data-x', d => d.name)
