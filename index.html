@@ -15,8 +15,23 @@
 
   import { makeChart } from "./src/index.js"
 
+  const data = [5, 7, 6, 3, 11]
+  const config = {
+    x: d => d.letter,
+    y: d => d.frequency,
+    xDomain: [1, 2, 3, 4, 5],
+    yFormat: "%",
+    yLabel: "↑ Frequency",
+    width: 1000,
+    height: 500,
+    color: "steelblue"
+  }
+
   const myBar = document.querySelector("#myBar")
-  myBar.appendChild(makeChart("bar"))
+
+  const chart = makeChart("bar", data)
+  myBar.appendChild(chart)
+  console.log(chart)
 
 </script>
 

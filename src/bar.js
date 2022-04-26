@@ -26,6 +26,7 @@ function BarChart(data, {
   const X = d3.map(data, x);
   const Y = d3.map(data, y);
 
+  console.log(color)
   // Compute default domains, and unique the x-domain.
   if (xDomain === undefined) xDomain = X;
   if (yDomain === undefined) yDomain = [0, d3.max(Y)];
@@ -76,6 +77,8 @@ function BarChart(data, {
 
   // A helper method for updating the position of bars.
   function position(rect, x, y) {
+    console.log(yScale(0))
+
     return rect
         .attr("x", x)
         .attr("y", y)
