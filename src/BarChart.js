@@ -41,7 +41,9 @@ export const BarChart = (svg,labels,dataset,width,height,margin,padding,y_max,y_
             .attr('height', d => y(y_min) - y(d.value))
             .attr('width', parseInt((x.bandwidth())/n)- padding)
             .attr('data-x', d => d.name)
-            .attr('data-y', d => d.value);
+            .attr('data-y', d => d.value)
+            .on("mouseover", onMouseOver)
+            .on("mouseout", onMouseOut);
     });
 
 
@@ -54,20 +56,45 @@ export const BarChart = (svg,labels,dataset,width,height,margin,padding,y_max,y_
 
     const tooltop = document.getElementById('tooltip');
 
-    for(const el of rectEl) {
-        el.addEventListener('mouseover', (event) => {
+    for(const el of rectEl) { // 마우스 커서 기준 위치를 받아서 마우스 근처에 데이터 표시
+        el.addEventListener('mousemove', (event) => {
+            const x = event.pageX;
+            const y = event.pageY;
             const target = event.target;
-            const positionLeft = Number(target.getAttribute('x')) + Number(x.bandwidth()/2) - tooltop.clientWidth/2;
-            const positionTop = height - margin.top - target.getAttribute('height') - tooltop.clientHeight - 5;
+            const positionLeft =x;
+            const positionTop = y;
             // const color = target.dataset.color;
             const value = target.dataset.y;
-
+            
+            
             tooltop.innerText = value;
             tooltop.style.background = '#ddd';
-            tooltop.style.top = positionTop + 'px';
-            tooltop.style.left = positionLeft + 'px';
+            tooltop.style.top = positionTop -110+ 'px';
+            tooltop.style.left = positionLeft -90 + 'px';
+            // tooltip.style("left", (d3.event.pageX+10)+"px");
+            // tooltip.style("top",  (d3.event.pageY-10)+"px");
             tooltop.style.opacity = 1;
+                
         });
     }
-        
+
+    function onMouseOut(d, i) { 
+        d3.select(this).transition().duration(600).style("opacity" , "1.0");
+        d3.select(".val")
+          .selectAll("text")
+          .filter((d, index) => index === i)
+          .attr("display", "none");
+          tooltop.style.opacity = 0; // 마우스가 target을 벗어나면 tooltip 안보이게
+      }
+      
+      function onMouseOver(d, i) { // 마우스 커서가 위에 있으면 색상 변환 (가시성)
+        d3.select(this).transition().duration(600).style("opacity", "0.5");  // 일단 임의로 하늘색
+        d3.select(".val")
+          .selectAll("text")
+          .filter((d, index) => index === i)
+          .attr("display", "block") 
+          
+      }
+         
 };
+
