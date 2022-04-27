@@ -1,4 +1,4 @@
-import { xGrid } from "./function.js";
+import { xGrid, xGridHidden, xGridShow } from "./function.js";
 import { yGrid } from "./function.js";
 
 export const BarChart = (id,svg,labels,dataset,width,height,margin,padding, options, y_max,y_min) => {
@@ -42,6 +42,31 @@ export const BarChart = (id,svg,labels,dataset,width,height,margin,padding, opti
             -height + margin.top + margin.bottom,
             options.xGrid
         )
+        svg
+            .append('foreignObject')
+            .attr('x', margin.left + width/2)
+            .attr('y', 0)
+            .attr('height', 100)
+            .attr('width', 100)
+            .attr('id', id+"xGridHiddenButton")
+            
+        const xGridHiddenButton = document.getElementById(id+"xGridHiddenButton")
+        xGridHiddenButton.innerText = id
+        xGridHiddenButton.addEventListener("click", xGridHidden)
+        
+        svg
+            .append('foreignObject')
+            .attr('fill', "steelblue")
+            .attr('x', margin.left + width/2 + 40)
+            .attr('y', 0)
+            .attr('height', 20)
+            .attr('width', 20)
+            .attr('id', id+"xGridShowButton")
+        
+        const xGridShowButton = document.getElementById(id+"xGridShowButton")
+        xGridShowButton.innerText = id
+        xGridShowButton.addEventListener("click", xGridShow)
+        
     }
 
     if (options.yGrid) {

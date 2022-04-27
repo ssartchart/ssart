@@ -36,10 +36,7 @@ function Chart(type,id,labels,dataset,width,height,margin,padding, grid={}, y_ma
 function xGrid(id,length,options) {
     let color = "black"
     if (options.color) {
-        console.log(color)
-        console.log(options.color)
         color = options.color
-        console.log(color)
     }
 
     let weight = 1
@@ -69,9 +66,6 @@ function xGrid(id,length,options) {
         .attr("x2", 0)
         .attr("y2", 0);
 
-    if (options.display===false) {
-        xGridHidden(id)
-    }
 }
 
 function yGrid(id,length,options) {
@@ -107,14 +101,15 @@ function yGrid(id,length,options) {
         .attr("x2", length)
         .attr("y2", 0);
 
-    if (options.display===false) {
-        yGridHidden(id)
-    }
 }
 
-function xGridShow(id) {
+function xGridShow(event) {
     // grid 보이기 이벤트 발생 시
-    d3.selectAll(id + " svg g.xAxis g.tick")
+    console.log(event.target)
+    console.log(event.target.innerText)
+    console.log(event.target.id)
+    
+    d3.selectAll(event.target.innerText + " svg g.yAxis g.tick line.gridline")
         .style("visibility", "visible")
 }
 
@@ -124,9 +119,13 @@ function yGridShow(id) {
         .style("visibility", "visible")
 }
 
-function xGridHidden(id) {
-    // grid 없애기 이벤트 발생 시 
-    d3.selectAll(id + " svg g.xAxis g.tick line.gridline")
+function xGridHidden(event) {
+    // grid 없애기 이벤트 발생 시
+    console.log(event.target)
+    console.log(event.target.innerText)
+    console.log(event.target.id)
+
+    d3.selectAll(event.target.innerText + " svg g.yAxis g.tick line.gridline")
         .style("visibility", "hidden")
 }
 
