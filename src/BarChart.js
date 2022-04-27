@@ -1,4 +1,7 @@
-export const BarChart = (id,svg,labels,dataset,width,height,margin,padding, grid, y_max,y_min) => {
+import { xGrid } from "./function.js";
+import { yGrid } from "./function.js";
+
+export const BarChart = (id,svg,labels,dataset,width,height,margin,padding, options, y_max,y_min) => {
     
 
     const colors = ["steelblue","red","yellow","green"];
@@ -32,45 +35,23 @@ export const BarChart = (id,svg,labels,dataset,width,height,margin,padding, grid
     svg.append('g').call(yAxis);
     svg.append('g').call(xAxis);
 
-    // config에 grid 값이 있다면 grid 그려주기
-    if (grid.x) {
-        d3.selectAll("div" + id + " svg g.xAxis g.tick")
-            .append("line")
-            .attr("class", "gridline")
-            .attr("stroke", "blue")
-            .attr("stroke-width", 1)
-            .attr("stroke-opacity", 1)
-            // .attr("shape-rendering", "crispEdges")
-            .attr("x1", 0)
-            .attr("y1", -height + margin.top + margin.bottom)
-            .attr("x2", 0)
-            .attr("y2", 0);
+
+    if (options.xGrid) {
+        xGrid(
+            id,
+            -height + margin.top + margin.bottom,
+            options.xGrid
+        )
     }
 
-    d3.selectAll("div" + id + " svg g.yAxis g.tick")
-        .append("line")
-        .attr("class", "gridline")
-        .style("stroke", "rgba(255, 0, 0, 1)")      // 색
-        .style("stroke-width", 1)                   // 두께
-        .style("stroke-opacity", 1)                 // 투명도
-        .style("shape-rendering", "crispEdges")      // 렌더링, 안써도 될듯
-        .style("stroke-dasharray", ("10,3"))         // 점선
-        .attr("x1", 0)
-        .attr("y1", 0)
-        .attr("x2", width - margin.left - margin.right) // 길이
-        .attr("y2", 0);
-
-
-    
-    // grid 없애기 이벤트 발생 시 
-    // d3.selectAll("g.xAxis g.tick line.gridline")
-    //     .style("visibility", "hidden")
-    
-    // grid 보이기 이벤트 발생 시
-    // d3.selectAll("g.xAxis g.tick line.gridline")
-    //     .style("visibility", "visible")
-    
-    
+    if (options.yGrid) {
+        yGrid(
+            id,
+            width - margin.left - margin.right,
+            options.yGrid
+        )
+    }
+        
     dataset.forEach( (data,index) => {
         svg.append('g')
             .attr('fill', colors[index])
