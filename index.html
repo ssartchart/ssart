@@ -20,13 +20,15 @@
     #tooltip {
         position: absolute;
         opacity: 0;
-        width: 40px;
-        height: 20px;
+        max-width: 30%;
+        max-height: 30%;
+        min-width: 5%;
+        min-height: 5%;
         line-height: 20px;
         transition: all 0.3s;
         border-radius: 5px;
         text-align: center;
-        color: #d0d;
+        color: rgb(0, 0, 0);
         font-size: 14px;
         font-weight: bold;
     }
@@ -60,13 +62,22 @@
             {
                 label: 'data1',
                 data : [
-                    {name: 'a', value: 10},
-                    {name: 'b', value: 29},
-                    {name: 'c', value: 32},
-                    {name: 'd', value: 25},
-                    {name: 'e', value: 23},
-                    {name: 'f', value: 15}
+                    {name: 'a', value: 1000000},
+                    {name: 'b', value: 2900000},
+                    {name: 'c', value: 3200000},
+                    {name: 'd', value: 2500000},
+                    {name: 'e', value: 2300000},
+                    {name: 'f', value: 1500000}
                 ]
+                // label: 'data1',
+                // data : [
+                //     {name: 'a', value: 10},
+                //     {name: 'b', value: 29},
+                //     {name: 'c', value: 32},
+                //     {name: 'd', value: 25},
+                //     {name: 'e', value: 23},
+                //     {name: 'f', value: 15}
+                // ]
             }
         ];
         const labels = ['a','b','c','d','e','f'];
@@ -159,6 +170,7 @@
                 data : [
                     {name: 'a', value: 15},
                     {name: 'b', value: 23},
+                    {name: 'c', value: 25},
                     {name: 'd', value: 32},
                     {name: 'e', value: 29},
                     {name: 'f', value: 10}
@@ -171,6 +183,7 @@
                     {name: 'b', value: 23},
                     {name: 'c', value: 25},
                     {name: 'd', value: 32},
+                    {name: 'e', value: 29},
                     {name: 'f', value: 10}
                 ]
             }
