@@ -1,6 +1,6 @@
 import {BarChart} from './BarChart.js'
 import {BarHChart} from './BarHChart.js'
-
+import BarHClass from './BarHClass.js'
 
 function Chart(type,id,labels,dataset,width,height,margin,padding,y_max = -1, y_min= 0){
 
@@ -39,20 +39,13 @@ function Chart(type,id,labels,dataset,width,height,margin,padding,y_max = -1, y_
 
 function ChartH(type, id, data, color, width, height, margin) {
 
-    const svg = d3.select(id).append('svg').style('width',width).style('height', height)
-    .selectAll('rect').data(data).enter()
-        .append('rect').attr('rx',10)
-        .attr('height', 60)
-        .attr('y', (d,i)=>i*70)
-        .attr('class', (d,i)=>color[i])
-        .attr('width', '10')
-        .transition().duration(1000)
-        .attr('width', d=>(d*500)/100);
+    const svg = d3.select(id).append('svg').style('width',width).style('height', height);
 
         
-
     if(type==="barH") {
-        BarHChart(svg, data, width, height, margin);
+        // BarHChart(svg, data, color, width, height, margin); //js export 사용
+        
+        const barHchart = new BarHClass(svg, data, color, width, height, margin); //클래스 사용
 
     }
 
