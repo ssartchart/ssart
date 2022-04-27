@@ -1,6 +1,8 @@
+import { drawLegend } from "./legend.js";
 export const BarChart = (svg,labels,dataset,width,height,margin,padding,y_max,y_min) => {
-    
-
+    console.log(dataset)
+    const chartContainer = svg.append("g")
+    // legend(svg, width, height, dataset, chartContainer, "right")
     const colors = ["steelblue","red","yellow","green"];
 
     const n = dataset.length;
@@ -28,12 +30,12 @@ export const BarChart = (svg,labels,dataset,width,height,margin,padding,y_max,y_
             .attr('x2', width)
             .style('stroke', '#f5f5f5'));
 
-    svg.append('g').call(xAxis);
-    svg.append('g').call(yAxis);
+    chartContainer.append('g').call(xAxis);
+    chartContainer.append('g').call(yAxis);
 
     
     dataset.forEach( (data,index) => {
-        svg.append('g')
+        chartContainer.append('g')
             .attr('fill', colors[index])
             .selectAll('rect').data(data.data).enter().append('rect')
             .attr('x', d => x(d.name) + (2/n*index)*(parseInt((x.bandwidth())/n))*(n/2)) 
@@ -43,11 +45,9 @@ export const BarChart = (svg,labels,dataset,width,height,margin,padding,y_max,y_
             .attr('data-x', d => d.name)
             .attr('data-y', d => d.value);
     });
-
-
-
-    svg.node();
     
+    chartContainer.node();
+    drawLegend(svg, labels, width, height, chartContainer, "right")
     
     const rectEl = document.getElementsByTagName('rect');
 

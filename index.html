@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,6 +29,20 @@
         color: #d0d;
         font-size: 14px;
         font-weight: bold;
+    }
+    .svg-container {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        padding-bottom: 100%; /* aspect ratio */
+        vertical-align: top;
+        overflow: hidden;
+    }
+    .svg-content-responsive {
+        display: inline-block;
+        position: absolute;
+        top: 10px;
+        left: 0;
     }
 </style>
 <body>
@@ -60,16 +74,33 @@
             {
                 label: 'data1',
                 data : [
-                    {name: 'a', value: 10},
-                    {name: 'b', value: 29},
-                    {name: 'c', value: 32},
-                    {name: 'd', value: 25},
-                    {name: 'e', value: 23},
-                    {name: 'f', value: 15}
+                    {name: 'aaaaaaaaaaaaaaaaaaaaaaaa', value: 10},
+                    {name: 'bbbb', value: 29},
+                    {name: 'cccc', value: 32},
+                    {name: 'dddd', value: 25},
+                    {name: 'eeee', value: 23},
+                    {name: 'ffff', value: 15},
+                    {name: 'gggg', value: 15},
+                    {name: 'hhhh', value: 15},
+                    {name: 'iiii', value: 15},
+                    {name: 'jjjj', value: 15},
+                    {name: 'kkkk', value: 15},
+                    {name: 'l', value: 15},
+                    {name: 'm', value: 15},                    
+                    {name: 'n', value: 15},                    
+                    {name: 'o', value: 15},                    
+                    {name: 'o', value: 15},                    
+                    {name: 'o', value: 15},                    
+                    {name: 'o', value: 15},                    
+                    {name: 'o', value: 15},                    
+                    {name: 'o', value: 15},                    
+                    {name: 'o', value: 15},                    
+                    {name: 'o', value: 15},                    
+                    {name: 'oooooooooooo', value: 15},                    
                 ]
             }
         ];
-        const labels = ['a','b','c','d','e','f'];
+        const labels = ['aaaaaaaaaaaaaaaaaaaaaaaa','bbbb','cccc','dddd','eeee','ffff', 'gggg', 'hhhh', 'iiii', 'jjjj', 'kkkk', 'l', 'm', 'n', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'oooooooooooo',];
         const dataset2 = [
             {
                 label: 'data1',
@@ -184,9 +215,9 @@
 
         // Chart.Chart("bar",'#bargraph',dataset,width2,height2,margin2);
         Chart.Chart("bar",'#bargraph',labels,dataset,width2,height2,margin2,padding);
-        Chart.Chart("bar",'#bargraph2',labels,dataset2,width2,height2,margin2,padding);
-        Chart.Chart("bar",'#bargraph3',labels,dataset3,width2,height2,margin2,padding);
-        Chart.Chart("bar",'#bargraph4',labels,dataset4,width2,height2,margin2,padding);
+        // Chart.Chart("bar",'#bargraph2',labels,dataset2,width2,height2,margin2,padding);
+        // Chart.Chart("bar",'#bargraph3',labels,dataset3,width2,height2,margin2,padding);
+        // Chart.Chart("bar",'#bargraph4',labels,dataset4,width2,height2,margin2,padding);
     </script>
     
 </body>
