@@ -1,73 +1,69 @@
-export const BarChart = (svg,labels,dataset,width,height,margin,padding,y_max,y_min) => {
-    
+import {Set_Axis} from './Axis_helper.js';
 
-    const colors = ["steelblue","red","yellow","green"];
-
-    const n = dataset.length;
-
-    const x = d3.scaleBand()
-        .domain(labels.map(d => d))
-        .range([margin.left, width - margin.right])
-        .padding(0.2);
-    const y = d3.scaleLinear()
-        .domain([y_min, y_max]).nice()
-        .range([height - margin.bottom, margin.top]);
-
-    const xAxis = g => g
-        .attr('transform', `translate(0, ${height - margin.bottom})`)
-        .call(d3.axisBottom(x)
-            .tickSizeOuter(0))
-        .call(g => g.select('.domain').remove())
-        .call(g => g.selectAll('line').remove());
-
-    const yAxis = g => g
-        .attr('transform', `translate(${margin.left}, 0)`)
-        .call(d3.axisLeft(y))
-        .call(g => g.select('.domain').remove())   
-        .call(g => g.selectAll('line')
-            .attr('x2', width)
-            .style('stroke', '#f5f5f5'));
-
-    svg.append('g').call(xAxis);
-    svg.append('g').call(yAxis);
-
-    
-    dataset.forEach( (data,index) => {
-        svg.append('g')
-            .attr('fill', colors[index])
-            .selectAll('rect').data(data.data).enter().append('rect')
-            .attr('x', d => x(d.name) + (2/n*index)*(parseInt((x.bandwidth())/n))*(n/2)) 
-            .attr('y', d => y(d.value))
-            .attr('height', d => y(y_min) - y(d.value))
-            .attr('width', parseInt((x.bandwidth())/n)- padding)
-            .attr('data-x', d => d.name)
-            .attr('data-y', d => d.value);
-    });
-
-
-
-    svg.node();
-    
-    
-    const rectEl = document.getElementsByTagName('rect');
-
-
-    const tooltop = document.getElementById('tooltip');
-
-    for(const el of rectEl) {
-        el.addEventListener('mouseover', (event) => {
-            const target = event.target;
-            const positionLeft = Number(target.getAttribute('x')) + Number(x.bandwidth()/2) - tooltop.clientWidth/2;
-            const positionTop = height - margin.top - target.getAttribute('height') - tooltop.clientHeight - 5;
-            // const color = target.dataset.color;
-            const value = target.dataset.y;
-
-            tooltop.innerText = value;
-            tooltop.style.background = '#ddd';
-            tooltop.style.top = positionTop + 'px';
-            tooltop.style.left = positionLeft + 'px';
-            tooltop.style.opacity = 1;
-        });
-    }
+export class BarChart{
+    constructor({chart_area,labels,datasets,color,width,height,margin,padding,y_max,y_min}){
         
-};
+        chart_area.selectAll('*').remove();
+
+        const x_domain = labels.map(d => d);        
+        const y_domain = [y_min,  (y_max != null) ? y_max : d3.max(datasets, label=>{
+                return d3.max(label.data, d=>{
+                    return d.value;});            
+                })];        
+        const Axis = Set_Axis({chart_area,x_domain,y_domain,width,height,margin,padding});
+
+        this.color = color;
+        this.y_min = y_min;
+        this.x0 = Axis.x;
+        this.y = Axis.y;
+        this.x1 = d3.scaleBand()
+            .domain(datasets.map((d,index)=>{return index}))
+            .range([0, this.x0.bandwidth()]);
+
+        this.slice = chart_area.selectAll(".slice")
+            .data(datasets)
+            .enter().append("g")
+            .attr("class", "g")
+            .attr("transform",(d,index)=>{ return "translate(" + this.x1(index) + ",0)"; });
+
+        this.slice.selectAll("rect")
+            .data(datasets=>{return datasets.data;})
+            .enter().append("rect")
+            .filter(d=>{return labels.includes(d.name);})   //labels에 없는값 필터링
+            .attr("width", this.x0.bandwidth()/datasets.length)
+            .attr("x",d=>{ return this.x0(d.name);})
+            .style("fill",d=>{return this.color(d.label_index);})
+            .attr("y", d=>{ return this.y(d.value); })
+            .attr("height", d=>{ return this.y(this.y_min) - this.y(d.value); });
+
+
+        chart_area.node();
+            
+    };
+
+    // 툴팁 효과
+    tooltip(){
+        const color = this.color;
+        this.slice.selectAll("rect")
+        .on("mouseover", function(d){ 
+            d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));
+            console.log(d);
+        })
+        .on("mouseout", function(d){ 
+            d3.select(this).style("fill", color(d.label_index));
+        });
+
+    }
+    // 애니메이션 효과
+    animation(delay=1000,duration=1000){
+        this.slice.selectAll("rect")
+            .attr("y", d=>{ return this.y(0); })
+            .attr("height", d=>{ return this.y(this.y_min) - this.y(0); })
+            .transition()
+            .delay(d=>{return Math.random()*delay;})
+            .duration(duration)
+            .attr("y", d=>{ return this.y(d.value); })
+            .attr("height", d=>{ return this.y(this.y_min) - this.y(d.value); });
+
+    }
+}
