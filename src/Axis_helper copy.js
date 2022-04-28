@@ -9,7 +9,6 @@ export const Set_Axis = ({chart_area,x_domain,y_domain,width,height,margin,paddi
         .range([height - margin.bottom, margin.top]);
 
     const xAxis = g => g
-        .attr("class", "xAxis")
         .attr('transform', `translate(0, ${height - margin.bottom})`)
         .call(d3.axisBottom(x)
             .tickSizeOuter(0))
@@ -17,7 +16,6 @@ export const Set_Axis = ({chart_area,x_domain,y_domain,width,height,margin,paddi
         .call(g => g.selectAll('line').remove());
 
     const yAxis = g => g
-        .attr("class", "yAxis")
         .attr('transform', `translate(${margin.left}, 0)`)
         .call(d3.axisLeft(y))
         .call(g => g.select('.domain').remove())   
@@ -32,75 +30,6 @@ export const Set_Axis = ({chart_area,x_domain,y_domain,width,height,margin,paddi
         x : x,
         y : y
     };
-}
-
-export const xGrid = (chart_area,length,options)=>{
-    let color = "black"
-    if (options.color) {
-        color = options.color
-    }
-
-    let weight = 1
-    if (options.weight) {
-        weight = options.weight
-    }
-
-    let opacity = 1
-    if (options.opacity) {
-        opacity = options.opacity
-    }
-
-    let dash = "1,0"
-    if (options.dash) {
-        dash = options.dash
-    }
-
-    chart_area.selectAll(" g.xAxis g.tick")
-        .append("line")
-        .attr("class", "gridline")
-        .style("stroke", color)
-        .style("stroke-width", weight)
-        .style("stroke-opacity", opacity)
-        .style("stroke-dasharray", (dash))
-        .attr("x1", 0)
-        .attr("y1", -length)
-        .attr("x2", 0)
-        .attr("y2", 0);
-
-}
-export const yGrid=(chart_area,length,options) =>{
-    let color = "black"
-    if (options.color) {
-        color = options.color
-    }
-
-    let weight = 1
-    if (options.weight) {
-        weight = options.weight
-    }
-
-    let opacity = 1
-    if (options.opacity) {
-        opacity = options.opacity
-    }
-
-    let dash = "1,0"
-    if (options.dash) {
-        dash = options.dash
-    }
-    console.log("y");
-    chart_area.selectAll("g.yAxis g.tick")
-        .append("line")
-        .attr("class", "gridline")
-        .style("stroke", color)
-        .style("stroke-width", weight)
-        .style("stroke-opacity", opacity)
-        .style("stroke-dasharray", (dash))
-        .attr("x1", 0)
-        .attr("y1", 0)
-        .attr("x2", length)
-        .attr("y2", 0);
-
 }
 
 

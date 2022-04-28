@@ -1,4 +1,4 @@
-import {Set_Axis} from './Axis_helper.js';
+import {Set_Axis, xGrid, yGrid} from './Axis_helper.js';
 
 export class BarChart{
     constructor({chart_area,labels,datasets,color,width,height,margin,padding,y_max,y_min}){
@@ -35,7 +35,6 @@ export class BarChart{
             .style("fill",d=>{return this.color(d.label_index);})
             .attr("y", d=>{ return this.y(d.value); })
             .attr("height", d=>{ return this.y(this.y_min) - this.y(d.value); });
-
 
         chart_area.node();
             
