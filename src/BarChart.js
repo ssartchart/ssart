@@ -1,4 +1,4 @@
-import {Set_Axis, xGrid, yGrid} from './Axis_helper.js';
+import {Set_Axis} from './Axis_helper.js';
 
 export class BarChart{
     constructor({chart_area,labels,datasets,color,width,height,margin,padding,y_max,y_min}){
@@ -50,8 +50,9 @@ export class BarChart{
         const color = this.color;
         this.slice.selectAll("rect")
         .on("mouseover", function(d){ 
-            d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));
             console.log(d);
+            console.log(this);
+            d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));
         })
         .on("mouseout", function(d){ 
             d3.select(this).style("fill", color(d.label_index));
