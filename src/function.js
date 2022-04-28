@@ -1,6 +1,8 @@
+import {BarChart} from './BarChart.js'
+import {BarHChart} from './BarHChart.js'
+import BarHClass from './BarHClass.js'
 // import {BarChart} from './BarChartfunction.js'
 import { xGrid, yGrid } from './Axis_helper.js';
-import { BarChart } from './BarChart.js'
 import { LabelColor } from './Color_helper.js';
 import { Data_pre_processing } from './Dataset_helper.js';
 
@@ -21,15 +23,26 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
         chart.animation();
         
     }
-
     xGrid(chart_area,height,options);
     yGrid(chart_area,width,options);
 
-    
 
-    console.log(datasets);
+};
+
+function ChartH(type, id, data, color, width, height, margin) {
+
+    const svg = d3.select(id).append('svg').style('width',width).style('height', height);
+
+        
+    if(type==="barH") {
+        // BarHChart(svg, data, color, width, height, margin); //js export 사용
+        
+        const barHchart = new BarHClass(svg, data, color, width, height, margin); //클래스 사용
+
+    }
+    
 
 };
 
 
-export {Chart};
+export {Chart, ChartH};

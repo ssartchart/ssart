@@ -30,6 +30,12 @@
         font-size: 14px;
         font-weight: bold;
     }
+
+    /* 컬러 CSS를 스타일안에 미리 해놔야하는지 ..? */
+    .blue{fill : #5abae6;}
+    .red{fill : #d34e4e;}
+    .green{fill : #9dbb19;}
+    .yellow{fill : #f7b358;}
 </style>
 <body>
 
@@ -139,6 +145,26 @@
         // Chart.Chart("bar",'#bargraph',dataset,width2,height2,margin2);
         //Chart.Chart2("bar",'#bargraph',labels,dataset,width2,height2,margin2,padding);
         Chart.Chart('#bargraph2',config);
+    </script>
+
+    <h1>가로 막대 그래프</h1>
+    <div id="barH"></div>
+
+    </svg>
+    <script>
+        var dataH = [600, 300, 750, 1002];
+        var color = ['red', 'blue', 'yellow','green'];
+        var widthH = 500;
+        var heightH = 500;
+        var marginH = {top: 40, left: 40, bottom: 40, right: 40};
+
+    </script>
+    <script type="module">
+        import * as Chart from './src/index.js';
+
+        Chart.ChartH("barH", '#barH', dataH, color, widthH, heightH, marginH);
+
+
     </script>
     
 </body>
