@@ -47,134 +47,88 @@
     <script src='https://d3js.org/d3.v5.min.js'></script>
 
     <script>
-        
-        const width = 500;
-        const height = 500;
-        const margin = {top: 40, left: 40, bottom: 40, right: 40};
-        
-        const width2 = 700;
-        const height2 = 500;
-        const margin2 = {top: 40, left: 40, bottom: 40, right: 40};
-        const padding = 0;
-        const dataset = [
-            {
-                label: 'data1',
-                data : [
-                    {name: 'a', value: 10},
-                    {name: 'b', value: 29},
-                    {name: 'c', value: 32},
-                    {name: 'd', value: 25},
-                    {name: 'e', value: 23},
-                    {name: 'f', value: 15}
-                ]
-            }
-        ];
-        const labels = ['a','b','c','d','e','f'];
-        const dataset2 = [
-            {
-                label: 'data1',
-                data : [
-                    {name: 'a', value: 10},
-                    {name: 'b', value: 29},
-                    {name: 'c', value: 32},
-                    {name: 'd', value: 25},
-                    {name: 'e', value: 23},
-                    {name: 'f', value: 15}
-                ]
-            },
-            {
-                label: 'data2',
-                data : [
-                    {name: 'a', value: 15},
-                    {name: 'b', value: 23},
-                    {name: 'c', value: 25},
-                    {name: 'd', value: 32},
-                    {name: 'e', value: 29},
-                    {name: 'f', value: 10}
-                ]
-            }
-        ];
+        const data = {
+            labels: ['a','b','c','d','e','f'],
+            datasets: [
+                {
+                    label: 'Fully Rounded',
+                    data: [
+                        {name: 'a', value: 10},
+                        {name: 'b', value: 29},
+                        {name: 'c', value: 32},
+                        {name: 'd', value: 25},
+                        {name: 'e', value: 23},
+                        {name: 'f', value: 15}
+                    ],
+                    backgroundColor: "red",
+            
+                },
+                {
+                    label: 'Small Radius',
+                    data : [1,2,3,4,5,6,7,8,9,10]
+                    ,
+                    backgroundColor: "blue",
+                },
+                {
+                    label: 'Small Radius',
+                    data : 
+                    [
+                        {name: 'a', value: 15},
+                        {name: 'b', value: 23},
+                        {name: 'c', value: 25},
+                        {name: 'd', value: 32},
+                        {name: 'e', value: 29},
+                        {name: 'f', value: 12},
+                        {name: 'g', value: 15},
+                        {name: 'ㅎ', value: 1},
+                        {name: 't', value: 12}
+                    ],
+                },
+                {
+                    label: 'Small Radius',
+                    data : [
+                        {name: 'a', value: 15},
+                        {name: 'b', value: 23},
+                        {name: 'c', value: 25},
+                        {name: 'd', value: 32},
+                        {name: 'e', value: 29},
+                        {name: 'f', value: 13},
+                        {name: 'g', value: 15},
+                    ],
+                }
+            ]
+        };
+        const config = {
+            type: 'bar',
+            width : 500,
+            height : 500,
+            margin : {top: 40, left: 40, bottom: 40, right: 40},
+            padding : 0.1,
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                            position: 'bottom',// top bottom left right
+                    },
+                    title: {
+                        display: true,
+                        text: 'Chart.js Bar Chart'
+                    },
+                    xTitle: {
+                        display: true,
+                        text: 'name'
+                    },
+                    yTitle: {
+                        display: true,
+                        text: 'value'
+                    },
 
+                }
+            },
+            y_min : 0,
+        };
 
-        const dataset3 = [
-            {
-                label: 'data1',
-                data : [
-                    {name: 'a', value: 10},
-                    {name: 'b', value: 29},
-                    {name: 'c', value: 32},
-                    {name: 'd', value: 25},
-                    {name: 'e', value: 23},
-                    {name: 'f', value: 15}
-                ]
-            },
-            {
-                label: 'data2',
-                data : [
-                    {name: 'a', value: 15},
-                    {name: 'b', value: 23},
-                    {name: 'c', value: 25},
-                    {name: 'd', value: 32},
-                    {name: 'e', value: 29},
-                    {name: 'f', value: 10}
-                ]
-            },
-            {
-                label: 'data3',
-                data : [
-                    {name: 'a', value: 15},
-                    {name: 'b', value: 23},
-                    {name: 'd', value: 32},
-                    {name: 'e', value: 29},
-                    {name: 'f', value: 10}
-                ]
-            }
-        ];
-
-        const dataset4 = [
-            {
-                label: 'data1',
-                data : [
-                    {name: 'a', value: 10},
-                    {name: 'b', value: 29},
-                    {name: 'c', value: 32},
-                    {name: 'd', value: 25},
-                    {name: 'e', value: 23},
-                    {name: 'f', value: 15}
-                ]
-            },
-            {
-                label: 'data2',
-                data : [
-                    {name: 'a', value: 15},
-                    {name: 'b', value: 23},
-                    {name: 'c', value: 25},
-                    {name: 'd', value: 32},
-                    {name: 'e', value: 29},
-                    {name: 'f', value: 10}
-                ]
-            },
-            {
-                label: 'data3',
-                data : [
-                    {name: 'a', value: 15},
-                    {name: 'b', value: 23},
-                    {name: 'd', value: 32},
-                    {name: 'e', value: 29},
-                    {name: 'f', value: 10}
-                ]
-            },
-            {
-                label: 'data4',
-                data : [
-                    {name: 'a', value: 15},
-                    {name: 'b', value: 23},
-                    {name: 'c', value: 25},
-                    {name: 'd', value: 32},
-                    {name: 'f', value: 10}
-                ]
-            }
-        ];
 
     </script>
     <script type="module">
@@ -183,10 +137,8 @@
         
 
         // Chart.Chart("bar",'#bargraph',dataset,width2,height2,margin2);
-        Chart.Chart("bar",'#bargraph',labels,dataset,width2,height2,margin2,padding);
-        Chart.Chart("bar",'#bargraph2',labels,dataset2,width2,height2,margin2,padding);
-        Chart.Chart("bar",'#bargraph3',labels,dataset3,width2,height2,margin2,padding);
-        Chart.Chart("bar",'#bargraph4',labels,dataset4,width2,height2,margin2,padding);
+        //Chart.Chart2("bar",'#bargraph',labels,dataset,width2,height2,margin2,padding);
+        Chart.Chart('#bargraph2',config);
     </script>
     
 </body>
