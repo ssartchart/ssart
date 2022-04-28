@@ -5,7 +5,8 @@ import BarHClass from './BarHClass.js'
 import { xGrid, yGrid } from './Axis_helper.js';
 import { LabelColor } from './Color_helper.js';
 import { Data_pre_processing } from './Dataset_helper.js';
-
+import { drawTitle, drawXTitle, drawYTitle } from "./title.js";
+import { checkMargin } from "./checkMargin.js";
 
 function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=0}){
 
@@ -16,6 +17,9 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
     const labels = data.labels;
     const color = LabelColor(datasets);
     const chart_area = svg.append('g').style('width', width).style('height', height);
+
+    checkMargin(margin);
+
     if (type==="bar"){
         // BarChart({svg,labels,datasets,width,height,margin,padding,y_max,y_min});       
         const chart = new BarChart({chart_area,labels,datasets:datasets,color,width,height,margin,padding,y_max,y_min});
@@ -23,6 +27,27 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
         chart.animation();
         
     }
+
+    // except circle
+    if (type != "circle") {
+      if (options.plugins.title.display) {
+        drawTitle(svg, options.plugins.title.text, width, height, margin);
+      }
+      if (options.plugins.xTitle.display) {
+        drawXTitle(svg, options.plugins.xTitle.text, width, height, margin);
+      }
+      if (options.plugins.yTitle.display) {
+        drawYTitle(
+          svg,
+          options.plugins.yTitle.text,
+          width,
+          height,
+          margin,
+          options.plugins.yTitle.position
+        );
+      }
+    }
+
     xGrid(chart_area,height,options);
     yGrid(chart_area,width,options);
 
