@@ -5,12 +5,15 @@ export class BarChart{
         
         chart_area.selectAll('*').remove();
 
+
+
         const x_domain = labels.map(d => d);        
         const y_domain = [y_min,  (y_max != null) ? y_max : d3.max(datasets, label=>{
                 return d3.max(label.data, d=>{
                     return d.value;});            
                 })];        
         const Axis = Set_Axis({chart_area,x_domain,y_domain,width,height,margin,padding});
+
 
         this.color = color;
         this.y_min = y_min;
@@ -34,7 +37,9 @@ export class BarChart{
             .attr("x",d=>{ return this.x0(d.name);})
             .style("fill",d=>{return this.color(d.label_index);})
             .attr("y", d=>{ return this.y(d.value); })
-            .attr("height", d=>{ return this.y(this.y_min) - this.y(d.value); });
+            .attr("height", d=>{ return this.y(this.y_min) - this.y(d.value); })
+            .on("mouseover", onMouseOver)
+            .on("mouseout", onMouseOut);
 
         chart_area.node();
             
@@ -65,4 +70,26 @@ export class BarChart{
             .attr("height", d=>{ return this.y(this.y_min) - this.y(d.value); });
 
     }
+    
+    
 }
+const tooltop = document.getElementById('tooltip');
+    
+    function onMouseOut(d, i) { 
+        d3.select(this).transition().duration(600).style("opacity" , "1.0");
+        d3.select(".val")
+          .selectAll("text")
+          .filter((d, index) => index === i)
+          .attr("display", "none");
+          tooltop.style.opacity = 0; // 마우스가 target을 벗어나면 tooltip 안보이게
+    }
+    
+    function onMouseOver(d, i) { // 마우스 커서가 위에 있으면 색상 변환 (가시성)
+        d3.select(this).transition().duration(600).style("opacity", "0.5");  // 일단 임의로 하늘색
+        d3.select(".val")
+          .selectAll("text")
+          .filter((d, index) => index === i)
+          .attr("display", "block") 
+          
+    }
+    
