@@ -7,9 +7,9 @@ import { LabelColor } from './Color_helper.js';
 import { Data_pre_processing } from './Dataset_helper.js';
 import { drawTitle, drawXTitle, drawYTitle } from "./title.js";
 import { checkMargin } from "./checkMargin.js";
-
+import { drawLegend } from "./legend.js";
 function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=0}){
-
+    const { position } = options.plugins.legend;
     const svg = d3.select(id).append('svg').style('width', width).style('height', height);
     
     console.log(`Hello, ${type}!`);
@@ -17,28 +17,32 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
     const labels = data.labels;
     const color = LabelColor(datasets);
     const chart_area = svg.append('g').style('width', width).style('height', height);
-
+    
     checkMargin(margin);
-
+    console.log(position)
     if (type==="bar"){
         // BarChart({svg,labels,datasets,width,height,margin,padding,y_max,y_min});       
+        // width, height 조정 필요
         const chart = new BarChart({chart_area,labels,datasets:datasets,color,width,height,margin,padding,y_max,y_min});
         chart.tooltip();
         chart.animation();
         
     }
+    // drawLegend(svg, labels, width, height, chart_area, position);
 
     // except circle
     if (type != "circle") {
       if (options.plugins.title.display) {
         drawTitle(svg, options.plugins.title.text, width, height, margin);
       }
-      if (options.plugins.xTitle.display) {
-        drawXTitle(svg, options.plugins.xTitle.text, width, height, margin);
+        if (options.plugins.xTitle.display) {
+          // width, height 조정 필요
+        drawXTitle(chart_area, options.plugins.xTitle.text, width, height, margin);
       }
-      if (options.plugins.yTitle.display) {
+        if (options.plugins.yTitle.display) {
+          // width, height 조정 필요
         drawYTitle(
-          svg,
+          chart_area,
           options.plugins.yTitle.text,
           width,
           height,
