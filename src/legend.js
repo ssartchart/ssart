@@ -30,6 +30,7 @@ export function drawLegend(svg, labels, width, height, chartContainer, position)
       let currYPos = 0;
       const MARGIN = 20;
       let res;
+      // let start = 0, end = 0;
       legend.attr("transform", function (d, i) {
         let legendBBox = document.getElementById(`legend-${i}`).getBBox();
         // console.log(`범례 너비-${i}`, legendBBox.width, '현재 x좌표(시작점):' ,currXPos)
@@ -38,12 +39,24 @@ export function drawLegend(svg, labels, width, height, chartContainer, position)
           svg.style("height", height + currYPos)
           currXPos = svg.node().getBBox().x
           chartContainer.attr("transform", `translate(0, ${currYPos})`)
+          // console.log('start:', start, 'end:', end);
+          // let currLegend;
+          // for (start; start <= end; start++) {
+          //   currLegend = document.getElementById(`legend-${start}`);
+          //   console.log(currLegend)
+          // }
+          // start = i;
+          // rowCnt++;
         }
         // console.log(currXPos, currYPos)
         res = `translate(${currXPos}, ${currYPos})`
         currXPos += legendBBox.width + MARGIN
+        // end = i;
         return res
-      })    
+      })
+      // if (end === labels.length - 1) {
+      //   console.log('start:', start, 'end:', end);
+      // }
     } else if (position === "bottom") {
       let currXPos = svg.node().getBBox().x
       let currYPos = height;
