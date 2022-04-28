@@ -8,6 +8,9 @@ import { Data_pre_processing } from './Dataset_helper.js';
 import { drawTitle, drawXTitle, drawYTitle } from "./title.js";
 import { checkMargin } from "./checkMargin.js";
 import { drawLegend } from "./legend.js";
+import { xGridHidden, yGridHidden, xGridShow, yGridShow } from "./Axis_helper.js"
+
+
 function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=0}){
     const { position } = options.plugins.legend;
     const svg = d3.select(id).append('svg').style('width', width).style('height', height);
@@ -51,12 +54,65 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
         );
       }
     }
+    if (options.plugins.xGrid) {
+        xGrid(chart_area,height - margin.top - margin.bottom,options.plugins.xGrid);  
 
-    xGrid(chart_area,height,options);
-    yGrid(chart_area,width,options);
+        svg
+            .append('foreignObject')
+            .attr('x', margin.left + width/2)
+            .attr('y', 0)
+            .attr('height', 20)
+            .attr('width', 20)
+            .attr('id', id+"xGridHiddenButton")
+            
+        const xGridHiddenButton = document.getElementById(id+"xGridHiddenButton")
+        xGridHiddenButton.innerText = id
+        xGridHiddenButton.addEventListener("click", xGridHidden)
+        
+        svg
+            .append('foreignObject')
+            .attr('fill', "steelblue")
+            .attr('x', margin.left + width/2 + 40)
+            .attr('y', 0)
+            .attr('height', 20)
+            .attr('width', 20)
+            .attr('id', id+"xGridShowButton")
+        
+        const xGridShowButton = document.getElementById(id+"xGridShowButton")
+        xGridShowButton.innerText = id
+        xGridShowButton.addEventListener("click", xGridShow)
+        
+    }
+    if (options.plugins.yGrid) {
+        yGrid(chart_area,width - margin.left - margin.right,options.plugins.yGrid);
 
+        svg
+            .append('foreignObject')
+            .attr('x', margin.left + width/2 + 80)
+            .attr('y', 0)
+            .attr('height', 20)
+            .attr('width', 20)
+            .attr('id', id+"yGridHiddenButton")
+            
+        const yGridHiddenButton = document.getElementById(id+"yGridHiddenButton")
+        yGridHiddenButton.innerText = id
+        yGridHiddenButton.addEventListener("click", yGridHidden)
+        
+        svg
+            .append('foreignObject')
+            .attr('fill', "steelblue")
+            .attr('x', margin.left + width/2 + 120)
+            .attr('y', 0)
+            .attr('height', 20)
+            .attr('width', 20)
+            .attr('id', id+"yGridShowButton")
+        
+        const yGridShowButton = document.getElementById(id+"yGridShowButton")
+        yGridShowButton.innerText = id
+        yGridShowButton.addEventListener("click", yGridShow)
+    }
 
-};
+}
 
 function ChartH(type, id, data, color, width, height, margin) {
 
@@ -99,9 +155,6 @@ function ChartH(type, id, data, color, width, height, margin) {
         });
     }
 };
-
-    
-
 
 
 export {Chart, ChartH};
