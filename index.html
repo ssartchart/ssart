@@ -1,63 +1,23 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="https://uicdn.toast.com/chart/latest/toastui-chart.min.css" />
-    <script src="https://uicdn.toast.com/chart/latest/toastui-chart.min.js"></script>
-    
+    <!-- <link rel="stylesheet" href="https://uicdn.toast.com/chart/latest/toastui-chart.min.css" /> -->
+    <!-- <script src="https://uicdn.toast.com/chart/latest/toastui-chart.min.js"></script> -->
+    <link rel="stylesheet" href="src/css/index.css">
+
+
     <link rel="icon" type="image/png" href="http://example.com/myicon.png">
-    </head>
-<style>
-    body{padding: 5%;text-align: center;}
+</head>
 
-    #bargraph {
-        position: relative;
-    }
-
-    #tooltip {
-        position: absolute;
-        opacity: 0;
-        max-width: 30%;
-        max-height: 30%;
-        min-width: 5%;
-        min-height: 5%;
-        line-height: 20px;
-        transition: all 0.3s;
-        border-radius: 5px;
-        text-align: center;
-        color: rgb(0, 0, 0);
-        background-color: #5abae6;
-        font-size: 14px;
-        font-weight: bold;
-    }
-    .svg-container {
-        display: inline-block;
-        position: relative;
-        width: 100%;
-        padding-bottom: 100%; /* aspect ratio */
-        vertical-align: top;
-        overflow: hidden;
-    }
-    .svg-content-responsive {
-        display: inline-block;
-        position: absolute;
-        top: 10px;
-        left: 0;
-    }
-
-    /* 컬러 CSS를 스타일안에 미리 해놔야하는지 ..? */
-    .blue{fill : #5abae6;}
-    .red{fill : #d34e4e;}
-    .green{fill : #9dbb19;}
-    .yellow{fill : #f7b358;}
-</style>
 <body>
 
     <div id="bargraph">
-        <div id = 'tooltip'></div>
+        <div id='tooltip'></div>
     </div>
 
     <div id="bargraph2"></div>
@@ -71,62 +31,62 @@
 
     <script>
         const data = {
-            labels: ['a','baaaaaaaaa','c','d','e','f','a','b','c','d','e','f','a','b','c','d'],
+            labels: ['a', 'b', 'c', 'd', 'e', 'f'],
             datasets: [
                 {
                     label: 'Fully Rounded',
                     data: [
-                        {name: 'a', value: 10},
-                        {name: 'b', value: 29},
-                        {name: 'c', value: 32},
-                        {name: 'd', value: 25},
-                        {name: 'e', value: 23},
-                        {name: 'f', value: 15}
+                        { name: 'a', value: 10 },
+                        { name: 'b', value: 29 },
+                        { name: 'c', value: 32 },
+                        { name: 'd', value: 25 },
+                        { name: 'e', value: 23 },
+                        { name: 'f', value: 15 }
                     ],
                     backgroundColor: "red",
-            
+
                 },
                 {
                     label: 'Small Radius',
-                    data : [1,2,3,4,5,6,7,8,9,10]
+                    data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
                     ,
                     backgroundColor: "blue",
                 },
                 {
                     label: 'Small Radius',
-                    data : 
-                    [
-                        {name: 'a', value: 15},
-                        {name: 'b', value: 23},
-                        {name: 'c', value: 25},
-                        {name: 'd', value: 32},
-                        {name: 'e', value: 29},
-                        {name: 'f', value: 12},
-                        {name: 'g', value: 15},
-                        {name: 'ㅎ', value: 1},
-                        {name: 't', value: 12}
-                    ],
+                    data:
+                        [
+                            { name: 'a', value: 15 },
+                            { name: 'b', value: 23 },
+                            { name: 'c', value: 25 },
+                            { name: 'd', value: 32 },
+                            { name: 'e', value: 29 },
+                            { name: 'f', value: 12 },
+                            { name: 'g', value: 15 },
+                            { name: 'ㅎ', value: 1 },
+                            { name: 't', value: 12 }
+                        ],
                 },
                 {
                     label: 'Small Radius',
-                    data : [
-                        {name: 'a', value: 15},
-                        {name: 'b', value: 23},
-                        {name: 'c', value: 25},
-                        {name: 'd', value: 32},
-                        {name: 'e', value: 29},
-                        {name: 'f', value: 13},
-                        {name: 'g', value: 15},
+                    data: [
+                        { name: 'a', value: 15 },
+                        { name: 'b', value: 23 },
+                        { name: 'c', value: 25 },
+                        { name: 'd', value: 32 },
+                        { name: 'e', value: 29 },
+                        { name: 'f', value: 13 },
+                        { name: 'g', value: 15 },
                     ],
                 }
             ]
         };
         const config = {
             type: 'bar',
-            width : 500,
-            height : 500,
-            margin : {top: 40, left: 40, bottom: 40, right: 40},
-            padding : 0.1,
+            width: 500,
+            height: 500,
+            margin: { top: 40, left: 40, bottom: 40, right: 40 },
+            padding: 0.1,
             data: data,
             options: {
                 responsive: true,
@@ -160,7 +120,7 @@
                     },
                 }
             },
-            y_min : 0,
+            y_min: 0,
         };
 
 
@@ -168,11 +128,11 @@
     <script type="module">
 
         import * as Chart from './src/index.js';
-        
+
 
         // Chart.Chart("bar",'#bargraph',dataset,width2,height2,margin2);
         //Chart.Chart2("bar",'#bargraph',labels,dataset,width2,height2,margin2,padding);
-        Chart.Chart('#bargraph2',config);
+        Chart.Chart('#bargraph2', config);
     </script>
 
     <h1>가로 막대 그래프</h1>
@@ -181,10 +141,10 @@
     </svg>
     <script>
         var dataH = [600, 300, 750, 1002];
-        var color = ['red', 'blue', 'yellow','green'];
+        var color = ['red', 'blue', 'yellow', 'green'];
         var widthH = 500;
         var heightH = 500;
-        var marginH = {top: 40, left: 40, bottom: 40, right: 40};
+        var marginH = { top: 40, left: 40, bottom: 40, right: 40 };
 
     </script>
     <script type="module">
@@ -194,6 +154,7 @@
 
 
     </script>
-    
+
 </body>
+
 </html>
