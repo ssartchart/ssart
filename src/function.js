@@ -58,8 +58,8 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
         xGrid(chart_area,height - margin.top - margin.bottom,options.plugins.xGrid);  
 
         svg
-            .append('foreignObject')
-            .attr('x', margin.left + width/2)
+            .append('rect')
+            .attr('x', width - 20)
             .attr('y', 0)
             .attr('height', 20)
             .attr('width', 20)
@@ -70,10 +70,10 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
         xGridHiddenButton.addEventListener("click", xGridHidden)
         
         svg
-            .append('foreignObject')
+            .append('rect')
             .attr('fill', "steelblue")
-            .attr('x', margin.left + width/2 + 40)
-            .attr('y', 0)
+            .attr('x', width - 20)
+            .attr('y', 30)
             .attr('height', 20)
             .attr('width', 20)
             .attr('id', id+"xGridShowButton")
@@ -83,13 +83,14 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
         xGridShowButton.addEventListener("click", xGridShow)
         
     }
+
     if (options.plugins.yGrid) {
         yGrid(chart_area,width - margin.left - margin.right,options.plugins.yGrid);
 
         svg
-            .append('foreignObject')
-            .attr('x', margin.left + width/2 + 80)
-            .attr('y', 0)
+            .append('rect')
+            .attr('x', width - 20)
+            .attr('y', 60)
             .attr('height', 20)
             .attr('width', 20)
             .attr('id', id+"yGridHiddenButton")
@@ -99,10 +100,10 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
         yGridHiddenButton.addEventListener("click", yGridHidden)
         
         svg
-            .append('foreignObject')
+            .append('rect')
             .attr('fill', "steelblue")
-            .attr('x', margin.left + width/2 + 120)
-            .attr('y', 0)
+            .attr('x', width - 20)
+            .attr('y', 90)
             .attr('height', 20)
             .attr('width', 20)
             .attr('id', id+"yGridShowButton")
