@@ -1,5 +1,5 @@
 export function drawLegend(svg, labels, width, height, chartContainer, position) {  
-  
+  console.log(svg, labels, width, height, chartContainer, position, 'legend')
   if (position === "top" || position === "bottom") {    
     let rowCnt = 1;
     const legend = svg
@@ -59,7 +59,7 @@ export function drawLegend(svg, labels, width, height, chartContainer, position)
       // }
     } else if (position === "bottom") {
       let currXPos = svg.node().getBBox().x
-      let currYPos = height;
+      let currYPos = chartContainer.node().getBBox().height;
       const MARGIN = 20;
       let res;      
       legend.attr("transform", function (d, i) {
