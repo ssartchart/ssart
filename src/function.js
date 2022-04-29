@@ -9,6 +9,7 @@ import { drawTitle, drawXTitle, drawYTitle } from "./title.js";
 import { checkMargin } from "./checkMargin.js";
 import { drawLegend } from "./legend.js";
 import { xGridHidden, yGridHidden, xGridShow, yGridShow } from "./Axis_helper.js"
+import { printColorBar } from './background.js';
 
 
 function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=0}){
@@ -60,7 +61,7 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
         svg
             .append('rect')
             .attr('x', width - 20)
-            .attr('y', 0)
+            .attr('y', margin.top)
             .attr('height', 20)
             .attr('width', 20)
             .attr('id', id+"xGridHiddenButton")
@@ -73,7 +74,7 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
             .append('rect')
             .attr('fill', "steelblue")
             .attr('x', width - 20)
-            .attr('y', 30)
+            .attr('y', margin.top + 30)
             .attr('height', 20)
             .attr('width', 20)
             .attr('id', id+"xGridShowButton")
@@ -90,7 +91,7 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
         svg
             .append('rect')
             .attr('x', width - 20)
-            .attr('y', 60)
+            .attr('y', margin.top + 60)
             .attr('height', 20)
             .attr('width', 20)
             .attr('id', id+"yGridHiddenButton")
@@ -103,7 +104,7 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
             .append('rect')
             .attr('fill', "steelblue")
             .attr('x', width - 20)
-            .attr('y', 90)
+            .attr('y', margin.top + 90)
             .attr('height', 20)
             .attr('width', 20)
             .attr('id', id+"yGridShowButton")
@@ -112,6 +113,19 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
         yGridShowButton.innerText = id
         yGridShowButton.addEventListener("click", yGridShow)
     }
+
+    svg
+        .append('rect')
+        .attr('fill', "red")
+        .attr('x', width - 20)
+        .attr('y', margin.top + 120)
+        .attr('height', 20)
+        .attr('width', 20)
+        .attr('id', id+"changeBackgroundColorButton")
+
+    const changeBackgroundColorButton = document.getElementById(id+"changeBackgroundColorButton")
+    changeBackgroundColorButton.innerText = id
+    changeBackgroundColorButton.addEventListener("click", printColorBar)
 
 }
 
