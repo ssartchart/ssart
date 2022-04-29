@@ -19,20 +19,28 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
     console.log(`Hello, ${type}!`);
     const datasets = Data_pre_processing(data.labels,data.datasets);
     const labels = data.labels;
-    const color = LabelColor(datasets);
-    const chart_area = svg.append('g').style('width', width).style('height', height);
-    
+    const labelcolor = LabelColor(datasets);
+    const color = labelcolor.color;
+    const legend_label = labelcolor.label;
+
+    const chart_area = svg.append('g').style('width', width-100).style('height', height-100);
+
+    const legend_box = drawLegend(svg, legend_label, width, height, chart_area, position, margin);
+
+    const chart_width = width - legend_box.width;
+    const chart_height = height - legend_box.height;
     checkMargin(margin);
     console.log(position)
     if (type==="bar"){
         // BarChart({svg,labels,datasets,width,height,margin,padding,y_max,y_min});       
         // width, height 조정 필요
-        const chart = new BarChart({chart_area,labels,datasets:datasets,color,width,height,margin,padding,y_max,y_min});
+        const chart = new BarChart({chart_area,labels,datasets:datasets,color,width:chart_width,height:chart_height,margin,padding,y_max,y_min});
         chart.tooltip();
         chart.animation();
         
     }
-    // drawLegend(svg, labels, width, height, chart_area, position);
+    
+    
 
     // except circle
     if (type != "circle") {
@@ -41,22 +49,22 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
       }
         if (options.plugins.xTitle.display) {
           // width, height 조정 필요
-        drawXTitle(chart_area, options.plugins.xTitle.text, width, height, margin);
+        drawXTitle(chart_area, options.plugins.xTitle.text, chart_width, chart_height, margin);
       }
         if (options.plugins.yTitle.display) {
           // width, height 조정 필요
         drawYTitle(
           chart_area,
           options.plugins.yTitle.text,
-          width,
-          height,
+          chart_width,
+          chart_height,
           margin,
           options.plugins.yTitle.position
         );
       }
     }
     if (options.plugins.xGrid) {
-        xGrid(chart_area,height - margin.top - margin.bottom,options.plugins.xGrid);  
+        xGrid(chart_area,chart_height - margin.top - margin.bottom,options.plugins.xGrid);  
 
         svg
             .append('rect')
@@ -86,7 +94,7 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
     }
 
     if (options.plugins.yGrid) {
-        yGrid(chart_area,width - margin.left - margin.right,options.plugins.yGrid);
+        yGrid(chart_area,chart_width - margin.left - margin.right,options.plugins.yGrid);
 
         svg
             .append('rect')
@@ -159,7 +167,6 @@ function ChartH(type, id, data, color, width, height, margin) {
             // const color = target.dataset.color;
             const value = target.dataset.y;
             const name = target.dataset.x;
-            
             tooltop.innerText = "\u00a0"+" val : "+value+"\u00a0"+"\n" +"\u00a0"+"data : "+name +"\u00a0" +"\n" +"\u00a0"+"add : " + "\u00a0" + ""  +"\u00a0"; // 값 + 데이터 set
             tooltop.style.background = '#ddd';
             tooltop.style.top = positionTop -30+ 'px';
