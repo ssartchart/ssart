@@ -17,7 +17,7 @@ export class BarChart{
 
         this.color = color;
         this.y_min = y_min;
-        this.x0 = Axis.x;
+        this.x0 = Axis.x.padding(padding);
         this.y = Axis.y;
         this.x1 = d3.scaleBand()
             .domain(datasets.map((d,index)=>{return index}))
@@ -46,6 +46,7 @@ export class BarChart{
         this.slice.selectAll("rect")
             .data(datasets=>{return datasets.data;})
             .enter().append("rect")
+            .attr("class","data")
             .filter(d=>{return labels.includes(d.name);})   //labels에 없는값 필터링
             .attr("width", this.x0.bandwidth()/datasets.length)
             .attr("x",d=>{ return this.x0(d.name);})
@@ -62,7 +63,7 @@ export class BarChart{
     // 툴팁 효과
     tooltip(){
         const color = this.color;
-        this.slice.selectAll("rect")
+        this.slice.selectAll(".data")
         .on("mouseover", function(d){ 
             console.log(d);
             console.log(this);
