@@ -14,7 +14,7 @@ import { ScatterChart } from './ScatterChar.js';
 
 
 function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=0}){
-    const { position } = options.plugins.legend;
+    const legend = options.plugins.legend;
     const svg = d3.select(id).append('svg').style('width', width).style('height', height);
     
     console.log(`Hello, ${type}!`);
@@ -23,15 +23,13 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
     const labelcolor = LabelColor(data.datasets);
     const color = labelcolor.color;
     const legend_label = labelcolor.label;
-
     const chart_area = svg.append('g').style('width', width-100).style('height', height-100);
 
-    const legend_box = drawLegend(svg, legend_label, width, height, chart_area, position, margin);
+    const legend_box = drawLegend(id, svg, labelcolor, width, height, chart_area, legend, margin);
 
     const chart_width = width - legend_box.width;
     const chart_height = height - legend_box.height;
     checkMargin(margin);
-    console.log(position)
     if (type==="bar"){
         const datasets = Data_pre_processing(data.labels,data.datasets,"namevalue");
         // BarChart({svg,labels,datasets,width,height,margin,padding,y_max,y_min});       
