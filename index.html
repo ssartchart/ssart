@@ -106,18 +106,18 @@
                         {name: 't', value: 12}
                     ],
                 },
-                {
-                    label: 'Small Radius',
-                    data : [
-                        {name: 'a', value: 15},
-                        {name: 'b', value: 23},
-                        {name: 'c', value: 25},
-                        {name: 'd', value: 32},
-                        {name: 'e', value: 29},
-                        {name: 'f', value: 13},
-                        {name: 'g', value: 15},
-                    ],
-                }
+                // {
+                //     label: 'Small Radius',
+                //     data : [
+                //         {name: 'a', value: 15},
+                //         {name: 'b', value: 23},
+                //         {name: 'c', value: 25},
+                //         {name: 'd', value: 32},
+                //         {name: 'e', value: 29},
+                //         {name: 'f', value: 13},
+                //         {name: 'g', value: 15},
+                //     ],
+                // }
             ]
         };
         const config = {
@@ -166,20 +166,86 @@
     <h1>가로 막대 그래프</h1>
     <div id="barH"></div>
 
+    <script>
+        const dataH = {
+            labels: ['a','b','c','d','e'],
+            datasets: [
+                {
+                    label: '1번 막대 label',
+                    data: [
+                        {name: 'a', value: 10},
+                        {name: 'b', value: 29},
+                        {name: 'c', value: 32},
+                        {name: 'd', value: 25},
+                        {name: 'e', value: 750},
+                    ],
+                    backgroundColor: "red",
+            
+                },
+
+                {
+                    label: 'Small Radius',
+                    data : [100,200,320,45 ]
+                    ,
+                    backgroundColor: "blue",
+                },
+
+                // {
+                //     label: 'Small Radius',
+                //     data : [90,170,300,415 ]
+                //     ,
+                //     backgroundColor: "yellow",
+                // },
+            ]
+        };
+
+        const configH = {
+            type: 'barH',
+            width : 500,
+            height : 500,
+            margin : {top: 40, left: 40, bottom: 40, right: 40},
+            padding : 0.1,
+            data: dataH,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                            position: 'bottom',// top bottom left right
+                    },
+                    title: {
+                        display: true,
+                        text: 'Chart.js BarH Chart'
+                    },
+                    xTitle: {
+                        display: true,
+                        text: 'x축 이름 xxxxx'
+                    },
+                    yTitle: {
+                        display: true,
+                        text: 'y축 title yyyyy'
+                    },
+
+                }
+            },
+            y_min : 0,
+        };
+
+
+    </script>
+
     </svg>
     <script>
-        var dataH = [600, 300, 750, 1002];
-        var color = ['red', 'blue', 'yellow','green'];
-        var widthH = 500;
-        var heightH = 500;
-        var marginH = {top: 40, left: 40, bottom: 40, right: 40};
+       
+        // var color = ['red', 'blue', 'yellow','green'];
+        // var widthH = 500;
+        // var heightH = 500;
+        // var marginH = {top: 40, left: 40, bottom: 40, right: 40};
 
     </script>
     <script type="module">
         import * as Chart from './src/index.js';
 
-        Chart.ChartH("barH", '#barH', dataH, color, widthH, heightH, marginH);
-
+        Chart.ChartH('#barH', configH);
 
     </script>
     

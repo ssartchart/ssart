@@ -1,6 +1,6 @@
 import {BarChart} from './BarChart.js'
 import {BarHChart} from './BarHChart.js'
-import BarHClass from './BarHClass.js'
+import {BarHClass} from './BarHClass.js'
 // import {BarChart} from './BarChartfunction.js'
 import { xGrid, yGrid } from './Axis_helper.js';
 import { LabelColor } from './Color_helper.js';
@@ -58,15 +58,29 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
 
 };
 
-function ChartH(type, id, data, color, width, height, margin) {
+function ChartH(id, {type,width,height,margin,padding=0,data,options,y_max, y_min=0} ) {
 
+    const { position } = options.plugins.legend;
     const svg = d3.select(id).append('svg').style('width',width).style('height', height);
+
+    const datasets = Data_pre_processing(data.labels,data.datasets);
+
+    const labels = data.labels;
+    const color = LabelColor(datasets);
+    const chart_area = svg.append('g').style('width', width).style('height', height);
+
+    console.log("chartH function");
+    
+    
+    console.log(labels);
+    console.log(datasets);
 
         
     if(type==="barH") {
         // BarHChart(svg, data, color, width, height, margin); //js export 사용
         
-        const barHchart = new BarHClass(svg, data, color, width, height, margin); //클래스 사용
+        // const barHchart = new BarHClass(chart_area, data, width, height, margin); //클래스 사용
+        const barHchart = new BarHClass({chart_area, labels, datasets, color, width, height, margin, padding, y_max, y_min});
 
     }
     
