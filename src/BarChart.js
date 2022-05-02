@@ -1,4 +1,4 @@
-import {Set_Axis, xGrid, yGrid} from './Axis_helper.js';
+import {Set_Axis} from './Axis_helper.js';
 
 export class BarChart{
     constructor({chart_area,labels,datasets,color,width,height,margin,padding,y_max,y_min}){
@@ -22,6 +22,20 @@ export class BarChart{
         this.x1 = d3.scaleBand()
             .domain(datasets.map((d,index)=>{return index}))
             .range([0, this.x0.bandwidth()]);
+        
+        chart_area
+            .append("g")
+            .attr("class", "chartBody")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+            .append("rect")
+            .attr("x", 0)
+            .attr("y", 0)
+            .attr("width", width - margin.left - margin.right)
+            .attr("height", height - margin.top - margin.bottom)
+            .style("fill", "none")
+            .style("fill-opacity", .8)
+            .attr("rx", 20)
+            .attr("ry", 20)
 
         this.slice = chart_area.selectAll(".slice")
             .data(datasets)
@@ -50,8 +64,9 @@ export class BarChart{
         const color = this.color;
         this.slice.selectAll("rect")
         .on("mouseover", function(d){ 
-            d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));
             console.log(d);
+            console.log(this);
+            d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));
         })
         .on("mouseout", function(d){ 
             d3.select(this).style("fill", color(d.label_index));

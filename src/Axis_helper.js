@@ -13,17 +13,15 @@ export const Set_Axis = ({chart_area,x_domain,y_domain,width,height,margin,paddi
         .attr('transform', `translate(0, ${height - margin.bottom})`)
         .call(d3.axisBottom(x)
             .tickSizeOuter(0))
-        .call(g => g.select('.domain').remove())
-        .call(g => g.selectAll('line').remove());
+        // .call(g => g.select('.domain').remove())
+        // .call(g => g.selectAll('line').remove());
 
     const yAxis = g => g
         .attr("class", "yAxis")
         .attr('transform', `translate(${margin.left}, 0)`)
         .call(d3.axisLeft(y))
-        .call(g => g.select('.domain').remove())   
-        .call(g => g.selectAll('line')
-            .attr('x2', width)
-            .style('stroke', '#f5f5f5'));
+        // .call(g => g.select('.domain').remove())   
+        // .call(g => g.selectAll('line').remove());
 
     chart_area.append('g').call(xAxis);
     chart_area.append('g').call(yAxis);
@@ -88,7 +86,7 @@ export const yGrid=(chart_area,length,options) =>{
     if (options.dash) {
         dash = options.dash
     }
-    console.log("y");
+
     chart_area.selectAll("g.yAxis g.tick")
         .append("line")
         .attr("class", "gridline")
@@ -135,4 +133,32 @@ export const Set_Axis_reverse = ({chart_area,x_domain,y_domain,width,height,marg
         x : x,
         y : y
     };
+}
+
+export function xGridShow(event) {
+    // grid 보이기 이벤트 발생 시
+    // console.log(event.target)
+    // console.log(event.target.innerText)
+    // console.log(event.target.id)
+    
+    d3.selectAll(event.target.innerText + " svg g.xAxis g.tick line.gridline")
+        .style("visibility", "visible")
+}
+
+export function yGridShow(event) {
+    // grid 보이기 이벤트 발생 시
+    d3.selectAll(event.target.innerText + " svg g.yAxis g.tick line.gridline")
+        .style("visibility", "visible")
+}
+
+export function xGridHidden(event) {
+    // grid 없애기 이벤트 발생 시
+    d3.selectAll(event.target.innerText + " svg g.xAxis g.tick line.gridline")
+        .style("visibility", "hidden")
+}
+
+export function yGridHidden(event) {
+    // grid 없애기 이벤트 발생 시 
+    d3.selectAll(event.target.innerText + " svg g.yAxis g.tick line.gridline")
+        .style("visibility", "hidden")
 }

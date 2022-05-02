@@ -2,12 +2,10 @@
 function drawTitle(svg, text, width, height, margin) {
   svg
     .append("text")
+    .attr("id", "title")
     .attr("x", width / 2)
     .attr("y", margin.top / 2)
     .attr("text-anchor", "middle")
-    .style("font-size", "16px")
-    .style("font-weight", "bold")
-    .style("font-family", "sans-serif")
     .text(text);
 }
 
@@ -15,6 +13,7 @@ function drawTitle(svg, text, width, height, margin) {
 function drawXTitle(svg, text, width, height, margin) {
   svg
     .append("text")
+    .attr("id", "xTitle")
     .attr(
       "transform",
       "translate(" + width / 2 + " ," + (height - margin.bottom / 4) + ")"
@@ -28,6 +27,7 @@ function drawYTitle(svg, text, width, height, margin, position) {
   if (position === "right") {
     svg
       .append("text")
+      .attr("id", "yTitle")
       .attr("x", width - margin.right / 3)
       .attr("y", height / 2)
       .attr("text-anchor", "middle")
@@ -36,6 +36,7 @@ function drawYTitle(svg, text, width, height, margin, position) {
   } else {
     svg
       .append("text")
+      .attr("id", "yTitle")
       .attr("transform", "rotate(-90)")
       .attr("x", -(height / 2))
       .attr("y", margin.left / 3)
