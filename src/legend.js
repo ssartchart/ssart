@@ -1,9 +1,8 @@
 export function drawLegend(id, svg, labels, width, height, chartContainer, legend, margin) {    
-  let { position, fontSize, fontFamily, fontWeight, legendType } = legend;
-  // console.log(position, fontSize, fontFamily, legendType)  
+  let { position = "left", fontSize = 10, fontFamily = "comic sans ms", fontWeight = "normal", legendType = "rect" } = legend;
   const tid = id.slice(1, id.length)
   if (typeof fontSize !== "number") {
-    if (fontSize.includes("px")) {
+    if (fontSize?.includes("px")) {
       fontSize = fontSize.slice(0, fontSize.length - 2)
     }
   }  
