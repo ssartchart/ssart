@@ -10,6 +10,7 @@ import { checkMargin } from "./checkMargin.js";
 import { drawLegend } from "./legend.js";
 import { xGridHidden, yGridHidden, xGridShow, yGridShow } from "./Axis_helper.js"
 import { printColorBar } from './background.js';
+import { ScatterChart } from './ScatterChar.js';
 
 
 function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=0}){
@@ -17,9 +18,9 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
     const svg = d3.select(id).append('svg').style('width', width).style('height', height);
     
     console.log(`Hello, ${type}!`);
-    const datasets = Data_pre_processing(data.labels,data.datasets);
+    
     const labels = data.labels;
-    const labelcolor = LabelColor(datasets);
+    const labelcolor = LabelColor(data.datasets);
     const color = labelcolor.color;
     const legend_label = labelcolor.label;
     const chart_area = svg.append('g').style('width', width-100).style('height', height-100);
@@ -30,12 +31,20 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
     const chart_height = height - legend_box.height;
     checkMargin(margin);
     if (type==="bar"){
+        const datasets = Data_pre_processing(data.labels,data.datasets,"namevalue");
         // BarChart({svg,labels,datasets,width,height,margin,padding,y_max,y_min});       
         // width, height 조정 필요
         const chart = new BarChart({chart_area,labels,datasets:datasets,color,width:chart_width,height:chart_height,margin,padding,y_max,y_min});
         chart.tooltip();
         chart.animation();
         
+    }
+
+    if (type==="scatter"){
+      const datasets = Data_pre_processing(data.labels,data.datasets,"xy");
+      const chart = new ScatterChart({chart_area,labels,datasets:datasets,color,width:chart_width,height:chart_height,margin,padding,y_max,y_min});
+      chart.tooltip();
+
     }
     
     
@@ -61,6 +70,7 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
         );
       }
     }
+
     if (options.plugins.xGrid) {
         xGrid(chart_area,chart_height - margin.top - margin.bottom,options.plugins.xGrid);  
 
