@@ -10,7 +10,8 @@ import { checkMargin } from "./checkMargin.js";
 import { drawLegend } from "./legend.js";
 import { xGridHidden, yGridHidden, xGridShow, yGridShow } from "./Axis_helper.js"
 import { printColorBar } from './background.js';
-import { ScatterChart } from './ScatterChar.js';
+import { ScatterChart } from './ScatterChart.js';
+import { BubbleChart } from './BubbleChart.js';
 
 
 function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=0}){
@@ -31,21 +32,28 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
     const chart_height = height - legend_box.height;
     checkMargin(margin);
     if (type==="bar"){
-        const datasets = Data_pre_processing(data.labels,data.datasets,"namevalue");
-        // BarChart({svg,labels,datasets,width,height,margin,padding,y_max,y_min});       
-        // width, height 조정 필요
-        const chart = new BarChart({chart_area,labels,datasets:datasets,color,width:chart_width,height:chart_height,margin,padding,y_max,y_min});
-        chart.tooltip();
-        chart.animation();
-        
-    }
-
-    if (type==="scatter"){
-      const datasets = Data_pre_processing(data.labels,data.datasets,"xy");
-      const chart = new ScatterChart({chart_area,labels,datasets:datasets,color,width:chart_width,height:chart_height,margin,padding,y_max,y_min});
+      const datasets = Data_pre_processing(data.labels,data.datasets,"namevalue");
+      // BarChart({svg,labels,datasets,width,height,margin,padding,y_max,y_min});       
+      // width, height 조정 필요
+      const chart = new BarChart({chart_area,labels,datasets:datasets,color,width:chart_width,height:chart_height,margin,padding,y_max,y_min});
       chart.tooltip();
+      chart.animation();
+      
+  }
 
-    }
+  if (type==="scatter"){
+    const datasets = Data_pre_processing(data.labels,data.datasets,"xy");
+    const chart = new ScatterChart({chart_area,labels,datasets:datasets,color,width:chart_width,height:chart_height,margin,padding,y_max,y_min});
+    chart.tooltip();
+
+  }
+
+  if (type==="bubble"){
+    const datasets = Data_pre_processing(data.labels,data.datasets,"xyr");
+    const chart = new BubbleChart({chart_area,labels,datasets:datasets,color,width:chart_width,height:chart_height,margin,padding,y_max,y_min});
+    chart.tooltip();
+
+  }
     
     
 
@@ -129,8 +137,6 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
         yGridShowButton.innerText = id
         yGridShowButton.addEventListener("click", yGridShow)
     }
-<<<<<<< HEAD
-=======
 
     svg
         .append('rect')
@@ -145,7 +151,6 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
     changeBackgroundColorButton.innerText = id
     changeBackgroundColorButton.addEventListener("click", printColorBar)
 
->>>>>>> e97ce8ccf62a7defc7028c235ba53bde7ec76ab4
 }
 
 function ChartH(type, id, data, color, width, height, margin) {
@@ -163,29 +168,6 @@ function ChartH(type, id, data, color, width, height, margin) {
 };
 
 
-<<<<<<< HEAD
-=======
-    for(const el of Type) { // 마우스 커서 기준 위치를 받아서 마우스 근처에 데이터 표시     
-        el.addEventListener('mousemove', (event) => {
-            const x = event.pageX;
-            const y = event.pageY;
-            const target = event.target;
-            const positionLeft =x;
-            const positionTop = y;
-            // const color = target.dataset.color;
-            const value = target.dataset.y;
-            const name = target.dataset.x;
-            tooltop.innerText = "\u00a0"+" val : "+value+"\u00a0"+"\n" +"\u00a0"+"data : "+name +"\u00a0" +"\n" +"\u00a0"+"add : " + "\u00a0" + ""  +"\u00a0"; // 값 + 데이터 set
-            tooltop.style.background = '#ddd';
-            tooltop.style.top = positionTop -30+ 'px';
-            tooltop.style.left = positionLeft -80 + 'px';
-            // tooltip.style("left", (d3.event.pageX+10)+"px");
-            // tooltip.style("top",  (d3.event.pageY-10)+"px");
-            tooltop.style.opacity = "1.0";
-        });
-    }
-};
->>>>>>> e97ce8ccf62a7defc7028c235ba53bde7ec76ab4
 
 
 export {Chart, ChartH};

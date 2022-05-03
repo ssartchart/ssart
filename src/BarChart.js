@@ -65,7 +65,6 @@ export class BarChart{
         const color = this.color;
         this.slice.selectAll(".data")
         .on("mouseover", function(d){ 
-<<<<<<< HEAD
             const x = event.pageX;
             const y = event.pageY;
             // const target = event.target;
@@ -85,11 +84,6 @@ export class BarChart{
             // tooltip.style("left", (d3.event.pageX+10)+"px");
             // tooltip.style("top",  (d3.event.pageY-10)+"px");
             tooltop.style.opacity = "1.0";
-=======
-            console.log(d);
-            console.log(this);
-            d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));
->>>>>>> e97ce8ccf62a7defc7028c235ba53bde7ec76ab4
         })
         .on("mouseout", function(d){ 
             d3.select(this).style("fill", color(d.label_index));

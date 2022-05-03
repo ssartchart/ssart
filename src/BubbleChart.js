@@ -1,7 +1,7 @@
 import {Set_Axis} from './Axis_helper.js';
 
-export class ScatterChart{
-    constructor({chart_area,labels,datasets,color,width,height,margin,padding,y_max,y_min}){
+export class BubbleChart{
+    constructor({chart_area,labels,datasets,color,width,height,margin,padding,y_max,y_min,r_max}){
         const x_domain = labels.map(d => d);        
         const y_domain = [y_min,  (y_max != null) ? y_max : d3.max(datasets, label=>{
                 return d3.max(label.data, d=>{
@@ -9,11 +9,19 @@ export class ScatterChart{
                 })];        
         const Axis = Set_Axis({chart_area,x_domain,y_domain,width,height,margin,padding,x_type:"number"});
 
-
+        const r_domain = [0,(r_max != null) ? r_max : d3.max(datasets, label=>{
+            return d3.max(label.data, d=>{
+                return d.r;});            
+            })];        
+        
         this.color = color;
         this.y_min = y_min;
         this.x = Axis.x;
         this.y = Axis.y;
+
+        this.r = d3.scaleLinear()
+            .domain(r_domain).nice()
+            .range([10, 50]);
 
         console.log(datasets);
 
@@ -36,9 +44,9 @@ export class ScatterChart{
             .attr("transform", (d)=>{
                 return "translate(" + this.x(d.x) + "," + this.y(d.y) + ")";
             })
-            .attr("r", 5)
+            .attr("r", (d)=>{return this.r(d.r)})
             .style("fill",d=>{return this.color(d.label_index);})
-            .style("fill-opacity", 1)
+            .style("fill-opacity", 0.2)
             // .on("mouseover", onMouseOver)
             // .on("mouseout", onMouseOut);
 
@@ -52,7 +60,6 @@ export class ScatterChart{
         this.ChartBody.selectAll(".data")
         .on("mouseover", function(d){ 
             console.log(d);
-            console.log(this);
             d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));
         })
         .on("mouseout", function(d){ 
