@@ -17,6 +17,7 @@ import {
 import { printColorBar } from "./background.js";
 import { ScatterChart } from "./ScatterChar.js";
 import { drawCircleChart } from "./circleChart.js";
+import { CircleChart } from "./CircleChartClass.js";
 
 function Chart(
   id,
@@ -96,7 +97,17 @@ function Chart(
   }
 
   if (type === "donut" || type === "pie") {
-    drawCircleChart(type, svg, width, height, margin, data, options);
+    // drawCircleChart(type, svg, width, height, margin, data, options);
+    const chart = new CircleChart({
+      type,
+      svg,
+      width,
+      height,
+      margin,
+      data,
+      options,
+    });
+    // chart.tooltip();
   }
 
   if (options.plugins.title.display) {
