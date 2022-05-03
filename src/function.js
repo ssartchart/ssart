@@ -144,28 +144,96 @@ function ChartH(id, {type,width,height,margin,padding=0,data,options,y_max, y_mi
 
     const datasets = Data_pre_processing(data.labels,data.datasets);
 
+    const labelcolor = LabelColor(datasets);
+    const color = labelcolor.color;
+    const legend_label = labelcolor.label;
+
     const labels = data.labels;
-    const color = LabelColor(datasets);
     const chart_area = svg.append('g').style('width', width).style('height', height);
 
-    console.log("chartH function");
-    
-    
-    console.log(labels);
-    console.log(datasets);
-
+    const legend_box = drawLegend(svg, legend_label, width, height, chart_area, position, margin);
+    const chart_width = width - legend_box.width;
+    const chart_height = height - legend_box.height;
         
     if(type==="barH") {
-        // BarHChart(svg, data, color, width, height, margin); //js export 사용
-        
-        // const barHchart = new BarHClass(chart_area, data, width, height, margin); //클래스 사용
-        const barHchart = new BarHClass({chart_area, labels, datasets, color, width, height, margin, padding, y_max, y_min});
 
+      const barHchart = new BarHClass({chart_area, labels, datasets, color, width:chart_width,height:chart_height, margin, padding, y_max, y_min});
+      barHchart.tooltip();
+      barHchart.animation();
     }
     
+    drawTitle(svg, options.plugins.title.text, width, height, margin);
+    drawXTitle(chart_area, options.plugins.xTitle.text, chart_width, chart_height, margin);
+    drawYTitle(
+              chart_area,
+              options.plugins.yTitle.text,
+              chart_width,
+              chart_height,
+              margin,
+              options.plugins.yTitle.position
+            );
 
-    // svg.attr.on("mouseover", onMouseOver)
-    //         .on("mouseout", onMouseOut);
+    if (options.plugins.xGrid) {
+      xGrid(chart_area,chart_height - margin.top - margin.bottom,options.plugins.xGrid);  
+
+      svg
+          .append('rect')
+          .attr('x', width - 20)
+          .attr('y', margin.top)
+          .attr('height', 20)
+          .attr('width', 20)
+          .attr('id', id+"xGridHiddenButton")
+          
+      const xGridHiddenButton = document.getElementById(id+"xGridHiddenButton")
+      xGridHiddenButton.innerText = id
+      xGridHiddenButton.addEventListener("click", xGridHidden)
+      
+      svg
+          .append('rect')
+          .attr('fill', "steelblue")
+          .attr('x', width - 20)
+          .attr('y', margin.top + 30)
+          .attr('height', 20)
+          .attr('width', 20)
+          .attr('id', id+"xGridShowButton")
+      
+      const xGridShowButton = document.getElementById(id+"xGridShowButton")
+      xGridShowButton.innerText = id
+      xGridShowButton.addEventListener("click", xGridShow)
+      
+  }
+
+  if (options.plugins.yGrid) {
+      yGrid(chart_area,chart_width - margin.left - margin.right,options.plugins.yGrid);
+
+      svg
+          .append('rect')
+          .attr('x', width - 20)
+          .attr('y', margin.top + 60)
+          .attr('height', 20)
+          .attr('width', 20)
+          .attr('id', id+"yGridHiddenButton")
+          
+      const yGridHiddenButton = document.getElementById(id+"yGridHiddenButton")
+      yGridHiddenButton.innerText = id
+      yGridHiddenButton.addEventListener("click", yGridHidden)
+      
+      svg
+          .append('rect')
+          .attr('fill', "steelblue")
+          .attr('x', width - 20)
+          .attr('y', margin.top + 90)
+          .attr('height', 20)
+          .attr('width', 20)
+          .attr('id', id+"yGridShowButton")
+      
+      const yGridShowButton = document.getElementById(id+"yGridShowButton")
+      yGridShowButton.innerText = id
+      yGridShowButton.addEventListener("click", yGridShow)
+  }
+
+   
+    /*
     const Type = document.getElementsByTagName('rect'); // 타입으로 받아서 처리해야할것같아요
     svg.node();
 
@@ -190,6 +258,7 @@ function ChartH(id, {type,width,height,margin,padding=0,data,options,y_max, y_mi
             tooltop.style.opacity = "1.0";
         });
     }
+    */
 };
 
 

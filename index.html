@@ -135,7 +135,7 @@
         Chart.Chart('#bargraph2', config);
     </script>
 
-    <h1>가로 막대 그래프</h1>
+    <br>
     <div id="barH"></div>
 
     <script>
@@ -145,10 +145,10 @@
                 {
                     label: '1번 막대 label',
                     data: [
-                        {name: 'a', value: 10},
-                        {name: 'b', value: 29},
-                        {name: 'c', value: 32},
-                        {name: 'd', value: 25},
+                        {name: 'a', value: 100},
+                        {name: 'b', value: 290},
+                        {name: 'c', value: 750},
+                        {name: 'd', value: 250},
                         {name: 'e', value: 750},
                     ],
                     backgroundColor: "red",
@@ -162,12 +162,12 @@
                     backgroundColor: "blue",
                 },
 
-                // {
-                //     label: 'Small Radius',
-                //     data : [90,170,300,415 ]
-                //     ,
-                //     backgroundColor: "yellow",
-                // },
+                {
+                    label: 'Small Radius',
+                    data : [90,170,300,415 ]
+                    ,
+                    backgroundColor: "yellow",
+                },
             ]
         };
 
@@ -180,21 +180,33 @@
             data: dataH,
             options: {
                 responsive: true,
-                plugins: {
+                plugins: {                    
                     legend: {
                             position: 'bottom',// top bottom left right
                     },
                     title: {
                         display: true,
-                        text: 'Chart.js BarH Chart'
+                        text: '가로막대 그래프'
                     },
                     xTitle: {
                         display: true,
-                        text: 'x축 이름 xxxxx'
+                        text: 'name'
                     },
                     yTitle: {
                         display: true,
-                        text: 'y축 title yyyyy'
+                        text: 'value'
+                    },
+                    xGrid: {
+                        color: "rgb(255, 0, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
+                        dash: "10,3",
+                        weight: 1,
+                        opacity: .5,
+                    },
+                    yGrid: {
+                        color: "#323233", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
+                        dash: "10,3",     // 점선, 10만큼 칠하고 3만큼 빈공간
+                        weight: 1,        // 선 두께
+                        opacity: .5,      // 선 투명도
                     },
 
                 }
