@@ -13,7 +13,59 @@
 
     <link rel="icon" type="image/png" href="http://example.com/myicon.png">
 </head>
+<style>
+    body{padding: 5%;text-align: center;}
 
+    #bargraph {
+        position: relative;
+    }
+
+    #tooltip {
+        position: absolute;
+        opacity: 1;
+        max-width: 30%;
+        /* max-height: 30%; */
+        min-width: 5%;
+        min-height: 5%;
+        line-height: 20px;
+        transition: all 0.3s;
+        border-radius: 5px;
+        padding: 5px 8px;
+        text-align: center;
+        color: rgb(0, 0, 0);
+        font-size: 14px;
+        font-weight: bold;
+        background-color: rgb(15, 14, 14);
+        display: inline-block; 
+    }
+    .svg-container {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        padding-bottom: 100%; /* aspect ratio */
+        vertical-align: top;
+        overflow: hidden;
+    }
+    .svg-content-responsive {
+        display: inline-block;
+        position: absolute;
+        top: 10px;
+        left: 0;
+    }
+    
+
+
+    /* 컬러 CSS를 스타일안에 미리 해놔야하는지 ..? */
+    .blue{fill : #5abae6;}
+    .red{fill : #d34e4e;}
+    .green{fill : #9dbb19;}
+    .yellow{fill : #f7b358;}
+</style>
+=======
+</head>
+
+>>>>>>> e97ce8ccf62a7defc7028c235ba53bde7ec76ab4
+>>>>>>> 5fac9a93477a909bfac379df90d89a30c9e096e3
 <body>
 
     <div id="bargraph">

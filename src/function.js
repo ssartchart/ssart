@@ -160,26 +160,6 @@ function ChartH(type, id, data, color, width, height, margin) {
 };
 
 
-    // for(const el of Type) { // 마우스 커서 기준 위치를 받아서 마우스 근처에 데이터 표시     
-    //     el.addEventListener('mousemove', (event) => {
-    //         const x = event.pageX;
-    //         const y = event.pageY;
-    //         const target = event.target;
-    //         const positionLeft =x;
-    //         const positionTop = y;
-    //         // const color = target.dataset.color;
-    //         const value = target.dataset.y;
-    //         const name = target.dataset.x;
-    //         tooltop.innerText = "\u00a0"+" val : "+value+"\u00a0"+"\n" +"\u00a0"+"data : "+name +"\u00a0" +"\n" +"\u00a0"+"add : " + "\u00a0" + ""  +"\u00a0"; // 값 + 데이터 set
-    //         tooltop.style.background = '#ddd';
-    //         tooltop.style.top = positionTop -30+ 'px';
-    //         tooltop.style.left = positionLeft -80 + 'px';
-    //         // tooltip.style("left", (d3.event.pageX+10)+"px");
-    //         // tooltip.style("top",  (d3.event.pageY-10)+"px");
-    //         tooltop.style.opacity = "1.0";
-    //     });
-    // }
-
 
 
 export {Chart, ChartH};

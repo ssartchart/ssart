@@ -79,7 +79,7 @@ export class BarChart{
             
             tooltop.innerText = "value : " + value +"\n" + "name : " + name +"\n" + "color : " +key ; // 값 + 데이터 
             // tooltop.style.background = '#ddd';
-            tooltop.style.top = positionTop -30+ 'px';
+            tooltop.style.top = positionTop -100+ 'px';
             tooltop.style.left = positionLeft -80 + 'px';
             // tooltip.style("left", (d3.event.pageX+10)+"px");
             // tooltip.style("top",  (d3.event.pageY-10)+"px");
