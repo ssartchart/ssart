@@ -32,7 +32,7 @@ export const Set_Axis = ({chart_area,x_domain,y_domain,width,height,margin,paddi
     };
 }
 
-export const xGrid = (chart_area,length,options)=>{
+export function xGrid (chart_area,length,options){
     let color = "black"
     if (options.color) {
         color = options.color
@@ -52,6 +52,9 @@ export const xGrid = (chart_area,length,options)=>{
     if (options.dash) {
         dash = options.dash
     }
+    
+    const xGridGroup = chart_area.select("g.xAxis")
+    xGridGroup.property("visibleStatus", "visible")
 
     chart_area.selectAll(" g.xAxis g.tick")
         .append("line")
@@ -65,8 +68,13 @@ export const xGrid = (chart_area,length,options)=>{
         .attr("x2", 0)
         .attr("y2", 0);
 
+    if (options.display === false) {
+        xGridGroup.property("visibleStatus", "hidden")
+        chart_area.selectAll("g.xAxis g.tick")
+            .style("visibility", "hidden")
+    }
 }
-export const yGrid=(chart_area,length,options) =>{
+export function yGrid (chart_area,length,options) {
     let color = "black"
     if (options.color) {
         color = options.color
@@ -87,6 +95,9 @@ export const yGrid=(chart_area,length,options) =>{
         dash = options.dash
     }
 
+    const yGridGroup = chart_area.select("g.yAxis")
+    yGridGroup.property("visibleStatus", "visible")
+
     chart_area.selectAll("g.yAxis g.tick")
         .append("line")
         .attr("class", "gridline")
@@ -99,6 +110,12 @@ export const yGrid=(chart_area,length,options) =>{
         .attr("x2", length)
         .attr("y2", 0);
 
+
+    if (options.display === false) {
+        yGridGroup.property("visibleStatus", "hidden")
+        chart_area.selectAll("g.yAxis g.tick")
+            .style("visibility", "hidden")
+    }
 }
 
 
