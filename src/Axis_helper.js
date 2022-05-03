@@ -1,8 +1,5 @@
-export const Set_Axis = ({chart_area,x_domain,y_domain,width,height,margin,padding})=>{
-    const x = d3.scaleBand()
-        .domain(x_domain)
-        .range([margin.left, width - margin.right])
-        .padding(padding);
+export const Set_Axis = ({chart_area,x_domain,y_domain,width,height,margin,x_type="band"})=>{
+    const x = Set_X(x_type,x_domain,margin,width);
 
     const y = d3.scaleLinear()
         .domain(y_domain).nice()
@@ -32,7 +29,28 @@ export const Set_Axis = ({chart_area,x_domain,y_domain,width,height,margin,paddi
     };
 }
 
-export function xGrid (chart_area,length,options){
+const Set_X = (x_type,x_domain,margin,width)=>{
+    switch(x_type){
+        case 'band':
+            return d3.scaleBand()
+            .domain(x_domain)
+            .range([margin.left, width - margin.right]);
+        case 'time':
+            return d3.scaleTime()
+            .domain(d3.extent(x_domain))
+            .range([margin.left, width - margin.right]);
+        case 'number':
+            return d3.scaleLinear()
+            .domain(d3.extent(x_domain))
+            .range([margin.left, width - margin.right]);
+        default:
+            return d3.scaleBand()
+            .domain(x_domain).nice()
+            .range([margin.left, width - margin.right]);
+    }
+}
+
+export const xGrid = (chart_area,length,options)=>{
     let color = "black"
     if (options.color) {
         color = options.color
