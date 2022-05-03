@@ -71,12 +71,11 @@ export class BarHClass{
         chart_area.node();
             
     };
-
     // 툴팁 효과 + 하이라이트
     tooltip(){
         const tooltop = document.getElementById('tooltip');
         const color = this.color;
-        this.slice.selectAll(".data")
+        this.slice.selectAll("rect")
         .on("mouseover", function(d){ 
             const x = event.pageX;
             const y = event.pageY;
@@ -84,7 +83,7 @@ export class BarHClass{
             const positionLeft =x;
             const positionTop = y;
             d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));
-            
+            console.log("툴팁 확인 BarHC");
             const value = d.value;
             const name =  d.name;
             const key = d3.rgb(color(d.label_index));
@@ -92,7 +91,7 @@ export class BarHClass{
             
             tooltop.innerText = "value : " + value +"\n" + "name : " + name +"\n" + "color : " +key ; // 값 + 데이터 
             // tooltop.style.background = '#ddd';
-            tooltop.style.top = positionTop -100+ 'px';
+            tooltop.style.top = positionTop -30+ 'px';
             tooltop.style.left = positionLeft -80 + 'px';
             // tooltip.style("left", (d3.event.pageX+10)+"px");
             // tooltip.style("top",  (d3.event.pageY-10)+"px");
