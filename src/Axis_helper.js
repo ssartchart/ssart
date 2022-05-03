@@ -70,6 +70,9 @@ export const xGrid = (chart_area,length,options)=>{
     if (options.dash) {
         dash = options.dash
     }
+    
+    const xGridGroup = chart_area.select("g.xAxis")
+    xGridGroup.property("visibleStatus", "visible")
 
     chart_area.selectAll(" g.xAxis g.tick")
         .append("line")
@@ -83,8 +86,13 @@ export const xGrid = (chart_area,length,options)=>{
         .attr("x2", 0)
         .attr("y2", 0);
 
+    if (options.display === false) {
+        xGridGroup.property("visibleStatus", "hidden")
+        chart_area.selectAll("g.xAxis g.tick")
+            .style("visibility", "hidden")
+    }
 }
-export const yGrid=(chart_area,length,options) =>{
+export function yGrid (chart_area,length,options) {
     let color = "black"
     if (options.color) {
         color = options.color
@@ -105,6 +113,9 @@ export const yGrid=(chart_area,length,options) =>{
         dash = options.dash
     }
 
+    const yGridGroup = chart_area.select("g.yAxis")
+    yGridGroup.property("visibleStatus", "visible")
+
     chart_area.selectAll("g.yAxis g.tick")
         .append("line")
         .attr("class", "gridline")
@@ -117,6 +128,12 @@ export const yGrid=(chart_area,length,options) =>{
         .attr("x2", length)
         .attr("y2", 0);
 
+
+    if (options.display === false) {
+        yGridGroup.property("visibleStatus", "hidden")
+        chart_area.selectAll("g.yAxis g.tick")
+            .style("visibility", "hidden")
+    }
 }
 
 
@@ -158,25 +175,28 @@ export function xGridShow(event) {
     // console.log(event.target)
     // console.log(event.target.innerText)
     // console.log(event.target.id)
+    // console.log(event.target.style.fill)
+    if (event.target.style.fill=="steelblue") {
+        event.target.style.fill = "black"
+        d3.selectAll(event.target.innerText + " svg g.xAxis g.tick line.gridline")
+            .style("visibility", "hidden")
+    } else {
+        event.target.style.fill = "steelblue"
+        d3.selectAll(event.target.innerText + " svg g.xAxis g.tick line.gridline")
+            .style("visibility", "visible")
+    }
     
-    d3.selectAll(event.target.innerText + " svg g.xAxis g.tick line.gridline")
-        .style("visibility", "visible")
 }
 
 export function yGridShow(event) {
     // grid 보이기 이벤트 발생 시
-    d3.selectAll(event.target.innerText + " svg g.yAxis g.tick line.gridline")
-        .style("visibility", "visible")
-}
-
-export function xGridHidden(event) {
-    // grid 없애기 이벤트 발생 시
-    d3.selectAll(event.target.innerText + " svg g.xAxis g.tick line.gridline")
-        .style("visibility", "hidden")
-}
-
-export function yGridHidden(event) {
-    // grid 없애기 이벤트 발생 시 
-    d3.selectAll(event.target.innerText + " svg g.yAxis g.tick line.gridline")
-        .style("visibility", "hidden")
+    if (event.target.style.fill=="steelblue") {
+        event.target.style.fill = "black"
+        d3.selectAll(event.target.innerText + " svg g.yAxis g.tick line.gridline")
+            .style("visibility", "hidden")
+    } else {
+        event.target.style.fill = "steelblue"
+        d3.selectAll(event.target.innerText + " svg g.yAxis g.tick line.gridline")
+            .style("visibility", "visible")
+    }
 }
