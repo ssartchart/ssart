@@ -1,7 +1,7 @@
 import {Set_Axis} from './Axis_helper.js';
 
 export class BarChart{
-    constructor({chart_area,labels,datasets,color,width,height,margin,padding,scales}){
+    constructor({id,chart_area,labels,datasets,color,width,height,margin,padding,scales}){
         
         chart_area.selectAll('*').remove();
 
@@ -49,7 +49,8 @@ export class BarChart{
         this.slice = this.ChartBody.selectAll(".slice")
             .data(datasets)
             .enter().append("g")
-            .attr("class", "slice")
+            .attr("class", "g")
+            .attr("id", (d, i) => `${id}-chart-legend-${i}`)
             .attr("transform",(d,index)=>{ return "translate(" + this.x1(index) + ",0)"; });
 
         this.slice.selectAll("rect")
