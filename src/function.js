@@ -23,6 +23,7 @@ function Chart(
   { type, width, height, margin, padding = 0, data, options, y_max, y_min = 0 }
 ) {
   const legend = options.plugins.legend;
+  const oid = id.slice(1, id.length);
   const svg = d3
     .select(id)
     .append("svg")
@@ -41,7 +42,7 @@ function Chart(
     .style("height", height - 100);
 
   const legend_box = drawLegend(
-    id,
+    oid,
     svg,
     labelcolor,
     width,
@@ -63,6 +64,7 @@ function Chart(
     // BarChart({svg,labels,datasets,width,height,margin,padding,y_max,y_min});
     // width, height 조정 필요
     const chart = new BarChart({
+      id: oid,
       chart_area,
       labels,
       datasets: datasets,

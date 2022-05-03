@@ -1,6 +1,5 @@
 export function drawLegend(id, svg, labels, width, height, chartContainer, legend, margin) {    
   let { position = "left", fontSize = 10, fontFamily = "comic sans ms", fontWeight = "normal", legendType = "rect" } = legend;
-  const tid = id.slice(1, id.length)
   if (typeof fontSize !== "number") {
     if (fontSize?.includes("px")) {
       fontSize = fontSize.slice(0, fontSize.length - 2)
@@ -13,12 +12,20 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
     let rowCnt = 1;
     const legend = svg
       .append("g")
-      .attr("id", `${tid}-legend`)
+      .attr("id", `${id}-legend`)
       .selectAll("g")
       .data(labels)
       .enter()
       .append("g")
-      .attr("id", (d, i) => `${tid}-legend-${i}`)
+      .attr("id", (d, i) => `${id}-legend-${i}`)
+      .on("click", function (d, i) {
+        const item = d3.select(`#${id}-chart-legend-${i}`)        
+        // 해당 범례가 보이는지 확인
+        let currentOpacity = item.style("opacity")        
+        // 클릭 이벤트에 따라 투명도 0 <=> 1 전환
+        item.transition().style("opacity", currentOpacity == 1 ? 0 : 1)
+        d3.select(`#${id}-legend-${i} text`).attr("text-decoration", currentOpacity == 1 ? "line-through" : "none")
+      })
     
     if (legendType === "circle") {
       legend
@@ -29,6 +36,7 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
         .attr('fill', (d, i) => labelsColor(i))    
       legend
         .append("text")
+        .attr("class", "legend-text")
         .attr("x", fontSize / 5 * 10)
         .attr("y", 0)
         .attr("font-size", fontSize)
@@ -48,6 +56,7 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
       
       legend
         .append("text")
+        .attr("class", "legend-text")
         .attr("font-size", fontSize)
         .attr("font-family", fontFamily)
         .attr("x", fontSize / 3 * 10)
@@ -65,8 +74,8 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
       let currYPos = margin.top;
       chartContainer.attr("transform", `translate(0, ${currYPos})`)
       legend.attr("transform", function (d, i) {
-        let legendBBox = document.getElementById(`${tid}-legend-${i}`).getBBox();
-        let legendItem = document.getElementById(`${tid}-legend-${i}`);
+        let legendBBox = document.getElementById(`${id}-legend-${i}`).getBBox();
+        let legendItem = document.getElementById(`${id}-legend-${i}`);
         // console.log(`범례 너비-${i}`, legendBBox.width, '현재 x좌표(시작점):' ,currXPos)
         if (currXPos + legendBBox.width >= width) {
           rowCnt++;
@@ -90,24 +99,24 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
       console.log(legend.node())
       for (let i = 0; i < rowGroup.length; i++) {
         let legendGroup = rowGroup[i];
-        d3.select(`svg ${id}-legend`).append('g').attr("id", `${tid}-legend-group-${i}`).node().append(...legendGroup);
+        d3.select(`svg #${id}-legend`).append('g').attr("id", `${id}-legend-group-${i}`).node().append(...legendGroup);
       }
       // 각 행의 legend 그룹을 센터로 재배치
       for (let i = 0; i < rowCnt; i++) {
-        const groupItem = d3.select(`${id}-legend-group-${i}`);        
+        const groupItem = d3.select(`#${id}-legend-group-${i}`);        
         const startXPos = (width - groupItem.node().getBoundingClientRect().width) / 2; // 배치할 X좌표 계산
         groupItem.attr("transform", `translate(${startXPos}, 0)`)  
       }
       // d3.select('svg .legend-item').remove();
       return {width : 0,
-        height : svg.select(`svg ${id}-legend`).node().getBBox().height+ margin.top};
+        height : svg.select(`svg #${id}-legend`).node().getBBox().height+ margin.top};
     } else if (position === "bottom") {
       let currXPos = 0;
       let currYPos = height;
             
       legend.attr("transform", function (d, i) {
-        let legendBBox = document.getElementById(`${tid}-legend-${i}`).getBBox();
-        let legendItem = document.getElementById(`${tid}-legend-${i}`);        
+        let legendBBox = document.getElementById(`${id}-legend-${i}`).getBBox();
+        let legendItem = document.getElementById(`${id}-legend-${i}`);        
         if (currXPos + legendBBox.width >= width) {
           rowCnt++;
           currYPos += legendBBox.height + 20
@@ -127,33 +136,41 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
       // legend를 행(row)별로 묶기(그룹화)
       for (let i = 0; i < rowGroup.length; i++) {
         let legendGroup = rowGroup[i];
-        d3.select(`${id}-legend`).append('g').attr("id", `${tid}-legend-group-${i}`).node().append(...legendGroup);
+        d3.select(`#${id}-legend`).append('g').attr("id", `${id}-legend-group-${i}`).node().append(...legendGroup);
       }
       // 각 행의 legend 그룹을 센터로 재배치
       // console.log(document.getElementById('chart-area').getBoundingClientRect())
       for (let i = 0; i < rowCnt; i++) {
-        const groupItem = d3.select(`${id}-legend-group-${i}`);        
+        const groupItem = d3.select(`#${id}-legend-group-${i}`);        
         const startXPos = (width - groupItem.node().getBoundingClientRect().width) / 2; // 배치할 X좌표 계산
         console.log('배치 x좌표', startXPos)
         groupItem.attr("transform", `translate(${startXPos}, 0)`)  
       }
-      const legend_y = svg.select(`${id}-legend`).node().getBBox().height;
-      svg.select(`${id}-legend`).attr("transform",`translate(${0}, ${-legend_y})`);
+      const legend_y = svg.select(`#${id}-legend`).node().getBBox().height;
+      svg.select(`#${id}-legend`).attr("transform",`translate(${0}, ${-legend_y})`);
 
       return {width : 0,
-        height : svg.select(`${id}-legend`).node().getBBox().height};
+        height : svg.select(`#${id}-legend`).node().getBBox().height};
     }    
 // left || right
   } else if (position === "left" || position === "right") {
     let colCnt = 1;
     const legend = svg
       .append("g")
-      .attr("id", `${tid}-legend`)
+      .attr("id", `${id}-legend`)
       .selectAll("g")
       .data(labels)
       .enter()
       .append("g")
-      .attr("id", (d, i) => `${tid}-legend-${i}`)
+      .attr("id", (d, i) => `${id}-legend-${i}`)
+      .on("click", function (d, i) {
+        const item = d3.select(`#${id}-chart-legend-${i}`)        
+        // 해당 범례가 보이는지 확인
+        let currentOpacity = item.style("opacity")        
+        // 클릭 이벤트에 따라 투명도 0 <=> 1 전환
+        item.transition().style("opacity", currentOpacity == 1 ? 0 : 1)
+        d3.select(`#${id}-legend-${i} text`).attr("text-decoration", currentOpacity == 1 ? "line-through" : "none")
+      })
 
     if (legendType === "circle") {
       legend
@@ -164,6 +181,7 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
         .attr('fill', (d, i) => labelsColor(i))    
       legend
         .append("text")
+        .attr("class", "legend-text")
         .attr("x", fontSize / 5 * 10)
         .attr("y", 9)
         .attr("font-size", fontSize)
@@ -183,6 +201,7 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
       
       legend
         .append("text")
+        .attr("class", "legend-text")
         .attr("font-size", fontSize)
         .attr("font-family", fontFamily)
         .attr("x", fontSize / 3 * 10)
@@ -202,12 +221,12 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
       
       let rowGap = 0;
       legend.attr('transform', function (d, i) {
-        let legendBBox = document.getElementById(`${tid}-legend-${i}`).getBBox();
-        let legendItem = document.getElementById(`${tid}-legend-${i}`);
+        let legendBBox = document.getElementById(`${id}-legend-${i}`).getBBox();
+        let legendItem = document.getElementById(`${id}-legend-${i}`);
         // console.log(legendItem, `${i}번 레전드 너비:`, legendBBox.width, `차트 gap:`, rowGap)
         if (width + legendBBox.width > width) {
           legendMaxWidth = Math.max(legendBBox.width, legendMaxWidth)
-          rowGap = document.querySelector(`${id}-legend`).getBBox().width + legendBBox.width;
+          rowGap = document.getElementById(`${id}-legend`).getBBox().width + legendBBox.width;
         }
         if (currYPos + legendBBox.height >= height - height / 5) {
           currYPos = 0;
@@ -230,23 +249,23 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
       // legend를 열(col)별로 묶기(그룹화)
       for (let i = 0; i < colGroup.length; i++) {
         let legendGroup = colGroup[i];
-        d3.select(`${id}-legend`).append('g').attr("id", `${tid}-legend-group-${i}`).node().append(...legendGroup);
+        d3.select(`#${id}-legend`).append('g').attr("id", `${id}-legend-group-${i}`).node().append(...legendGroup);
       }
       // 각 열의 legend 그룹을 센터로 재배치      
       for (let i = 0; i < colCnt; i++) {
-        const groupItem = d3.select(`${id}-legend-group-${i}`);                
+        const groupItem = d3.select(`#${id}-legend-group-${i}`);                
         const startYPos = (height - groupItem.node().getBoundingClientRect().height) / 2; // 배치할 Y좌표 계산        )
         groupItem.attr("transform", `translate(0, ${startYPos})`)  
       }
-      chartContainer.attr("transform", `translate(${svg.select(`${id}-legend`).node().getBBox().width}, 0)`)
+      chartContainer.attr("transform", `translate(${svg.select(`#${id}-legend`).node().getBBox().width}, 0)`)
       
     } else { // right      
       let currXPos = width-1;
       let currYPos = 0;      
      
       legend.attr('transform', function (d, i) {
-        let legendBBox = document.getElementById(`${tid}-legend-${i}`).getBBox();
-        let legendItem = document.getElementById(`${tid}-legend-${i}`);
+        let legendBBox = document.getElementById(`${id}-legend-${i}`).getBBox();
+        let legendItem = document.getElementById(`${id}-legend-${i}`);
         if (width + legendBBox.width > width) {
           legendMaxWidth = Math.max(legendBBox.width, legendMaxWidth)
         }
@@ -272,18 +291,18 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
       // legend를 열(col)별로 묶기(그룹화)
       for (let i = 0; i < colGroup.length; i++) {
         let legendGroup = colGroup[i];
-        d3.select(`${id}-legend`).append('g').attr("id", `${tid}-legend-group-${i}`).node().append(...legendGroup);
+        d3.select(`#${id}-legend`).append('g').attr("id", `${id}-legend-group-${i}`).node().append(...legendGroup);
       }
       // 각 열의 legend 그룹을 센터로 재배치      
       for (let i = 0; i < colCnt; i++) {
-        const groupItem = d3.select(`${id}-legend-group-${i}`);                
+        const groupItem = d3.select(`#${id}-legend-group-${i}`);                
         const startYPos = (height - groupItem.node().getBoundingClientRect().height) / 2; // 배치할 Y좌표 계산        )
         groupItem.attr("transform", `translate(0, ${startYPos})`)  
       }
       
-      svg.select(`${id}-legend`).attr("transform", `translate(${-svg.select(`${id}-legend`).node().getBBox().width}, ${0})`);      
-    }    
-    return {width : svg.select(`${id}-legend`).node().getBBox().width,
+      svg.select(`#${id}-legend`).attr("transform", `translate(${-svg.select(`#${id}-legend`).node().getBBox().width}, ${0})`);      
+    }
+    return {width : svg.select(`#${id}-legend`).node().getBBox().width,
     height : 0};
-  } 
+  }
 }
