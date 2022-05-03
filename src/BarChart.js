@@ -17,7 +17,7 @@ export class BarChart{
 
         this.color = color;
         this.y_min = y_min;
-        this.x0 = Axis.x;
+        this.x0 = Axis.x.padding(padding);
         this.y = Axis.y;
         this.x1 = d3.scaleBand()
             .domain(datasets.map((d,index)=>{return index}))
@@ -46,30 +46,48 @@ export class BarChart{
         this.slice.selectAll("rect")
             .data(datasets=>{return datasets.data;})
             .enter().append("rect")
+            .attr("class","data")
             .filter(d=>{return labels.includes(d.name);})   //labels에 없는값 필터링
             .attr("width", this.x0.bandwidth()/datasets.length)
             .attr("x",d=>{ return this.x0(d.name);})
             .style("fill",d=>{return this.color(d.label_index);})
             .attr("y", d=>{ return this.y(d.value); })
             .attr("height", d=>{ return this.y(this.y_min) - this.y(d.value); })
-            .on("mouseover", onMouseOver)
-            .on("mouseout", onMouseOut);
+            
 
         chart_area.node();
             
     };
 
-    // 툴팁 효과
+    // 툴팁 효과 + 하이라이트
     tooltip(){
+        const tooltop = document.getElementById('tooltip');
         const color = this.color;
-        this.slice.selectAll("rect")
+        this.slice.selectAll(".data")
         .on("mouseover", function(d){ 
-            console.log(d);
-            console.log(this);
+            const x = event.pageX;
+            const y = event.pageY;
+            // const target = event.target;
+            const positionLeft =x;
+            const positionTop = y;
             d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));
+            console.log("툴팁 확인 : BAR");
+            const value = d.value;
+            const name =  d.name;
+            const key = d3.rgb(color(d.label_index));
+            // const color = d;
+            
+            tooltop.innerText = "value : " + value +"\n" + "name : " + name +"\n" + "color : " +key ; // 값 + 데이터 
+            // tooltop.style.background = '#ddd';
+            tooltop.style.top = positionTop -100+ 'px';
+            tooltop.style.left = positionLeft -80 + 'px';
+            // tooltip.style("left", (d3.event.pageX+10)+"px");
+            // tooltip.style("top",  (d3.event.pageY-10)+"px");
+            tooltop.style.opacity = "1.0";
         })
         .on("mouseout", function(d){ 
             d3.select(this).style("fill", color(d.label_index));
+            tooltop.style.opacity = "0";
         });
 
     }
@@ -83,28 +101,5 @@ export class BarChart{
             .duration(duration)
             .attr("y", d=>{ return this.y(d.value); })
             .attr("height", d=>{ return this.y(this.y_min) - this.y(d.value); });
-
     }
-    
-    
 }
-const tooltop = document.getElementById('tooltip');
-    
-    function onMouseOut(d, i) { 
-        d3.select(this).transition().duration(600).style("opacity" , "1.0");
-        d3.select(".val")
-          .selectAll("text")
-          .filter((d, index) => index === i)
-          .attr("display", "none");
-          tooltop.style.opacity = 0; // 마우스가 target을 벗어나면 tooltip 안보이게
-    }
-    
-    function onMouseOver(d, i) { // 마우스 커서가 위에 있으면 색상 변환 (가시성)
-        d3.select(this).transition().duration(600).style("opacity", "0.5");  // 일단 임의로 하늘색
-        d3.select(".val")
-          .selectAll("text")
-          .filter((d, index) => index === i)
-          .attr("display", "block") 
-          
-    }
-    
