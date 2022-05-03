@@ -38,8 +38,7 @@ export class BarChart{
             .style("fill",d=>{return this.color(d.label_index);})
             .attr("y", d=>{ return this.y(d.value); })
             .attr("height", d=>{ return this.y(this.y_min) - this.y(d.value); })
-            // .on("mouseover", onMouseOver)
-            // .on("mouseout", onMouseOut);
+            
 
         chart_area.node();
             
@@ -57,13 +56,14 @@ export class BarChart{
             const positionLeft =x;
             const positionTop = y;
             d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));
-            console.log(this+ "tooltip");
-            const value = d3.select(this).attr('height');
-            const name = d3.select(this).attr();
-            const kind =  d3.select(this).attr();
-
+            console.log("툴팁 확인 : BAR");
+            const value = d.value;
+            const name =  d.name;
+            const key = d3.rgb(color(d.label_index));
+            // const color = d;
             
-            tooltop.innerText = "value : " + Math.round(value/12) +"\n" + "name : " + name +"\n" + "kind : " +kind  ; // 값 + 데이터 settooltop.style.background = '#ddd';
+            tooltop.innerText = "value : " + value +"\n" + "name : " + name +"\n" + "color : " +key ; // 값 + 데이터 
+            // tooltop.style.background = '#ddd';
             tooltop.style.top = positionTop -30+ 'px';
             tooltop.style.left = positionLeft -80 + 'px';
             // tooltip.style("left", (d3.event.pageX+10)+"px");
@@ -88,33 +88,3 @@ export class BarChart{
             .attr("height", d=>{ return this.y(this.y_min) - this.y(d.value); });
     }
 }
-
-// const Type = document.getElementsByTagName('rect'); // 타입으로 받아서 처리해야할것같아요
-//     // svg.node();
-
-//     
-
-//     for(const el of Type) { // 마우스 커서 기준 위치를 받아서 마우스 근처에 데이터 표시     
-//         el.addEventListener('mousemove', (event) => {
-//             const x = event.pageX;
-//             const y = event.pageY;
-//             const target = event.target;
-//             const positionLeft =x;
-//             const positionTop = y;
-//             // const color = target.dataset.color;
-//             const value = target.dataset.y;
-//             const name = target.dataset.x;
-//             console.log("type : " + type)
-//             // console.log("Type : " + Type)
-
-//             // console.log("tooltip")
-           
-//             tooltop.style.background = '#ddd';
-//             tooltop.style.top = positionTop -30+ 'px';
-//             tooltop.style.left = positionLeft -80 + 'px';
-//             // tooltip.style("left", (d3.event.pageX+10)+"px");
-//             // tooltip.style("top",  (d3.event.pageY-10)+"px");
-//             tooltop.style.opacity = "1.0";
-//         });
-//     }
-    
