@@ -1,4 +1,4 @@
-import {Set_Axis, xGrid, yGrid} from './Axis_helper.js';
+import {Set_Axis} from './Axis_helper.js';
 
 export class BarChart{
     constructor({chart_area,labels,datasets,color,width,height,margin,padding,y_max,y_min}){
@@ -17,11 +17,25 @@ export class BarChart{
 
         this.color = color;
         this.y_min = y_min;
-        this.x0 = Axis.x;
+        this.x0 = Axis.x.padding(padding);
         this.y = Axis.y;
         this.x1 = d3.scaleBand()
             .domain(datasets.map((d,index)=>{return index}))
             .range([0, this.x0.bandwidth()]);
+        
+        chart_area
+            .append("g")
+            .attr("class", "chartBody")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+            .append("rect")
+            .attr("x", 0)
+            .attr("y", 0)
+            .attr("width", width - margin.left - margin.right)
+            .attr("height", height - margin.top - margin.bottom)
+            .style("fill", "none")
+            .style("fill-opacity", .8)
+            .attr("rx", 20)
+            .attr("ry", 20)
 
         this.slice = chart_area.selectAll(".slice")
             .data(datasets)
@@ -32,6 +46,7 @@ export class BarChart{
         this.slice.selectAll("rect")
             .data(datasets=>{return datasets.data;})
             .enter().append("rect")
+            .attr("class","data")
             .filter(d=>{return labels.includes(d.name);})   //labels에 없는값 필터링
             .attr("width", this.x0.bandwidth()/datasets.length)
             .attr("x",d=>{ return this.x0(d.name);})
@@ -48,8 +63,9 @@ export class BarChart{
     tooltip(){
         const tooltop = document.getElementById('tooltip');
         const color = this.color;
-        this.slice.selectAll("rect")
+        this.slice.selectAll(".data")
         .on("mouseover", function(d){ 
+<<<<<<< HEAD
             const x = event.pageX;
             const y = event.pageY;
             // const target = event.target;
@@ -69,6 +85,11 @@ export class BarChart{
             // tooltip.style("left", (d3.event.pageX+10)+"px");
             // tooltip.style("top",  (d3.event.pageY-10)+"px");
             tooltop.style.opacity = "1.0";
+=======
+            console.log(d);
+            console.log(this);
+            d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));
+>>>>>>> e97ce8ccf62a7defc7028c235ba53bde7ec76ab4
         })
         .on("mouseout", function(d){ 
             d3.select(this).style("fill", color(d.label_index));

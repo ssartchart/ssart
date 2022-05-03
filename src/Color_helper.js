@@ -1,16 +1,18 @@
 export const LabelColor=(datasets) =>{
     
     let colors = ["steelblue","red","yellow","green"];
-
+    let label = [];
     datasets.forEach((d,index) => {
         if (d.backgroundColor != null){
             colors[index] = d.backgroundColor;
         }
+        label[index] = d.label;
     });
 
     const color = d3.scaleOrdinal().range(colors);
 
-    return color;
+    return {label : label,
+            color : color};
 
 }
 
@@ -27,6 +29,7 @@ export const LabelsColor=(datasets) =>{
 
     const color = d3.scaleOrdinal().range(colors);
 
-    return color;
+    return {label : datasets.labels,
+        color : color};
 
 }

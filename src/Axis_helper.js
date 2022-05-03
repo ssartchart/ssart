@@ -1,8 +1,5 @@
-export const Set_Axis = ({chart_area,x_domain,y_domain,width,height,margin,padding})=>{
-    const x = d3.scaleBand()
-        .domain(x_domain)
-        .range([margin.left, width - margin.right])
-        .padding(padding);
+export const Set_Axis = ({chart_area,x_domain,y_domain,width,height,margin,x_type="band"})=>{
+    const x = Set_X(x_type,x_domain,margin,width);
 
     const y = d3.scaleLinear()
         .domain(y_domain).nice()
@@ -30,6 +27,27 @@ export const Set_Axis = ({chart_area,x_domain,y_domain,width,height,margin,paddi
         x : x,
         y : y
     };
+}
+
+const Set_X = (x_type,x_domain,margin,width)=>{
+    switch(x_type){
+        case 'band':
+            return d3.scaleBand()
+            .domain(x_domain)
+            .range([margin.left, width - margin.right]);
+        case 'time':
+            return d3.scaleTime()
+            .domain(d3.extent(x_domain))
+            .range([margin.left, width - margin.right]);
+        case 'number':
+            return d3.scaleLinear()
+            .domain(d3.extent(x_domain))
+            .range([margin.left, width - margin.right]);
+        default:
+            return d3.scaleBand()
+            .domain(x_domain).nice()
+            .range([margin.left, width - margin.right]);
+    }
 }
 
 export const xGrid = (chart_area,length,options)=>{
@@ -86,7 +104,7 @@ export const yGrid=(chart_area,length,options) =>{
     if (options.dash) {
         dash = options.dash
     }
-    console.log("y");
+
     chart_area.selectAll("g.yAxis g.tick")
         .append("line")
         .attr("class", "gridline")
@@ -137,9 +155,9 @@ export const Set_Axis_reverse = ({chart_area,x_domain,y_domain,width,height,marg
 
 export function xGridShow(event) {
     // grid 보이기 이벤트 발생 시
-    console.log(event.target)
-    console.log(event.target.innerText)
-    console.log(event.target.id)
+    // console.log(event.target)
+    // console.log(event.target.innerText)
+    // console.log(event.target.id)
     
     d3.selectAll(event.target.innerText + " svg g.xAxis g.tick line.gridline")
         .style("visibility", "visible")
@@ -153,19 +171,12 @@ export function yGridShow(event) {
 
 export function xGridHidden(event) {
     // grid 없애기 이벤트 발생 시
-    console.log(event.target)
-    console.log(event.target.innerText)
-    console.log(event.target.id)
-
     d3.selectAll(event.target.innerText + " svg g.xAxis g.tick line.gridline")
         .style("visibility", "hidden")
 }
 
 export function yGridHidden(event) {
     // grid 없애기 이벤트 발생 시 
-    // d3.selectAll(id + " svg g.yAxis g.tick line.gridline")
-    //     .style("visibility", "hidden")
-    
     d3.selectAll(event.target.innerText + " svg g.yAxis g.tick line.gridline")
         .style("visibility", "hidden")
 }

@@ -1,0 +1,58 @@
+body {
+  padding: 5%;
+  text-align: center;
+}
+
+#bargraph {
+  position: relative;
+}
+
+#tooltip {
+  position: absolute;
+  opacity: 0;
+  max-width: 30%;
+  max-height: 30%;
+  min-width: 5%;
+  min-height: 5%;
+  line-height: 20px;
+  transition: all 0.3s;
+  border-radius: 5px;
+  text-align: center;
+  color: rgb(0, 0, 0);
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.svg-container {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  /* aspect ratio */
+  vertical-align: top;
+  overflow: hidden;
+}
+
+.svg-content-responsive {
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  left: 0;
+}
+
+/* 컬러 CSS를 스타일안에 미리 해놔야하는지 ..? */
+.blue {
+  fill: #5abae6;
+}
+
+.red {
+  fill: #d34e4e;
+}
+
+.green {
+  fill: #9dbb19;
+}
+
+.yellow {
+  fill: #f7b358;
+}

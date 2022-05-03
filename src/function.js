@@ -9,29 +9,45 @@ import { drawTitle, drawXTitle, drawYTitle } from "./title.js";
 import { checkMargin } from "./checkMargin.js";
 import { drawLegend } from "./legend.js";
 import { xGridHidden, yGridHidden, xGridShow, yGridShow } from "./Axis_helper.js"
+import { printColorBar } from './background.js';
+import { ScatterChart } from './ScatterChar.js';
 
 
 function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=0}){
-    const { position } = options.plugins.legend;
+    const legend = options.plugins.legend;
     const svg = d3.select(id).append('svg').style('width', width).style('height', height);
     
     console.log(`Hello, ${type}!`);
-    const datasets = Data_pre_processing(data.labels,data.datasets);
-    const labels = data.labels;
-    const color = LabelColor(datasets);
-    const chart_area = svg.append('g').style('width', width).style('height', height);
     
+    const labels = data.labels;
+    const labelcolor = LabelColor(data.datasets);
+    const color = labelcolor.color;
+    const legend_label = labelcolor.label;
+    const chart_area = svg.append('g').style('width', width-100).style('height', height-100);
+
+    const legend_box = drawLegend(id, svg, labelcolor, width, height, chart_area, legend, margin);
+
+    const chart_width = width - legend_box.width;
+    const chart_height = height - legend_box.height;
     checkMargin(margin);
-    console.log(position)
     if (type==="bar"){
+        const datasets = Data_pre_processing(data.labels,data.datasets,"namevalue");
         // BarChart({svg,labels,datasets,width,height,margin,padding,y_max,y_min});       
         // width, height 조정 필요
-        const chart = new BarChart({chart_area,labels,datasets:datasets,color,width,height,margin,padding,y_max,y_min});
+        const chart = new BarChart({chart_area,labels,datasets:datasets,color,width:chart_width,height:chart_height,margin,padding,y_max,y_min});
         chart.tooltip();
         chart.animation();
         
     }
-    // drawLegend(svg, labels, width, height, chart_area, position);
+
+    if (type==="scatter"){
+      const datasets = Data_pre_processing(data.labels,data.datasets,"xy");
+      const chart = new ScatterChart({chart_area,labels,datasets:datasets,color,width:chart_width,height:chart_height,margin,padding,y_max,y_min});
+      chart.tooltip();
+
+    }
+    
+    
 
     // except circle
     if (type != "circle") {
@@ -40,27 +56,28 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
       }
         if (options.plugins.xTitle.display) {
           // width, height 조정 필요
-        drawXTitle(chart_area, options.plugins.xTitle.text, width, height, margin);
+        drawXTitle(chart_area, options.plugins.xTitle.text, chart_width, chart_height, margin);
       }
         if (options.plugins.yTitle.display) {
           // width, height 조정 필요
         drawYTitle(
           chart_area,
           options.plugins.yTitle.text,
-          width,
-          height,
+          chart_width,
+          chart_height,
           margin,
           options.plugins.yTitle.position
         );
       }
     }
+
     if (options.plugins.xGrid) {
-        xGrid(chart_area,height - margin.top - margin.bottom,options.plugins.xGrid);  
+        xGrid(chart_area,chart_height - margin.top - margin.bottom,options.plugins.xGrid);  
 
         svg
-            .append('foreignObject')
-            .attr('x', margin.left + width/2)
-            .attr('y', 0)
+            .append('rect')
+            .attr('x', width - 20)
+            .attr('y', margin.top)
             .attr('height', 20)
             .attr('width', 20)
             .attr('id', id+"xGridHiddenButton")
@@ -70,10 +87,10 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
         xGridHiddenButton.addEventListener("click", xGridHidden)
         
         svg
-            .append('foreignObject')
+            .append('rect')
             .attr('fill', "steelblue")
-            .attr('x', margin.left + width/2 + 40)
-            .attr('y', 0)
+            .attr('x', width - 20)
+            .attr('y', margin.top + 30)
             .attr('height', 20)
             .attr('width', 20)
             .attr('id', id+"xGridShowButton")
@@ -83,13 +100,14 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
         xGridShowButton.addEventListener("click", xGridShow)
         
     }
+
     if (options.plugins.yGrid) {
-        yGrid(chart_area,width - margin.left - margin.right,options.plugins.yGrid);
+        yGrid(chart_area,chart_width - margin.left - margin.right,options.plugins.yGrid);
 
         svg
-            .append('foreignObject')
-            .attr('x', margin.left + width/2 + 80)
-            .attr('y', 0)
+            .append('rect')
+            .attr('x', width - 20)
+            .attr('y', margin.top + 60)
             .attr('height', 20)
             .attr('width', 20)
             .attr('id', id+"yGridHiddenButton")
@@ -99,10 +117,10 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
         yGridHiddenButton.addEventListener("click", yGridHidden)
         
         svg
-            .append('foreignObject')
+            .append('rect')
             .attr('fill', "steelblue")
-            .attr('x', margin.left + width/2 + 120)
-            .attr('y', 0)
+            .attr('x', width - 20)
+            .attr('y', margin.top + 90)
             .attr('height', 20)
             .attr('width', 20)
             .attr('id', id+"yGridShowButton")
@@ -111,6 +129,23 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
         yGridShowButton.innerText = id
         yGridShowButton.addEventListener("click", yGridShow)
     }
+<<<<<<< HEAD
+=======
+
+    svg
+        .append('rect')
+        .attr('fill', "red")
+        .attr('x', width - 20)
+        .attr('y', margin.top + 120)
+        .attr('height', 20)
+        .attr('width', 20)
+        .attr('id', id+"changeBackgroundColorButton")
+
+    const changeBackgroundColorButton = document.getElementById(id+"changeBackgroundColorButton")
+    changeBackgroundColorButton.innerText = id
+    changeBackgroundColorButton.addEventListener("click", printColorBar)
+
+>>>>>>> e97ce8ccf62a7defc7028c235ba53bde7ec76ab4
 }
 
 function ChartH(type, id, data, color, width, height, margin) {
@@ -128,6 +163,29 @@ function ChartH(type, id, data, color, width, height, margin) {
 };
 
 
+<<<<<<< HEAD
+=======
+    for(const el of Type) { // 마우스 커서 기준 위치를 받아서 마우스 근처에 데이터 표시     
+        el.addEventListener('mousemove', (event) => {
+            const x = event.pageX;
+            const y = event.pageY;
+            const target = event.target;
+            const positionLeft =x;
+            const positionTop = y;
+            // const color = target.dataset.color;
+            const value = target.dataset.y;
+            const name = target.dataset.x;
+            tooltop.innerText = "\u00a0"+" val : "+value+"\u00a0"+"\n" +"\u00a0"+"data : "+name +"\u00a0" +"\n" +"\u00a0"+"add : " + "\u00a0" + ""  +"\u00a0"; // 값 + 데이터 set
+            tooltop.style.background = '#ddd';
+            tooltop.style.top = positionTop -30+ 'px';
+            tooltop.style.left = positionLeft -80 + 'px';
+            // tooltip.style("left", (d3.event.pageX+10)+"px");
+            // tooltip.style("top",  (d3.event.pageY-10)+"px");
+            tooltop.style.opacity = "1.0";
+        });
+    }
+};
+>>>>>>> e97ce8ccf62a7defc7028c235ba53bde7ec76ab4
 
 
 export {Chart, ChartH};
