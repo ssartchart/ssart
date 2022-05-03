@@ -35,7 +35,7 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
         const datasets = Data_pre_processing(data.labels,data.datasets,"namevalue");
         // BarChart({svg,labels,datasets,width,height,margin,padding,y_max,y_min});       
         // width, height 조정 필요
-        const chart = new BarChart({oid, chart_area,labels,datasets:datasets,color,width:chart_width,height:chart_height,margin,padding,y_max,y_min});
+        const chart = new BarChart({id:oid, chart_area,labels,datasets:datasets,color,width:chart_width,height:chart_height,margin,padding,y_max,y_min});
         chart.tooltip();
         chart.animation();
         
