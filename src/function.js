@@ -95,6 +95,10 @@ function Chart(
     chart.tooltip();
   }
 
+  if (type === "donut" || type === "pie") {
+    drawCircleChart(type, svg, width, height, margin, data, options);
+  }
+
   if (options.plugins.title.display) {
     drawTitle(svg, options.plugins.title.text, width, height, margin);
   }
