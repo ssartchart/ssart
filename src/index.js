@@ -1,7 +1,7 @@
 export { Chart, ChartH } from "./function.js";
 
-export { drawTitle, drawXTitle, drawYTitle } from "./title.js";
+export { drawTitle, drawXTitle, drawYTitle } from "./Title.js";
 
 export { checkMargin } from "./checkMargin.js";
 
-export { drawCircleChart } from "./circleChart.js";
+export { CircleChart } from "./CircleChart.js";

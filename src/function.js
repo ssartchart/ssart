@@ -5,7 +5,7 @@ import {BarHClass} from './BarHClass.js'
 import { xGrid, yGrid } from "./Axis_helper.js";
 import { LabelColor } from "./Color_helper.js";
 import { Data_pre_processing } from "./Dataset_helper.js";
-import { drawTitle, drawXTitle, drawYTitle } from "./title.js";
+import { drawTitle, drawXTitle, drawYTitle } from "./Title.js";
 import { checkMargin } from "./checkMargin.js";
 import { drawLegend } from "./legend.js";
 import { menu } from './menu.js';
@@ -76,7 +76,17 @@ function Chart(
   }
 
   if (type === "donut" || type === "pie") {
-    drawCircleChart(type, svg, width, height, margin, data, options);
+    // drawCircleChart(type, svg, width, height, margin, data, options);
+    const chart = new CircleChart({
+      type,
+      svg,
+      width,
+      height,
+      margin,
+      data,
+      options,
+    });
+    // chart.tooltip();
   }
 
   if (options.plugins.title.display) {

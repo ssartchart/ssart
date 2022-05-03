@@ -27,6 +27,8 @@
     <div id="bargraph3"></div>
     <div id="bargraph4"></div>
     <div id="bargraph5"></div>
+    <div id="circle">
+    </div>
 
     <script src='https://d3js.org/d3.v5.min.js'></script>
 
@@ -137,7 +139,7 @@
         };
 
         const data2 = {
-            labels: [0,1,2,3,4,5,6,7,8,9],
+            labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
             datasets: [
                 {
                     label: 'Fully Rounded',
@@ -162,7 +164,7 @@
                     label: 'Small Radius',
                     data:
                         [
-                            [1,1],[2,2],[3,2],[4,2],[5,2],[6,2]
+                            [1, 1], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2]
                         ],
                 },
                 {
@@ -191,7 +193,7 @@
                 responsive: true,
                 plugins: {
                     legend: {
-                            position: 'left',// top bottom left right
+                        position: 'left',// top bottom left right
                     },
                     title: {
                         display: true,
@@ -319,6 +321,40 @@
             },
         };
 
+        const data6 = {
+            labels: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
+            datasets: [
+                { name: 'AAAAAAAAAAA', value: 1000, color: '#efa86b' },
+                { name: 'BBBBBBBBBBB', value: 1500, color: '#c1484f' },
+                { name: 'C', value: 1300, color: '#d35d50' },
+                { name: 'D', value: 900, color: '#f4c17c' },
+                { name: 'E', value: 700, color: '#fae8a4' },
+                { name: 'F', value: 1200, color: '#df7454' },
+                { name: 'G', value: 1100, color: '#e88d5d' },
+                { name: 'H', value: 600, color: '#f8d690' }
+            ]
+        };
+        const config6 = {
+            type: 'donut',
+            width: 500,
+            height: 500,
+            margin: { top: 40, left: 40, bottom: 40, right: 40 },
+            padding: 0.1,
+            data: data6,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',// top bottom left right
+                    },
+                    title: {
+                        display: true,
+                        text: 'Circle Chart Test'
+                    },
+                    sort: false,
+                },
+            }
+        }
     </script>
     <script type="module">
 
@@ -429,7 +465,11 @@
         Chart.ChartH('#barH', configH);
 
     </script>
+    <script type="module">
+        import * as Chart from './src/index.js';
 
+        Chart.Chart('#circle', config6);
+    </script>
 </body>
 
 </html>
