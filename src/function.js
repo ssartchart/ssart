@@ -14,7 +14,7 @@ import { ScatterChart } from './ScatterChart.js';
 import { BubbleChart } from './BubbleChart.js';
 
 
-function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=0}){
+function Chart(id,{type,width,height,margin,padding=0,data,options}){
     const legend = options.plugins.legend;
     const svg = d3.select(id).append('svg').style('width', width).style('height', height);
     
@@ -27,7 +27,7 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
     const chart_area = svg.append('g').style('width', width-100).style('height', height-100);
 
     const legend_box = drawLegend(id, svg, labelcolor, width, height, chart_area, legend, margin);
-
+    const scales = options.scales;
     const chart_width = width - legend_box.width;
     const chart_height = height - legend_box.height;
     checkMargin(margin);
@@ -35,7 +35,7 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
       const datasets = Data_pre_processing(data.labels,data.datasets,"namevalue");
       // BarChart({svg,labels,datasets,width,height,margin,padding,y_max,y_min});       
       // width, height 조정 필요
-      const chart = new BarChart({chart_area,labels,datasets:datasets,color,width:chart_width,height:chart_height,margin,padding,y_max,y_min});
+      const chart = new BarChart({chart_area,labels,datasets:datasets,color,width:chart_width,height:chart_height,margin,padding,scales});
       chart.tooltip();
       chart.animation();
       
@@ -43,14 +43,14 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
 
   if (type==="scatter"){
     const datasets = Data_pre_processing(data.labels,data.datasets,"xy");
-    const chart = new ScatterChart({chart_area,labels,datasets:datasets,color,width:chart_width,height:chart_height,margin,padding,y_max,y_min});
+    const chart = new ScatterChart({chart_area,labels,datasets:datasets,color,width:chart_width,height:chart_height,margin,padding,scales});
     chart.tooltip();
 
   }
 
   if (type==="bubble"){
     const datasets = Data_pre_processing(data.labels,data.datasets,"xyr");
-    const chart = new BubbleChart({chart_area,labels,datasets:datasets,color,width:chart_width,height:chart_height,margin,padding,y_max,y_min});
+    const chart = new BubbleChart({chart_area,labels,datasets:datasets,color,width:chart_width,height:chart_height,margin,padding,scales});
     chart.tooltip();
 
   }

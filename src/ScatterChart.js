@@ -1,13 +1,46 @@
 import {Set_Axis} from './Axis_helper.js';
 
 export class ScatterChart{
-    constructor({chart_area,labels,datasets,color,width,height,margin,padding,y_max,y_min}){
-        const x_domain = labels.map(d => d);        
+    constructor({chart_area,labels,datasets,color,width,height,margin,padding,scales}){
+
+        chart_area.selectAll('*').remove();
+
+        let x_domain = labels.map(d => d);     
+        let x_type = "band";
+        let y_min = 0;
+        let y_max = null;
+        let fillopacity = 1;
+        if (scales != null){
+            console.log(scales)
+            if (scales.xAxis){
+                if (scales.xAxis.type){
+                    x_type = scales.xAxis.type;
+                    if(scales.xAxis.ticks.max != null && scales.xAxis.ticks.min != null){
+                        x_domain = [scales.xAxis.ticks.min,scales.xAxis.ticks.max];
+                    }
+                }
+            }
+            if (scales.yAxis){
+                if(scales.yAxis.ticks){
+                    if(scales.yAxis.ticks.max){
+                        y_max = scales.yAxis.ticks.max;
+                    }
+                    if(scales.yAxis.ticks.min){
+                        y_min = scales.yAxis.ticks.min;
+                    }
+                }
+            }
+            if (scales.fillopacity){
+                fillopacity = scales.fillopacity;
+            }
+            
+        }
+
         const y_domain = [y_min,  (y_max != null) ? y_max : d3.max(datasets, label=>{
                 return d3.max(label.data, d=>{
                     return d.y;});            
                 })];        
-        const Axis = Set_Axis({chart_area,x_domain,y_domain,width,height,margin,padding,x_type:"number"});
+        const Axis = Set_Axis({chart_area,x_domain,y_domain,width,height,margin,padding,scales,x_type});
 
 
         this.color = color;
@@ -17,16 +50,23 @@ export class ScatterChart{
 
         console.log(datasets);
 
-        this.ChartBody = chart_area.selectAll(".slice")
+        this.ChartBody = chart_area
+            .append("g")
+            .attr("class", "chartBody")
+        
+        this.slice = this.ChartBody.selectAll(".slice")
             .data(datasets)
             .enter().append("g")
-            .attr("class", "chartBody")
-            .attr("transform", "translate(" + 0 + "," + 0 + ")")
+            .attr("class", "slice")
+        if (x_type == "band"){
+            this.slice.attr("transform", "translate(" + this.x.bandwidth()/2 + "," + 0 + ")")
+        }
+        else{
+            this.slice.attr("transform", "translate(" + 0 + "," + 0 + ")")
+        }
 
 
-        console.log(this.x('a'));
-        console.log(this.x(80));
-        this.ChartBody.selectAll(".data")
+        this.slice.selectAll(".data")
             .data(datasets=>{return datasets.data;})
             .enter().append("circle")
             .filter(d=>{return this.x(d.x)>= 0 && this.x(d.x) <= width - margin.left && this.y(d.y)>= 0 && this.y(d.y) <= height - margin.top;})
@@ -38,7 +78,7 @@ export class ScatterChart{
             })
             .attr("r", 5)
             .style("fill",d=>{return this.color(d.label_index);})
-            .style("fill-opacity", 1)
+            .style("fill-opacity", fillopacity)
             // .on("mouseover", onMouseOver)
             // .on("mouseout", onMouseOut);
 
@@ -48,16 +88,34 @@ export class ScatterChart{
 
     // 툴팁 효과
     tooltip(){
-        const color = this.color;
-        this.ChartBody.selectAll(".data")
-        .on("mouseover", function(d){ 
-            console.log(d);
-            d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));
-        })
-        .on("mouseout", function(d){ 
-            d3.select(this).style("fill", color(d.label_index));
-        });
-
+            const tooltop = document.getElementById('tooltip');
+            const color = this.color;
+            this.ChartBody.selectAll(".data")
+            .on("mouseover", function(d){ 
+                const x = event.pageX;
+                const y = event.pageY;
+                // const target = event.target;
+                const positionLeft =x;
+                const positionTop = y;
+                d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));
+                console.log("툴팁 확인 : scatter");
+                const value = d.x;
+                const name =  d.y;
+                const key = d3.rgb(color(d.label_index));
+                // const color = d;
+                
+                tooltop.innerText = "x : " + value +"\n" + "y : " + name +"\n" + "label : " +key ; // 값 + 데이터 
+                // tooltop.style.background = '#ddd';
+                tooltop.style.top = positionTop -100+ 'px';
+                tooltop.style.left = positionLeft -80 + 'px';
+                // tooltip.style("left", (d3.event.pageX+10)+"px");
+                // tooltip.style("top",  (d3.event.pageY-10)+"px");
+                tooltop.style.opacity = "1.0";
+            })
+            .on("mouseout", function(d){ 
+                d3.select(this).style("fill", color(d.label_index));
+                tooltop.style.opacity = "0";
+            });
     }
 }
 

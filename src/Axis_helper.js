@@ -1,22 +1,30 @@
-export const Set_Axis = ({chart_area,x_domain,y_domain,width,height,margin,x_type="band"})=>{
+export const Set_Axis = ({chart_area,x_domain,y_domain,width,height,margin,scales,x_type="band"})=>{
     const x = Set_X(x_type,x_domain,margin,width);
 
     const y = d3.scaleLinear()
         .domain(y_domain).nice()
         .range([height - margin.bottom, margin.top]);
 
+    const x_axis = d3.axisBottom(x)
+                    .tickSizeOuter(0);
+    // if (scales.xAxis[0].ticks.tick != null){
+    //     x_axis.ticks(scales.xAxis[0].ticks.tick);
+    // }
     const xAxis = g => g
         .attr("class", "xAxis")
         .attr('transform', `translate(0, ${height - margin.bottom})`)
-        .call(d3.axisBottom(x)
-            .tickSizeOuter(0))
+        .call(x_axis)
         // .call(g => g.select('.domain').remove())
         // .call(g => g.selectAll('line').remove());
 
+    const y_axis = d3.axisLeft(y);
+    if (scales !=null && scales.yAxis && scales.yAxis.ticks && scales.yAxis.ticks.tick != null){
+        y_axis.ticks(scales.yAxis.ticks.tick);
+    }
     const yAxis = g => g
         .attr("class", "yAxis")
         .attr('transform', `translate(${margin.left}, 0)`)
-        .call(d3.axisLeft(y))
+        .call(y_axis)
         // .call(g => g.select('.domain').remove())   
         // .call(g => g.selectAll('line').remove());
 
