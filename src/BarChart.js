@@ -1,18 +1,37 @@
 import {Set_Axis} from './Axis_helper.js';
 
 export class BarChart{
-    constructor({chart_area,labels,datasets,color,width,height,margin,padding,y_max,y_min}){
+    constructor({id,chart_area,labels,datasets,color,width,height,margin,padding,scales}){
         
         chart_area.selectAll('*').remove();
 
-
+        let y_min = 0;
+        let y_max = null;
+        let fillopacity = 1;
+        if (scales != null){
+            console.log(scales)
+            if (scales.yAxis){
+                if(scales.yAxis.ticks){
+                    if(scales.yAxis.ticks.max){
+                        y_max = scales.yAxis.ticks.max;
+                    }
+                    if(scales.yAxis.ticks.min){
+                        y_min = scales.yAxis.ticks.min;
+                    }
+                }
+            }
+            if (scales.fillopacity){
+                fillopacity = scales.fillopacity;
+            }
+            
+        }
 
         const x_domain = labels.map(d => d);        
         const y_domain = [y_min,  (y_max != null) ? y_max : d3.max(datasets, label=>{
                 return d3.max(label.data, d=>{
                     return d.value;});            
                 })];        
-        const Axis = Set_Axis({chart_area,x_domain,y_domain,width,height,margin,padding});
+        const Axis = Set_Axis({chart_area,x_domain,y_domain,width,height,margin,padding,scales});
 
 
         this.color = color;
@@ -23,24 +42,15 @@ export class BarChart{
             .domain(datasets.map((d,index)=>{return index}))
             .range([0, this.x0.bandwidth()]);
         
-        chart_area
+        this.ChartBody = chart_area
             .append("g")
             .attr("class", "chartBody")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-            .append("rect")
-            .attr("x", 0)
-            .attr("y", 0)
-            .attr("width", width - margin.left - margin.right)
-            .attr("height", height - margin.top - margin.bottom)
-            .style("fill", "none")
-            .style("fill-opacity", .8)
-            .attr("rx", 20)
-            .attr("ry", 20)
 
-        this.slice = chart_area.selectAll(".slice")
+        this.slice = this.ChartBody.selectAll(".slice")
             .data(datasets)
             .enter().append("g")
             .attr("class", "g")
+            .attr("id", (d, i) => `${id}-chart-legend-${i}`)
             .attr("transform",(d,index)=>{ return "translate(" + this.x1(index) + ",0)"; });
 
         this.slice.selectAll("rect")
@@ -51,6 +61,7 @@ export class BarChart{
             .attr("width", this.x0.bandwidth()/datasets.length)
             .attr("x",d=>{ return this.x0(d.name);})
             .style("fill",d=>{return this.color(d.label_index);})
+            .style("fill-opacity", fillopacity)
             .attr("y", d=>{ return this.y(d.value); })
             .attr("height", d=>{ return this.y(this.y_min) - this.y(d.value); })
             
