@@ -140,25 +140,28 @@ export function xGridShow(event) {
     // console.log(event.target)
     // console.log(event.target.innerText)
     // console.log(event.target.id)
+    // console.log(event.target.style.fill)
+    if (event.target.style.fill=="steelblue") {
+        event.target.style.fill = "black"
+        d3.selectAll(event.target.innerText + " svg g.xAxis g.tick line.gridline")
+            .style("visibility", "hidden")
+    } else {
+        event.target.style.fill = "steelblue"
+        d3.selectAll(event.target.innerText + " svg g.xAxis g.tick line.gridline")
+            .style("visibility", "visible")
+    }
     
-    d3.selectAll(event.target.innerText + " svg g.xAxis g.tick line.gridline")
-        .style("visibility", "visible")
 }
 
 export function yGridShow(event) {
     // grid 보이기 이벤트 발생 시
-    d3.selectAll(event.target.innerText + " svg g.yAxis g.tick line.gridline")
-        .style("visibility", "visible")
-}
-
-export function xGridHidden(event) {
-    // grid 없애기 이벤트 발생 시
-    d3.selectAll(event.target.innerText + " svg g.xAxis g.tick line.gridline")
-        .style("visibility", "hidden")
-}
-
-export function yGridHidden(event) {
-    // grid 없애기 이벤트 발생 시 
-    d3.selectAll(event.target.innerText + " svg g.yAxis g.tick line.gridline")
-        .style("visibility", "hidden")
+    if (event.target.style.fill=="steelblue") {
+        event.target.style.fill = "black"
+        d3.selectAll(event.target.innerText + " svg g.yAxis g.tick line.gridline")
+            .style("visibility", "hidden")
+    } else {
+        event.target.style.fill = "steelblue"
+        d3.selectAll(event.target.innerText + " svg g.yAxis g.tick line.gridline")
+            .style("visibility", "visible")
+    }
 }

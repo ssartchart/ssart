@@ -8,7 +8,7 @@ import { Data_pre_processing } from './Dataset_helper.js';
 import { drawTitle, drawXTitle, drawYTitle } from "./title.js";
 import { checkMargin } from "./checkMargin.js";
 import { drawLegend } from "./legend.js";
-import { xGridHidden, yGridHidden, xGridShow, yGridShow } from "./Axis_helper.js"
+import { xGridShow, yGridShow } from "./Axis_helper.js"
 import { printColorBar } from './background.js';
 
 
@@ -65,26 +65,14 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
     }
     if (options.plugins.xGrid) {
         xGrid(chart_area,chart_height - margin.top - margin.bottom,options.plugins.xGrid);  
-
+  
         svg
             .append('rect')
-            .attr('x', width - 20)
-            .attr('y', margin.top)
-            .attr('height', 20)
-            .attr('width', 20)
-            .attr('id', id+"xGridHiddenButton")
-            
-        const xGridHiddenButton = document.getElementById(id+"xGridHiddenButton")
-        xGridHiddenButton.innerText = id
-        xGridHiddenButton.addEventListener("click", xGridHidden)
-        
-        svg
-            .append('rect')
-            .attr('fill', "steelblue")
             .attr('x', width - 20)
             .attr('y', margin.top + 30)
             .attr('height', 20)
             .attr('width', 20)
+            .style('fill', "steelblue")
             .attr('id', id+"xGridShowButton")
         
         const xGridShowButton = document.getElementById(id+"xGridShowButton")
@@ -99,22 +87,10 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
         svg
             .append('rect')
             .attr('x', width - 20)
-            .attr('y', margin.top + 60)
-            .attr('height', 20)
-            .attr('width', 20)
-            .attr('id', id+"yGridHiddenButton")
-            
-        const yGridHiddenButton = document.getElementById(id+"yGridHiddenButton")
-        yGridHiddenButton.innerText = id
-        yGridHiddenButton.addEventListener("click", yGridHidden)
-        
-        svg
-            .append('rect')
-            .attr('fill', "steelblue")
-            .attr('x', width - 20)
             .attr('y', margin.top + 90)
             .attr('height', 20)
             .attr('width', 20)
+            .style('fill', "steelblue")
             .attr('id', id+"yGridShowButton")
         
         const yGridShowButton = document.getElementById(id+"yGridShowButton")
@@ -122,14 +98,84 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
         yGridShowButton.addEventListener("click", yGridShow)
     }
 
+    if (options.plugins.menu) {
+      const menuWidth = 30
+      const x = chart_width - margin.right - menuWidth
+      
+      const chartMenu = chart_area
+        .append('g')
+        .attr('class', 'chartMenu')
+        .attr("transform", "translate(" + x + ",0)")
+        .style('cursor', 'pointer')
+        .style('width', menuWidth)
+        .style('height', 30);
+
+      chartMenu
+        .append('rect')
+        .attr('fill', "black")
+        .style('opacity', 0)
+        .attr('x', 0)
+        .attr('y', 0)
+        .attr('height', 30)
+        .attr('width', menuWidth)
+        
+      chartMenu
+        .append('circle')
+        .attr('class', 'menuCircle')
+        .attr('fill', "black")
+        .attr('cx', menuWidth/2 - 10)
+        .attr('cy', 15)
+        .attr('r', 3)
+        .style('opacity', .2)
+      
+      chartMenu
+        .append('circle')
+        .attr('class', 'menuCircle')
+        .attr('fill', "black")
+        .attr('cx', menuWidth/2)
+        .attr('cy', 15)
+        .attr('r', 3)
+        .style('opacity', .2)
+
+      chartMenu
+        .append('circle')
+        .attr('class', 'menuCircle')
+        .attr('fill', "black")
+        .attr('cx', menuWidth/2 + 10)
+        .attr('cy', 15)
+        .attr('r', 3)
+        .style('opacity', .2)
+        
+      chartMenu.on("mouseover", function (e) {
+        chartMenu.selectAll(".menuCircle")
+          .style('opacity', .4)
+      })
+      chartMenu.on("mouseleave", function (e) {
+        chartMenu.selectAll(".menuCircle")
+          .style('opacity', .2)
+      })
+
+      const dropDown = document.createElement("div")
+      dropDown.className = "dropdown-content"
+      dropDown.id = "myDropdown"
+      document.body.appendChild(dropDown)
+      console.log(chartMenu)
+      console.log(dropDown)
+
+      chartMenu.on("click", function(e) {
+
+      })
+    }
+    
+    // 배경 색 변경하는 버튼
     svg
         .append('rect')
-        .attr('fill', "red")
         .attr('x', width - 20)
         .attr('y', margin.top + 120)
         .attr('height', 20)
         .attr('width', 20)
         .attr('id', id+"changeBackgroundColorButton")
+        .style('fill', "red")
 
     const changeBackgroundColorButton = document.getElementById(id+"changeBackgroundColorButton")
     changeBackgroundColorButton.innerText = id
