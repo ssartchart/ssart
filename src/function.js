@@ -10,8 +10,9 @@ import { checkMargin } from "./checkMargin.js";
 import { drawLegend } from "./legend.js";
 import { menu } from './menu.js';
 import { background } from './background.js';
-import { ScatterChart } from "./ScatterChar.js";
+import { ScatterChart } from "./ScatterChart.js";
 import { drawCircleChart } from "./circleChart.js";
+import { BubbleChart } from './BubbleChart.js';
 
 function Chart(
   id,
@@ -46,50 +47,32 @@ function Chart(
     legend,
     margin
   );
-
+  const scales = options.scales;
   const chart_width = width - legend_box.width;
   const chart_height = height - legend_box.height;
   checkMargin(margin);
-  if (type === "bar") {
-    const datasets = Data_pre_processing(
-      data.labels,
-      data.datasets,
-      "namevalue"
-    );
-    // BarChart({svg,labels,datasets,width,height,margin,padding,y_max,y_min});
+  if (type==="bar"){
+    const datasets = Data_pre_processing(data.labels,data.datasets,"namevalue");
+    // BarChart({svg,labels,datasets,width,height,margin,padding,y_max,y_min});       
     // width, height 조정 필요
-    const chart = new BarChart({
-      id: oid,
-      chart_area,
-      labels,
-      datasets: datasets,
-      color,
-      width: chart_width,
-      height: chart_height,
-      margin,
-      padding,
-      y_max,
-      y_min,
-    });
+    const chart = new BarChart({id:oid,chart_area,labels,datasets:datasets,color,width:chart_width,height:chart_height,margin,padding,scales});
     chart.tooltip();
     chart.animation();
+    
   }
 
-  if (type === "scatter") {
-    const datasets = Data_pre_processing(data.labels, data.datasets, "xy");
-    const chart = new ScatterChart({
-      chart_area,
-      labels,
-      datasets: datasets,
-      color,
-      width: chart_width,
-      height: chart_height,
-      margin,
-      padding,
-      y_max,
-      y_min,
-    });
+  if (type==="scatter"){
+    const datasets = Data_pre_processing(data.labels,data.datasets,"xy");
+    const chart = new ScatterChart({chart_area,labels,datasets:datasets,color,width:chart_width,height:chart_height,margin,padding,scales});
     chart.tooltip();
+
+  }
+
+  if (type==="bubble"){
+    const datasets = Data_pre_processing(data.labels,data.datasets,"xyr");
+    const chart = new BubbleChart({chart_area,labels,datasets:datasets,color,width:chart_width,height:chart_height,margin,padding,scales});
+    chart.tooltip();
+
   }
 
   if (type === "donut" || type === "pie") {

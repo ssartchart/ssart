@@ -1,18 +1,37 @@
 import {Set_Axis} from './Axis_helper.js';
 
 export class BarChart{
-    constructor({id, chart_area,labels,datasets,color,width,height,margin,padding,y_max,y_min}){
+    constructor({id,chart_area,labels,datasets,color,width,height,margin,padding,scales}){
         
         chart_area.selectAll('*').remove();
 
-
+        let y_min = 0;
+        let y_max = null;
+        let fillopacity = 1;
+        if (scales != null){
+            console.log(scales)
+            if (scales.yAxis){
+                if(scales.yAxis.ticks){
+                    if(scales.yAxis.ticks.max){
+                        y_max = scales.yAxis.ticks.max;
+                    }
+                    if(scales.yAxis.ticks.min){
+                        y_min = scales.yAxis.ticks.min;
+                    }
+                }
+            }
+            if (scales.fillopacity){
+                fillopacity = scales.fillopacity;
+            }
+            
+        }
 
         const x_domain = labels.map(d => d);        
         const y_domain = [y_min,  (y_max != null) ? y_max : d3.max(datasets, label=>{
                 return d3.max(label.data, d=>{
                     return d.value;});            
                 })];        
-        const Axis = Set_Axis({chart_area,x_domain,y_domain,width,height,margin,padding});
+        const Axis = Set_Axis({chart_area,x_domain,y_domain,width,height,margin,padding,scales});
 
 
         this.color = color;
@@ -22,8 +41,12 @@ export class BarChart{
         this.x1 = d3.scaleBand()
             .domain(datasets.map((d,index)=>{return index}))
             .range([0, this.x0.bandwidth()]);
+        
+        this.ChartBody = chart_area
+            .append("g")
+            .attr("class", "chartBody")
 
-        this.slice = chart_area.selectAll(".slice")
+        this.slice = this.ChartBody.selectAll(".slice")
             .data(datasets)
             .enter().append("g")
             .attr("class", "g")
@@ -38,6 +61,7 @@ export class BarChart{
             .attr("width", this.x0.bandwidth()/datasets.length)
             .attr("x",d=>{ return this.x0(d.name);})
             .style("fill",d=>{return this.color(d.label_index);})
+            .style("fill-opacity", fillopacity)
             .attr("y", d=>{ return this.y(d.value); })
             .attr("height", d=>{ return this.y(this.y_min) - this.y(d.value); })
             
