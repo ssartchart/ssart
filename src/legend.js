@@ -18,6 +18,14 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
       .enter()
       .append("g")
       .attr("id", (d, i) => `${id}-legend-${i}`)
+      .on("click", function (d, i) {
+        const item = d3.select(`#${id}-chart-legend-${i}`)        
+        // 해당 범례가 보이는지 확인
+        let currentOpacity = item.style("opacity")        
+        // 클릭 이벤트에 따라 투명도 0 <=> 1 전환
+        item.transition().style("opacity", currentOpacity == 1 ? 0 : 1)
+        d3.select(`#${id}-legend-${i} text`).attr("text-decoration", currentOpacity == 1 ? "line-through" : "none")
+      })
     
     if (legendType === "circle") {
       legend
@@ -153,6 +161,14 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
       .enter()
       .append("g")
       .attr("id", (d, i) => `${id}-legend-${i}`)
+      .on("click", function (d, i) {
+        const item = d3.select(`#${id}-chart-legend-${i}`)        
+        // 해당 범례가 보이는지 확인
+        let currentOpacity = item.style("opacity")        
+        // 클릭 이벤트에 따라 투명도 0 <=> 1 전환
+        item.transition().style("opacity", currentOpacity == 1 ? 0 : 1)
+        d3.select(`#${id}-legend-${i} text`).attr("text-decoration", currentOpacity == 1 ? "line-through" : "none")
+      })
 
     if (legendType === "circle") {
       legend
@@ -281,8 +297,8 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
       }
       
       svg.select(`#${id}-legend`).attr("transform", `translate(${-svg.select(`#${id}-legend`).node().getBBox().width}, ${0})`);      
-    }    
+    }
     return {width : svg.select(`#${id}-legend`).node().getBBox().width,
     height : 0};
-  } 
+  }
 }
