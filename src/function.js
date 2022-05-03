@@ -5,7 +5,7 @@ import BarHClass from "./BarHClass.js";
 import { xGrid, yGrid } from "./Axis_helper.js";
 import { LabelColor } from "./Color_helper.js";
 import { Data_pre_processing } from "./Dataset_helper.js";
-import { drawTitle, drawXTitle, drawYTitle } from "./title.js";
+import { drawTitle, drawXTitle, drawYTitle } from "./Title.js";
 import { checkMargin } from "./checkMargin.js";
 import { drawLegend } from "./legend.js";
 import {
@@ -16,8 +16,7 @@ import {
 } from "./Axis_helper.js";
 import { printColorBar } from "./background.js";
 import { ScatterChart } from "./ScatterChar.js";
-import { drawCircleChart } from "./circleChart.js";
-import { CircleChart } from "./CircleChartClass.js";
+import { CircleChart } from "./CircleChart.js";
 
 function Chart(
   id,
