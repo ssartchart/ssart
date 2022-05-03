@@ -15,6 +15,7 @@ import { ScatterChart } from './ScatterChar.js';
 
 function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=0}){
     const legend = options.plugins.legend;
+    const oid = id.slice(1, id.length);
     const svg = d3.select(id).append('svg').style('width', width).style('height', height);
     
     console.log(`Hello, ${type}!`);
@@ -25,7 +26,7 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
     const legend_label = labelcolor.label;
     const chart_area = svg.append('g').style('width', width-100).style('height', height-100);
 
-    const legend_box = drawLegend(id, svg, labelcolor, width, height, chart_area, legend, margin);
+    const legend_box = drawLegend(oid, svg, labelcolor, width, height, chart_area, legend, margin);
 
     const chart_width = width - legend_box.width;
     const chart_height = height - legend_box.height;
@@ -34,7 +35,7 @@ function Chart(id,{type,width,height,margin,padding=0,data,options,y_max, y_min=
         const datasets = Data_pre_processing(data.labels,data.datasets,"namevalue");
         // BarChart({svg,labels,datasets,width,height,margin,padding,y_max,y_min});       
         // width, height 조정 필요
-        const chart = new BarChart({chart_area,labels,datasets:datasets,color,width:chart_width,height:chart_height,margin,padding,y_max,y_min});
+        const chart = new BarChart({oid, chart_area,labels,datasets:datasets,color,width:chart_width,height:chart_height,margin,padding,y_max,y_min});
         chart.tooltip();
         chart.animation();
         
