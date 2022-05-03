@@ -36,6 +36,7 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
         .attr('fill', (d, i) => labelsColor(i))    
       legend
         .append("text")
+        .attr("class", "legend-text")
         .attr("x", fontSize / 5 * 10)
         .attr("y", 0)
         .attr("font-size", fontSize)
@@ -55,6 +56,7 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
       
       legend
         .append("text")
+        .attr("class", "legend-text")
         .attr("font-size", fontSize)
         .attr("font-family", fontFamily)
         .attr("x", fontSize / 3 * 10)
@@ -179,6 +181,7 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
         .attr('fill', (d, i) => labelsColor(i))    
       legend
         .append("text")
+        .attr("class", "legend-text")
         .attr("x", fontSize / 5 * 10)
         .attr("y", 9)
         .attr("font-size", fontSize)
@@ -198,6 +201,7 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
       
       legend
         .append("text")
+        .attr("class", "legend-text")
         .attr("font-size", fontSize)
         .attr("font-family", fontFamily)
         .attr("x", fontSize / 3 * 10)
