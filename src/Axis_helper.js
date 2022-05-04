@@ -173,7 +173,7 @@ export const xGrid = (chart_area,length,options)=>{
         weight = options.weight
     }
 
-    let opacity = 1
+    let opacity = .5
     if (options.opacity) {
         opacity = options.opacity
     }
@@ -215,7 +215,7 @@ export function yGrid (chart_area,length,options) {
         weight = options.weight
     }
 
-    let opacity = 1
+    let opacity = .5
     if (options.opacity) {
         opacity = options.opacity
     }
