@@ -42,11 +42,21 @@ export class BarChart{
             .domain(datasets.map((d,index)=>{return index}))
             .range([0, this.x0.bandwidth()]);
         
-        this.ChartBody = chart_area
+        chart_area
             .append("g")
             .attr("class", "chartBody")
-            
-        this.slice = this.ChartBody.selectAll(".slice")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+            .append("rect")
+            .attr("x", 0)
+            .attr("y", 0)
+            .attr("width", width - margin.left - margin.right)
+            .attr("height", height - margin.top - margin.bottom)
+            .style("fill", "none")
+            .style("fill-opacity", .8)
+            .attr("rx", 20)
+            .attr("ry", 20)
+
+        this.slice = chart_area.selectAll(".slice")
             .data(datasets)
             .enter().append("g")
             .attr("class", "g")

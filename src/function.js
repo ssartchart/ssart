@@ -156,7 +156,7 @@ function Chart(
   }
   function renderOptions() {
     if (options.plugins.title.display) {
-      drawTitle(chart_area, options.plugins.title.text, chart_width, height, margin);
+      drawTitle(svg, options.plugins.title.text, chart_width, height, margin);
     }
     // except circle
     if (type != "donut" && type != "pie") {
