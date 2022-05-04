@@ -52,6 +52,19 @@ function Chart(
   const chart_width = width - legend_box.width;
   const chart_height = height - legend_box.height;
   checkMargin(margin);
+  renderBackground();
+  function renderBackground() {
+    if (options.plugins.background) {
+      background(
+        chart_area,
+        margin,
+        chart_width,
+        chart_height,
+        options.plugins.background
+      );
+    }
+  }
+  console.log(type,'높이', chart_height, '너비', chart_width)
   if (type === "bar") {
     let datasets = Data_pre_processing(
       data.labels,
@@ -60,8 +73,8 @@ function Chart(
     );    
     // BarChart({svg,labels,datasets,width,height,margin,padding,y_max,y_min});
     // width, height 조정 필요
-    drawBarChart(datasets); // datasets으로 바차트 그리기    
-    createLegendToggle(datasets, legend_box?.legendList, drawBarChart, {});
+    drawBarChart(datasets); // datasets으로 바차트 그리기
+    createLegendToggle(datasets, legend_box?.legendList, chart_area, drawBarChart, {}, renderBackground);
     function drawBarChart(chartDatasets) {
       let chart = new BarChart({
         id: oid,
@@ -84,7 +97,7 @@ function Chart(
   if (type === "scatter") {
     const datasets = Data_pre_processing(data.labels, data.datasets, "xy");
     drawScatterChart(datasets);
-    createLegendToggle(datasets, legend_box?.legendList, drawScatterChart, {});
+    createLegendToggle(datasets, legend_box?.legendList, chart_area, drawScatterChart, {}, renderBackground);
     function drawScatterChart(chartData) {
       const chart = new ScatterChart({
         id:oid,
@@ -106,7 +119,7 @@ function Chart(
   if (type === "bubble") {
     const datasets = Data_pre_processing(data.labels, data.datasets, "xyr");
     drawBubbleChart(datasets)
-    createLegendToggle(datasets, legend_box?.legendList, drawBubbleChart, {});
+    createLegendToggle(datasets, legend_box?.legendList, chart_area, drawBubbleChart, {}, renderBackground);
     function drawBubbleChart(chartData) {
       const chart = new BubbleChart({
         id: oid,
@@ -137,12 +150,13 @@ function Chart(
       options,
     });
     // chart.tooltip();
+  }  
+  if (options.plugins.menu) {   
+    menu(chart_width, margin, svg, options, id);
   }
-  // renderOptions()
   function renderOptions() {
-    
     if (options.plugins.title.display) {
-      drawTitle(svg, options.plugins.title.text, width, height, margin);
+      drawTitle(chart_area, options.plugins.title.text, chart_width, height, margin);
     }
     // except circle
     if (type != "donut" && type != "pie") {
@@ -171,36 +185,29 @@ function Chart(
           );
         }
       }
-      if (options.plugins.xGrid) {
-        xGrid(
-          chart_area,
-          chart_height - margin.top - margin.bottom,
-          options.plugins.xGrid
-        );
-      }
-  
-      if (options.plugins.yGrid) {
-        yGrid(
-          chart_area,
-          chart_width - margin.left - margin.right,
-          options.plugins.yGrid
-        );
-      }
-  
-      if (options.plugins.background) {
-        background(
-          chart_area,
-          margin,
-          chart_width,
-          chart_height,
-          options.plugins.background
-        );
-      }
-  
-      if (options.plugins.menu) {
-        menu(chart_width, margin, chart_area, options, id);
-      }
     }
+    if (options.plugins.xGrid) {
+      xGrid(
+        chart_area,
+        chart_height - margin.top - margin.bottom,
+        options.plugins.xGrid
+      );
+    }
+
+    if (options.plugins.yGrid) {
+      yGrid(
+        chart_area,
+        chart_width - margin.left - margin.right,
+        options.plugins.yGrid
+      );
+    }
+  }
+}
+
+export function createMenu() {
+  if (options.plugins.menu) {
+    console.log('메뉴 생성')
+    menu(chart_width, margin, chart_area, options, id);
   }
 }
 
