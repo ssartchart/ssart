@@ -13,6 +13,7 @@ import { background } from "./background.js";
 import { ScatterChart } from "./ScatterChart.js";
 import { BubbleChart } from "./BubbleChart.js";
 import { CircleChart } from "./CircleChart.js";
+import { LineChart } from "./LineChart.js";
 
 function Chart(
   id,
@@ -107,6 +108,44 @@ function Chart(
     chart.tooltip();
   }
 
+  if (type === "line") {
+    const datasets = Data_pre_processing(data.labels, data.datasets, "xy");
+    const chart = new LineChart({
+      chart_area,
+      labels,
+      datasets: datasets,
+      color,
+      width: chart_width,
+      height: chart_height,
+      margin,
+      padding,
+      scales,
+    });
+    chart.tooltip();
+  }
+
+  if (type === "barH") {
+    const datasets = Data_pre_processing(
+      data.labels,
+      data.datasets,
+      "namevalue"
+    );
+    const barHchart = new BarHClass({
+      chart_area,
+      labels,
+      datasets: datasets,
+      color,
+      width:chart_width,
+      height:chart_height,
+      margin,
+      padding,
+      y_max,
+      y_min,
+    });
+    barHchart.tooltip();
+    barHchart.animation();
+  }
+
   if (type === "donut" || type === "pie") {
     // drawCircleChart(type, svg, width, height, margin, data, options);
     const chart = new CircleChart({
@@ -188,6 +227,7 @@ function ChartH(
   { type, width, height, margin, padding = 0, data, options, y_max, y_min = 0 }
 ) {
   const { position } = options.plugins.legend;
+  const legend = options.plugins.legend;
   const svg = d3
     .select(id)
     .append("svg")
@@ -197,6 +237,7 @@ function ChartH(
   const datasets = Data_pre_processing(data.labels, data.datasets);
 
   const labelcolor = LabelColor(datasets);
+  const oid = id.slice(1, id.length);
   const color = labelcolor.color;
   const legend_label = labelcolor.label;
 
@@ -206,9 +247,18 @@ function ChartH(
     .style("width", width)
     .style("height", height);
 
-  // const legend_box = drawLegend(svg, legend_label, width, height, chart_area, position, margin);
-  // const chart_width = width - legend_box.width;
-  // const chart_height = height - legend_box.height;
+    const legend_box = drawLegend(
+      oid,
+      svg,
+      labelcolor,
+      width,
+      height,
+      chart_area,
+      legend,
+      margin
+    );
+  const chart_width = width - legend_box.width;
+  const chart_height = height - legend_box.height;
 
   if (type === "barH") {
     const barHchart = new BarHClass({
@@ -216,8 +266,8 @@ function ChartH(
       labels,
       datasets,
       color,
-      width,
-      height,
+      width:chart_width,
+      height:chart_height,
       margin,
       padding,
       y_max,
@@ -228,15 +278,45 @@ function ChartH(
   }
 
   drawTitle(svg, options.plugins.title.text, width, height, margin);
-  drawXTitle(chart_area, options.plugins.xTitle.text, width, height, margin);
+  drawXTitle(chart_area, options.plugins.xTitle.text, chart_width, chart_height, margin);
   drawYTitle(
     chart_area,
     options.plugins.yTitle.text,
-    width,
-    height,
+    chart_width,
+    chart_height,
     margin,
     options.plugins.yTitle.position
   );
+
+  if (options.plugins.xGrid) {
+    xGrid(
+      chart_area,
+      chart_height - margin.top - margin.bottom,
+      options.plugins.xGrid
+    );
+  }
+
+  if (options.plugins.yGrid) {
+    yGrid(
+      chart_area,
+      chart_width - margin.left - margin.right,
+      options.plugins.yGrid
+    );
+  }
+
+  if (options.plugins.background) {
+    background(
+      chart_area,
+      margin,
+      chart_width,
+      chart_height,
+      options.plugins.background
+    );
+  }
+
+  if (options.plugins.menu) {
+    menu(chart_width, margin, chart_area, options, id);
+  }
 
   //   if (options.plugins.xGrid) {
   //     xGrid(chart_area,chart_height - margin.top - margin.bottom,options.plugins.xGrid);
