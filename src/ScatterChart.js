@@ -1,45 +1,25 @@
-import {Set_Axis} from './Axis_helper.js';
+import {Axis_Option, Set_Axis} from './Axis_helper.js';
 
 export class ScatterChart{
     constructor({id, chart_area,labels,datasets,color,width,height,margin,padding,scales}){
 
         // chart_area.selectAll('*').remove();
+        chart_area.selectAll('.chartBody').remove();
+        chart_area.selectAll('.xAxis').remove();
+        chart_area.selectAll('.yAxis').remove();
 
-        let x_domain = labels.map(d => d);     
-        let x_type = "band";
-        let y_min = 0;
-        let y_max = null;
-        let fillopacity = 1;
-        if (scales != null){
-            console.log(scales)
-            if (scales.xAxis){
-                if (scales.xAxis.type){
-                    x_type = scales.xAxis.type;
-                    if(scales.xAxis.ticks.max != null && scales.xAxis.ticks.min != null){
-                        x_domain = [scales.xAxis.ticks.min,scales.xAxis.ticks.max];
-                    }
-                }
-            }
-            if (scales.yAxis){
-                if(scales.yAxis.ticks){
-                    if(scales.yAxis.ticks.max){
-                        y_max = scales.yAxis.ticks.max;
-                    }
-                    if(scales.yAxis.ticks.min){
-                        y_min = scales.yAxis.ticks.min;
-                    }
-                }
-            }
-            if (scales.fillopacity){
-                fillopacity = scales.fillopacity;
-            }
-            
-        }
+        
+        const axis_option = Axis_Option(labels,datasets,scales,1);
+        const x_domain = axis_option.x_domain;
+        const x_type = axis_option.x_type;
+        const y_min = axis_option.y_min;
+        const y_max = axis_option.y_max;
 
-        const y_domain = [y_min,  (y_max != null) ? y_max : d3.max(datasets, label=>{
-                return d3.max(label.data, d=>{
-                    return d.y;});            
-                })];        
+        const fillopacity = axis_option.fillopacity;
+        const y_domain = axis_option.y_domain
+        const dot_opacity = axis_option.dot_opacity;
+        const dot_size = axis_option.dot_size;
+
         const Axis = Set_Axis({chart_area,x_domain,y_domain,width,height,margin,padding,scales,x_type});
 
 
@@ -47,7 +27,7 @@ export class ScatterChart{
         this.y_min = y_min;
         this.x = Axis.x;
         this.y = Axis.y;
-
+        
         console.log(datasets);
 
         this.ChartBody = chart_area
@@ -77,9 +57,9 @@ export class ScatterChart{
             .attr("transform", (d)=>{
                 return "translate(" + this.x(d.x) + "," + this.y(d.y) + ")";
             })
-            .attr("r", 5)
+            .attr("r", dot_size)
             .style("fill",d=>{return this.color(d.label_index);})
-            .style("fill-opacity", fillopacity)
+            .style("fill-opacity", dot_opacity)
             // .on("mouseover", onMouseOver)
             // .on("mouseout", onMouseOut);
 
