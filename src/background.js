@@ -24,12 +24,12 @@ export function background(chart_area, margin, width, height, options) {
     opacity = options.opacity
   }
 
-  let rx = 20
+  let rx = 0
   if (options.rx) {
     rx = options.rx
   }
 
-  let ry = 20
+  let ry = 0
   if (options.ry) {
     ry = options.ry
   }
