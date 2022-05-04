@@ -1,10 +1,11 @@
-export function drawLegend(id, svg, labels, width, height, chartContainer, legend, margin) {    
-  let { position = "left", fontSize = 10, fontFamily = "comic sans ms", fontWeight = "normal", legendType = "rect" } = legend;
+export function drawLegend(id, svg, labels, width, height, chartContainer, legendData, margin) {    
+  let { position = "left", fontSize = 12, fontFamily = "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif", fontWeight = "normal", legendType = "rect" } = legendData;
   if (typeof fontSize !== "number") {
     if (fontSize?.includes("px")) {
       fontSize = fontSize.slice(0, fontSize.length - 2)
     }
-  }  
+  }
+  const legendList = [];
   const labelsColor = labels.color
   labels = labels.label;  
   // top || bottom
@@ -18,14 +19,14 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
       .enter()
       .append("g")
       .attr("id", (d, i) => `${id}-legend-${i}`)
-      .on("click", function (d, i) {
-        const item = d3.select(`#${id}-chart-legend-${i}`)        
-        // 해당 범례가 보이는지 확인
-        let currentOpacity = item.style("opacity")        
-        // 클릭 이벤트에 따라 투명도 0 <=> 1 전환
-        item.transition().style("opacity", currentOpacity == 1 ? 0 : 1)
-        d3.select(`#${id}-legend-${i} text`).attr("text-decoration", currentOpacity == 1 ? "line-through" : "none")
-      })
+      // .on("click", function (d, i) {
+      //   const item = d3.select(`#${id}-chart-legend-${i}`)        
+      //   // 해당 범례가 보이는지 확인
+      //   let currentOpacity = item.style("opacity")        
+      //   // 클릭 이벤트에 따라 투명도 0 <=> 1 전환
+      //   item.transition().style("opacity", currentOpacity == 1 ? 0 : 1)
+      //   d3.select(`#${id}-legend-${i} text`).attr("text-decoration", currentOpacity == 1 ? "line-through" : "none")
+      // })
     
     if (legendType === "circle") {
       legend
@@ -42,7 +43,7 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
         .attr("font-size", fontSize)
         .attr("font-family", fontFamily)
         .style("font-weight", fontWeight)
-        .attr("alignment-baseline", "central")        
+        .attr("alignment-baseline", "central")       
         .text(d => d);
     } else { // rect
       legend
@@ -60,8 +61,9 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
         .attr("font-size", fontSize)
         .attr("font-family", fontFamily)
         .attr("x", fontSize / 3 * 10)
-        .attr("y", 1)
-        .attr("alignment-baseline", "hanging")   // 사각형 레전드일 때 설정        
+        .attr("y", 0)
+        // auto | baseline | before-edge | text-before-edge | middle | central | after-edge | text-after-edge | ideographic | alphabetic | hanging | mathematical | top | center | bottom
+        .attr("alignment-baseline", "text-before-edge")   // 사각형 레전드일 때 설정
         .text(d => d);  
     }
     
@@ -76,6 +78,7 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
       legend.attr("transform", function (d, i) {
         let legendBBox = document.getElementById(`${id}-legend-${i}`).getBBox();
         let legendItem = document.getElementById(`${id}-legend-${i}`);
+        legendList.push(legendItem);
         // console.log(`범례 너비-${i}`, legendBBox.width, '현재 x좌표(시작점):' ,currXPos)
         if (currXPos + legendBBox.width >= width) {
           rowCnt++;
@@ -95,8 +98,7 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
         rowGroup.push(currGroup);
         currGroup = [];
       }
-      // legend를 행(row)별로 묶기(그룹화)
-      console.log(legend.node())
+      // legend를 행(row)별로 묶기(그룹화)      
       for (let i = 0; i < rowGroup.length; i++) {
         let legendGroup = rowGroup[i];
         d3.select(`svg #${id}-legend`).append('g').attr("id", `${id}-legend-group-${i}`).node().append(...legendGroup);
@@ -109,7 +111,7 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
       }
       // d3.select('svg .legend-item').remove();
       return {width : 0,
-        height : svg.select(`svg #${id}-legend`).node().getBBox().height+ margin.top};
+        height : svg.select(`svg #${id}-legend`).node().getBBox().height+ margin.top, legendList};
     } else if (position === "bottom") {
       let currXPos = 0;
       let currYPos = height;
@@ -117,6 +119,7 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
       legend.attr("transform", function (d, i) {
         let legendBBox = document.getElementById(`${id}-legend-${i}`).getBBox();
         let legendItem = document.getElementById(`${id}-legend-${i}`);        
+        legendList.push(legendItem);
         if (currXPos + legendBBox.width >= width) {
           rowCnt++;
           currYPos += legendBBox.height + 20
@@ -143,14 +146,13 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
       for (let i = 0; i < rowCnt; i++) {
         const groupItem = d3.select(`#${id}-legend-group-${i}`);        
         const startXPos = (width - groupItem.node().getBoundingClientRect().width) / 2; // 배치할 X좌표 계산
-        console.log('배치 x좌표', startXPos)
         groupItem.attr("transform", `translate(${startXPos}, 0)`)  
       }
       const legend_y = svg.select(`#${id}-legend`).node().getBBox().height;
       svg.select(`#${id}-legend`).attr("transform",`translate(${0}, ${-legend_y})`);
 
       return {width : 0,
-        height : svg.select(`#${id}-legend`).node().getBBox().height};
+        height : svg.select(`#${id}-legend`).node().getBBox().height, legendList};
     }    
 // left || right
   } else if (position === "left" || position === "right") {
@@ -163,14 +165,15 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
       .enter()
       .append("g")
       .attr("id", (d, i) => `${id}-legend-${i}`)
-      .on("click", function (d, i) {
-        const item = d3.select(`#${id}-chart-legend-${i}`)        
-        // 해당 범례가 보이는지 확인
-        let currentOpacity = item.style("opacity")        
-        // 클릭 이벤트에 따라 투명도 0 <=> 1 전환
-        item.transition().style("opacity", currentOpacity == 1 ? 0 : 1)
-        d3.select(`#${id}-legend-${i} text`).attr("text-decoration", currentOpacity == 1 ? "line-through" : "none")
-      })
+      // .on("click", function (d, i) {
+      //   const item = d3.select(`#${id}-chart-legend-${i}`)        
+      //   // 해당 범례가 보이는지 확인
+      //   let currentOpacity = item.style("opacity")        
+      //   // 클릭 이벤트에 따라 투명도 0 <=> 1 전환
+      //   item.transition().style("opacity", currentOpacity == 1 ? 0 : 1)
+      //   d3.select(`#${id}-legend-${i} text`).attr("text-decoration", currentOpacity == 1 ? "line-through" : "none")
+      // })
+      
 
     if (legendType === "circle") {
       legend
@@ -206,7 +209,7 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
         .attr("font-family", fontFamily)
         .attr("x", fontSize / 3 * 10)
         .attr("y", 1)
-        .attr("alignment-baseline", "hanging")   // 사각형 레전드일 때 설정        
+        .attr("alignment-baseline", "text-before-edge")   // 사각형 레전드일 때 설정        
         .text(d => d);  
     }
     
@@ -223,6 +226,7 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
       legend.attr('transform', function (d, i) {
         let legendBBox = document.getElementById(`${id}-legend-${i}`).getBBox();
         let legendItem = document.getElementById(`${id}-legend-${i}`);
+        legendList.push(legendItem);
         // console.log(legendItem, `${i}번 레전드 너비:`, legendBBox.width, `차트 gap:`, rowGap)
         if (width + legendBBox.width > width) {
           legendMaxWidth = Math.max(legendBBox.width, legendMaxWidth)
@@ -266,6 +270,7 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
       legend.attr('transform', function (d, i) {
         let legendBBox = document.getElementById(`${id}-legend-${i}`).getBBox();
         let legendItem = document.getElementById(`${id}-legend-${i}`);
+        legendList.push(legendItem);
         if (width + legendBBox.width > width) {
           legendMaxWidth = Math.max(legendBBox.width, legendMaxWidth)
         }
@@ -303,6 +308,39 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
       svg.select(`#${id}-legend`).attr("transform", `translate(${-svg.select(`#${id}-legend`).node().getBBox().width}, ${0})`);      
     }
     return {width : svg.select(`#${id}-legend`).node().getBBox().width,
-    height : 0};
+    height : 0, legendList};
   }
+}
+
+// legend 클릭 이벤트에 따라 차트 데이터를 바꾸는 Toggle 기능 생성
+export function createLegendToggle(datasets, items, makeChart, removedSet) {
+  const dataList = {};
+  for (let i = 0; i < items.length; i++) {
+    dataList[i] = datasets[i]
+  }  
+  items.forEach(item => {    
+    const toggleItem = d3.select(`#${item.id}`)
+    const tid = toggleItem.node().id
+    toggleItem.on("click", () => {      
+      const idx = tid[tid.length - 1]
+      if (removedSet[idx] === undefined ) {
+        removedSet[idx] = true;
+      } else {
+        removedSet[idx] = undefined;
+      }      
+      d3.select(`#${toggleItem.node().id} text`).attr("text-decoration", () => {
+        if (removedSet[idx] !== undefined) {
+          return "line-through"
+        } else {
+          return "none"
+        }
+      })
+      datasets = []
+      for (let j = 0; j < items.length; j++) {
+        if (removedSet[j] !== undefined) continue;
+        datasets.push(dataList[j])          
+      }
+      makeChart(datasets)      
+    })
+  })
 }
