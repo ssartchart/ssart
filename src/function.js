@@ -7,7 +7,7 @@ import { LabelColor } from "./Color_helper.js";
 import { Data_pre_processing } from "./Dataset_helper.js";
 import { drawTitle, drawXTitle, drawYTitle } from "./Title.js";
 import { checkMargin } from "./checkMargin.js";
-import { drawLegend } from "./legend.js";
+import { createLegendToggle, drawLegend } from "./legend.js";
 import { menu } from "./menu.js";
 import { background } from "./background.js";
 import { ScatterChart } from "./ScatterChart.js";
@@ -45,66 +45,84 @@ function Chart(
     height,
     chart_area,
     legend,
-    margin
+    margin,
+    data.datasets,
   );
   const scales = options.scales;
   const chart_width = width - legend_box.width;
   const chart_height = height - legend_box.height;
   checkMargin(margin);
   if (type === "bar") {
-    const datasets = Data_pre_processing(
+    let datasets = Data_pre_processing(
       data.labels,
       data.datasets,
       "namevalue"
-    );
+    );    
     // BarChart({svg,labels,datasets,width,height,margin,padding,y_max,y_min});
     // width, height 조정 필요
-    const chart = new BarChart({
-      id: oid,
-      chart_area,
-      labels,
-      datasets: datasets,
-      color,
-      width: chart_width,
-      height: chart_height,
-      margin,
-      padding,
-      scales,
-    });
-    chart.tooltip();
-    chart.animation();
+    drawBarChart(datasets); // datasets으로 바차트 그리기    
+    createLegendToggle(datasets, legend_box?.legendList, drawBarChart, {});
+    function drawBarChart(chartDatasets) {
+      let chart = new BarChart({
+        id: oid,
+        chart_area,
+        labels,
+        datasets: chartDatasets,
+        color,
+        width: chart_width,
+        height: chart_height,
+        margin,
+        padding,
+        scales,
+      });
+      chart.tooltip();
+      chart.animation();
+      renderOptions();
+    };
   }
-
+  
   if (type === "scatter") {
     const datasets = Data_pre_processing(data.labels, data.datasets, "xy");
-    const chart = new ScatterChart({
-      chart_area,
-      labels,
-      datasets: datasets,
-      color,
-      width: chart_width,
-      height: chart_height,
-      margin,
-      padding,
-      scales,
-    });
-    chart.tooltip();
+    drawScatterChart(datasets);
+    createLegendToggle(datasets, legend_box?.legendList, drawScatterChart, {});
+    function drawScatterChart(chartData) {
+      const chart = new ScatterChart({
+        id:oid,
+        chart_area,
+        labels,
+        datasets: chartData,
+        color,
+        width: chart_width,
+        height: chart_height,
+        margin,
+        padding,
+        scales,
+      });
+      chart.tooltip();
+      renderOptions();
+    }
   }
 
   if (type === "bubble") {
     const datasets = Data_pre_processing(data.labels, data.datasets, "xyr");
-    const chart = new BubbleChart({
-      chart_area,
-      labels,
-      datasets: datasets,
-      color,
-      width: chart_width,
-      height: chart_height,
-      margin,
-      padding,
-      scales,
-    });
-    chart.tooltip();
+    drawBubbleChart(datasets)
+    createLegendToggle(datasets, legend_box?.legendList, drawBubbleChart, {});
+    function drawBubbleChart(chartData) {
+      const chart = new BubbleChart({
+        id: oid,
+        chart_area,
+        labels,
+        datasets: chartData,
+        color,
+        width: chart_width,
+        height: chart_height,
+        margin,
+        padding,
+        scales,
+      });
+      chart.tooltip();
+      renderOptions();
+    }
   }
 
   if (type === "donut" || type === "pie") {
@@ -120,65 +138,68 @@ function Chart(
     });
     // chart.tooltip();
   }
-
-  if (options.plugins.title.display) {
-    drawTitle(svg, options.plugins.title.text, width, height, margin);
-  }
-  // except circle
-  if (type != "donut" && type != "pie") {
-    if (options.plugins.xTitle) {
-      // width, height 조정 필요
-      if (options.plugins.xTitle.display) {
-        drawXTitle(
+  // renderOptions()
+  function renderOptions() {
+    
+    if (options.plugins.title.display) {
+      drawTitle(svg, options.plugins.title.text, width, height, margin);
+    }
+    // except circle
+    if (type != "donut" && type != "pie") {
+      if (options.plugins.xTitle) {
+        // width, height 조정 필요
+        if (options.plugins.xTitle.display) {
+          drawXTitle(
+            chart_area,
+            options.plugins.xTitle.text,
+            chart_width,
+            chart_height,
+            margin
+          );
+        }
+      }
+      if (options.plugins.yTitle) {
+        // width, height 조정 필요
+        if (options.plugins.yTitle.display) {
+          drawYTitle(
+            chart_area,
+            options.plugins.yTitle.text,
+            chart_width,
+            chart_height,
+            margin,
+            options.plugins.yTitle.position
+          );
+        }
+      }
+      if (options.plugins.xGrid) {
+        xGrid(
           chart_area,
-          options.plugins.xTitle.text,
-          chart_width,
-          chart_height,
-          margin
+          chart_height - margin.top - margin.bottom,
+          options.plugins.xGrid
         );
       }
-    }
-    if (options.plugins.yTitle) {
-      // width, height 조정 필요
-      if (options.plugins.yTitle.display) {
-        drawYTitle(
+  
+      if (options.plugins.yGrid) {
+        yGrid(
           chart_area,
-          options.plugins.yTitle.text,
-          chart_width,
-          chart_height,
+          chart_width - margin.left - margin.right,
+          options.plugins.yGrid
+        );
+      }
+  
+      if (options.plugins.background) {
+        background(
+          chart_area,
           margin,
-          options.plugins.yTitle.position
+          chart_width,
+          chart_height,
+          options.plugins.background
         );
       }
-    }
-    if (options.plugins.xGrid) {
-      xGrid(
-        chart_area,
-        chart_height - margin.top - margin.bottom,
-        options.plugins.xGrid
-      );
-    }
-
-    if (options.plugins.yGrid) {
-      yGrid(
-        chart_area,
-        chart_width - margin.left - margin.right,
-        options.plugins.yGrid
-      );
-    }
-
-    if (options.plugins.background) {
-      background(
-        chart_area,
-        margin,
-        chart_width,
-        chart_height,
-        options.plugins.background
-      );
-    }
-
-    if (options.plugins.menu) {
-      menu(chart_width, margin, chart_area, options, id);
+  
+      if (options.plugins.menu) {
+        menu(chart_width, margin, chart_area, options, id);
+      }
     }
   }
 }

@@ -1,7 +1,7 @@
 import {Set_Axis} from './Axis_helper.js';
 
 export class ScatterChart{
-    constructor({chart_area,labels,datasets,color,width,height,margin,padding,scales}){
+    constructor({id, chart_area,labels,datasets,color,width,height,margin,padding,scales}){
 
         chart_area.selectAll('*').remove();
 
@@ -58,6 +58,7 @@ export class ScatterChart{
             .data(datasets)
             .enter().append("g")
             .attr("class", "slice")
+            .attr("id", (d, i) => `${id}-chart-legend-${i}`)
         if (x_type == "band"){
             this.slice.attr("transform", "translate(" + this.x.bandwidth()/2 + "," + 0 + ")")
         }
