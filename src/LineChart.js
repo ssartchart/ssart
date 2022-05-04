@@ -1,7 +1,7 @@
 import {Axis_Option, Set_Axis} from './Axis_helper.js';
 
 export class LineChart{
-    constructor({chart_area,labels,datasets,color,width,height,margin,padding,scales}){
+    constructor({id,chart_area,labels,datasets,color,width,height,margin,padding,scales}){
 
         // chart_area.selectAll('*').remove();
         chart_area.selectAll('.chartBody').remove();
@@ -46,6 +46,7 @@ export class LineChart{
             .data(datasets)
             .enter().append("g")
             .attr("class", "slice")
+            .attr("id", (d, i) => `${id}-chart-legend-${i}`)
             
             
         if (x_type == "band"){
@@ -60,8 +61,7 @@ export class LineChart{
                 return datasets.data;})
             .attr("class","line")        
             .attr("fill", "none")
-            .attr("stroke", (d,index)=>{
-                return this.color(index)})
+            .attr("stroke", (d)=>{return this.color(d[0].label_index)})
             .attr("stroke-width", line_width)
             .attr("stroke-opacity", line_opacity)
             .attr("d", line)

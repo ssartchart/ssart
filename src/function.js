@@ -140,18 +140,24 @@ function Chart(
 
   if (type === "line") {
     const datasets = Data_pre_processing(data.labels, data.datasets, "xy");
-    const chart = new LineChart({
-      chart_area,
-      labels,
-      datasets: datasets,
-      color,
-      width: chart_width,
-      height: chart_height,
-      margin,
-      padding,
-      scales,
-    });
-    chart.tooltip();
+    drawLineChart(datasets)
+    createLegendToggle(datasets, legend_box?.legendList, chart_area, drawLineChart, {}, renderBackground);
+    function drawLineChart(chartData) {
+      const chart = new LineChart({
+        id: oid,
+        chart_area,
+        labels,
+        datasets: chartData,
+        color,
+        width: chart_width,
+        height: chart_height,
+        margin,
+        padding,
+        scales,
+      });
+      chart.tooltip();
+      renderOptions();
+    }
   }
 
   if (type === "barH") {
@@ -160,20 +166,27 @@ function Chart(
       data.datasets,
       "namevalue"
     );
-    const barHchart = new BarHClass({
-      chart_area,
-      labels,
-      datasets: datasets,
-      color,
-      width:chart_width,
-      height:chart_height,
-      margin,
-      padding,
-      y_max,
-      y_min,
-    });
-    barHchart.tooltip();
-    barHchart.animation();
+    drawbarHChart(datasets)
+    createLegendToggle(datasets, legend_box?.legendList, chart_area, drawbarHChart, {}, renderBackground);
+    function drawbarHChart(chartData) {
+      const barHchart = new BarHClass({
+        id: oid,
+        chart_area,
+        labels,
+        datasets: chartData,
+        color,
+        width:chart_width,
+        height:chart_height,
+        margin,
+        padding,
+        y_max,
+        y_min,
+      });
+      barHchart.tooltip();
+      barHchart.animation();
+      renderOptions();
+    }
+    
   }
 
   if (type === "donut" || type === "pie") {
