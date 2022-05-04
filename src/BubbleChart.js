@@ -3,7 +3,7 @@ import {Set_Axis} from './Axis_helper.js';
 export class BubbleChart{
     constructor({id, chart_area,labels,datasets,color,width,height,margin,padding,scales}){
 
-        chart_area.selectAll('*').remove();
+        // chart_area.selectAll('*').remove();
 
         let x_domain = labels.map(d => d);     
         let x_type = "band";

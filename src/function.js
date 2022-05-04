@@ -64,7 +64,6 @@ function Chart(
       );
     }
   }
-  console.log(type,'높이', chart_height, '너비', chart_width)
   if (type === "bar") {
     let datasets = Data_pre_processing(
       data.labels,
@@ -201,13 +200,6 @@ function Chart(
         options.plugins.yGrid
       );
     }
-  }
-}
-
-export function createMenu() {
-  if (options.plugins.menu) {
-    console.log('메뉴 생성')
-    menu(chart_width, margin, chart_area, options, id);
   }
 }
 

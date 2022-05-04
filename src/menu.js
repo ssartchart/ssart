@@ -244,8 +244,8 @@ export function menu(chart_width, margin, svg, options, id) {
     const chartBackground = svg.select(".chartBackground rect")
     // console.log(chart_area)
     // console.log(chartBackground)
-    let color = "black"
-    if(options.plugins.background.color) {
+    let color = "#f1f3f5"
+    if(options.plugins.background?.color) {
       color = options.plugins.background.color
     }
 
