@@ -4,6 +4,9 @@ export class ScatterChart{
     constructor({chart_area,labels,datasets,color,width,height,margin,padding,scales}){
 
         // chart_area.selectAll('*').remove();
+        chart_area.selectAll('.chartBody').remove();
+        chart_area.selectAll('.xAxis').remove();
+        chart_area.selectAll('.yAxis').remove();
 
         
         const axis_option = Axis_Option(labels,datasets,scales,1);
