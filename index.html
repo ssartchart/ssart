@@ -78,6 +78,8 @@
     <div id="bargraph3"></div>
     <div id="bargraph4"></div>
     <div id="bargraph5"></div>
+    <div id="circle">
+    </div>
 
     <script src='https://d3js.org/d3.v5.min.js'></script>
 
@@ -119,18 +121,18 @@
                             { name: 't', value: 12 }
                         ],
                 },
-                {
-                    label: 'Small Radius',
-                    data: [
-                        { nam: 'a', value: 15 },
-                        { nam: 'b', value: 23 },
-                        { nam: 'c', value: 25 },
-                        { nam: 'd', value: 32 },
-                        { nam: 'e', value: 29 },
-                        { nam: 'f', value: 13 },
-                        { nam: 'g', value: 15 },
-                    ],
-                }
+                // {
+                //     label: 'Small Radius',
+                //     data : [
+                //         {name: 'a', value: 15},
+                //         {name: 'b', value: 23},
+                //         {name: 'c', value: 25},
+                //         {name: 'd', value: 32},
+                //         {name: 'e', value: 29},
+                //         {name: 'f', value: 13},
+                //         {name: 'g', value: 15},
+                //     ],
+                // }
             ]
         };
         const config = {
@@ -174,13 +176,21 @@
                         weight: 1,        // 선 두께
                         opacity: .5,      // 선 투명도
                     },
+                },
+                scales: {                    
+                    yAxis : {
+                        ticks:{
+                            max : 40
+                        }
+                    },                    
+                    fillopacity : 0.5
                 }
             },
-            y_min: 0,
+                
         };
 
         const data2 = {
-            labels: [0,1,2,3,4,5,6,7,8,9],
+            labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
             datasets: [
                 {
                     label: 'Fully Rounded',
@@ -205,7 +215,7 @@
                     label: 'Small Radius',
                     data:
                         [
-                            [1,1],[2,2],[3,2],[4,2],[5,2],[6,2]
+                            [1, 1], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2]
                         ],
                 },
                 {
@@ -234,7 +244,7 @@
                 responsive: true,
                 plugins: {
                     legend: {
-                            position: 'left',// top bottom left right
+                        position: 'left',// top bottom left right
                     },
                     title: {
                         display: true,
@@ -242,11 +252,87 @@
                     },
                     xTitle: {
                         display: true,
-                        text: 'name'
+                        text: 'y'
                     },
                     yTitle: {
                         display: true,
-                        text: 'value'
+                        text: 'x'
+                    },
+                    xGrid: {
+                        color: "rgb(255, 0, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
+                        dash: "10,3",
+                        weight: 5,
+                        opacity: .5
+                    },
+                    yGrid: {
+                        display: true,
+                        color: "#323233", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
+                        dash: "10,3",     // 점선, 10만큼 칠하고 3만큼 빈공간
+                        weight: 1,        // 선 두께
+                        opacity: .5       // 선 투명도
+                    },
+                    background: {
+
+                    },
+                    menu: {
+                        // grid: true,
+                        xGrid: true,
+                        yGrid: true,
+                        background: true
+                    }
+                }
+            },
+        };
+
+        const data3 = {
+            labels: [0,1,2,3,4,5,6,7,8,9],
+            datasets: [
+                {
+                    label: 'Small Radius',
+                    data:
+                        [
+                            [1,1,1],[2,2,2],[3,2,3],[4,2,4],[5,2,5],[6,2,6]
+                        ],
+                },
+                {
+                    label: 'Small Radius',
+                    data: [
+                        { x: 1, y: 15, r:10 },
+                        { x: 2, y: 23, r:20 },
+                        { x: 3, y: 25, r:30 },
+                        { x: 4, y: 32, r:30 },
+                        { x: 5, y: 29, r:100 },
+                        { x: 6, y: 13, r:20 },
+                        { x: 7, y: 15, r:50 },
+                    ],
+                }
+            ]
+        };
+
+        const config3 = {
+            type: 'bubble',
+            width: 500,
+            height: 500,
+            margin: { top: 40, left: 40, bottom: 40, right: 40 },
+            padding: 0.1,
+            data: data3,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                            position: 'top',// top bottom left right
+                    },
+                    title: {
+                        display: true,
+                        text: 'Chart.js bubble Chart'
+                    },
+                    xTitle: {
+                        display: true,
+                        text: 'x'
+                    },
+                    yTitle: {
+                        display: true,
+                        text: 'y'
                     },
                     xGrid: {
                         color: "rgb(255, 0, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
@@ -260,11 +346,66 @@
                         weight: 1,        // 선 두께
                         opacity: .5,      // 선 투명도
                     },
+                },
+                scales: {
+                    xAxis : {
+                        type : "number",
+                        ticks:{
+                            min : 0,
+                            max : 10
+                        }
+                    },    
+                    yAxis : {
+                        ticks:{
+                            max : 80,
+                            tick : 80
+                        }
+                    },
+                    r:{
+                        size:{
+                            min : 10,
+                            max : 30
+                        }
+                    },
+                    fillopacity : 0.5
                 }
             },
-            y_min: 0,
         };
 
+        const data6 = {
+            labels: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
+            datasets: [
+                { name: 'AAAAAAAAAAA', value: 1000, color: '#efa86b' },
+                { name: 'BBBBBBBBBBB', value: 1500, color: '#c1484f' },
+                { name: 'C', value: 1300, color: '#d35d50' },
+                { name: 'D', value: 900, color: '#f4c17c' },
+                { name: 'E', value: 700, color: '#fae8a4' },
+                { name: 'F', value: 1200, color: '#df7454' },
+                { name: 'G', value: 1100, color: '#e88d5d' },
+                { name: 'H', value: 600, color: '#f8d690' }
+            ]
+        };
+        const config6 = {
+            type: 'donut',
+            width: 500,
+            height: 500,
+            margin: { top: 40, left: 40, bottom: 40, right: 40 },
+            padding: 0.1,
+            data: data6,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',// top bottom left right
+                    },
+                    title: {
+                        display: true,
+                        text: 'Circle Chart Test'
+                    },
+                    sort: false,
+                },
+            }
+        }
     </script>
     <script type="module">
 
@@ -275,31 +416,112 @@
         //Chart.Chart2("bar",'#bargraph',labels,dataset,width2,height2,margin2,padding);
         Chart.Chart('#bargraph2', config);
         Chart.Chart('#bargraph3', config2);
+        Chart.Chart('#bargraph4', config3);
     </script>
 
-    <h1>가로 막대 그래프</h1>
+    <br>
     <div id="barH"></div>
+
+    <script>
+        const dataH = {
+            labels: ['a','b','c','d','e'],
+            datasets: [
+                {
+                    label: '1번 막대 label',
+                    data: [
+                        {name: 'a', value: 100},
+                        {name: 'b', value: 290},
+                        {name: 'c', value: 750},
+                        {name: 'd', value: 250},
+                        {name: 'e', value: 750},
+                    ],
+                    backgroundColor: "red",
+            
+                },
+
+                {
+                    label: 'Small Radius',
+                    data : [100,200,320,45 ]
+                    ,
+                    backgroundColor: "blue",
+                },
+
+                {
+                    label: 'Small Radius',
+                    data : [90,170,300,415 ]
+                    ,
+                    backgroundColor: "yellow",
+                },
+            ]
+        };
+
+        const configH = {
+            type: 'barH',
+            width : 500,
+            height : 500,
+            margin : {top: 40, left: 40, bottom: 40, right: 40},
+            padding : 0.1,
+            data: dataH,
+            options: {
+                responsive: true,
+                plugins: {                    
+                    legend: {
+                            position: 'bottom',// top bottom left right
+                    },
+                    title: {
+                        display: true,
+                        text: '가로막대 그래프'
+                    },
+                    xTitle: {
+                        display: true,
+                        text: 'name'
+                    },
+                    yTitle: {
+                        display: true,
+                        text: 'value'
+                    },
+                    xGrid: {
+                        color: "rgb(255, 0, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
+                        dash: "10,3",
+                        weight: 1,
+                        opacity: .5,
+                    },
+                    yGrid: {
+                        color: "#323233", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
+                        dash: "10,3",     // 점선, 10만큼 칠하고 3만큼 빈공간
+                        weight: 1,        // 선 두께
+                        opacity: .5,      // 선 투명도
+                    },
+
+                }
+            },
+            y_min : 0,
+        };
+
+
+    </script>
 
     </svg>
     <script>
-        var dataH = [600, 300, 750, 1002];
-        var color = ['red', 'blue', 'yellow', 'green'];
-        var widthH = 500;
-        var heightH = 500;
-        var marginH = { top: 40, left: 40, bottom: 40, right: 40 };
+        // var color = ['red', 'blue', 'yellow','green'];
+        // var widthH = 500;
+        // var heightH = 500;
+        // var marginH = {top: 40, left: 40, bottom: 40, right: 40};
 
     </script>
     <script type="module">
         import * as Chart from './src/index.js';
 
-        Chart.ChartH("barH", '#barH', dataH, color, widthH, heightH, marginH);
-
+        Chart.ChartH('#barH', configH);
 
     </script>
-    
-    
-    <script>MakeRadar();</script>
+    <script type="module">
+        import * as Chart from './src/index.js';
 
+        Chart.Chart('#circle', config6);
+    </script>
+
+<script>MakeRadar();</script>
 </body>
 
 </html>

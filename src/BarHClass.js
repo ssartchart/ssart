@@ -1,21 +1,75 @@
+import {Set_Axis, Set_Axis_reverse, xGrid, yGrid} from './Axis_helper.js';
 
-class BarHClass{
-    constructor(svg, data, color, width, height, margin) {
-
-        var max = Math.max.apply(null, data);
+export class BarHClass{
+    constructor({chart_area,labels,datasets,color,width,height,margin,padding,scales}){
         
-        console.log("barH Class 생성자 호출");
-        svg
-        .selectAll('rect').data(data).enter()
-            .append('rect').attr('rx',5)
-            .attr('height', 30)  //가로 그래프 높이 (클수록 두꺼워 짐)
-            .attr('y', (d,i)=>i*50) // 다음 rect y축 위치 정해줌 (최소 가로그래프 높이 이상 되어야함)
-            .attr('class', (d,i)=>color[i])
-            .attr('width', '1')
-            .transition().duration(1000)
-            .attr('width', d=>(d*100)/max+"%"); //데이터 값에 대한 백분율로 width 주기 (max data는 width와 크기 같음)
+        chart_area.selectAll('*').remove();
 
-        svg.node(); //?
+        var y_min = 0;
+        var y_max = null;
+        var fillopacity = 1;
+        if (scales != null){
+            console.log(scales)
+            if (scales.yAxis){
+                if(scales.yAxis[0].ticks){
+                    if(scales.yAxis[0].ticks.max){
+                        y_max = scales.yAxis[0].ticks.max;
+                    }
+                    if(scales.yAxis[0].ticks.min){
+                        y_min = scales.yAxis[0].ticks.min;
+                    }
+                }
+            }
+            if (scales.fillopacity){
+                fillopacity = scales.fillopacity;
+            }
+            
+        }
+
+        const x_domain = labels.map(d => d);        
+        const y_domain = [y_min,  (y_max != null) ? y_max : d3.max(datasets, label=>{
+                return d3.max(label.data, d=>{
+                    return d.value;});            
+                })];        
+        const Axis = Set_Axis_reverse({chart_area,x_domain,y_domain,width,height,margin,padding,scales});
+
+
+        this.color = color;
+        this.y_min = y_min;
+        this.x0 = Axis.x.padding(padding);
+        this.y = Axis.y;
+        this.x1 = d3.scaleBand()
+            .domain(datasets.map((d,index)=>{return index}))
+            .range([0, this.x0.bandwidth()]);
+        
+        this.ChartBody = chart_area
+            .append("g")
+            .attr("class", "chartBody")
+
+        this.slice = this.ChartBody.selectAll(".slice")
+            .data(datasets)
+            .enter().append("g")
+            .attr("class", "slice")
+            // .attr("transform",(d,index)=>{ return "translate(" + this.x1(index) + ",0)"; });
+            .attr("transform",(d,index)=>{ return "translate(0," + this.x1(index) +")"; });
+
+        this.slice.selectAll("rect")
+            .data(datasets=>{return datasets.data;})
+            .enter().append("rect")
+            .attr("class","data")
+            .filter(d=>{return labels.includes(d.name);})   //labels에 없는값 필터링
+            .attr("y",d=>{ return this.x0(d.name);})
+            .attr("height", this.x0.bandwidth()/datasets.length)
+            .style("fill",d=>{return this.color(d.label_index);})
+            .style("fill-opacity", fillopacity)
+            
+            .attr("x", d=>{return this.y(this.y_min) })
+            // .attr("width", d=>{ return this.y(this.y_min) - this.y(d.value); })
+            .attr("width", d=>{ return this.y(d.value); })
+            
+
+        chart_area.node();
+            
     };
     // 툴팁 효과 + 하이라이트
     tooltip(){
@@ -50,17 +104,16 @@ class BarHClass{
 
     }
     // 애니메이션 효과
-    animation(delay=1000,duration=1000){
+        animation(delay=800, duration=800) {
         this.slice.selectAll("rect")
-            .attr("y", d=>{ return this.y(0); })
-            .attr("height", d=>{ return this.y(this.y_min) - this.y(0); })
+            .attr('width', '1')
             .transition()
             .delay(d=>{return Math.random()*delay;})
             .duration(duration)
-            .attr("y", d=>{ return this.y(d.value); })
-            .attr("height", d=>{ return this.y(this.y_min) - this.y(d.value); });
-    
+            .attr("width", d=>{ return this.y(d.value); })
     }
+   
+    
 }
 
-export default BarHClass;
+    
