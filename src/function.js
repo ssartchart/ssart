@@ -50,6 +50,11 @@ function Chart(
   const chart_width = width - legend_box.width;
   const chart_height = height - legend_box.height;
   checkMargin(margin);
+
+  if (options.plugins.background) {
+    background(chart_area, margin, chart_width, chart_height, options.plugins.background)
+  }
+
   if (type === "bar") {
     const datasets = Data_pre_processing(
       data.labels,
@@ -126,21 +131,21 @@ function Chart(
         );
       }
     }
-    if (options.plugins.xGrid) {
-      xGrid(chart_area, chart_height - margin.top - margin.bottom, options.plugins.xGrid);          
-    }
+  }
+  if (options.plugins.xGrid) {
+    xGrid(chart_area, chart_height - margin.top - margin.bottom, options.plugins.xGrid);          
+  }
 
-    if (options.plugins.yGrid) {
-      yGrid(chart_area, chart_width - margin.left - margin.right, options.plugins.yGrid);
-    }
+  if (options.plugins.yGrid) {
+    yGrid(chart_area, chart_width - margin.left - margin.right, options.plugins.yGrid);
+  }
 
-    if (options.plugins.background) {
-      background(chart_area, margin, chart_width, chart_height, options.plugins.background)
-    }
+  // if (options.plugins.background) {
+  //   background(chart_area, margin, chart_width, chart_height, options.plugins.background)
+  // }
 
-    if (options.plugins.menu) {
-      menu(chart_width, margin, chart_area, options, id)
-    }
+  if (options.plugins.menu) {
+    menu(chart_width, margin, chart_area, options, id)
   }
 }
 

@@ -83,61 +83,72 @@ export function menu(chart_width, margin, chart_area, options, id) {
     .style('stroke', 'black')
     .style('stroke-width', '2')
   
-  // if(options.plugins.menu.grid) {
+  const yGridGroup = chart_area.select("g.yAxis")
+  const xGridGroup = chart_area.select("g.xAxis")
+  
+  const gridButton = dropDown
+    .append('text')
+  const xGridButton = dropDown
+    .append('text')
+  const yGridButton = dropDown
+    .append('text')
 
-  //   dropDownIndex += 1
+  if(options.plugins.menu.grid) {
 
-  //   const yGridGroup = chart_area.select("g.yAxis")
-  //   const xGridGroup = chart_area.select("g.xAxis")
+    dropDownIndex += 1
 
-  //   const gridButton = dropDown
-  //     .append('text')
-  //     .attr('x', 5)
-  //     .attr('y', dropDownIndex * 25)
-  //     // .attr('width', dropDownWidth)
-  //     // .attr('height', 20)
-  //     .text("Grid")
-  //     .style('cursor', 'pointer')
-  //     .style('font-weight', 'bold')
-  //     .on('click', function(event) {
-  //       if (xGridGroup.property("visibleStatus")==="hidden" && yGridGroup.property("visibleStatus")==="hidden") {
-  //         yGridGroup
-  //           .property("visibleStatus", "visible")
-  //         xGridGroup
-  //           .property("visibleStatus", "visible")
-  //         d3.selectAll(id + " svg g.yAxis g.tick line.gridline")
-  //           .style("visibility", "visible")
-  //         d3.selectAll(id + " svg g.xAxis g.tick line.gridline")
-  //           .style("visibility", "visible")
-  //         gridButton
-  //           .style('font-weight', 'bold')
-  //       } else {
-  //         yGridGroup
-  //           .property("visibleStatus", "hidden")
-  //         xGridGroup
-  //           .property("visibleStatus", "hidden")
-  //         d3.selectAll(id + " svg g.yAxis g.tick line.gridline")
-  //           .style("visibility", "hidden")
-  //         d3.selectAll(id + " svg g.xAxis g.tick line.gridline")
-  //           .style("visibility", "hidden")
-  //         gridButton
-  //           .style('font-weight', 'normal')
-  //       }
-  //     })
-  //   if (xGridGroup.property("visibleStatus")==="hidden" && yGridGroup.property("visibleStatus")==="hidden") {
-  //     gridButton
-  //       .style('font-weight', 'normal')
-  //   }
-  // }
+    gridButton
+      .attr('x', 5)
+      .attr('y', dropDownIndex * 25)
+      // .attr('width', dropDownWidth)
+      // .attr('height', 20)
+      .text("Grid")
+      .style('cursor', 'pointer')
+      .style('font-weight', 'bold')
+      .on('click', function(event) {
+        if (xGridGroup.property("visibleStatus")==="hidden" && yGridGroup.property("visibleStatus")==="hidden") {
+          yGridGroup
+            .property("visibleStatus", "visible")
+          xGridGroup
+            .property("visibleStatus", "visible")
+          d3.selectAll(id + " svg g.yAxis g.tick line.gridline")
+            .style("visibility", "visible")
+          d3.selectAll(id + " svg g.xAxis g.tick line.gridline")
+            .style("visibility", "visible")
+          gridButton
+            .style('font-weight', 'bold')
+          xGridButton
+            .style('font-weight', 'bold')
+          yGridButton
+            .style('font-weight', 'bold')
+        } else {
+          yGridGroup
+            .property("visibleStatus", "hidden")
+          xGridGroup
+            .property("visibleStatus", "hidden")
+          d3.selectAll(id + " svg g.yAxis g.tick line.gridline")
+            .style("visibility", "hidden")
+          d3.selectAll(id + " svg g.xAxis g.tick line.gridline")
+            .style("visibility", "hidden")
+          gridButton
+            .style('font-weight', 'normal')
+          xGridButton
+            .style('font-weight', 'normal')
+          yGridButton
+            .style('font-weight', 'normal')
+        }
+      })
+    if (xGridGroup.property("visibleStatus")==="hidden" && yGridGroup.property("visibleStatus")==="hidden") {
+      gridButton
+        .style('font-weight', 'normal')
+    }
+  }
 
   if(options.plugins.menu.xGrid) {
 
     dropDownIndex += 1
 
-    const xGridGroup = chart_area.select("g.xAxis")
-
-    const xGridButton = dropDown
-      .append('text')
+    xGridButton
       .attr('x', 5)
       .attr('y', dropDownIndex * 25)
       .text("xGrid")
@@ -151,6 +162,12 @@ export function menu(chart_width, margin, chart_area, options, id) {
             .style("visibility", "visible")
           xGridButton
             .style('font-weight', 'bold')
+          
+          if (yGridGroup.property("visibleStatus")==="visible") {
+            gridButton
+              .style('font-weight', 'bold')
+          }
+
         } else {
           xGridGroup
             .property("visibleStatus", "hidden")
@@ -158,6 +175,11 @@ export function menu(chart_width, margin, chart_area, options, id) {
             .style("visibility", "hidden")
           xGridButton
             .style('font-weight', 'normal')
+
+          if (yGridGroup.property("visibleStatus")==="hidden") {
+            gridButton
+              .style('font-weight', 'normal')
+          }
         }
       })
 
@@ -171,10 +193,7 @@ export function menu(chart_width, margin, chart_area, options, id) {
 
     dropDownIndex += 1
 
-    const yGridGroup = chart_area.select("g.yAxis")
-
-    const yGridButton = dropDown
-      .append('text')
+    yGridButton
       .attr('x', 5)
       .attr('y', dropDownIndex * 25)
       .text("yGrid")
@@ -188,6 +207,12 @@ export function menu(chart_width, margin, chart_area, options, id) {
             .style("visibility", "visible")
           yGridButton
             .style('font-weight', 'bold')
+
+          if (xGridGroup.property("visibleStatus")==="visible") {
+            gridButton
+              .style('font-weight', 'bold')
+          }
+  
         } else {
           yGridGroup
             .property("visibleStatus", "hidden")
@@ -195,6 +220,11 @@ export function menu(chart_width, margin, chart_area, options, id) {
             .style("visibility", "hidden")
           yGridButton
             .style('font-weight', 'normal')
+
+          if (xGridGroup.property("visibleStatus")==="hidden") {
+            gridButton
+              .style('font-weight', 'normal')
+          }
         }
       })
 

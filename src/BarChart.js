@@ -3,7 +3,7 @@ import {Set_Axis} from './Axis_helper.js';
 export class BarChart{
     constructor({id, chart_area,labels,datasets,color,width,height,margin,padding,y_max,y_min}){
         
-        chart_area.selectAll('*').remove();
+        // chart_area.selectAll('*').remove();
 
 
 
