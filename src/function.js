@@ -162,25 +162,25 @@ function Chart(
         );
       }
     }
-    if (options.plugins.xGrid) {
-      xGrid(
-        chart_area,
-        chart_height - margin.top - margin.bottom,
-        options.plugins.xGrid
-      );
-    }
+  }
+  if (options.plugins.xGrid) {
+    xGrid(
+      chart_area,
+      chart_height - margin.top - margin.bottom,
+      options.plugins.xGrid
+    );
+  }
 
-    if (options.plugins.yGrid) {
-      yGrid(
-        chart_area,
-        chart_width - margin.left - margin.right,
-        options.plugins.yGrid
-      );
-    }
+  if (options.plugins.yGrid) {
+    yGrid(
+      chart_area,
+      chart_width - margin.left - margin.right,
+      options.plugins.yGrid
+    );
+  }
 
-    if (options.plugins.menu) {
-      menu(chart_width, margin, chart_area, options, id);
-    }
+  if (options.plugins.menu) {
+    menu(chart_width, margin, chart_area, options, id);
   }
 }
 

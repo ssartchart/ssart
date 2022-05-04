@@ -241,9 +241,9 @@ export function menu(chart_width, margin, chart_area, options, id) {
 
     dropDownIndex += 1
 
-    const chartBody = chart_area.select(".chartBody rect")
+    const chartBackground = chart_area.select(".chartBackground rect")
     console.log(chart_area)
-    console.log(chartBody)
+    console.log(chartBackground)
     let color = "black"
     if(options.plugins.background.color) {
       color = options.plugins.background.color
@@ -258,24 +258,24 @@ export function menu(chart_width, margin, chart_area, options, id) {
       .style("font-family", "sans-serif")
       .style('cursor', 'pointer')
       .on('click', function(event) {
-        if (chartBody.property("visibleStatus")==="hidden") {
-          chartBody
+        if (chartBackground.property("visibleStatus")==="hidden") {
+          chartBackground
             .property("visibleStatus", "visible")
-          d3.selectAll(id + " svg g.chartBody rect")
+          d3.selectAll(id + " svg g.chartBackground rect")
             .style("fill", color)
           bgButton
             .style('fill', 'black')
         } else {
-          chartBody
+          chartBackground
             .property("visibleStatus", "hidden")
-          d3.selectAll(id + " svg g.chartBody rect")
+          d3.selectAll(id + " svg g.chartBackground rect")
             .style("fill", "none")
           bgButton
             .style('fill', '#aaaaaa')
         }
       })
     
-    if (chartBody.property("visibleStatus")==="hidden") {
+    if (chartBackground.property("visibleStatus")==="hidden") {
       bgButton
         .style('fill', '#aaaaaa')
     }
