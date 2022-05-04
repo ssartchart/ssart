@@ -63,7 +63,7 @@ export function menu(chart_width, margin, chart_area, options, id) {
   const dropDown = chart_area
     .append('g')
     .attr('class', 'dropDown')
-    .attr("transform", "translate(" + dropDownX + "," + menuHeight + ")")
+    .attr("transform", "translate(" + dropDownX + "," + margin.top + ")")
 
   // 일일히 옵션 생성해주기
   // 어차피 함수 한개씩 일일히 지정해야한다
@@ -98,13 +98,14 @@ export function menu(chart_width, margin, chart_area, options, id) {
     dropDownIndex += 1
 
     gridButton
-      .attr('x', 5)
+      .attr('x', dropDownWidth - 8)
       .attr('y', dropDownIndex * 25)
       // .attr('width', dropDownWidth)
       // .attr('height', 20)
       .text("Grid")
+      .attr("text-anchor", "end")
+      .style("font-family", "sans-serif")
       .style('cursor', 'pointer')
-      .style('font-weight', 'bold')
       .on('click', function(event) {
         if (xGridGroup.property("visibleStatus")==="hidden" && yGridGroup.property("visibleStatus")==="hidden") {
           yGridGroup
@@ -116,11 +117,11 @@ export function menu(chart_width, margin, chart_area, options, id) {
           d3.selectAll(id + " svg g.xAxis g.tick line.gridline")
             .style("visibility", "visible")
           gridButton
-            .style('font-weight', 'bold')
+            .style('fill', 'black')
           xGridButton
-            .style('font-weight', 'bold')
+            .style('fill', 'black')
           yGridButton
-            .style('font-weight', 'bold')
+            .style('fill', 'black')
         } else {
           yGridGroup
             .property("visibleStatus", "hidden")
@@ -131,16 +132,16 @@ export function menu(chart_width, margin, chart_area, options, id) {
           d3.selectAll(id + " svg g.xAxis g.tick line.gridline")
             .style("visibility", "hidden")
           gridButton
-            .style('font-weight', 'normal')
+            .style('fill', '#aaaaaa')
           xGridButton
-            .style('font-weight', 'normal')
+            .style('fill', '#aaaaaa')
           yGridButton
-            .style('font-weight', 'normal')
+            .style('fill', '#aaaaaa')
         }
       })
     if (xGridGroup.property("visibleStatus")==="hidden" && yGridGroup.property("visibleStatus")==="hidden") {
       gridButton
-        .style('font-weight', 'normal')
+        .style('fill', '#aaaaaa')
     }
   }
 
@@ -149,11 +150,12 @@ export function menu(chart_width, margin, chart_area, options, id) {
     dropDownIndex += 1
 
     xGridButton
-      .attr('x', 5)
+      .attr('x', dropDownWidth - 8)
       .attr('y', dropDownIndex * 25)
       .text("xGrid")
+      .attr("text-anchor", "end")
+      .style("font-family", "sans-serif")
       .style('cursor', 'pointer')
-      .style('font-weight', 'bold')
       .on('click', function(event) {
         if (xGridGroup.property("visibleStatus")==="hidden") {
           xGridGroup
@@ -161,11 +163,11 @@ export function menu(chart_width, margin, chart_area, options, id) {
           d3.selectAll(id + " svg g.xAxis g.tick line.gridline")
             .style("visibility", "visible")
           xGridButton
-            .style('font-weight', 'bold')
+            .style('fill', 'black')
           
           if (yGridGroup.property("visibleStatus")==="visible") {
             gridButton
-              .style('font-weight', 'bold')
+              .style('fill', 'black')
           }
 
         } else {
@@ -174,11 +176,11 @@ export function menu(chart_width, margin, chart_area, options, id) {
           d3.selectAll(id + " svg g.xAxis g.tick line.gridline")
             .style("visibility", "hidden")
           xGridButton
-            .style('font-weight', 'normal')
+            .style('fill', '#aaaaaa')
 
           if (yGridGroup.property("visibleStatus")==="hidden") {
             gridButton
-              .style('font-weight', 'normal')
+              .style('fill', '#aaaaaa')
           }
         }
       })
@@ -194,11 +196,12 @@ export function menu(chart_width, margin, chart_area, options, id) {
     dropDownIndex += 1
 
     yGridButton
-      .attr('x', 5)
+      .attr('x', dropDownWidth - 8)
       .attr('y', dropDownIndex * 25)
       .text("yGrid")
+      .attr("text-anchor", "end")
+      .style("font-family", "sans-serif")
       .style('cursor', 'pointer')
-      .style('font-weight', 'bold')
       .on('click', function(event) {
         if (yGridGroup.property("visibleStatus")==="hidden") {
           yGridGroup
@@ -206,11 +209,11 @@ export function menu(chart_width, margin, chart_area, options, id) {
           d3.selectAll(id + " svg g.yAxis g.tick line.gridline")
             .style("visibility", "visible")
           yGridButton
-            .style('font-weight', 'bold')
+            .style('fill', 'black')
 
           if (xGridGroup.property("visibleStatus")==="visible") {
             gridButton
-              .style('font-weight', 'bold')
+              .style('fill', 'black')
           }
   
         } else {
@@ -219,18 +222,18 @@ export function menu(chart_width, margin, chart_area, options, id) {
           d3.selectAll(id + " svg g.yAxis g.tick line.gridline")
             .style("visibility", "hidden")
           yGridButton
-            .style('font-weight', 'normal')
+            .style('fill', '#aaaaaa')
 
           if (xGridGroup.property("visibleStatus")==="hidden") {
             gridButton
-              .style('font-weight', 'normal')
+              .style('fill', '#aaaaaa')
           }
         }
       })
 
     if (yGridGroup.property("visibleStatus")==="hidden") {
       yGridButton
-        .style('font-weight', 'normal')
+        .style('fill', '#aaaaaa')
     }
   }
 
@@ -248,11 +251,12 @@ export function menu(chart_width, margin, chart_area, options, id) {
 
     const bgButton = dropDown
       .append('text')
-      .attr('x', 5)
+      .attr('x', dropDownWidth - 8)
       .attr('y', dropDownIndex * 25)
       .text("background")
+      .attr("text-anchor", "end")
+      .style("font-family", "sans-serif")
       .style('cursor', 'pointer')
-      .style('font-weight', 'bold')
       .on('click', function(event) {
         if (chartBody.property("visibleStatus")==="hidden") {
           chartBody
@@ -260,20 +264,20 @@ export function menu(chart_width, margin, chart_area, options, id) {
           d3.selectAll(id + " svg g.chartBody rect")
             .style("fill", color)
           bgButton
-            .style('font-weight', 'bold')
+            .style('fill', 'black')
         } else {
           chartBody
             .property("visibleStatus", "hidden")
           d3.selectAll(id + " svg g.chartBody rect")
             .style("fill", "none")
           bgButton
-            .style('font-weight', 'normal')
+            .style('fill', '#aaaaaa')
         }
       })
     
     if (chartBody.property("visibleStatus")==="hidden") {
       bgButton
-        .style('font-weight', 'normal')
+        .style('fill', '#aaaaaa')
     }
   }
   dropDown
