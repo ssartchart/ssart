@@ -45,7 +45,7 @@ export class BarChart{
         this.ChartBody = chart_area
             .append("g")
             .attr("class", "chartBody")
-
+            
         this.slice = this.ChartBody.selectAll(".slice")
             .data(datasets)
             .enter().append("g")

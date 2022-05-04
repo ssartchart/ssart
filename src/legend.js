@@ -313,7 +313,7 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
 }
 
 // legend 클릭 이벤트에 따라 차트 데이터를 바꾸는 Toggle 기능 생성
-export function createLegendToggle(datasets, items, makeChart, removedSet) {
+export function createLegendToggle(datasets, items, chartArea, makeChart, removedSet, renderBackgroundColor) {
   const dataList = {};
   for (let i = 0; i < items.length; i++) {
     dataList[i] = datasets[i]
@@ -340,7 +340,9 @@ export function createLegendToggle(datasets, items, makeChart, removedSet) {
         if (removedSet[j] !== undefined) continue;
         datasets.push(dataList[j])          
       }
-      makeChart(datasets)      
+      chartArea.selectAll('*').remove();      
+      renderBackgroundColor();
+      makeChart(datasets);
     })
   })
 }
