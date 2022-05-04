@@ -34,9 +34,9 @@ export function background(chart_area, margin, width, height, options) {
     ry = options.ry
   }
 
-  const chartBody = chart_area
+  const chartBackground = chart_area
     .append("g")
-    .attr("class", "chartBody")
+    .attr("class", "chartBackground")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
     .append("rect")
     .property("visibleStatus", "hidden")
@@ -50,7 +50,7 @@ export function background(chart_area, margin, width, height, options) {
     .attr("ry", ry)
 
   if (options.display) {
-    chartBody
+    chartBackground
       .property("visibleStatus", "visible")
       .style("fill", color)
   }
