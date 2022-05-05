@@ -5,3 +5,5 @@ export { drawTitle, drawXTitle, drawYTitle } from "./Title.js";
 export { checkMargin } from "./checkMargin.js";
 
 export { CircleChart } from "./CircleChart.js";
+
+export { RadarChart } from "./RadarChart.js";
