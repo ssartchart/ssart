@@ -1,36 +1,23 @@
-import {Set_Axis} from './Axis_helper.js';
+import {Axis_Option, Set_Axis} from './Axis_helper.js';
 
 export class BarChart{
     constructor({id,chart_area,labels,datasets,color,width,height,margin,padding,scales}){
         
-        chart_area.selectAll('*').remove();
+        // chart_area.selectAll('*').remove();
+        chart_area.selectAll('.chartBody').remove();
+        chart_area.selectAll('.xAxis').remove();
+        chart_area.selectAll('.yAxis').remove();
 
-        let y_min = 0;
-        let y_max = null;
-        let fillopacity = 1;
-        if (scales != null){
-            console.log(scales)
-            if (scales.yAxis){
-                if(scales.yAxis.ticks){
-                    if(scales.yAxis.ticks.max){
-                        y_max = scales.yAxis.ticks.max;
-                    }
-                    if(scales.yAxis.ticks.min){
-                        y_min = scales.yAxis.ticks.min;
-                    }
-                }
-            }
-            if (scales.fillopacity){
-                fillopacity = scales.fillopacity;
-            }
-            
-        }
+        
+        const axis_option = Axis_Option(labels,datasets,scales,1);
+        const x_domain = axis_option.x_domain;
 
-        const x_domain = labels.map(d => d);        
-        const y_domain = [y_min,  (y_max != null) ? y_max : d3.max(datasets, label=>{
-                return d3.max(label.data, d=>{
-                    return d.value;});            
-                })];        
+        const y_min = axis_option.y_min;
+        const y_max = axis_option.y_max;
+
+        const fillopacity = axis_option.fillopacity;
+        const y_domain = axis_option.y_domain
+        
         const Axis = Set_Axis({chart_area,x_domain,y_domain,width,height,margin,padding,scales});
 
 
@@ -42,14 +29,24 @@ export class BarChart{
             .domain(datasets.map((d,index)=>{return index}))
             .range([0, this.x0.bandwidth()]);
         
-        this.ChartBody = chart_area
+        chart_area
             .append("g")
             .attr("class", "chartBody")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+            .append("rect")
+            .attr("x", 0)
+            .attr("y", 0)
+            .attr("width", width - margin.left - margin.right)
+            .attr("height", height - margin.top - margin.bottom)
+            .style("fill", "none")
+            .style("fill-opacity", .8)
+            .attr("rx", 20)
+            .attr("ry", 20)
 
-        this.slice = this.ChartBody.selectAll(".slice")
+        this.slice = chart_area.selectAll(".slice")
             .data(datasets)
             .enter().append("g")
-            .attr("class", "g")
+            .attr("class", "slice")
             .attr("id", (d, i) => `${id}-chart-legend-${i}`)
             .attr("transform",(d,index)=>{ return "translate(" + this.x1(index) + ",0)"; });
 

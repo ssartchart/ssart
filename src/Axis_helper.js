@@ -7,9 +7,9 @@ export const Set_Axis = ({chart_area,x_domain,y_domain,width,height,margin,scale
 
     const x_axis = d3.axisBottom(x)
                     .tickSizeOuter(0);
-    // if (scales.xAxis[0].ticks.tick != null){
-    //     x_axis.ticks(scales.xAxis[0].ticks.tick);
-    // }
+    if (scales !=null && scales.xAxis && scales.xAxis.ticks && scales.xAxis.ticks.tick != null){
+        x_axis.ticks(scales.xAxis.ticks.tick);
+    }
     const xAxis = g => g
         .attr("class", "xAxis")
         .attr('transform', `translate(0, ${height - margin.bottom})`)
@@ -58,6 +58,110 @@ const Set_X = (x_type,x_domain,margin,width)=>{
     }
 }
 
+export const Axis_Option = (labels, datasets, scales, f = 1) =>{
+    let x_domain = labels.map(d => d);     
+    let x_type = "band";
+    
+    let y_min = 0;
+    let y_max = null;
+    let r_min = 0;
+    let r_max = null;
+    let r_size_min = 10;
+    let r_size_max = 50;
+    let fillopacity = f;
+    let line_width = 2;
+    let line_opacity = 1;
+    let dot_opacity = 1;
+    let dot_size = 5;
+    if (scales){
+        if (scales.xAxis){
+            if (scales.xAxis.type){
+                x_type = scales.xAxis.type;
+                if(scales.xAxis.ticks.max != null && scales.xAxis.ticks.min != null){
+                    x_domain = [scales.xAxis.ticks.min,scales.xAxis.ticks.max];
+                    console.log(x_domain);
+                }
+            }
+        }
+        if (scales.yAxis){                
+            if(scales.yAxis.ticks){
+                if(scales.yAxis.ticks.max){
+                    y_max = scales.yAxis.ticks.max;
+                }
+                if(scales.yAxis.ticks.min){
+                    y_min = scales.yAxis.ticks.min;
+                }
+            }
+            if(scales.r){
+                if(scales.r.value){
+                    if(scales.r.value.max){
+                        r_max = scales.r.value.max;
+                    }
+                    if(scales.r.value.min){
+                        r_min = scales.r.value.min;
+                    }
+                }
+                if(scales.r.size){
+                    if(scales.r.size.max){
+                        r_size_max = scales.r.size.max;
+                    }
+                    if(scales.r.size.min){
+                        r_size_min = scales.r.size.min;
+                    }
+                }                    
+            }
+        }
+        if (scales.fillopacity){
+            fillopacity = scales.fillopacity;
+        }
+        if (scales.line){
+            if (scales.line.width){
+                line_width = scales.line.width
+                dot_size = line_width/2
+            }
+            if (scales.line.opacity){
+                line_opacity = scales.line.opacity
+            }
+        }
+        if (scales.dot){
+            if (scales.dot.opacity){
+                dot_opacity = scales.dot.opacity
+            }
+            if (scales.dot.visible != null && scales.dot.visible == false){
+                dot_opacity = 0
+            }
+            if (scales.dot.size){
+                dot_size = scales.dot.size
+            }
+
+        }
+
+        
+        
+    }       
+    const y_domain = [y_min,  (y_max != null) ? y_max : d3.max(datasets, label=>{
+            return d3.max(label.data, d=>{
+                return d.y;});            
+    })];
+
+    return {
+        x_domain: x_domain,
+        y_domain: y_domain,
+        x_type: x_type,    
+        y_min: y_min,
+        y_max: y_max,
+        r_min: r_min,
+        r_max: r_max ,
+        r_size_min: r_size_min ,
+        r_size_max: r_size_max ,
+        fillopacity: fillopacity,
+        line_width: line_width,
+        line_opacity: line_opacity,
+        dot_opacity: dot_opacity,
+        dot_size: dot_size
+    }
+}
+
 export const xGrid = (chart_area,length,options)=>{
     let color = "black"
     if (options.color) {
@@ -69,7 +173,7 @@ export const xGrid = (chart_area,length,options)=>{
         weight = options.weight
     }
 
-    let opacity = 1
+    let opacity = .5
     if (options.opacity) {
         opacity = options.opacity
     }
@@ -111,7 +215,7 @@ export function yGrid (chart_area,length,options) {
         weight = options.weight
     }
 
-    let opacity = 1
+    let opacity = .5
     if (options.opacity) {
         opacity = options.opacity
     }
@@ -145,29 +249,40 @@ export function yGrid (chart_area,length,options) {
 }
 
 
-export const Set_Axis_reverse = ({chart_area,x_domain,y_domain,width,height,margin,padding})=>{
+export const Set_Axis_reverse = ({chart_area,x_domain,y_domain,width,height,margin,scales})=>{
     const x = d3.scaleBand()
         .domain(x_domain)
-        .range([height - margin.bottom, margin.top])
-        .padding(padding);
+        .range([height - margin.bottom, margin.top]);
 
     const y = d3.scaleLinear()
         .domain(y_domain).nice()
         .range([margin.left, width - margin.right]);
         
-    const yAxis = g => g
-        .attr('transform', `translate(${margin.left}, 0)`)
-        .call(d3.axisLeft(x).tickSizeOuter(0))
-        .call(g => g.select('.domain').remove())
-        .call(g => g.selectAll('line').remove());   
+    const x_axis = d3.axisLeft(x)
+                    .tickSizeOuter(0);
+    if (scales !=null && scales.xAxis && scales.xAxis.ticks && scales.xAxis.ticks.tick != null){
+        x_axis.ticks(scales.xAxis.ticks.tick);
+    }
 
+    const yAxis = g => g
+        .attr("class", "yAxis")
+        .attr('transform', `translate(${margin.left}, 0)`)
+        .call(x_axis)
+        // .call(g => g.select('.domain').remove())
+        // .call(g => g.selectAll('line').remove());   
+
+    const y_axis = d3.axisBottom(y);
+        if (scales !=null && scales.yAxis && scales.yAxis.ticks && scales.yAxis.ticks.tick != null){
+            y_axis.ticks(scales.yAxis.ticks.tick);
+        }    
     const xAxis = g => g
+        .attr("class", "xAxis")
         .attr('transform', `translate(0, ${height - margin.bottom})`)
-        .call(d3.axisBottom(y))
-        .call(g => g.select('.domain').remove())
-        .call(g => g.selectAll('line')
-            .attr('x2', width)
-            .style('stroke', '#f5f5f5'));
+        .call(y_axis)
+        // .call(g => g.select('.domain').remove())
+        // .call(g => g.selectAll('line')
+        //     .attr('x2', width)
+        //     .style('stroke', '#f5f5f5'));
             
     chart_area.append('g').call(xAxis);
     chart_area.append('g').call(yAxis);
