@@ -47,6 +47,7 @@ function Chart(
     legend,
     margin
   );
+
   const scales = options.scales;
   const chart_width = width - legend_box.width;
   const chart_height = height - legend_box.height;
@@ -108,7 +109,6 @@ function Chart(
   }
 
   if (type === "donut" || type === "pie") {
-    // drawCircleChart(type, svg, width, height, margin, data, options);
     const chart = new CircleChart({
       type,
       svg,
@@ -118,12 +118,12 @@ function Chart(
       data,
       options,
     });
-    // chart.tooltip();
   }
 
   if (options.plugins.title.display) {
     drawTitle(svg, options.plugins.title.text, width, height, margin);
   }
+
   // except circle
   if (type != "donut" && type != "pie") {
     if (options.plugins.xTitle) {
