@@ -49,6 +49,7 @@ function Chart(
     margin,
     data.datasets,
   );
+
   const scales = options.scales;
   const chart_width = width - legend_box.width;
   const chart_height = height - legend_box.height;
@@ -190,7 +191,6 @@ function Chart(
   }
 
   if (type === "donut" || type === "pie") {
-    // drawCircleChart(type, svg, width, height, margin, data, options);
     const chart = new CircleChart({
       type,
       svg,
