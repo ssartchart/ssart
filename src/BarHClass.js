@@ -1,7 +1,7 @@
 import {Set_Axis, Set_Axis_reverse, xGrid, yGrid} from './Axis_helper.js';
 
 export class BarHClass{
-    constructor({chart_area,labels,datasets,color,width,height,margin,padding,scales}){
+    constructor({id,chart_area,labels,datasets,color,width,height,margin,padding,scales}){
         
         chart_area.selectAll('*').remove();
 
@@ -50,6 +50,7 @@ export class BarHClass{
             .data(datasets)
             .enter().append("g")
             .attr("class", "slice")
+            .attr("id", (d, i) => `${id}-chart-legend-${i}`)
             // .attr("transform",(d,index)=>{ return "translate(" + this.x1(index) + ",0)"; });
             .attr("transform",(d,index)=>{ return "translate(0," + this.x1(index) +")"; });
 

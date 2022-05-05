@@ -7,12 +7,13 @@ import { LabelColor } from "./Color_helper.js";
 import { Data_pre_processing } from "./Dataset_helper.js";
 import { drawTitle, drawXTitle, drawYTitle } from "./Title.js";
 import { checkMargin } from "./checkMargin.js";
-import { drawLegend } from "./legend.js";
+import { createLegendToggle, drawLegend } from "./legend.js";
 import { menu } from "./menu.js";
 import { background } from "./background.js";
 import { ScatterChart } from "./ScatterChart.js";
 import { BubbleChart } from "./BubbleChart.js";
 import { CircleChart } from "./CircleChart.js";
+import { LineChart } from "./LineChart.js";
 
 function Chart(
   id,
@@ -45,67 +46,148 @@ function Chart(
     height,
     chart_area,
     legend,
-    margin
+    margin,
+    data.datasets,
   );
 
   const scales = options.scales;
   const chart_width = width - legend_box.width;
   const chart_height = height - legend_box.height;
   checkMargin(margin);
+  renderBackground();
+  function renderBackground() {
+    if (options.plugins.background) {
+      background(
+        chart_area,
+        margin,
+        chart_width,
+        chart_height,
+        options.plugins.background
+      );
+    }
+  }
   if (type === "bar") {
+    let datasets = Data_pre_processing(
+      data.labels,
+      data.datasets,
+      "namevalue"
+    );    
+    // BarChart({svg,labels,datasets,width,height,margin,padding,y_max,y_min});
+    // width, height 조정 필요
+    drawBarChart(datasets); // datasets으로 바차트 그리기
+    createLegendToggle(datasets, legend_box?.legendList, chart_area, drawBarChart, {}, renderBackground);
+    function drawBarChart(chartDatasets) {
+      let chart = new BarChart({
+        id: oid,
+        chart_area,
+        labels,
+        datasets: chartDatasets,
+        color,
+        width: chart_width,
+        height: chart_height,
+        margin,
+        padding,
+        scales,
+      });
+      chart.tooltip();
+      chart.animation();
+      renderOptions();
+    };
+  }
+  
+  if (type === "scatter") {
+    const datasets = Data_pre_processing(data.labels, data.datasets, "xy");
+    drawScatterChart(datasets);
+    createLegendToggle(datasets, legend_box?.legendList, chart_area, drawScatterChart, {}, renderBackground);
+    function drawScatterChart(chartData) {
+      const chart = new ScatterChart({
+        id:oid,
+        chart_area,
+        labels,
+        datasets: chartData,
+        color,
+        width: chart_width,
+        height: chart_height,
+        margin,
+        padding,
+        scales,
+      });
+      chart.tooltip();
+      renderOptions();
+    }
+  }
+
+  if (type === "bubble") {
+    const datasets = Data_pre_processing(data.labels, data.datasets, "xyr");
+    drawBubbleChart(datasets)
+    createLegendToggle(datasets, legend_box?.legendList, chart_area, drawBubbleChart, {}, renderBackground);
+    function drawBubbleChart(chartData) {
+      const chart = new BubbleChart({
+        id: oid,
+        chart_area,
+        labels,
+        datasets: chartData,
+        color,
+        width: chart_width,
+        height: chart_height,
+        margin,
+        padding,
+        scales,
+      });
+      chart.tooltip();
+      renderOptions();
+    }
+  }
+
+  if (type === "line") {
+    const datasets = Data_pre_processing(data.labels, data.datasets, "xy");
+    drawLineChart(datasets)
+    createLegendToggle(datasets, legend_box?.legendList, chart_area, drawLineChart, {}, renderBackground);
+    function drawLineChart(chartData) {
+      const chart = new LineChart({
+        id: oid,
+        chart_area,
+        labels,
+        datasets: chartData,
+        color,
+        width: chart_width,
+        height: chart_height,
+        margin,
+        padding,
+        scales,
+      });
+      chart.tooltip();
+      renderOptions();
+    }
+  }
+
+  if (type === "barH") {
     const datasets = Data_pre_processing(
       data.labels,
       data.datasets,
       "namevalue"
     );
-    // BarChart({svg,labels,datasets,width,height,margin,padding,y_max,y_min});
-    // width, height 조정 필요
-    const chart = new BarChart({
-      id: oid,
-      chart_area,
-      labels,
-      datasets: datasets,
-      color,
-      width: chart_width,
-      height: chart_height,
-      margin,
-      padding,
-      scales,
-    });
-    chart.tooltip();
-    chart.animation();
-  }
-
-  if (type === "scatter") {
-    const datasets = Data_pre_processing(data.labels, data.datasets, "xy");
-    const chart = new ScatterChart({
-      chart_area,
-      labels,
-      datasets: datasets,
-      color,
-      width: chart_width,
-      height: chart_height,
-      margin,
-      padding,
-      scales,
-    });
-    chart.tooltip();
-  }
-
-  if (type === "bubble") {
-    const datasets = Data_pre_processing(data.labels, data.datasets, "xyr");
-    const chart = new BubbleChart({
-      chart_area,
-      labels,
-      datasets: datasets,
-      color,
-      width: chart_width,
-      height: chart_height,
-      margin,
-      padding,
-      scales,
-    });
-    chart.tooltip();
+    drawbarHChart(datasets)
+    createLegendToggle(datasets, legend_box?.legendList, chart_area, drawbarHChart, {}, renderBackground);
+    function drawbarHChart(chartData) {
+      const barHchart = new BarHClass({
+        id: oid,
+        chart_area,
+        labels,
+        datasets: chartData,
+        color,
+        width:chart_width,
+        height:chart_height,
+        margin,
+        padding,
+        y_max,
+        y_min,
+      });
+      barHchart.tooltip();
+      barHchart.animation();
+      renderOptions();
+    }
+    
   }
 
   if (type === "donut" || type === "pie") {
@@ -118,37 +200,41 @@ function Chart(
       data,
       options,
     });
+    // chart.tooltip();
+  }  
+  if (options.plugins.menu) {   
+    menu(chart_width, margin, svg, options, id);
   }
-
-  if (options.plugins.title.display) {
-    drawTitle(svg, options.plugins.title.text, width, height, margin);
-  }
-
-  // except circle
-  if (type != "donut" && type != "pie") {
-    if (options.plugins.xTitle) {
-      // width, height 조정 필요
-      if (options.plugins.xTitle.display) {
-        drawXTitle(
-          chart_area,
-          options.plugins.xTitle.text,
-          chart_width,
-          chart_height,
-          margin
-        );
-      }
+  function renderOptions() {
+    if (options.plugins.title.display) {
+      drawTitle(svg, options.plugins.title.text, chart_width, height, margin);
     }
-    if (options.plugins.yTitle) {
-      // width, height 조정 필요
-      if (options.plugins.yTitle.display) {
-        drawYTitle(
-          chart_area,
-          options.plugins.yTitle.text,
-          chart_width,
-          chart_height,
-          margin,
-          options.plugins.yTitle.position
-        );
+    // except circle
+    if (type != "donut" && type != "pie") {
+      if (options.plugins.xTitle) {
+        // width, height 조정 필요
+        if (options.plugins.xTitle.display) {
+          drawXTitle(
+            chart_area,
+            options.plugins.xTitle.text,
+            chart_width,
+            chart_height,
+            margin
+          );
+        }
+      }
+      if (options.plugins.yTitle) {
+        // width, height 조정 필요
+        if (options.plugins.yTitle.display) {
+          drawYTitle(
+            chart_area,
+            options.plugins.yTitle.text,
+            chart_width,
+            chart_height,
+            margin,
+            options.plugins.yTitle.position
+          );
+        }
       }
     }
     if (options.plugins.xGrid) {
@@ -166,20 +252,6 @@ function Chart(
         options.plugins.yGrid
       );
     }
-
-    if (options.plugins.background) {
-      background(
-        chart_area,
-        margin,
-        chart_width,
-        chart_height,
-        options.plugins.background
-      );
-    }
-
-    if (options.plugins.menu) {
-      menu(chart_width, margin, chart_area, options, id);
-    }
   }
 }
 
@@ -188,6 +260,7 @@ function ChartH(
   { type, width, height, margin, padding = 0, data, options, y_max, y_min = 0 }
 ) {
   const { position } = options.plugins.legend;
+  const legend = options.plugins.legend;
   const svg = d3
     .select(id)
     .append("svg")
@@ -197,6 +270,7 @@ function ChartH(
   const datasets = Data_pre_processing(data.labels, data.datasets);
 
   const labelcolor = LabelColor(datasets);
+  const oid = id.slice(1, id.length);
   const color = labelcolor.color;
   const legend_label = labelcolor.label;
 
@@ -206,9 +280,18 @@ function ChartH(
     .style("width", width)
     .style("height", height);
 
-  // const legend_box = drawLegend(svg, legend_label, width, height, chart_area, position, margin);
-  // const chart_width = width - legend_box.width;
-  // const chart_height = height - legend_box.height;
+    const legend_box = drawLegend(
+      oid,
+      svg,
+      labelcolor,
+      width,
+      height,
+      chart_area,
+      legend,
+      margin
+    );
+  const chart_width = width - legend_box.width;
+  const chart_height = height - legend_box.height;
 
   if (type === "barH") {
     const barHchart = new BarHClass({
@@ -216,8 +299,8 @@ function ChartH(
       labels,
       datasets,
       color,
-      width,
-      height,
+      width:chart_width,
+      height:chart_height,
       margin,
       padding,
       y_max,
@@ -228,15 +311,45 @@ function ChartH(
   }
 
   drawTitle(svg, options.plugins.title.text, width, height, margin);
-  drawXTitle(chart_area, options.plugins.xTitle.text, width, height, margin);
+  drawXTitle(chart_area, options.plugins.xTitle.text, chart_width, chart_height, margin);
   drawYTitle(
     chart_area,
     options.plugins.yTitle.text,
-    width,
-    height,
+    chart_width,
+    chart_height,
     margin,
     options.plugins.yTitle.position
   );
+
+  if (options.plugins.xGrid) {
+    xGrid(
+      chart_area,
+      chart_height - margin.top - margin.bottom,
+      options.plugins.xGrid
+    );
+  }
+
+  if (options.plugins.yGrid) {
+    yGrid(
+      chart_area,
+      chart_width - margin.left - margin.right,
+      options.plugins.yGrid
+    );
+  }
+
+  if (options.plugins.background) {
+    background(
+      chart_area,
+      margin,
+      chart_width,
+      chart_height,
+      options.plugins.background
+    );
+  }
+
+  if (options.plugins.menu) {
+    menu(chart_width, margin, chart_area, options, id);
+  }
 
   //   if (options.plugins.xGrid) {
   //     xGrid(chart_area,chart_height - margin.top - margin.bottom,options.plugins.xGrid);

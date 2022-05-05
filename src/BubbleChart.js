@@ -1,67 +1,25 @@
-import {Set_Axis} from './Axis_helper.js';
+import {Axis_Option, Set_Axis} from './Axis_helper.js';
 
 export class BubbleChart{
-    constructor({chart_area,labels,datasets,color,width,height,margin,padding,scales}){
+    constructor({id, chart_area,labels,datasets,color,width,height,margin,padding,scales}){
 
-        chart_area.selectAll('*').remove();
+        // chart_area.selectAll('*').remove();
+        chart_area.selectAll('.chartBody').remove();
+        chart_area.selectAll('.xAxis').remove();
+        chart_area.selectAll('.yAxis').remove();
 
-        let x_domain = labels.map(d => d);     
-        let x_type = "band";
-        
-        let y_min = 0;
-        let y_max = null;
-        let r_min = 0;
-        let r_max = null;
-        let r_size_min = 10;
-        let r_size_max = 50;
-        let fillopacity = 0.2;
-        if (scales){
-            if (scales.xAxis){
-                if (scales.xAxis.type){
-                    x_type = scales.xAxis.type;
-                    if(scales.xAxis.ticks.max != null && scales.xAxis.ticks.min != null){
-                        x_domain = [scales.xAxis.ticks.min,scales.xAxis.ticks.max];
-                        console.log(x_domain);
-                    }
-                }
-            }
-            if (scales.yAxis){                
-                if(scales.yAxis.ticks){
-                    if(scales.yAxis.ticks.max){
-                        y_max = scales.yAxis.ticks.max;
-                    }
-                    if(scales.yAxis.ticks.min){
-                        y_min = scales.yAxis.ticks.min;
-                    }
-                }
-                if(scales.r){
-                    if(scales.r.value){
-                        if(scales.r.value.max){
-                            r_max = scales.r.value.max;
-                        }
-                        if(scales.r.value.min){
-                            r_min = scales.r.value.min;
-                        }
-                    }
-                    if(scales.r.size){
-                        if(scales.r.size.max){
-                            r_size_max = scales.r.size.max;
-                        }
-                        if(scales.r.size.min){
-                            r_size_min = scales.r.size.min;
-                        }
-                    }                    
-                }
-            }
-            if (scales.fillopacity){
-                fillopacity = scales.fillopacity;
-            }
-            
-        }       
-        const y_domain = [y_min,  (y_max != null) ? y_max : d3.max(datasets, label=>{
-                return d3.max(label.data, d=>{
-                    return d.y;});            
-                })];        
+        const axis_option = Axis_Option(labels,datasets,scales,0.2);
+        const x_domain = axis_option.x_domain;
+        const x_type = axis_option.x_type;
+        const y_min = axis_option.y_min;
+        const y_max = axis_option.y_max;
+        const r_min = axis_option.r_min;
+        const r_max = axis_option.r_max;
+        const r_size_min = axis_option.r_size_min;
+        const r_size_max = axis_option.r_size_max;
+        const fillopacity = axis_option.fillopacity;
+        const y_domain = axis_option.y_domain
+
         const Axis = Set_Axis({chart_area,x_domain,y_domain,width,height,margin,padding,scales,x_type});
 
         const r_domain = [0,(r_max != null) ? r_max : d3.max(datasets, label=>{
@@ -88,6 +46,7 @@ export class BubbleChart{
             .data(datasets)
             .enter().append("g")
             .attr("class", "slice")
+            .attr("id", (d, i) => `${id}-chart-legend-${i}`)
         if (x_type == "band"){
             this.slice.attr("transform", "translate(" + this.x.bandwidth()/2 + "," + 0 + ")")
         }
