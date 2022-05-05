@@ -47,7 +47,7 @@ function Chart(
     chart_area,
     legend,
     margin,
-    data.datasets,
+    data.datasets
   );
 
   const scales = options.scales;
@@ -67,15 +67,18 @@ function Chart(
     }
   }
   if (type === "bar") {
-    let datasets = Data_pre_processing(
-      data.labels,
-      data.datasets,
-      "namevalue"
-    );    
+    let datasets = Data_pre_processing(data.labels, data.datasets, "namevalue");
     // BarChart({svg,labels,datasets,width,height,margin,padding,y_max,y_min});
     // width, height 조정 필요
     drawBarChart(datasets); // datasets으로 바차트 그리기
-    createLegendToggle(datasets, legend_box?.legendList, chart_area, drawBarChart, {}, renderBackground);
+    createLegendToggle(
+      datasets,
+      legend_box?.legendList,
+      chart_area,
+      drawBarChart,
+      {},
+      renderBackground
+    );
     function drawBarChart(chartDatasets) {
       let chart = new BarChart({
         id: oid,
@@ -92,16 +95,23 @@ function Chart(
       chart.tooltip();
       chart.animation();
       renderOptions();
-    };
+    }
   }
-  
+
   if (type === "scatter") {
     const datasets = Data_pre_processing(data.labels, data.datasets, "xy");
     drawScatterChart(datasets);
-    createLegendToggle(datasets, legend_box?.legendList, chart_area, drawScatterChart, {}, renderBackground);
+    createLegendToggle(
+      datasets,
+      legend_box?.legendList,
+      chart_area,
+      drawScatterChart,
+      {},
+      renderBackground
+    );
     function drawScatterChart(chartData) {
       const chart = new ScatterChart({
-        id:oid,
+        id: oid,
         chart_area,
         labels,
         datasets: chartData,
@@ -119,8 +129,15 @@ function Chart(
 
   if (type === "bubble") {
     const datasets = Data_pre_processing(data.labels, data.datasets, "xyr");
-    drawBubbleChart(datasets)
-    createLegendToggle(datasets, legend_box?.legendList, chart_area, drawBubbleChart, {}, renderBackground);
+    drawBubbleChart(datasets);
+    createLegendToggle(
+      datasets,
+      legend_box?.legendList,
+      chart_area,
+      drawBubbleChart,
+      {},
+      renderBackground
+    );
     function drawBubbleChart(chartData) {
       const chart = new BubbleChart({
         id: oid,
@@ -141,8 +158,15 @@ function Chart(
 
   if (type === "line") {
     const datasets = Data_pre_processing(data.labels, data.datasets, "xy");
-    drawLineChart(datasets)
-    createLegendToggle(datasets, legend_box?.legendList, chart_area, drawLineChart, {}, renderBackground);
+    drawLineChart(datasets);
+    createLegendToggle(
+      datasets,
+      legend_box?.legendList,
+      chart_area,
+      drawLineChart,
+      {},
+      renderBackground
+    );
     function drawLineChart(chartData) {
       const chart = new LineChart({
         id: oid,
@@ -167,8 +191,15 @@ function Chart(
       data.datasets,
       "namevalue"
     );
-    drawbarHChart(datasets)
-    createLegendToggle(datasets, legend_box?.legendList, chart_area, drawbarHChart, {}, renderBackground);
+    drawbarHChart(datasets);
+    createLegendToggle(
+      datasets,
+      legend_box?.legendList,
+      chart_area,
+      drawbarHChart,
+      {},
+      renderBackground
+    );
     function drawbarHChart(chartData) {
       const barHchart = new BarHClass({
         id: oid,
@@ -176,8 +207,8 @@ function Chart(
         labels,
         datasets: chartData,
         color,
-        width:chart_width,
-        height:chart_height,
+        width: chart_width,
+        height: chart_height,
         margin,
         padding,
         y_max,
@@ -187,7 +218,6 @@ function Chart(
       barHchart.animation();
       renderOptions();
     }
-    
   }
 
   if (type === "donut" || type === "pie") {
@@ -200,9 +230,9 @@ function Chart(
       data,
       options,
     });
-    // chart.tooltip();
-  }  
-  if (options.plugins.menu) {   
+    renderOptions();
+  }
+  if (options.plugins.menu) {
     menu(chart_width, margin, svg, options, id);
   }
   function renderOptions() {
@@ -280,16 +310,16 @@ function ChartH(
     .style("width", width)
     .style("height", height);
 
-    const legend_box = drawLegend(
-      oid,
-      svg,
-      labelcolor,
-      width,
-      height,
-      chart_area,
-      legend,
-      margin
-    );
+  const legend_box = drawLegend(
+    oid,
+    svg,
+    labelcolor,
+    width,
+    height,
+    chart_area,
+    legend,
+    margin
+  );
   const chart_width = width - legend_box.width;
   const chart_height = height - legend_box.height;
 
@@ -299,8 +329,8 @@ function ChartH(
       labels,
       datasets,
       color,
-      width:chart_width,
-      height:chart_height,
+      width: chart_width,
+      height: chart_height,
       margin,
       padding,
       y_max,
@@ -311,7 +341,13 @@ function ChartH(
   }
 
   drawTitle(svg, options.plugins.title.text, width, height, margin);
-  drawXTitle(chart_area, options.plugins.xTitle.text, chart_width, chart_height, margin);
+  drawXTitle(
+    chart_area,
+    options.plugins.xTitle.text,
+    chart_width,
+    chart_height,
+    margin
+  );
   drawYTitle(
     chart_area,
     options.plugins.yTitle.text,
