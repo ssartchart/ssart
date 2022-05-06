@@ -1,12 +1,17 @@
 // chart title
-function drawTitle(svg, text, width, height, margin) {
+function drawTitle(svg, options, width, chart_width, height, margin) {
+  let xTitle = chart_width/2
+  if (options.plugins.legend.position && options.plugins.legend.position == "left"){
+    xTitle = width - chart_width/2
+  }
+
   svg
     .append("text")
     .attr("id", "title")
-    .attr("x", width / 2)
+    .attr("x", xTitle)
     .attr("y", margin.top / 2)
     .attr("text-anchor", "middle")
-    .text(text);
+    .text(options.plugins.title.text);
 }
 
 // x title
