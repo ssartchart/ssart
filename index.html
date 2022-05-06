@@ -98,6 +98,20 @@
 <body>
 
     <div id="bargraph">
+<<<<<<< HEAD
+        <!-- <div id='tooltip' style="opacity: 0;" class="tooltip"></div> -->
+    </div>
+
+    <div id="bargraph2"></div>
+    <div id="bargraph3"></div>
+    <div id="bargraph4"></div>
+    <div id="bargraph5"></div>
+    <div id="area"></div>
+    <div id="circle"></div>
+    <div id="barH"></div>
+    <div id="radar"></div>
+    
+=======
         <div id='tooltip'></div>
     </div>
 
@@ -110,6 +124,7 @@
     <div id="circle">
     </div>
 
+>>>>>>> 9c5e9ed261d153376bc45fee7e3b11d08f0a8089
     <script src='https://d3js.org/d3.v5.min.js'></script>
 
     <script>
@@ -528,6 +543,72 @@
             },
         };
 
+        const config5 = {
+            type: 'area',
+            width: 500,
+            height: 500,
+            margin: { top: 40, left: 40, bottom: 40, right: 40 },
+            padding: 0.1,
+            data: data4,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',// top bottom left right
+                    },
+                    title: {
+                        display: true,
+                        text: 'Chart.js Area Chart'
+                    },
+                    xTitle: {
+                        display: true,
+                        text: 'y'
+                    },
+                    yTitle: {
+                        display: true,
+                        text: 'x'
+                    },
+
+                    yGrid: {
+                        display: true,
+                        color: "#323233", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
+                        dash: "10,3",     // 점선, 10만큼 칠하고 3만큼 빈공간
+                        weight: 1,        // 선 두께
+                        opacity: .5       // 선 투명도
+                    },
+
+                    menu: {
+                        // grid: true,
+                        xGrid: true,
+                        yGrid: true,
+
+                    }
+                },
+                scales: {
+                    xAxis : {
+                        type : "number",
+                        ticks:{
+
+                        }
+                    },    
+                    yAxis : {
+                        ticks:{
+
+                        }
+                    },
+                    line :{
+                        width : 10,
+                        opacity : .5
+                    },
+                    dot :{
+                        size : 0,
+                        opacity : 1,
+                        visible : true
+                    }
+                }
+            },
+        };
+
         const data6 = {
             labels: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
             datasets: [
@@ -576,6 +657,7 @@
         Chart.Chart('#bargraph3', config2);
         Chart.Chart('#bargraph4', config3);
         Chart.Chart('#bargraph5', config4);
+        Chart.Chart('#area', config5);
     </script>
 
     <br>
