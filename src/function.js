@@ -253,10 +253,10 @@ function Chart(
     if (type != "donut" && type != "pie") {
       if (options.plugins.xTitle) {
         // width, height 조정 필요
-        if (options.plugins.xTitle.display) {
+        if (options.plugins.xTitle) {
           drawXTitle(
             chart_area,
-            options.plugins.xTitle.text,
+            options.plugins.xTitle,
             chart_width,
             chart_height,
             margin
@@ -265,14 +265,13 @@ function Chart(
       }
       if (options.plugins.yTitle) {
         // width, height 조정 필요
-        if (options.plugins.yTitle.display) {
+        if (options.plugins.yTitle) {
           drawYTitle(
             chart_area,
-            options.plugins.yTitle.text,
+            options.plugins.yTitle,
             chart_width,
             chart_height,
             margin,
-            options.plugins.yTitle.position
           );
         }
       }
