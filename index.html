@@ -9,13 +9,96 @@
     <!-- <link rel="stylesheet" href="https://uicdn.toast.com/chart/latest/toastui-chart.min.css" /> -->
     <!-- <script src="https://uicdn.toast.com/chart/latest/toastui-chart.min.js"></script> -->
     <link rel="stylesheet" href="src/css/index.css">
-    
+
+    <script src="src/RadarChart.js"></script>
+
+
+
     <link rel="icon" type="image/png" href="http://example.com/myicon.png">
+</head>
+<style>
+    body {
+        padding: 5%;
+        text-align: center;
+    }
+
+    #bargraph {
+        position: relative;
+    }
+
+    #tooltip {
+        position: absolute;
+        opacity: 1;
+        max-width: 30%;
+        /* max-height: 30%; */
+        min-width: 5%;
+        min-height: 5%;
+        line-height: 20px;
+        transition: all 0.3s;
+        border-radius: 5px;
+        padding: 5px 8px;
+        text-align: center;
+        color: rgb(0, 0, 0);
+        font-size: 14px;
+        font-weight: bold;
+        background-color: rgb(15, 14, 14);
+        display: inline-block;
+    }
+
+    .tooltip2 {
+        background-color: rgba(0, 0, 0, 0.75);
+        padding: 15px;
+        border-radius: 2px;
+        font-family: sans-serif;
+        color: white;
+        pointer-events: none;
+        box-shadow: 0 0 5px #999999;
+        background-color: rgb(115, 114, 214);
+        display: inline-block;
+    }
+
+    .svg-container {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        padding-bottom: 100%;
+        /* aspect ratio */
+        vertical-align: top;
+        overflow: hidden;
+    }
+
+    .svg-content-responsive {
+        display: inline-block;
+        position: absolute;
+        top: 10px;
+        left: 0;
+    }
+
+
+
+    /* 컬러 CSS를 스타일안에 미리 해놔야하는지 ..? */
+    .blue {
+        fill: #5abae6;
+    }
+
+    .red {
+        fill: #d34e4e;
+    }
+
+    .green {
+        fill: #9dbb19;
+    }
+
+    .yellow {
+        fill: #f7b358;
+    }
+</style>
 </head>
 
 <body>
 
     <div id="bargraph">
+<<<<<<< HEAD
         <!-- <div id='tooltip' style="opacity: 0;" class="tooltip"></div> -->
     </div>
 
@@ -28,6 +111,20 @@
     <div id="barH"></div>
     <div id="radar"></div>
     
+=======
+        <div id='tooltip'></div>
+    </div>
+
+    <div id="bargraph2"></div>
+
+
+    <div id="bargraph3"></div>
+    <div id="bargraph4"></div>
+    <div id="bargraph5"></div>
+    <div id="circle">
+    </div>
+
+>>>>>>> 9c5e9ed261d153376bc45fee7e3b11d08f0a8089
     <script src='https://d3js.org/d3.v5.min.js'></script>
 
     <script>
@@ -236,12 +333,12 @@
                         yGrid: true,
                         background: true
                     },
-                    
+
                 },
-                scales :{
-                    dot :{
-                        size : 10,
-                        opacity : 1
+                scales: {
+                    dot: {
+                        size: 10,
+                        opacity: 1
                     }
                 }
             },
@@ -317,11 +414,11 @@
                             min: 0,
                             max: 10
                         }
-                    },    
-                    yAxis : {
-                        ticks:{
-                            max : 80,
-                            tick : 20
+                    },
+                    yAxis: {
+                        ticks: {
+                            max: 80,
+                            tick: 20
                         }
                     },
                     r: {
@@ -422,25 +519,25 @@
                     }
                 },
                 scales: {
-                    xAxis : {
-                        type : "number",
-                        ticks:{
-
-                        }
-                    },    
-                    yAxis : {
-                        ticks:{
+                    xAxis: {
+                        type: "number",
+                        ticks: {
 
                         }
                     },
-                    line :{
-                        width : 15,
-                        opacity : .5
+                    yAxis: {
+                        ticks: {
+
+                        }
                     },
-                    dot :{
-                        size : 0,
-                        opacity : 1,
-                        visible : true
+                    line: {
+                        width: 15,
+                        opacity: .5
+                    },
+                    dot: {
+                        size: 0,
+                        opacity: 1,
+                        visible: true
                     }
                 }
             },
@@ -523,13 +620,13 @@
                 { name: 'E', value: 700, color: '#fae8a4' },
                 { name: 'F', value: 1200, color: '#df7454' },
                 { name: 'G', value: 1100, color: '#e88d5d' },
-                { name: 'H', value: 600, color:" '#f8d690'" }
+                { name: 'H', value: 600, color: '#f8d690' }
             ]
         };
         const config6 = {
             type: 'donut',
-            width: 300,
-            height: 300,
+            width: 500,
+            height: 500,
             margin: { top: 40, left: 40, bottom: 40, right: 40 },
             padding: 0.1,
             data: data6,
@@ -544,51 +641,18 @@
                         text: 'Circle Chart Test'
                     },
                     sort: true,
-                    view: false,
-                },
-            }
-        }
-
-        const data_r = {
-            labels: ['A', 'B', 'C', 'D' ,'E' ,'F'],
-            datasets: [
-                { name: 'AAA'},
-                { name: 'BBB' },
-                { name: 'CC' },
-                { name : 'DDDDD'}
-            ],
-            data:[
-                [100,100,1200,13,1400,1700],
-                [1400,100,2800,2500,1200,2100],
-                [1200,1900,1400,12,2700,1600],
-                [20,2200,2000,520,2300,200],
-            ]            
-        };
-        const config_r = {
-            type: 'radar',
-            width:600,
-            height: 600,
-            margin: { top:40, left: 40, bottom: 40, right: 40 },
-            padding: 0.1,
-            data: data_r,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'bottom',// top bottom left right
-                    },
-                    title: {
-                        display: true,
-                        text: 'Radar Chart Test'
-                    },
-                    sort: false,
+                    view: true,
                 },
             }
         }
     </script>
-
     <script type="module">
+
         import * as Chart from './src/index.js';
+
+
+        // Chart.Chart("bar",'#bargraph',dataset,width2,height2,margin2);
+        //Chart.Chart2("bar",'#bargraph',labels,dataset,width2,height2,margin2,padding);
         Chart.Chart('#bargraph2', config);
         Chart.Chart('#bargraph3', config2);
         Chart.Chart('#bargraph4', config3);
@@ -597,7 +661,7 @@
     </script>
 
     <br>
-    
+    <div id="barH"></div>
 
     <script>
         const dataH = {
@@ -678,23 +742,27 @@
 
     </script>
 
+    </svg>
+    <script>
+        // var color = ['red', 'blue', 'yellow','green'];
+        // var widthH = 500;
+        // var heightH = 500;
+        // var marginH = {top: 40, left: 40, bottom: 40, right: 40};
+
+    </script>
     <script type="module">
         import * as Chart from './src/index.js';
 
         Chart.Chart('#barH', configH);
 
     </script>
-
     <script type="module">
         import * as Chart from './src/index.js';
 
         Chart.Chart('#circle', config6);
     </script>
 
-<script type="module">
-    import * as Chart from './src/index.js';
-    Chart.Chart('#radar', config_r);
-</script>
+    <script>MakeRadar();</script>
 </body>
 
 </html>

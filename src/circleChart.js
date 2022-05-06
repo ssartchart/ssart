@@ -67,9 +67,17 @@ export class CircleChart {
       .on("mousemove", this.mousemove.bind(this))
       .on("mouseout", this.mouseout.bind(this))
       .attr("stroke", "white")
-      .attr("d", arc);
-    // .append("title")
-    // .text((d) => `${d.data.name}: ${d.value}`)
+      .attr("d", arc)
+      // 애니메이션 효과
+      .transition()
+      .duration(1500)
+      .attrTween("d", function (d) {
+        let i = d3.interpolate(d.startAngle, d.endAngle);
+        return function (t) {
+          d.endAngle = i(t);
+          return arc(d);
+        };
+      });
 
     // 라벨 추가
     const text = g
