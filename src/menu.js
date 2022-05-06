@@ -1,9 +1,7 @@
 export function menu(chart_width, margin, chart_area, options, id) {
   const menuWidth = 30
   const menuHeight = 30
-  const menuX = chart_width - margin.right - menuWidth
-  
-  console.log(chart_area)
+  const menuX = chart_width - margin.right - menuWidth  
   
   const chartMenu = chart_area
     .append('g')
@@ -298,7 +296,4 @@ export function menu(chart_width, margin, chart_area, options, id) {
         .property("visibility", "hidden")
     }
   })
-  // console.log(svg.node().getBBox().width)
-  // chartMenu.attr("transform", `translate(${options.plugins.legend.position === "right" ? svg.node().getBBox().width - dropDown.node().getBBox().width : svg.node().getBBox().width}, 0)`)
-  // dropDown.attr("transform", `translate(${options.plugins.legend.position === "right" ? svg.node().getBBox().width - dropDown.node().getBBox().width: svg.node().getBBox().width - dropDown.node().getBBox().width}, ${menuHeight})`)
 }

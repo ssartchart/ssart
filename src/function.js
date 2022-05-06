@@ -245,9 +245,6 @@ function Chart(
     });
     // chart.tooltip();
   }
-  if (options.plugins.menu) {
-    menu(chart_width, margin, svg, options, id);
-  }
   function renderOptions() {
     if (options.plugins.title.display) {
       drawTitle(svg, options.plugins.title.text, chart_width, height, margin);
@@ -294,6 +291,10 @@ function Chart(
         chart_width - margin.left - margin.right,
         options.plugins.yGrid
       );
+    }
+
+    if (options.plugins.menu) {
+      menu(chart_width, margin, chart_area, options, id);
     }
   }
 }
@@ -397,7 +398,7 @@ function ChartH(
   }
 
   if (options.plugins.menu) {
-    menu(chart_width, margin, chart_area, options, id);
+    menu(chart_width, width, margin, chart_area, options, id);
   }
 
   //   if (options.plugins.xGrid) {
