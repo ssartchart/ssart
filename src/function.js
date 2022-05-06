@@ -18,7 +18,7 @@ import { LineChart } from "./LineChart.js";
 
 function Chart(
   id,
-  { type, width, height, margin, padding = 0, data, options, y_max, y_min = 0 }
+  { type, width, height, margin, padding = 0, data, options, y_max, y_min = 0,depth }
 ) {
   const legend = options.plugins.legend;
   const oid = id.slice(1, id.length);
@@ -93,7 +93,6 @@ function Chart(
         padding,
         scales,
       });
-      chart.tooltip();
       chart.animation();
       renderOptions();
     }
@@ -241,9 +240,11 @@ function Chart(
       height,
       margin,
       data,
+      depth,
       options,
     });
     // chart.tooltip();
+    renderOptions();
   }
   if (options.plugins.menu) {
     menu(chart_width, margin, svg, options, id);
