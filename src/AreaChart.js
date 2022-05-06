@@ -62,7 +62,7 @@ export class AreaChart{
         }
         // this.slice.attr("transform", "translate(" + 0 + "," + 0 + ")")
         
-        this.slice
+        this.path = this.slice
             .append("path")    
             .datum(datasets=>{
                 return datasets.data;})
@@ -73,7 +73,9 @@ export class AreaChart{
             .attr("stroke-opacity", 1)
             .attr("d", line)
 
-        this.slice
+        this.pathLength = this.path.node().getTotalLength();
+
+        this.area_path = this.slice
             .append("path")    
             .datum(datasets=>{
                 console.log(datasets.data);
@@ -138,5 +140,25 @@ export class AreaChart{
                 d3.select(this).style("fill", "white");
                 tooltop.style.opacity = "0";
             });
+    }
+
+    animation(delay=1000,duration=1000){
+        const transitionPath = d3
+            .transition()
+            .ease(d3.easeSin)
+            .delay(d=>{return Math.random()*delay;})
+            .duration(duration);
+
+        this.path
+        .attr("stroke-dashoffset", this.pathLength)
+        .attr("stroke-dasharray", this.pathLength)
+        .transition(transitionPath)
+        .attr("stroke-dashoffset", 0);
+
+        this.area_path
+        .attr("fill-opacity", 0)
+        .transition(transitionPath)
+        .attr("fill-opacity", 0.5)
+        
     }
 }

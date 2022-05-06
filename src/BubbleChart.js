@@ -103,7 +103,16 @@ export class BubbleChart{
             d3.select(this).style("fill", color(d.label_index));
             tooltop.style.opacity = "0";
         });
-}
+    }
+
+    animation(delay=1000,duration=1000){
+        this.slice.selectAll(".data")
+            .attr("r", 0)
+            .transition()
+            .delay(d=>{return Math.random()*delay;})
+            .duration(duration)
+            .attr("r", d=>{ return this.r(d.r); })
+    }
 }
 
 

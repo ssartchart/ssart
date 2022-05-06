@@ -125,6 +125,7 @@ function Chart(
         scales,
       });
       chart.tooltip();
+      chart.animation();
       renderOptions();
     }
   }
@@ -154,6 +155,7 @@ function Chart(
         scales,
       });
       chart.tooltip();
+      chart.animation();
       renderOptions();
     }
   }
@@ -183,6 +185,7 @@ function Chart(
         scales,
       });
       chart.tooltip();
+      chart.animation();
       renderOptions();
     }
   }
@@ -212,6 +215,7 @@ function Chart(
         scales,
       });
       chart.tooltip();
+      chart.animation();
       renderOptions();
     }
   }
