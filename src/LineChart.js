@@ -57,7 +57,6 @@ export class LineChart{
         this.slice
             .append("path")    
             .datum(datasets=>{
-                console.log(datasets.data);
                 return datasets.data;})
             .attr("class","line")        
             .attr("fill", "none")

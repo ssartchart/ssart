@@ -9,108 +9,23 @@
     <!-- <link rel="stylesheet" href="https://uicdn.toast.com/chart/latest/toastui-chart.min.css" /> -->
     <!-- <script src="https://uicdn.toast.com/chart/latest/toastui-chart.min.js"></script> -->
     <link rel="stylesheet" href="src/css/index.css">
-<<<<<<< HEAD
     
-=======
-
-    <script src="src/RadarChart.js"></script>
-
-
-
->>>>>>> 46dc527f6e67fc0b3abbde08f4d757bb53203d89
     <link rel="icon" type="image/png" href="http://example.com/myicon.png">
-</head>
-<style>
-    body {
-        padding: 5%;
-        text-align: center;
-    }
-
-    #bargraph {
-        position: relative;
-    }
-
-    #tooltip {
-        position: absolute;
-        opacity: 1;
-        max-width: 30%;
-        /* max-height: 30%; */
-        min-width: 5%;
-        min-height: 5%;
-        line-height: 20px;
-        transition: all 0.3s;
-        border-radius: 5px;
-        padding: 5px 8px;
-        text-align: center;
-        color: rgb(0, 0, 0);
-        font-size: 14px;
-        font-weight: bold;
-        background-color: rgb(15, 14, 14);
-        display: inline-block;
-    }
-
-    .tooltip2 {
-        background-color: rgba(0, 0, 0, 0.75);
-        padding: 15px;
-        border-radius: 2px;
-        font-family: sans-serif;
-        color: white;
-        pointer-events: none;
-        box-shadow: 0 0 5px #999999;
-        background-color: rgb(115, 114, 214);
-        display: inline-block; 
-    }
-
-    .svg-container {
-        display: inline-block;
-        position: relative;
-        width: 100%;
-        padding-bottom: 100%;
-        /* aspect ratio */
-        vertical-align: top;
-        overflow: hidden;
-    }
-
-    .svg-content-responsive {
-        display: inline-block;
-        position: absolute;
-        top: 10px;
-        left: 0;
-    }
-
-
-
-    /* 컬러 CSS를 스타일안에 미리 해놔야하는지 ..? */
-    .blue {
-        fill: #5abae6;
-    }
-
-    .red {
-        fill: #d34e4e;
-    }
-
-    .green {
-        fill: #9dbb19;
-    }
-
-    .yellow {
-        fill: #f7b358;
-    }
-</style>
 </head>
 
 <body>
 
     <div id="bargraph">
-        <div id='tooltip' style="opacity: 0;"></div>
+        <!-- <div id='tooltip' style="opacity: 0;" class="tooltip"></div> -->
     </div>
 
     <div id="bargraph2"></div>
-    <!-- <div id="bargraph3"></div> -->
-    <!-- <div id="bargraph4"></div> -->
-    <!-- <div id="bargraph5"></div> -->
+    <div id="bargraph3"></div>
+    <div id="bargraph4"></div>
+    <div id="bargraph5"></div>
+    <div id="area"></div>
     <div id="circle"></div>
-    <!-- <div id="barH"></div> -->
+    <div id="barH"></div>
     <div id="radar"></div>
     
     <script src='https://d3js.org/d3.v5.min.js'></script>
@@ -531,6 +446,72 @@
             },
         };
 
+        const config5 = {
+            type: 'area',
+            width: 500,
+            height: 500,
+            margin: { top: 40, left: 40, bottom: 40, right: 40 },
+            padding: 0.1,
+            data: data4,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',// top bottom left right
+                    },
+                    title: {
+                        display: true,
+                        text: 'Chart.js Area Chart'
+                    },
+                    xTitle: {
+                        display: true,
+                        text: 'y'
+                    },
+                    yTitle: {
+                        display: true,
+                        text: 'x'
+                    },
+
+                    yGrid: {
+                        display: true,
+                        color: "#323233", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
+                        dash: "10,3",     // 점선, 10만큼 칠하고 3만큼 빈공간
+                        weight: 1,        // 선 두께
+                        opacity: .5       // 선 투명도
+                    },
+
+                    menu: {
+                        // grid: true,
+                        xGrid: true,
+                        yGrid: true,
+
+                    }
+                },
+                scales: {
+                    xAxis : {
+                        type : "number",
+                        ticks:{
+
+                        }
+                    },    
+                    yAxis : {
+                        ticks:{
+
+                        }
+                    },
+                    line :{
+                        width : 10,
+                        opacity : .5
+                    },
+                    dot :{
+                        size : 0,
+                        opacity : 1,
+                        visible : true
+                    }
+                }
+            },
+        };
+
         const data6 = {
             labels: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
             datasets: [
@@ -612,6 +593,7 @@
         Chart.Chart('#bargraph3', config2);
         Chart.Chart('#bargraph4', config3);
         Chart.Chart('#bargraph5', config4);
+        Chart.Chart('#area', config5);
     </script>
 
     <br>

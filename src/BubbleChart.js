@@ -36,8 +36,6 @@ export class BubbleChart{
             .domain(r_domain).nice()
             .range([r_size_min, r_size_max]);
 
-        console.log(datasets);
-
         this.ChartBody = chart_area
             .append("g")
             .attr("class", "chartBody")

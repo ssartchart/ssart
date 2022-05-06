@@ -15,6 +15,7 @@ import { BubbleChart } from "./BubbleChart.js";
 import { CircleChart } from "./CircleChart.js";
 import { RadarChart } from "./RadarChart.js";
 import { LineChart } from "./LineChart.js";
+import { AreaChart } from "./AreaChart.js";
 
 function Chart(
   id,
@@ -170,6 +171,35 @@ function Chart(
     );
     function drawLineChart(chartData) {
       const chart = new LineChart({
+        id: oid,
+        chart_area,
+        labels,
+        datasets: chartData,
+        color,
+        width: chart_width,
+        height: chart_height,
+        margin,
+        padding,
+        scales,
+      });
+      chart.tooltip();
+      renderOptions();
+    }
+  }
+
+  if (type === "area") {
+    const datasets = Data_pre_processing(data.labels, data.datasets, "xy");
+    drawAreaChart(datasets);
+    createLegendToggle(
+      datasets,
+      legend_box?.legendList,
+      chart_area,
+      drawAreaChart,
+      {},
+      renderBackground
+    );
+    function drawAreaChart(chartData) {
+      const chart = new AreaChart({
         id: oid,
         chart_area,
         labels,
