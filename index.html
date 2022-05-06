@@ -349,6 +349,30 @@
                         { x: 6, y: 13, r: 20 },
                         { x: 7, y: 15, r: 50 },
                     ],
+                },
+                {
+                    label: 'Small Radius',
+                    data: [
+                        { x: 1, y: 15, r: 10 },
+                        { x: 2, y: 23, r: 20 },
+                        { x: 3, y: 25, r: 30 },
+                        { x: 4, y: 32, r: 30 },
+                        { x: 5, y: 29, r: 100 },
+                        { x: 6, y: 13, r: 20 },
+                        { x: 7, y: 15, r: 50 },
+                    ],
+                },
+                {
+                    label: 'Small Radius',
+                    data: [
+                        { x: 1, y: 15, r: 10 },
+                        { x: 2, y: 23, r: 20 },
+                        { x: 3, y: 25, r: 30 },
+                        { x: 4, y: 32, r: 30 },
+                        { x: 5, y: 29, r: 100 },
+                        { x: 6, y: 13, r: 20 },
+                        { x: 7, y: 15, r: 50 },
+                    ],
                 }
             ]
         };
@@ -364,11 +388,13 @@
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'left',// top bottom left right
+                        position: 'bottom',// top bottom left right
                     },
                     title: {
                         display: true,
-                        text: 'Chart.js bubble Chart'
+                        text: 'Chart.js bubble Chart',
+                        color: 'black',
+				        align: 'end' //start, end, center
                     },
                     xTitle: {
                         display: true,
@@ -390,6 +416,9 @@
                         weight: 1,        // 선 두께
                         opacity: .5,      // 선 투명도
                     },
+                    menu: {
+
+                    }
                 },
                 scales: {
                     xAxis: {

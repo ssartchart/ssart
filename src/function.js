@@ -246,7 +246,7 @@ function Chart(
     // chart.tooltip();
   }
   function renderOptions() {
-    if (options.plugins.title.display) {
+    if (options.plugins.title) {
       drawTitle(svg, options, width, chart_width, height, margin);      
     }
     // except circle
@@ -294,7 +294,7 @@ function Chart(
     }
 
     if (options.plugins.menu) {
-      menu(chart_width, margin, chart_area, options, id);
+      menu(chart_width, width, margin, svg, options, id);
     }
   }
 }

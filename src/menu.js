@@ -1,15 +1,19 @@
-export function menu(chart_width, margin, chart_area, options, id) {
+export function menu(chart_width, width, margin, chart_area, options, id) {
   const menuWidth = 30
   const menuHeight = 30
-  const menuX = chart_width - margin.right - menuWidth  
+  
+  let menuX = chart_width - margin.right - menuWidth  
+  if (options.plugins.legend.position && options.plugins.legend.position == "left"){
+    menuX = width - margin.right - menuWidth
+  }
   
   const chartMenu = chart_area
     .append('g')
     .attr('class', 'chartMenu')
-    .attr("transform", "translate(" + menuX + ",0)")
+    .attr("transform", "translate(" + menuX + "," + 0 + ")")
     .style('cursor', 'pointer')
     .style('width', menuWidth)
-    .style('height', 30);
+    .style('height', menuHeight);
 
   chartMenu
     .append('rect')
@@ -17,7 +21,7 @@ export function menu(chart_width, margin, chart_area, options, id) {
     .style('opacity', 0)
     .attr('x', 0)
     .attr('y', 0)
-    .attr('height', 30)
+    .attr('height', menuHeight)
     .attr('width', menuWidth)
     
   chartMenu
