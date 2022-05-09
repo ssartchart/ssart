@@ -11,6 +11,7 @@
      <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
      <!-- Core theme CSS (includes Bootstrap)-->
      <link href="/src/css/intro_styles.css" rel="stylesheet" />
+     <link href="/src/css/index.css" rel="stylesheet" />
 
      <script src='https://d3js.org/d3.v5.min.js'></script>
      
@@ -43,20 +44,21 @@
                         
                         <div class="container-fluid px-4">
                             <h1 class="mt-4">차트 시각화 </h1>
+                            <br>
                             <div class="row">
                                 <div class="col-md-6">
                                     
                                     <div class="card mb-4">
                                         <div class="card-body bg-primary text-white ">Bar chart</div>
                                          <p class="m-3"> 데이터 형식 예시</p>
-                                         차트 이름 <input class="form-control" id="chartTitle" type="text" placeholder=""  style="width: 90%; margin: 10px; margin-top: 5px;"/>
-                                         데이터 1 <input class="form-control" id="inputData1" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..."  style="width: 90%; margin: 10px; margin-top: 5px;"/>
-                                         데이터 2 <input class="form-control" id="inputData2" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
-                                         데이터 3 <input class="form-control" id="inputData3" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
-                                         config <input class="form-control" type="text" placeholder="해당 데이터의 라벨 ex) 데이터1, 데이터2, 데이터3 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp 차트 이름 <input class="form-control" id="chartTitle" type="text" placeholder=""  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp 데이터 1 <input class="form-control" id="inputData1" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..."  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp 데이터 2 <input class="form-control" id="inputData2" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp 데이터 3 <input class="form-control" id="inputData3" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp config <input class="form-control" type="text" placeholder="해당 데이터의 라벨 ex) 데이터1, 데이터2, 데이터3 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
                                          <div class="row">
                                             <div class="col-sm-4">
-                                                차트1 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
+                                                &nbsp&nbsp 차트1 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
                                                     <option>1</option>
                                                     <option>2</option>
                                                     <option>3</option>
@@ -65,7 +67,7 @@
                                                   </select>
                                             </div>
                                             <div class="col-sm-4">
-                                                차트2 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
+                                                &nbsp&nbsp 차트2 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
                                                     <option>1</option>
                                                     <option>2</option>
                                                     <option>3</option>
@@ -74,7 +76,7 @@
                                                   </select>
                                             </div>
                                             <div class="col-sm-4">
-                                                차트3 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
+                                                &nbsp&nbsp 차트3 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
                                                     <option>1</option>
                                                     <option>2</option>
                                                     <option>3</option>
@@ -88,26 +90,24 @@
                                          <br>
                                          
                                         <div class="card-footer d-flex align-items-center justify-content-between">
-                                            <button id="generateBar" type="button" class="btn btn-primary">생성</button>
-
+                                            <button id="generateBar1" type="button" class="btn btn-primary">생성</button>
                                             <script type="module">
                                                 
                                                 import * as Chart from './src/index.js';
 
-                                                const button = document.getElementById("generateBar");
+                                                const button = document.getElementById("generateBar1");
                                                 button.addEventListener('click', generate);
                                                 
                                                 function generate() {
+                                                    window.scrollTo(0,100);
+                                                    const chartResult = document.getElementById("result");
+                                                    chartResult.innerText = '';
                                                     Chart.Chart('#result', config);
-                                                    
                                                     console.log(data);
                                                     //data 갱신
 
                                                 }
                                             </script>
-
-                                            
-
                                             <div class="small "><i class="fas fa-angle-right"></i></div>
                                         </div>
                                     </div>
@@ -116,10 +116,60 @@
                                     <div class="card mb-4">
                                         <div class="card-body bg-primary text-white ">Bar Chart - 2</div>
                                          <p class="m-3"> 데이터 형식 : xxxx , xxxx, xxxx, xxxx,</p>
-                                         
+                                         &nbsp&nbsp 차트 이름 <input class="form-control" id="chartTitle" type="text" placeholder=""  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp 데이터 1 <input class="form-control" id="inputData1" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..."  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp 데이터 2 <input class="form-control" id="inputData2" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp 데이터 3 <input class="form-control" id="inputData3" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp config <input class="form-control" type="text" placeholder="해당 데이터의 라벨 ex) 데이터1, 데이터2, 데이터3 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         <div class="row">
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 차트1 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                  </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 차트2 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                  </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 차트3 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                  </select>
+                                            </div>
+                                         </div>
+                                         <br>
                                          
                                         <div class="card-footer d-flex align-items-center justify-content-between">
-                                            <a class="" href="#">생성</a>
+                                            <button id="generateBar2" type="button" class="btn btn-primary">생성</button>
+                                            <script type="module">
+                                                
+                                                import * as Chart from './src/index.js';
+
+                                                const button = document.getElementById("generateBar2");
+                                                button.addEventListener('click', generate);
+                                                
+                                                function generate() {
+                                                    window.scrollTo(0,100);
+                                                    const chartResult = document.getElementById("result");
+                                                    chartResult.innerText = '';
+                                                    Chart.Chart('#result', configH);
+                                                    console.log(data);
+
+                                                }
+                                            </script>
                                             <div class="small "><i class="fas fa-angle-right"></i></div>
                                         </div>
                                     </div>
@@ -127,11 +177,61 @@
 
                                     <div class="card mb-4">
                                         <div class="card-body bg-primary text-white ">Line Chart </div>
-                                         <p class="m-3"> 데이터 형식</p>
+                                         <p class="m-3"> Line 차트 데이터 형식</p>
+                                         &nbsp&nbsp 차트 이름 <input class="form-control" id="chartTitle" type="text" placeholder=""  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp 데이터 1 <input class="form-control" id="inputData1" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..."  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp 데이터 2 <input class="form-control" id="inputData2" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp 데이터 3 <input class="form-control" id="inputData3" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp config <input class="form-control" type="text" placeholder="해당 데이터의 라벨 ex) 데이터1, 데이터2, 데이터3 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         <div class="row">
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 차트1 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                  </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 차트2 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                  </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 차트3 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                  </select>
+                                            </div>
+                                         </div>
+                                         <br>
                                          
-                                         
-                                        <div class="card-footer d-flex align-items-center justify-content-between">
-                                            <a class="" href="#">생성</a>
+                                         <div class="card-footer d-flex align-items-center justify-content-between">
+                                            <button id="lineChart" type="button" class="btn btn-primary">생성</button>
+                                            <script type="module">
+                                                
+                                                import * as Chart from './src/index.js';
+
+                                                const button = document.getElementById("lineChart");
+                                                button.addEventListener('click', generate);
+                                                
+                                                function generate() {
+                                                    window.scrollTo(0,100);
+                                                    const chartResult = document.getElementById("result");
+                                                    chartResult.innerText = 'Line chart 생성 !';
+                                                    // Chart.Chart('#result', configH);
+                                                    console.log(data);
+
+                                                }
+                                            </script>
                                             <div class="small "><i class="fas fa-angle-right"></i></div>
                                         </div>
                                     </div>
@@ -139,11 +239,62 @@
 
                                     <div class="card mb-4">
                                         <div class="card-body bg-primary text-white ">Scatter Chart </div>
-                                         <p class="m-3"> 데이터 형식 : xxxx , xxxx, xxxx, xxxx,</p>
+                                         <p class="m-3"> Scatter chart 데이터 형식 </p>
+                                         &nbsp&nbsp 차트 이름 <input class="form-control" id="chartTitle" type="text" placeholder=""  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp 데이터 1 <input class="form-control" id="inputData1" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..."  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp 데이터 2 <input class="form-control" id="inputData2" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp 데이터 3 <input class="form-control" id="inputData3" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp config <input class="form-control" type="text" placeholder="해당 데이터의 라벨 ex) 데이터1, 데이터2, 데이터3 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         <div class="row">
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 차트1 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                  </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 차트2 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                  </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 차트3 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                  </select>
+                                            </div>
+                                         </div>
+                                         <br>
                                          
                                          
-                                        <div class="card-footer d-flex align-items-center justify-content-between">
-                                            <a class="small stretched-link" href="#">생성</a>
+                                         <div class="card-footer d-flex align-items-center justify-content-between">
+                                            <button id="scatterChart" type="button" class="btn btn-primary">생성</button>
+                                            <script type="module">
+                                                
+                                                import * as Chart from './src/index.js';
+
+                                                const button = document.getElementById("scatterChart");
+                                                button.addEventListener('click', generate);
+                                                
+                                                function generate() {
+                                                    window.scrollTo(0,100);
+                                                    const chartResult = document.getElementById("result");
+                                                    chartResult.innerText = 'scatter chart 생성 !';
+                                                    // Chart.Chart('#result', configH);
+                                                    console.log(data);
+
+                                                }
+                                            </script>
                                             <div class="small "><i class="fas fa-angle-right"></i></div>
                                         </div>
                                     </div>
@@ -151,11 +302,61 @@
 
                                     <div class="card mb-4">
                                         <div class="card-body bg-primary text-white ">Pie Chart</div>
-                                         <p class="m-3"> 데이터 형식 : xxxx , xxxx, xxxx, xxxx,</p>
+                                         <p class="m-3"> Pice chart 데이터 형식 </p>
+                                         &nbsp&nbsp 차트 이름 <input class="form-control" id="chartTitle" type="text" placeholder=""  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp 데이터 1 <input class="form-control" id="inputData1" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..."  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp 데이터 2 <input class="form-control" id="inputData2" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp 데이터 3 <input class="form-control" id="inputData3" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp config <input class="form-control" type="text" placeholder="해당 데이터의 라벨 ex) 데이터1, 데이터2, 데이터3 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         <div class="row">
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 차트1 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                  </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 차트2 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                  </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 차트3 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                  </select>
+                                            </div>
+                                         </div>
+                                         <br>
                                          
-                                         
-                                        <div class="card-footer d-flex align-items-center justify-content-between">
-                                            <a class="small stretched-link" href="#">생성</a>
+                                         <div class="card-footer d-flex align-items-center justify-content-between">
+                                            <button id="pieChart" type="button" class="btn btn-primary">생성</button>
+                                            <script type="module">
+                                                
+                                                import * as Chart from './src/index.js';
+
+                                                const button = document.getElementById("pieChart");
+                                                button.addEventListener('click', generate);
+                                                
+                                                function generate() {
+                                                    window.scrollTo(0,100);
+                                                    const chartResult = document.getElementById("result");
+                                                    chartResult.innerText = 'Pirce chart 생성 !';
+                                                    // Chart.Chart('#result', configH);
+                                                    console.log(data);
+
+                                                }
+                                            </script>
                                             <div class="small "><i class="fas fa-angle-right"></i></div>
                                         </div>
                                     </div>
@@ -163,11 +364,61 @@
 
                                     <div class="card mb-4">
                                         <div class="card-body bg-primary text-white ">Donut Chart</div>
-                                         <p class="m-3"> 데이터 형식 : xxxx , xxxx, xxxx, xxxx,</p>
+                                         <p class="m-3"> Donut Chart 데이터 형식</p>
+                                         &nbsp&nbsp 차트 이름 <input class="form-control" id="chartTitle" type="text" placeholder=""  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp 데이터 1 <input class="form-control" id="inputData1" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..."  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp 데이터 2 <input class="form-control" id="inputData2" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp 데이터 3 <input class="form-control" id="inputData3" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp config <input class="form-control" type="text" placeholder="해당 데이터의 라벨 ex) 데이터1, 데이터2, 데이터3 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         <div class="row">
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 차트1 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                  </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 차트2 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                  </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 차트3 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                  </select>
+                                            </div>
+                                         </div>
+                                         <br>
                                          
-                                         
-                                        <div class="card-footer d-flex align-items-center justify-content-between">
-                                            <a class="small stretched-link" href="#">생성</a>
+                                         <div class="card-footer d-flex align-items-center justify-content-between">
+                                            <button id="donutChart" type="button" class="btn btn-primary">생성</button>
+                                            <script type="module">
+                                                
+                                                import * as Chart from './src/index.js';
+
+                                                const button = document.getElementById("donutChart");
+                                                button.addEventListener('click', generate);
+                                                
+                                                function generate() {
+                                                    window.scrollTo(0,100);
+                                                    const chartResult = document.getElementById("result");
+                                                    chartResult.innerText = 'donut Chart 생성 !';
+                                                    // Chart.Chart('#result', configH);
+                                                    console.log(data);
+
+                                                }
+                                            </script>
                                             <div class="small "><i class="fas fa-angle-right"></i></div>
                                         </div>
                                     </div>
@@ -175,11 +426,62 @@
 
                                     <div class="card mb-4">
                                         <div class="card-body bg-primary text-white ">Radar Chart</div>
-                                         <p class="m-3"> 데이터 형식 : xxxx , xxxx, xxxx, xxxx,</p>
+                                         <p class="m-3"> Radar Chart 데이터 형식</p>
+                                         &nbsp&nbsp 차트 이름 <input class="form-control" id="chartTitle" type="text" placeholder=""  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp 데이터 1 <input class="form-control" id="inputData1" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..."  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp 데이터 2 <input class="form-control" id="inputData2" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp 데이터 3 <input class="form-control" id="inputData3" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp config <input class="form-control" type="text" placeholder="해당 데이터의 라벨 ex) 데이터1, 데이터2, 데이터3 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         <div class="row">
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 차트1 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                  </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 차트2 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                  </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 차트3 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                  </select>
+                                            </div>
+                                         </div>
+                                         <br>
+
                                          
-                                         
-                                        <div class="card-footer d-flex align-items-center justify-content-between">
-                                            <a class="small stretched-link" href="#">생성</a>
+                                         <div class="card-footer d-flex align-items-center justify-content-between">
+                                            <button id="radarChart" type="button" class="btn btn-primary">생성</button>
+                                            <script type="module">
+                                                
+                                                import * as Chart from './src/index.js';
+
+                                                const button = document.getElementById("radarChart");
+                                                button.addEventListener('click', generate);
+                                                
+                                                function generate() {
+                                                    window.scrollTo(0,100);
+                                                    const chartResult = document.getElementById("result");
+                                                    chartResult.innerText = 'radar Chart 생성 !';
+                                                    // Chart.Chart('#result', configH);
+                                                    console.log(data);
+
+                                                }
+                                            </script>
                                             <div class="small "><i class="fas fa-angle-right"></i></div>
                                         </div>
                                     </div>
@@ -195,10 +497,6 @@
                                         </div>
                                         <div id="result" class="card-body">
                                             차트 화면 결과 출력
-                                            <div id="chartResult">
-                                               
-
-                                            </div>
                                         </div>
                                     </div>
                                     
@@ -216,6 +514,7 @@
             </div>
 
             <script>
+                //bar data
                 const data = {
 labels: ['a', 'b', 'c', 'd', 'e', 'f'],
 datasets: [
@@ -332,6 +631,80 @@ fillopacity : 0.5
 
 
 
+            </script>
+            <script>
+                //barH data
+                const dataH = {
+                    labels: ['a', 'b', 'c', 'd', 'e'],
+                    datasets: [
+                        {
+                            label: '1번 막대 label',
+                            data: [
+                                { name: 'a', value: 100 },
+                                { name: 'b', value: 290 },
+                                { name: 'c', value: 650 },
+                                { name: 'd', value: 250 },
+                                { name: 'e', value: 350 },
+                            ],
+                            backgroundColor: "red",
+        
+                        },
+        
+                        {
+                            label: 'Small Radius',
+                            data: [100, 200, 320, 45]
+                            ,
+                            backgroundColor: "gold",
+                        },
+        
+                       
+                    ]
+                };
+        
+                const configH = {
+                    type: 'barH',
+                    width: 500,
+                    height: 500,
+                    margin: { top: 40, left: 40, bottom: 40, right: 40 },
+                    padding: 0.1,
+                    data: dataH,
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',// top bottom left right
+                            },
+                            title: {
+                                display: true,
+                                text: '가로막대 그래프'
+                            },
+                            xTitle: {
+                                display: true,
+                                text: 'name'
+                            },
+                            yTitle: {
+                                display: true,
+                                text: 'value'
+                            },
+                            xGrid: {
+                                color: "rgb(255, 0, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
+                                dash: "10,3",
+                                weight: 1,
+                                opacity: .5,
+                            },
+                            yGrid: {
+                                color: "#323233", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
+                                dash: "10,3",     // 점선, 10만큼 칠하고 3만큼 빈공간
+                                weight: 1,        // 선 두께
+                                opacity: .5,      // 선 투명도
+                            },
+        
+                        }
+                    },
+                    y_min: 0,
+                };
+        
+        
             </script>
 
             <!-- Footer-->
