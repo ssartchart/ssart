@@ -279,6 +279,7 @@ export function menu(chart_width, margin, svg, options, id) {
         // div 태그를 가져옴
         let divId = this.parentNode.parentNode.parentNode.getAttribute("id");
         console.log(divId);
+
         // 클릭시 메뉴 닫음.
         if (dropDown.property("visibility") === "hidden") {
           dropDown
