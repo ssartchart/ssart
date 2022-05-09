@@ -2,7 +2,7 @@ import { BarChart } from "./BarChart.js";
 import { BarHChart } from "./BarHChart.js";
 import { BarHClass } from "./BarHClass.js";
 // import {BarChart} from './BarChartfunction.js'
-import { xGrid, yGrid } from "./Axis_helper.js";
+import { axisOptions, xGrid, yGrid } from "./Axis_helper.js";
 import { LabelColor } from "./Color_helper.js";
 import { Data_pre_processing } from "./Dataset_helper.js";
 import { drawTitle, drawXTitle, drawYTitle } from "./Title.js";
@@ -332,6 +332,10 @@ function Chart(
         }
       }
     }
+    if (options.plugins.axis) {
+      axisOptions(chart_area, options)
+    }
+
     if (options.plugins.xGrid) {
       xGrid(
         chart_area,
