@@ -14,4 +14,4 @@ d3
 .append("div")
 .attr("id","tooltip")
 .attr("class","tooltip")
-.attr("opacity",0);
+.style("opacity",0);
