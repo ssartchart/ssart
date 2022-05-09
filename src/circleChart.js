@@ -1,10 +1,10 @@
 export class CircleChart {
-  constructor({ type, svg, width, height, margin, data, options }) {
+  constructor({ id, type, svg, width, height, margin, datasets, options }) {
     const nowWidth = width - margin.left - margin.right;
     const nowHeight = height - margin.top - margin.bottom;
-
+    
     let sum = 0;
-    data.datasets.forEach(function (currentElement) {
+    datasets.forEach(function (currentElement) {
       sum += currentElement.value;
       if (!currentElement.color) {
         currentElement.color =
@@ -40,13 +40,28 @@ export class CircleChart {
       pie.sort((a, b) => a.value - b.value).value((d) => d.value);
     }
 
-    const arcs = pie(data.datasets);
-
+    const arcs = pie(datasets);
+    const position = options.plugins.legend.position;
+    let xPos, yPos;
+    if (position === "top") {
+      xPos = width / 2
+      yPos = height - nowHeight + height / 2
+    } else if (position === "bottom") {
+      xPos = width / 2
+      yPos = height / 2
+    } else if (position === "left") {
+      xPos = width - nowWidth + (nowWidth / 2) + nowWidth / datasets.length
+      yPos = height / 2
+    } else if (position === "right") {
+      xPos = width - nowWidth + (nowWidth / 2) - nowWidth / datasets.length
+      yPos = height / 2
+    }
     // g 추가
     const g = svg
       .append("g")
+      .attr("class", 'chartBody')
       // 중앙에 차트 그리기
-      .attr("transform", `translate(${width / 2}, ${height / 2})`);
+      .attr("transform", `translate(${xPos}, ${yPos})`);
     // 색상 랜덤
 
     // 툴팁 추가
@@ -106,41 +121,41 @@ export class CircleChart {
         .attr("class", "value")
         .text((d) => d.value);
     }
-    const l = svg
-      .append("g")
-      .attr("class", "chart-legend")
-      .attr("transform", `translate(0,${height - 20})`);
+    // const l = svg
+    //   .append("g")
+    //   .attr("class", "chart-legend")
+    //   .attr("transform", `translate(0,${height - 20})`);
 
-    const xl = d3
-      .scaleBand()
-      .range([0, width])
-      .padding(0.3)
-      .domain(data.datasets.map((d) => d.name));
+    // const xl = d3
+    //   .scaleBand()
+    //   .range([0, width])
+    //   .padding(0.3)
+    //   .domain(data.datasets.map((d) => d.name));
 
-    const legend = l
-      .selectAll(".chart-legend")
-      .data(data.datasets)
-      .enter()
-      .append("g")
-      .attr("class", (d, i) => `chart-legend-${i}`)
-      .attr("transform", (d, i) => `translate(${xl(d.name)},0)`);
-    legend
-      .append("rect")
-      .attr("width", 12)
-      .attr("height", 12)
-      .style("fill", (d) => d.color);
+    // const legend = l
+    //   .selectAll(".chart-legend")
+    //   .data(data.datasets)
+    //   .enter()
+    //   .append("g")
+    //   .attr("class", (d, i) => `chart-legend-${i}`)
+    //   .attr("transform", (d, i) => `translate(${xl(d.name)},0)`);
+    // legend
+    //   .append("rect")
+    //   .attr("width", 12)
+    //   .attr("height", 12)
+    //   .style("fill", (d) => d.color);
 
-    legend
-      .append("text")
-      .attr("x", 30)
-      .attr("y", 10)
-      .style("font-size", 10)
-      .style("padding", 10)
-      // attr("text-anchor", "middle")
-      //   .style("font-size", "12px sans-serif")
-      .text((d) => d.name);
+    // legend
+    //   .append("text")
+    //   .attr("x", 30)
+    //   .attr("y", 10)
+    //   .style("font-size", 10)
+    //   .style("padding", 10)
+    //   // attr("text-anchor", "middle")
+    //   //   .style("font-size", "12px sans-serif")
+    //   .text((d) => d.name);
 
-    svg.node();
+    // svg.node();
   }
 
   mouseover() {
