@@ -98,7 +98,6 @@
 <body>
 
     <div id="bargraph">
-<<<<<<< HEAD
         <!-- <div id='tooltip' style="opacity: 0;" class="tooltip"></div> -->
     </div>
 
@@ -111,7 +110,6 @@
     <div id="barH"></div>
     <div id="radar"></div>
     
-=======
         <div id='tooltip'></div>
     </div>
 
@@ -123,8 +121,6 @@
     <div id="bargraph5"></div>
     <div id="circle">
     </div>
-
->>>>>>> 9c5e9ed261d153376bc45fee7e3b11d08f0a8089
     <script src='https://d3js.org/d3.v5.min.js'></script>
 
     <script>
@@ -190,7 +186,7 @@
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'right',// top bottom left right
+                        position: 'bottom',// top bottom left right
                         fontSize: '10px',
                         fontWeight: 'normal',
                         fontFamily: 'comic sans ms',
@@ -297,7 +293,7 @@
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'left',// top bottom left right
+                        position: 'right',// top bottom left right
                     },
                     title: {
                         display: true,
@@ -365,6 +361,30 @@
                         { x: 6, y: 13, r: 20 },
                         { x: 7, y: 15, r: 50 },
                     ],
+                },
+                {
+                    label: 'Small Radius',
+                    data: [
+                        { x: 1, y: 15, r: 10 },
+                        { x: 2, y: 23, r: 20 },
+                        { x: 3, y: 25, r: 30 },
+                        { x: 4, y: 32, r: 30 },
+                        { x: 5, y: 29, r: 100 },
+                        { x: 6, y: 13, r: 20 },
+                        { x: 7, y: 15, r: 50 },
+                    ],
+                },
+                {
+                    label: 'Small Radius',
+                    data: [
+                        { x: 1, y: 15, r: 10 },
+                        { x: 2, y: 23, r: 20 },
+                        { x: 3, y: 25, r: 30 },
+                        { x: 4, y: 32, r: 30 },
+                        { x: 5, y: 29, r: 100 },
+                        { x: 6, y: 13, r: 20 },
+                        { x: 7, y: 15, r: 50 },
+                    ],
                 }
             ]
         };
@@ -380,19 +400,28 @@
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'top',// top bottom left right
+                        position: 'bottom',// top bottom left right
                     },
                     title: {
                         display: true,
-                        text: 'Chart.js bubble Chart'
+                        text: 'Chart.js bubble Chart',
+                        color: 'rgba(100, 150, 0, .5)',
+				        align: 'end' //start, end, center
                     },
                     xTitle: {
                         display: true,
-                        text: 'x'
+                        text: 'x213123123',
+                        size: "20px",
+                        // color: 'rgba(100, 150, 0, .5)',
+				        align: 'start' //start, end, center
                     },
                     yTitle: {
                         display: true,
-                        text: 'y'
+                        text: 'y423423432',
+                        rotate: true,
+                        position: 'left',
+                        color: 'rgba(100, 150, 0, 1)',
+				        align: 'bottom' //top, bottom, center
                     },
                     xGrid: {
                         color: "rgb(255, 0, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
@@ -406,6 +435,9 @@
                         weight: 1,        // 선 두께
                         opacity: .5,      // 선 투명도
                     },
+                    menu: {
+
+                    }
                 },
                 scales: {
                     xAxis: {

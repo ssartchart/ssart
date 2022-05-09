@@ -1,15 +1,19 @@
-export function menu(chart_width, margin, svg, options, id) {
+export function menu(chart_width, width, margin, chart_area, options, id) {
   const menuWidth = 30
   const menuHeight = 30
-  const menuX = chart_width - margin.right - menuWidth
   
-  const chartMenu = svg
+  let menuX = chart_width - margin.right - menuWidth  
+  if (options.plugins.legend.position && options.plugins.legend.position == "left"){
+    menuX = width - margin.right - menuWidth
+  }
+  
+  const chartMenu = chart_area
     .append('g')
     .attr('class', 'chartMenu')
-    .attr("transform", "translate(" + menuX + ",0)")
+    .attr("transform", "translate(" + menuX + "," + 0 + ")")
     .style('cursor', 'pointer')
     .style('width', menuWidth)
-    .style('height', 30);
+    .style('height', menuHeight);
 
   chartMenu
     .append('rect')
@@ -17,7 +21,7 @@ export function menu(chart_width, margin, svg, options, id) {
     .style('opacity', 0)
     .attr('x', 0)
     .attr('y', 0)
-    .attr('height', 30)
+    .attr('height', menuHeight)
     .attr('width', menuWidth)
     
   chartMenu
@@ -60,7 +64,7 @@ export function menu(chart_width, margin, svg, options, id) {
   const dropDownWidth = 100
   const dropDownX = chart_width - margin.right - dropDownWidth
 
-  const dropDown = svg
+  const dropDown = chart_area
     .append('g')
     .attr('class', 'dropDown')
     .attr("transform", "translate(" + dropDownX + "," + margin.top + ")")
@@ -83,8 +87,8 @@ export function menu(chart_width, margin, svg, options, id) {
     .style('stroke', 'black')
     .style('stroke-width', '2')
   
-  const yGridGroup = svg.select("g.yAxis")
-  const xGridGroup = svg.select("g.xAxis")
+  const yGridGroup = chart_area.select("g.yAxis")
+  const xGridGroup = chart_area.select("g.xAxis")
   
   const gridButton = dropDown
     .append('text')
@@ -241,7 +245,7 @@ export function menu(chart_width, margin, svg, options, id) {
 
     dropDownIndex += 1
 
-    const chartBackground = svg.select(".chartBackground rect")
+    const chartBackground = chart_area.select(".chartBackground rect")
     // console.log(chart_area)
     // console.log(chartBackground)
     let color = "#f1f3f5"
@@ -296,7 +300,4 @@ export function menu(chart_width, margin, svg, options, id) {
         .property("visibility", "hidden")
     }
   })
-  console.log(svg.node().getBBox().width)
-  chartMenu.attr("transform", `translate(${options.plugins.legend.position === "right" ? svg.node().getBBox().width - dropDown.node().getBBox().width : svg.node().getBBox().width}, 0)`)
-  dropDown.attr("transform", `translate(${options.plugins.legend.position === "right" ? svg.node().getBBox().width - dropDown.node().getBBox().width: svg.node().getBBox().width - dropDown.node().getBBox().width}, ${menuHeight})`)
 }
