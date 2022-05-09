@@ -2,7 +2,7 @@ import {Axis_Option, Set_Axis} from './Axis_helper.js';
 
 export class BarChart{
     constructor({id,chart_area,labels,datasets,color,width,height,margin,padding,scales}){
-        
+        console.log(datasets)
         // chart_area.selectAll('*').remove();
         chart_area.selectAll('.chartBody').remove();
         chart_area.selectAll('.xAxis').remove();
@@ -61,7 +61,17 @@ export class BarChart{
             .style("fill-opacity", fillopacity)
             .attr("y", d=>{ return this.y(d.value); })
             .attr("height", d=>{ return this.y(this.y_min) - this.y(d.value); })
-            
+
+        let rectItem;
+        for (let i = 0; i < datasets.length; i++) {
+            const { backgroundColor, borderColor, borderWidth, borderRadius } = datasets[i];
+            rectItem = d3.selectAll(`#${id}-chart-legend-${i} rect`);
+            rectItem.attr("stroke", borderColor)
+            rectItem.attr("stroke-width", borderWidth)
+            rectItem.attr("rx", borderRadius)
+            rectItem.attr("ry", borderRadius)
+            rectItem.attr("fill", backgroundColor)
+        }
 
         chart_area.node();
             
