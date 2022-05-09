@@ -7,7 +7,7 @@ import { LabelColor } from "./Color_helper.js";
 import { Data_pre_processing } from "./Dataset_helper.js";
 import { drawTitle, drawXTitle, drawYTitle } from "./Title.js";
 import { checkMargin } from "./checkMargin.js";
-import { createLegendToggle, drawLegend } from "./legend.js";
+import { createCircleChartLegend, createLegendToggle, drawLegend } from "./legend.js";
 import { menu } from "./menu.js";
 import { background } from "./background.js";
 import { ScatterChart } from "./ScatterChart.js";
@@ -39,19 +39,25 @@ function Chart(
     .append("g")
     .style("width", width - 100)
     .style("height", height - 100);
-
-  const legend_box = drawLegend(
-    oid,
-    svg,
-    labelcolor,
-    width,
-    height,
-    chart_area,
-    legend,
-    margin,
-    data.datasets
-  );
-
+    
+  let legend_box = {
+    width: width,
+    height: height,
+  }
+  if (options.plugins?.legend) {
+    legend_box = drawLegend(
+      oid,
+      svg,
+      labelcolor,
+      width,
+      height,
+      chart_area,
+      legend,
+      margin,
+      data.datasets,
+      type
+    );
+  }
   const scales = options.scales;
   const chart_width = width - legend_box.width;
   const chart_height = height - legend_box.height;
@@ -256,16 +262,32 @@ function Chart(
   }
 
   if (type === "donut" || type === "pie") {
-    const chart = new CircleChart({
-      type,
-      svg,
-      width,
-      height,
-      margin,
-      data,
-      options,
-    });
-    renderOptions();
+    drawCicleChart(data.datasets);
+    for (let i = 0; i < data.datasets.length; i++) {
+      const item = d3.select(`${id}-legend-${i} rect`);
+      item.attr("fill", data.datasets[i].color);
+    }
+    createCircleChartLegend(
+      id,
+      data.datasets,
+      legend_box?.legendList,
+      drawCicleChart,
+      {},
+      renderBackground,
+    );
+    function drawCicleChart(chartData) {      
+      const chart = new CircleChart({
+        id: oid,
+        type,
+        svg,
+        width: chart_width,
+        height: chart_height,
+        margin,
+        datasets: chartData,
+        options,
+      });
+      renderOptions();
+    }
   }
   if (type === "radar" ) {
     const chart = new RadarChart({
@@ -284,7 +306,7 @@ function Chart(
   }
   function renderOptions() {
     if (options.plugins.title.display) {
-      drawTitle(svg, options.plugins.title.text, chart_width, height, margin);
+      drawTitle(svg, options.plugins.title.text, width, height, margin);
     }
     // except circle
     if (type != "donut" && type != "pie") {

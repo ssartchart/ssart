@@ -1,12 +1,17 @@
-export function drawLegend(id, svg, labels, width, height, chartContainer, legendData, margin) {    
+export function drawLegend(id, svg, labels, width, height, chartContainer, legendData, margin, datasets, type) {    
   let { position = "left", fontSize = 12, fontFamily = "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif", fontWeight = "normal", legendType = "rect" } = legendData;
   if (typeof fontSize !== "number") {
     if (fontSize?.includes("px")) {
       fontSize = fontSize.slice(0, fontSize.length - 2)
     }
   }
-  const legendList = [];
-  const labelsColor = labels.color
+  const legendList = [];  
+  let labelsColor = labels.color
+  if (type === "donut" || type === "pie") {
+    for (let i = 0; i < datasets.length; i++) {
+      labels.label[i] = datasets[i].name
+    }
+  }  
   labels = labels.label;  
   // top || bottom
   if (position === "top" || position === "bottom") {    
@@ -37,9 +42,10 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
         .attr('fill', (d, i) => labelsColor(i))    
       legend
         .append("text")
-        .attr("class", "legend-text")
-        .attr("x", fontSize / 5 * 10)
+        .attr("class", "legend-text")        
+        .attr("x", (d, i) => d3.select(`#${id}-legend-${i}`).node().getBoundingClientRect().width + fontSize / 2)
         .attr("y", 0)
+        .attr("text-anchor", "start" )
         .attr("font-size", fontSize)
         .attr("font-family", fontFamily)
         .style("font-weight", fontWeight)
@@ -60,8 +66,9 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
         .attr("class", "legend-text")
         .attr("font-size", fontSize)
         .attr("font-family", fontFamily)
-        .attr("x", fontSize / 3 * 10)
+        .attr("x", (d, i) => d3.select(`#${id}-legend-${i}`).node().getBoundingClientRect().width + fontSize / 2)
         .attr("y", 0)
+        .attr("text-anchor", "start" )
         // auto | baseline | before-edge | text-before-edge | middle | central | after-edge | text-after-edge | ideographic | alphabetic | hanging | mathematical | top | center | bottom
         .attr("alignment-baseline", "text-before-edge")   // 사각형 레전드일 때 설정
         .text(d => d);  
@@ -185,8 +192,9 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
       legend
         .append("text")
         .attr("class", "legend-text")
-        .attr("x", fontSize / 5 * 10)
+        .attr("x", (d, i) => d3.select(`#${id}-legend-${i}`).node().getBoundingClientRect().width + fontSize / 2)
         .attr("y", 9)
+        .attr("text-anchor", "start" )
         .attr("font-size", fontSize)
         .attr("font-family", fontFamily)
         .style('font-weight', fontWeight)
@@ -204,13 +212,14 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
       
       legend
         .append("text")
-        .attr("class", "legend-text")
+        .attr("id", (d, i) => `${id}-legend-text-${i}`)
         .attr("font-size", fontSize)
         .attr("font-family", fontFamily)
-        .attr("x", fontSize / 3 * 10)
+        .attr("x", (d, i) => d3.select(`#${id}-legend-${i}`).node().getBoundingClientRect().width + fontSize / 2)
         .attr("y", 1)
-        .attr("alignment-baseline", "text-before-edge")   // 사각형 레전드일 때 설정        
-        .text(d => d);  
+        .attr("text-anchor", "start" )
+        .attr("alignment-baseline", "text-before-edge")   // 사각형 레전드일 때 설정
+        .text(d => d)
     }
     
     let colGroup = [];
@@ -305,8 +314,8 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, legen
         groupItem.attr("transform", `translate(0, ${startYPos})`)  
       }
       
-      svg.select(`#${id}-legend`).attr("transform", `translate(${-svg.select(`#${id}-legend`).node().getBBox().width}, ${0})`);      
-    }
+      d3.select(`#${id}-legend`).attr("transform", `translate(${-svg.select(`#${id}-legend`).node().getBoundingClientRect().width}, ${0})`);      
+    }   
     return {width : svg.select(`#${id}-legend`).node().getBBox().width,
     height : 0, legendList};
   }
@@ -341,6 +350,43 @@ export function createLegendToggle(datasets, items, chartArea, makeChart, remove
         datasets.push(dataList[j])          
       }
       chartArea.selectAll('*').remove();      
+      renderBackgroundColor();
+      makeChart(datasets);
+    })
+  })
+}
+
+export function createCircleChartLegend(id, datasets, legendItems, makeChart, removedSet, renderBackgroundColor) {  
+  const dataList = {};
+  for (let i = 0; i < legendItems.length; i++) {
+    dataList[i] = datasets[i]
+  };
+  legendItems.forEach(item => {    
+    const toggleItem = d3.select(`#${item.id}`)
+    const tid = toggleItem.node().id
+    toggleItem.on("click", () => {      
+      d3.selectAll(`${id} .chartBody`).remove();
+      d3.selectAll(`${id} > svg > text`).remove();
+      d3.selectAll(`${id} > div`).remove();
+      
+      const idx = tid[tid.length - 1]
+      if (removedSet[idx] === undefined ) {
+        removedSet[idx] = true;
+      } else {
+        removedSet[idx] = undefined;
+      }      
+      d3.select(`#${toggleItem.node().id} text`).attr("text-decoration", () => {
+        if (removedSet[idx] !== undefined) {
+          return "line-through"
+        } else {
+          return "none"
+        }
+      })
+      datasets = []
+      for (let j = 0; j < legendItems.length; j++) {
+        if (removedSet[j] !== undefined) continue;
+        datasets.push(dataList[j])          
+      }      
       renderBackgroundColor();
       makeChart(datasets);
     })
