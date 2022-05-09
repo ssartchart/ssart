@@ -7,7 +7,7 @@ import { LabelColor } from "./Color_helper.js";
 import { Data_pre_processing } from "./Dataset_helper.js";
 import { drawTitle, drawXTitle, drawYTitle } from "./Title.js";
 import { checkMargin } from "./checkMargin.js";
-import { createLegendToggle, drawLegend } from "./legend.js";
+import { createCircleChartLegend, createLegendToggle, drawLegend } from "./legend.js";
 import { menu } from "./menu.js";
 import { background } from "./background.js";
 import { ScatterChart } from "./ScatterChart.js";
@@ -15,6 +15,7 @@ import { BubbleChart } from "./BubbleChart.js";
 import { CircleChart } from "./CircleChart.js";
 import { RadarChart } from "./RadarChart.js";
 import { LineChart } from "./LineChart.js";
+import { AreaChart } from "./AreaChart.js";
 
 function Chart(
   id,
@@ -38,19 +39,25 @@ function Chart(
     .append("g")
     .style("width", width - 100)
     .style("height", height - 100);
-
-  const legend_box = drawLegend(
-    oid,
-    svg,
-    labelcolor,
-    width,
-    height,
-    chart_area,
-    legend,
-    margin,
-    data.datasets
-  );
-
+    
+  let legend_box = {
+    width: width,
+    height: height,
+  }
+  if (options.plugins?.legend) {
+    legend_box = drawLegend(
+      oid,
+      svg,
+      labelcolor,
+      width,
+      height,
+      chart_area,
+      legend,
+      margin,
+      data.datasets,
+      type
+    );
+  }
   const scales = options.scales;
   const chart_width = width - legend_box.width;
   const chart_height = height - legend_box.height;
@@ -124,6 +131,7 @@ function Chart(
         scales,
       });
       chart.tooltip();
+      chart.animation();
       renderOptions();
     }
   }
@@ -153,6 +161,7 @@ function Chart(
         scales,
       });
       chart.tooltip();
+      chart.animation();
       renderOptions();
     }
   }
@@ -182,6 +191,37 @@ function Chart(
         scales,
       });
       chart.tooltip();
+      chart.animation();
+      renderOptions();
+    }
+  }
+
+  if (type === "area") {
+    const datasets = Data_pre_processing(data.labels, data.datasets, "xy");
+    drawAreaChart(datasets);
+    createLegendToggle(
+      datasets,
+      legend_box?.legendList,
+      chart_area,
+      drawAreaChart,
+      {},
+      renderBackground
+    );
+    function drawAreaChart(chartData) {
+      const chart = new AreaChart({
+        id: oid,
+        chart_area,
+        labels,
+        datasets: chartData,
+        color,
+        width: chart_width,
+        height: chart_height,
+        margin,
+        padding,
+        scales,
+      });
+      chart.tooltip();
+      chart.animation();
       renderOptions();
     }
   }
@@ -222,16 +262,32 @@ function Chart(
   }
 
   if (type === "donut" || type === "pie") {
-    const chart = new CircleChart({
-      type,
-      svg,
-      width,
-      height,
-      margin,
-      data,
-      options,
-    });
-    renderOptions();
+    drawCicleChart(data.datasets);
+    for (let i = 0; i < data.datasets.length; i++) {
+      const item = d3.select(`${id}-legend-${i} rect`);
+      item.attr("fill", data.datasets[i].color);
+    }
+    createCircleChartLegend(
+      id,
+      data.datasets,
+      legend_box?.legendList,
+      drawCicleChart,
+      {},
+      renderBackground,
+    );
+    function drawCicleChart(chartData) {      
+      const chart = new CircleChart({
+        id: oid,
+        type,
+        svg,
+        width: chart_width,
+        height: chart_height,
+        margin,
+        datasets: chartData,
+        options,
+      });
+      renderOptions();
+    }
   }
   if (type === "radar" ) {
     const chart = new RadarChart({
@@ -399,65 +455,6 @@ function ChartH(
   if (options.plugins.menu) {
     menu(chart_width, width, margin, chart_area, options, id);
   }
-
-  //   if (options.plugins.xGrid) {
-  //     xGrid(chart_area,chart_height - margin.top - margin.bottom,options.plugins.xGrid);
-
-  //     svg
-  //         .append('rect')
-  //         .attr('x', width - 20)
-  //         .attr('y', margin.top)
-  //         .attr('height', 20)
-  //         .attr('width', 20)
-  //         .attr('id', id+"xGridHiddenButton")
-
-  //     const xGridHiddenButton = document.getElementById(id+"xGridHiddenButton")
-  //     xGridHiddenButton.innerText = id
-  //     xGridHiddenButton.addEventListener("click", xGridHidden)
-
-  //     svg
-  //         .append('rect')
-  //         .attr('fill', "steelblue")
-  //         .attr('x', width - 20)
-  //         .attr('y', margin.top + 30)
-  //         .attr('height', 20)
-  //         .attr('width', 20)
-  //         .attr('id', id+"xGridShowButton")
-
-  //     const xGridShowButton = document.getElementById(id+"xGridShowButton")
-  //     xGridShowButton.innerText = id
-  //     xGridShowButton.addEventListener("click", xGridShow)
-
-  // }
-
-  // if (options.plugins.yGrid) {
-  //     yGrid(chart_area,chart_width - margin.left - margin.right,options.plugins.yGrid);
-
-  //     svg
-  //         .append('rect')
-  //         .attr('x', width - 20)
-  //         .attr('y', margin.top + 60)
-  //         .attr('height', 20)
-  //         .attr('width', 20)
-  //         .attr('id', id+"yGridHiddenButton")
-
-  //     const yGridHiddenButton = document.getElementById(id+"yGridHiddenButton")
-  //     yGridHiddenButton.innerText = id
-  //     yGridHiddenButton.addEventListener("click", yGridHidden)
-
-  //     svg
-  //         .append('rect')
-  //         .attr('fill', "steelblue")
-  //         .attr('x', width - 20)
-  //         .attr('y', margin.top + 90)
-  //         .attr('height', 20)
-  //         .attr('width', 20)
-  //         .attr('id', id+"yGridShowButton")
-
-  //     const yGridShowButton = document.getElementById(id+"yGridShowButton")
-  //     yGridShowButton.innerText = id
-  //     yGridShowButton.addEventListener("click", yGridShow)
-  // }
 
   /*
     const Type = document.getElementsByTagName('rect'); // 타입으로 받아서 처리해야할것같아요

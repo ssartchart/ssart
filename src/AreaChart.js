@@ -1,6 +1,6 @@
 import {Axis_Option, Set_Axis} from './Axis_helper.js';
 
-export class LineChart{
+export class AreaChart{
     constructor({id,chart_area,labels,datasets,color,width,height,margin,padding,scales}){
 
         // chart_area.selectAll('*').remove();
@@ -37,6 +37,14 @@ export class LineChart{
             .x(d => this.x(d.x))
             .y(d => this.y(d.y));
 
+        const area = d3.area()
+            .defined(d => !isNaN(d.y))
+            .defined(d=>{return this.x(d.x)>= 0 && this.x(d.x) <= width - margin.left && this.y(d.y)>= 0 && this.y(d.y) <= height - margin.top;})
+            .x(d => this.x(d.x))
+            .y0(this.y(0))
+            .y1(d => this.y(d.y));
+
+
         this.ChartBody = chart_area
             .data(datasets)
             .append("g")
@@ -62,10 +70,23 @@ export class LineChart{
             .attr("fill", "none")
             .attr("stroke", (d)=>{return this.color(d[0].label_index)})
             .attr("stroke-width", line_width)
-            .attr("stroke-opacity", line_opacity)
+            .attr("stroke-opacity", 1)
             .attr("d", line)
 
         this.pathLength = this.path.node().getTotalLength();
+
+        this.area_path = this.slice
+            .append("path")    
+            .datum(datasets=>{
+                console.log(datasets.data);
+                return datasets.data;})
+            .attr("class","area")        
+            .attr("fill", (d)=>{return this.color(d[0].label_index)})
+            .attr("fill-opacity", 0.5)
+            .attr("stroke-width", 0)
+            .attr("stroke-opacity", 0)
+            .attr("pointer-events", "none")
+            .attr("d", area)
 
         this.slice.selectAll(".data")
             .data(datasets=>{return datasets.data;})
@@ -79,8 +100,11 @@ export class LineChart{
                 return "translate(" + this.x(d.x) + "," + this.y(d.y) + ")";
             })
             .attr("r", dot_size)
-            .style("fill",d=>{return this.color(d.label_index);})
+            .style("fill","white")
             .style("fill-opacity", dot_opacity)
+            .attr("stroke", (d)=>{return this.color(d.label_index)})
+            .attr("stroke-width", 0.2)
+            .attr("stroke-opacity", 1)
 
         chart_area.node();
         
@@ -98,7 +122,7 @@ export class LineChart{
                 const positionLeft =x;
                 const positionTop = y;
                 d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));
-                console.log("툴팁 확인 : line");
+                console.log("툴팁 확인 : area");
                 const value = d.x;
                 const name =  d.y;
                 const key = d3.rgb(color(d.label_index));
@@ -113,7 +137,7 @@ export class LineChart{
                 tooltop.style.opacity = "1.0";
             })
             .on("mouseout", function(d){ 
-                d3.select(this).style("fill", color(d.label_index));
+                d3.select(this).style("fill", "white");
                 tooltop.style.opacity = "0";
             });
     }
@@ -128,7 +152,13 @@ export class LineChart{
         this.path
         .attr("stroke-dashoffset", this.pathLength)
         .attr("stroke-dasharray", this.pathLength)
-        .transition(transitionPath)     
+        .transition(transitionPath)
         .attr("stroke-dashoffset", 0);
+
+        this.area_path
+        .attr("fill-opacity", 0)
+        .transition(transitionPath)
+        .attr("fill-opacity", 0.5)
+        
     }
 }

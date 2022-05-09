@@ -27,8 +27,7 @@ export class ScatterChart{
         this.y_min = y_min;
         this.x = Axis.x;
         this.y = Axis.y;
-        
-        console.log(datasets);
+        this.dot_size = dot_size;
 
         this.ChartBody = chart_area
             .append("g")
@@ -57,7 +56,7 @@ export class ScatterChart{
             .attr("transform", (d)=>{
                 return "translate(" + this.x(d.x) + "," + this.y(d.y) + ")";
             })
-            .attr("r", dot_size)
+            .attr("r", this.dot_size)
             .style("fill",d=>{return this.color(d.label_index);})
             .style("fill-opacity", dot_opacity)
             // .on("mouseover", onMouseOver)
@@ -97,6 +96,15 @@ export class ScatterChart{
                 d3.select(this).style("fill", color(d.label_index));
                 tooltop.style.opacity = "0";
             });
+    }
+
+    animation(delay=1000,duration=1000){
+        this.slice.selectAll(".data")
+            .attr("r", 0)
+            .transition()
+            .delay(d=>{return Math.random()*delay;})
+            .duration(duration)
+            .attr("r", d=>{ return this.dot_size; })
     }
 }
 
