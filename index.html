@@ -8,10 +8,11 @@
     <title>Document</title>
     <!-- <link rel="stylesheet" href="https://uicdn.toast.com/chart/latest/toastui-chart.min.css" /> -->
     <!-- <script src="https://uicdn.toast.com/chart/latest/toastui-chart.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- <script src="/src/html2canvas.js"></script> -->
     <link rel="stylesheet" href="src/css/index.css">
 
     <script src="src/RadarChart.js"></script>
-
 
 
     <link rel="icon" type="image/png" href="http://example.com/myicon.png">
@@ -96,22 +97,7 @@
 </head>
 
 <body>
-
     <div id="bargraph">
-<<<<<<< HEAD
-        <!-- <div id='tooltip' style="opacity: 0;" class="tooltip"></div> -->
-    </div>
-
-    <div id="bargraph2"></div>
-    <div id="bargraph3"></div>
-    <div id="bargraph4"></div>
-    <div id="bargraph5"></div>
-    <div id="area"></div>
-    <div id="circle"></div>
-    <div id="barH"></div>
-    <div id="radar"></div>
-    
-=======
         <div id='tooltip'></div>
     </div>
 
@@ -124,7 +110,6 @@
     <div id="circle">
     </div>
 
->>>>>>> 9c5e9ed261d153376bc45fee7e3b11d08f0a8089
     <script src='https://d3js.org/d3.v5.min.js'></script>
 
     <script>
@@ -585,25 +570,25 @@
                     }
                 },
                 scales: {
-                    xAxis : {
-                        type : "number",
-                        ticks:{
-
-                        }
-                    },    
-                    yAxis : {
-                        ticks:{
+                    xAxis: {
+                        type: "number",
+                        ticks: {
 
                         }
                     },
-                    line :{
-                        width : 10,
-                        opacity : .5
+                    yAxis: {
+                        ticks: {
+
+                        }
                     },
-                    dot :{
-                        size : 0,
-                        opacity : 1,
-                        visible : true
+                    line: {
+                        width: 10,
+                        opacity: .5
+                    },
+                    dot: {
+                        size: 0,
+                        opacity: 1,
+                        visible: true
                     }
                 }
             },
