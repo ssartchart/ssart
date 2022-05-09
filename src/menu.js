@@ -284,16 +284,46 @@ export function menu(chart_width, width, margin, chart_area, options, id) {
         .style('fill', '#aaaaaa')
     }
   }
-  dropDown
-    .style("visibility", "hidden")
-    .property("visibility", "hidden")
 
-  chartMenu.on("click", function(e) {
-    console.log(dropDown.property("visibility"))
-    if(dropDown.property("visibility")==="hidden") {
-      dropDown
-        .style("visibility", "visible")
-        .property("visibility", "visible")
+  if (options.plugins.menu.download) {
+    dropDownIndex += 1;
+    download
+      .attr("x", dropDownWidth - 8)
+      .attr("y", dropDownIndex * 25)
+      .text("Download")
+      .attr("text-anchor", "end")
+      .style("font-family", "sans-serif")
+      .style("cursor", "pointer")
+      .on("click", function (event) {
+        // div 태그를 가져옴
+        let divId = this.parentNode.parentNode.parentNode.getAttribute("id");
+        console.log(divId);
+
+        // 클릭시 메뉴 닫음.
+        if (dropDown.property("visibility") === "hidden") {
+          dropDown
+            .style("visibility", "visible")
+            .property("visibility", "visible");
+        } else {
+          dropDown
+            .style("visibility", "hidden")
+            .property("visibility", "hidden");
+        }
+
+        // 이미지 저장
+        saveSvgAsPng(
+          document.getElementById(divId).getElementsByTagName("svg")[0],
+          "ssart-chart"
+        );
+      });
+  }
+
+  dropDown.style("visibility", "hidden").property("visibility", "hidden");
+
+  chartMenu.on("click", function (e) {
+    console.log(dropDown.property("visibility"));
+    if (dropDown.property("visibility") === "hidden") {
+      dropDown.style("visibility", "visible").property("visibility", "visible");
     } else {
       dropDown
         .style("visibility", "hidden")
