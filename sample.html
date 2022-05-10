@@ -47,41 +47,65 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-6">
-                                    
+                                    <!-- barchart  -->
                                     <div class="card mb-4">
                                         <div class="card-body bg-primary text-white ">Bar chart</div>
                                          <p class="m-3"> 데이터 형식 예시</p>
-                                         &nbsp&nbsp 차트 이름 <input class="form-control" id="chartTitle" type="text" placeholder=""  style="width: 90%; margin: 10px; margin-top: 5px;"/>
-                                         &nbsp&nbsp 데이터 1 <input class="form-control" id="inputData1" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..."  style="width: 90%; margin: 10px; margin-top: 5px;"/>
-                                         &nbsp&nbsp 데이터 2 <input class="form-control" id="inputData2" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
-                                         &nbsp&nbsp 데이터 3 <input class="form-control" id="inputData3" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
-                                         &nbsp&nbsp config <input class="form-control" type="text" placeholder="해당 데이터의 라벨 ex) 데이터1, 데이터2, 데이터3 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp 차트 이름 <input class="form-control" id="barChartTitle" type="text" placeholder="예시 차트 이름"  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp 차트 Label <input class="form-control" id="barLabel" type="text" placeholder="해당 데이터별 라벨 ex) 데이터1, 데이터2, 데이터3" style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         <div class="row">
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp 데이터 1 <input class="form-control" id="barinputData1" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..."  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp&nbsp 데이터 1 라벨 <input class="form-control" id="barDataLabel1" type="text" placeholder="ex) 라벨1"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp 데이터 2 <input class="form-control" id="barinputData2" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp&nbsp 데이터 2 라벨 <input class="form-control" id="barDataLabel2" type="text" placeholder="ex) 라벨2"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp 데이터 3 <input class="form-control" id="barinputData3" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp&nbsp 데이터 3 라벨 <input class="form-control" id="barDataLabel3" type="text" placeholder="ex) 라벨3"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                        </div>
+                                         
                                          <div class="row">
                                             <div class="col-sm-4">
-                                                &nbsp&nbsp 차트1 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
+                                                &nbsp&nbsp 차트1 색깔  <select class="form-select" id="barColor1" style="margin: 3px; width: 95%;">
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
                                                   </select>
                                             </div>
                                             <div class="col-sm-4">
-                                                &nbsp&nbsp 차트2 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
+                                                &nbsp&nbsp 차트2 색깔  <select class="form-select" id="barColor2" style="margin: 3px; width: 95%;">
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
                                                   </select>
                                             </div>
                                             <div class="col-sm-4">
-                                                &nbsp&nbsp 차트3 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
+                                                &nbsp&nbsp 차트3 색깔  <select class="form-select" id="barColor3" style="margin: 3px; width: 95%;">
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
                                                   </select>
                                             </div>
                                          </div> <!-- select div row-->
@@ -102,9 +126,61 @@
                                                     window.scrollTo(0,100);
                                                     const chartResult = document.getElementById("result");
                                                     chartResult.innerText = '';
-                                                    Chart.Chart('#result', config);
-                                                    console.log(data);
+                                                    
+                                                    // console.log(data);
+
                                                     //data 갱신
+                                                    var chartName = document.getElementById("barChartTitle").value;
+                                                    var barData1 = document.getElementById("barinputData1").value;
+                                                    var barData2 = document.getElementById("barinputData2").value;
+                                                    var barData3 = document.getElementById("barinputData3").value;
+                                                    var barDataLabel1 = document.getElementById("barDataLabel1").value;
+                                                    var barDataLabel2 = document.getElementById("barDataLabel2").value;
+                                                    var barDataLabel3 = document.getElementById("barDataLabel3").value;
+                                                    var barLabel = document.getElementById("barLabel").value;
+                                                    var barColor1 = document.getElementById("barColor1").selectedIndex;
+                                                    var barColor2 = document.getElementById("barColor2").selectedIndex;
+                                                    var barColor3 = document.getElementById("barColor3").selectedIndex;
+                                                    var colorHex = ["#ff0000", "#ff3300", "#ffff00", "#00ff00", "#0000ff" ];
+                                                    config.options.plugins.title.text = chartName;
+                                                    
+                                                    if(barData1!=null && barData1!="") {
+                                                        var dataArray1 = barData1.replace(/ /g,"").split(",");
+                                                        data.datasets[0].data = dataArray1;
+                                                    }
+                                                    if(barDataLabel1!=null && barDataLabel1) {
+                                                        data.datasets[0].label = barDataLabel1;
+                                                    }
+
+                                                    if(barData2!=null && barData2!="") {
+                                                        var dataArray2 = barData2.replace(/ /g,"").split(",");
+                                                        data.datasets[1].data = dataArray2;
+                                                    }
+                                                    if(barDataLabel2!=null && barDataLabel2) {
+                                                        data.datasets[1].label = barDataLabel2;
+                                                    }
+
+                                                    if(barData3!=null && barData3!="") {
+                                                        var dataArray3 = barData3.replace(/ /g,"").split(",");
+                                                        data.datasets[2].data = dataArray3;
+                                                    }
+                                                    if(barDataLabel3!=null && barDataLabel3) {
+                                                        data.datasets[2].label = barDataLabel3;
+                                                    }
+
+                                                    if(barLabel!=null && barLabel!="") {
+                                                        var labelArray = barLabel.replace(/ /g,"").split(",");
+                                                        data.labels = labelArray;
+                                                    }
+                                                    console.log('==============================');
+                                                    console.log(colorHex);
+                                                    console.log(barColor1+", "+barColor2+" , "+barColor3);
+
+
+                                                    Chart.Chart('#result', config);
+
+
+
 
                                                 }
                                             </script>
@@ -113,6 +189,7 @@
                                     </div>
                                     <br>
 
+                                    <!-- barchart  -->
                                     <div class="card mb-4">
                                         <div class="card-body bg-primary text-white ">Bar Chart - 2</div>
                                          <p class="m-3"> 데이터 형식 : xxxx , xxxx, xxxx, xxxx,</p>
@@ -120,33 +197,33 @@
                                          &nbsp&nbsp 데이터 1 <input class="form-control" id="inputData1" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..."  style="width: 90%; margin: 10px; margin-top: 5px;"/>
                                          &nbsp&nbsp 데이터 2 <input class="form-control" id="inputData2" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
                                          &nbsp&nbsp 데이터 3 <input class="form-control" id="inputData3" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
-                                         &nbsp&nbsp config <input class="form-control" type="text" placeholder="해당 데이터의 라벨 ex) 데이터1, 데이터2, 데이터3 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp config <input class="form-control" type="text" placeholder="해당 데이터 라벨 ex) 데이터1, 데이터2, 데이터3 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
                                          <div class="row">
                                             <div class="col-sm-4">
                                                 &nbsp&nbsp 차트1 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
                                                   </select>
                                             </div>
                                             <div class="col-sm-4">
                                                 &nbsp&nbsp 차트2 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
                                                   </select>
                                             </div>
                                             <div class="col-sm-4">
                                                 &nbsp&nbsp 차트3 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
                                                   </select>
                                             </div>
                                          </div>
@@ -175,6 +252,7 @@
                                     </div>
                                     <br>
 
+                                    <!-- linechart  -->
                                     <div class="card mb-4">
                                         <div class="card-body bg-primary text-white ">Line Chart </div>
                                          <p class="m-3"> Line 차트 데이터 형식</p>
@@ -186,29 +264,29 @@
                                          <div class="row">
                                             <div class="col-sm-4">
                                                 &nbsp&nbsp 차트1 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
                                                   </select>
                                             </div>
                                             <div class="col-sm-4">
                                                 &nbsp&nbsp 차트2 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
                                                   </select>
                                             </div>
                                             <div class="col-sm-4">
                                                 &nbsp&nbsp 차트3 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
                                                   </select>
                                             </div>
                                          </div>
@@ -237,6 +315,7 @@
                                     </div>
                                     <br>
 
+                                    <!-- scatterchart  -->
                                     <div class="card mb-4">
                                         <div class="card-body bg-primary text-white ">Scatter Chart </div>
                                          <p class="m-3"> Scatter chart 데이터 형식 </p>
@@ -248,29 +327,29 @@
                                          <div class="row">
                                             <div class="col-sm-4">
                                                 &nbsp&nbsp 차트1 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
                                                   </select>
                                             </div>
                                             <div class="col-sm-4">
                                                 &nbsp&nbsp 차트2 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
                                                   </select>
                                             </div>
                                             <div class="col-sm-4">
                                                 &nbsp&nbsp 차트3 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
                                                   </select>
                                             </div>
                                          </div>
@@ -300,6 +379,7 @@
                                     </div>
                                     <br>
 
+                                    <!-- piechart  -->
                                     <div class="card mb-4">
                                         <div class="card-body bg-primary text-white ">Pie Chart</div>
                                          <p class="m-3"> Pice chart 데이터 형식 </p>
@@ -311,29 +391,29 @@
                                          <div class="row">
                                             <div class="col-sm-4">
                                                 &nbsp&nbsp 차트1 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
                                                   </select>
                                             </div>
                                             <div class="col-sm-4">
                                                 &nbsp&nbsp 차트2 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
                                                   </select>
                                             </div>
                                             <div class="col-sm-4">
                                                 &nbsp&nbsp 차트3 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
                                                   </select>
                                             </div>
                                          </div>
@@ -362,6 +442,7 @@
                                     </div>
                                     <br>
 
+                                    <!-- donutchart  -->
                                     <div class="card mb-4">
                                         <div class="card-body bg-primary text-white ">Donut Chart</div>
                                          <p class="m-3"> Donut Chart 데이터 형식</p>
@@ -373,29 +454,29 @@
                                          <div class="row">
                                             <div class="col-sm-4">
                                                 &nbsp&nbsp 차트1 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
                                                   </select>
                                             </div>
                                             <div class="col-sm-4">
                                                 &nbsp&nbsp 차트2 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
                                                   </select>
                                             </div>
                                             <div class="col-sm-4">
                                                 &nbsp&nbsp 차트3 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
                                                   </select>
                                             </div>
                                          </div>
@@ -424,6 +505,7 @@
                                     </div>
                                     <br>
 
+                                    <!-- radar chart  -->
                                     <div class="card mb-4">
                                         <div class="card-body bg-primary text-white ">Radar Chart</div>
                                          <p class="m-3"> Radar Chart 데이터 형식</p>
@@ -435,29 +517,29 @@
                                          <div class="row">
                                             <div class="col-sm-4">
                                                 &nbsp&nbsp 차트1 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
                                                   </select>
                                             </div>
                                             <div class="col-sm-4">
                                                 &nbsp&nbsp 차트2 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
                                                   </select>
                                             </div>
                                             <div class="col-sm-4">
                                                 &nbsp&nbsp 차트3 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
                                                   </select>
                                             </div>
                                          </div>
@@ -519,38 +601,22 @@
 labels: ['a', 'b', 'c', 'd', 'e', 'f'],
 datasets: [
 {
-label: 'Fully Rounded',
+label: '',
 data: [
-{ name: 'a', value: 10 },
-{ name: 'b', value: 29 },
-{ name: 'c', value: 32 },
-{ name: 'd', value: 25 },
-{ name: 'e', value: 23 },
-{ name: 'f', value: 15 }
+
 ],
 // backgroundColor: "red",
-
 },
 {
-label: 'Small Radius',
-data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-,
+label: '',
+data: [],
 // backgroundColor: "blue",
 },
 {
-label: 'Small Radius',
+label: '',
 data:
-[
-{ name: 'a', value: 15 },
-{ name: 'b', value: 23 },
-{ name: 'c', value: 25 },
-{ name: 'd', value: 32 },
-{ name: 'e', value: 29 },
-{ name: 'f', value: 12 },
-{ name: 'g', value: 15 },
-{ name: 'ㅎ', value: 1 },
-{ name: 't', value: 12 }
-],
+[],
+
 },
 // {
 //     label: 'Small Radius',
