@@ -1,13 +1,13 @@
 import {Axis_Option, Set_Axis} from './Axis_helper.js';
 
 export class BarChart{
-    constructor({id,chart_area,labels,datasets,color,width,height,margin,padding,scales}){
+    constructor({id,chart_area,labels,datasets,color,width,height,margin,padding,scales,position}){
         console.log(datasets)
         // chart_area.selectAll('*').remove();
         chart_area.selectAll('.chartBody').remove();
         chart_area.selectAll('.xAxis').remove();
         chart_area.selectAll('.yAxis').remove();
-
+        
         
         const axis_option = Axis_Option(labels,datasets,scales,1);
         const x_domain = axis_option.x_domain;
@@ -32,7 +32,6 @@ export class BarChart{
         chart_area
             .append("g")
             .attr("class", "chartBody")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
             .append("rect")
             .attr("x", 0)
             .attr("y", 0)
@@ -42,7 +41,19 @@ export class BarChart{
             .style("fill-opacity", .8)
             .attr("rx", 20)
             .attr("ry", 20)
-
+        
+            
+        let XPos, YPos;
+        if (position === "left") {            
+            XPos = d3.select(`#${id} svg`).node().getBoundingClientRect().width - chart_area.node().getBoundingClientRect().width
+            YPos = 0
+            chart_area
+                .attr("transform", `translate(${XPos}, ${YPos})`)
+        } else if (position === "top") {           
+            chart_area
+                .attr("transform", `translate(${0}, ${margin.top})`)
+        }
+            
         this.slice = chart_area.selectAll(".slice")
             .data(datasets)
             .enter().append("g")
