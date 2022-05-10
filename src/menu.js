@@ -3,7 +3,7 @@ export function menu(chart_width, width, margin, chart_area, options, id) {
   const menuHeight = 30
   
   let menuX = chart_width - margin.right - menuWidth  
-  if (options.plugins.legend.position && options.plugins.legend.position == "left"){
+  if (options.plugins.legend?.position && options.plugins.legend.position == "left"){
     menuX = width - margin.right - menuWidth
   }
   

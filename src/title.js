@@ -1,7 +1,7 @@
 // chart title
 function drawTitle(svg, options, width, chart_width, height, margin) {
   let xTitle = chart_width/2
-  if (options.plugins.legend.position && options.plugins.legend.position == "left"){
+  if (options.plugins.legend?.position && options.plugins.legend.position == "left"){
     xTitle = width - chart_width/2
   }
 
@@ -73,7 +73,6 @@ function drawXTitle(svg, options, width, height, margin) {
     .attr("text-anchor", "middle")
     .text(options.text);
 
-  console.log(options.size)
   if (options.size) {
     xTitle
       .style("font-size", options.size)
@@ -150,7 +149,7 @@ function drawYTitle(svg, options, width, height, margin) {
         .attr("text-anchor", "start")
     }
   }
-  console.log(options.rotate)
+  
   if (options.rotate) {
     yTitle
       .attr("writing-mode", "none")
