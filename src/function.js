@@ -2,7 +2,7 @@ import { BarChart } from "./BarChart.js";
 import { BarHChart } from "./BarHChart.js";
 import { BarHClass } from "./BarHClass.js";
 // import {BarChart} from './BarChartfunction.js'
-import { xGrid, yGrid } from "./Axis_helper.js";
+import { axisOptions, xGrid, yGrid } from "./Axis_helper.js";
 import { LabelColor, LabelsColor } from "./Color_helper.js";
 import { Data_pre_processing } from "./Dataset_helper.js";
 import { drawTitle, drawXTitle, drawYTitle } from "./Title.js";
@@ -82,15 +82,17 @@ function Chart(
   checkMargin(margin);
   renderBackground();
   function renderBackground() {
+    let backgroundOptions = {}
     if (options.plugins.background) {
-      background(
-        chart_area,
-        margin,
-        chart_width,
-        chart_height,
-        options.plugins.background
-      );
+      backgroundOptions = options.plugins.background
     }
+    background(
+      chart_area,
+      margin,
+      chart_width,
+      chart_height,
+      backgroundOptions
+    );
   }
   if (type === "bar") {
     let datasets = Data_pre_processing(data.labels, data.datasets, "namevalue");
@@ -363,6 +365,10 @@ function Chart(
         }
       }
     }
+    if (options.plugins.axis) {
+      axisOptions(chart_area, options)
+    }
+
     if (options.plugins.xGrid) {
       xGrid(
         chart_area,
