@@ -23,6 +23,7 @@ function Chart(
 ) {
   const legend = options.plugins.legend;
   const oid = id.slice(1, id.length);
+  d3.select(id).selectAll('*').remove();
   const svg = d3
     .select(id)
     .append("svg")
@@ -386,7 +387,8 @@ function Chart(
     }
 
     if (options.plugins.menu) {
-      menu(chart_width, width, margin, svg, options, id);
+      const param = {type, width, height, margin, padding, data, options, y_max, y_min, depth}
+      menu(chart_width, width, margin, svg, options, id, param);
     }
   }
 }
