@@ -1,19 +1,45 @@
 {
   "name": "ssart",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simply crate and use various charts ",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["chart", "svg", "opensource","d3"],
-  "authors": [
-    "Lee JungHun",
-    "Kim YoungJin",
-    "Jo wonbin",
-    "Jeong HaeYun",
-    "Ahn JaeYoung",
-    "Bae YongHan"
+  "bugs": {
+    "email": "hostname@hostname.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://lab.ssafy.com/s06-final/S06P31S201.git"
+  },
+  "homepage": "https://oursites.com",
+  "keywords": ["chart", "svg", "opensource","d3", "data" , "visualization"],
+  "contributors": [
+    {
+      "name":  "Lee JungHun",
+      "email": "your@email.com"
+    },
+    {
+      "name": "Kim YoungJin",
+      "email": "your@email.com"
+    },
+    {
+      "name":  "Jo wonbin",
+      "email": "your@email.com"
+    },
+    {
+      "name": "Jeong HaeYun",
+      "email": "your@email.com"
+    },
+    {
+      "name":  "Ahn JaeYoung",
+      "email": "your@email.com"
+    },
+    {
+      "name": "Bae YongHan",
+      "email": "your@email.com"
+    }
   ],
   "license": "MIT",
   "dependencies": {
