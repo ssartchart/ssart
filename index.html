@@ -559,8 +559,9 @@
         };
 
         const data6 = {
-            labels: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
-            datasets: [
+            labels: ['dd', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
+            datasets: [{    
+                data : [
                 { name: 'AAAA', value: 100, color: '#efa86b' },
                 { name: 'BBB', value: 1500, color: '#c1484f' },
                 // { name: 'C', value: 1300, color: '#d35d50' },
@@ -569,7 +570,11 @@
                 { name: 'E', value: 700, color: '#fae8a4' },
                 { name: 'F', value: 1200, color: '#df7454' },
                 { name: 'G', value: 1100, color: '#e88d5d' },
-                { name: 'H', value: 600, color: '#f8d690' }
+                { name: 'H', value: 600, color: '#f8d690' },
+                
+                
+                ]
+            }
                 
             ]
         };
@@ -584,7 +589,7 @@
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'top',// top bottom left right
+                        position: 'left',// top bottom left right
                     },
                     title: {
                         display: true,

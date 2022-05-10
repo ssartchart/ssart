@@ -30,6 +30,7 @@ function Chart(
     .style("height", height);
 
   console.log(`Hello, ${type}!`);
+  console.log(data.datasets);
 
   const labels = data.labels;
   const labelcolor = LabelColor(data.datasets);
@@ -280,12 +281,19 @@ function Chart(
   }
 
   if (type === "donut" || type === "pie") {
-    // console.log(datasets)
-    drawCicleChart(data.datasets);
-    for (let i = 0; i < data.datasets.length; i++) {
-      const item = d3.select(`${id}-legend-${i} rect`);
-      item.attr("fill", data.datasets[i].color);
-    }
+    
+    const datasets = Data_pre_processing(
+      data.labels,
+      data.datasets,
+      "namevaluedataone"
+    );
+    console.log(datasets)
+    console.log(data.datasets)
+    drawCicleChart(datasets);
+    // for (let i = 0; i < datasets.length; i++) {
+    //   const item = d3.select(`${id}-legend-${i} rect`);
+    //   item.attr("fill", datasets[i].color);
+    // }
     // createCircleChartLegend(
     //   id,
     //   data.datasets,
@@ -295,7 +303,7 @@ function Chart(
     //   renderBackground,
     // );
     createLegendToggle(
-      data.datasets,
+      datasets,
       legend_box?.legendList,
       chart_area,
       drawCicleChart,
@@ -307,7 +315,7 @@ function Chart(
         id: oid,
         type,
         chart_area,
-        color,
+        color: labelscolor.color,
         width: chart_width,
         height: chart_height,
         margin,

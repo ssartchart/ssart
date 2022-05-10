@@ -81,7 +81,7 @@ export class CircleChart {
       .attr("class", "data")
       .attr("fill", (d,index) => {
         // console.log(d.data.color)
-        return d.data.color
+        return color(d.data.label_index)
       })
       // .on("mouseover", this.mouseover.bind(this))
       // .on("mousemove", this.mousemove.bind(this))
@@ -194,8 +194,8 @@ export class CircleChart {
     const sum = this.sum;
     this.ChartBody.selectAll(".data")
     .on("mouseover", function(d,index){ 
-
-        d3.select(this).style("fill", d3.rgb(d.data.color).darker(2));
+        // console.log(d.data)
+        d3.select(this).style("fill", d3.rgb(color(d.data.label_index)).darker(2));
         console.log("툴팁 확인 : circle");
 
         tooltop.style.opacity = "1.0";
@@ -209,7 +209,7 @@ export class CircleChart {
       tooltop.style.top = d3.event.pageY + 20 + "px";
     })
     .on("mouseout", function(d,index){ 
-        d3.select(this).style("fill", d.data.color);
+        d3.select(this).style("fill", color(d.data.label_index));
         tooltop.style.opacity = "0";
     });
   }
