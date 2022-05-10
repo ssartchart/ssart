@@ -314,7 +314,7 @@ function Chart(
         datasets: chartData,
         options,
       });
-      circleChart.tooltip2();
+      circleChart.tooltip();
       renderOptions();
       
     }    
@@ -331,21 +331,18 @@ function Chart(
     });
     // chart.tooltip();
   }
-  if (options.plugins.menu) {
-    menu(chart_width, margin, svg, options, id);
-  }
   function renderOptions() {
-    if (options.plugins.title.display) {
-      drawTitle(chart_area, options.plugins.title.text, chart_width, chart_height, margin);
+    if (options.plugins.title) {
+      drawTitle(svg, options, width, chart_width, height, margin);      
     }
     // except circle
     if (type != "donut" && type != "pie") {
       if (options.plugins.xTitle) {
         // width, height 조정 필요
-        if (options.plugins.xTitle.display) {
+        if (options.plugins.xTitle) {
           drawXTitle(
             chart_area,
-            options.plugins.xTitle.text,
+            options.plugins.xTitle,
             chart_width,
             chart_height,
             margin
@@ -354,14 +351,13 @@ function Chart(
       }
       if (options.plugins.yTitle) {
         // width, height 조정 필요
-        if (options.plugins.yTitle.display) {
+        if (options.plugins.yTitle) {
           drawYTitle(
             chart_area,
-            options.plugins.yTitle.text,
+            options.plugins.yTitle,
             chart_width,
             chart_height,
             margin,
-            options.plugins.yTitle.position
           );
         }
       }
@@ -380,6 +376,10 @@ function Chart(
         chart_width - margin.left - margin.right,
         options.plugins.yGrid
       );
+    }
+
+    if (options.plugins.menu) {
+      menu(chart_width, width, margin, svg, options, id);
     }
   }
 }
@@ -483,67 +483,8 @@ function ChartH(
   }
 
   if (options.plugins.menu) {
-    menu(chart_width, margin, chart_area, options, id);
+    menu(chart_width, width, margin, chart_area, options, id);
   }
-
-  //   if (options.plugins.xGrid) {
-  //     xGrid(chart_area,chart_height - margin.top - margin.bottom,options.plugins.xGrid);
-
-  //     svg
-  //         .append('rect')
-  //         .attr('x', width - 20)
-  //         .attr('y', margin.top)
-  //         .attr('height', 20)
-  //         .attr('width', 20)
-  //         .attr('id', id+"xGridHiddenButton")
-
-  //     const xGridHiddenButton = document.getElementById(id+"xGridHiddenButton")
-  //     xGridHiddenButton.innerText = id
-  //     xGridHiddenButton.addEventListener("click", xGridHidden)
-
-  //     svg
-  //         .append('rect')
-  //         .attr('fill', "steelblue")
-  //         .attr('x', width - 20)
-  //         .attr('y', margin.top + 30)
-  //         .attr('height', 20)
-  //         .attr('width', 20)
-  //         .attr('id', id+"xGridShowButton")
-
-  //     const xGridShowButton = document.getElementById(id+"xGridShowButton")
-  //     xGridShowButton.innerText = id
-  //     xGridShowButton.addEventListener("click", xGridShow)
-
-  // }
-
-  // if (options.plugins.yGrid) {
-  //     yGrid(chart_area,chart_width - margin.left - margin.right,options.plugins.yGrid);
-
-  //     svg
-  //         .append('rect')
-  //         .attr('x', width - 20)
-  //         .attr('y', margin.top + 60)
-  //         .attr('height', 20)
-  //         .attr('width', 20)
-  //         .attr('id', id+"yGridHiddenButton")
-
-  //     const yGridHiddenButton = document.getElementById(id+"yGridHiddenButton")
-  //     yGridHiddenButton.innerText = id
-  //     yGridHiddenButton.addEventListener("click", yGridHidden)
-
-  //     svg
-  //         .append('rect')
-  //         .attr('fill', "steelblue")
-  //         .attr('x', width - 20)
-  //         .attr('y', margin.top + 90)
-  //         .attr('height', 20)
-  //         .attr('width', 20)
-  //         .attr('id', id+"yGridShowButton")
-
-  //     const yGridShowButton = document.getElementById(id+"yGridShowButton")
-  //     yGridShowButton.innerText = id
-  //     yGridShowButton.addEventListener("click", yGridShow)
-  // }
 
   /*
     const Type = document.getElementsByTagName('rect'); // 타입으로 받아서 처리해야할것같아요

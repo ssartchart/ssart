@@ -71,7 +71,7 @@ export class CircleChart {
     // 색상 랜덤
 
     // 툴팁 추가
-    this.tooltip = document.getElementById('tooltip');
+    // this.tooltip = document.getElementById('tooltip');
 
     //각각의 파이 그리기
     this.ChartBody.selectAll("path")
@@ -187,7 +187,7 @@ export class CircleChart {
   //   this.tooltip.style("display", "none");
   // }
 
-  tooltip2(){
+  tooltip(){
     console.log("22233");
     const tooltop = document.getElementById('tooltip');
     const color = this.color;
@@ -195,7 +195,7 @@ export class CircleChart {
     this.ChartBody.selectAll(".data")
     .on("mouseover", function(d,index){ 
 
-        d3.select(this).style("fill", d3.rgb(color(index)).darker(2));
+        d3.select(this).style("fill", d3.rgb(d.data.color).darker(2));
         console.log("툴팁 확인 : circle");
 
         tooltop.style.opacity = "1.0";
@@ -209,7 +209,7 @@ export class CircleChart {
       tooltop.style.top = d3.event.pageY + 20 + "px";
     })
     .on("mouseout", function(d,index){ 
-        d3.select(this).style("fill", color(index));
+        d3.select(this).style("fill", d.data.color);
         tooltop.style.opacity = "0";
     });
   }
