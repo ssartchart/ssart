@@ -64,15 +64,17 @@ function Chart(
   checkMargin(margin);
   renderBackground();
   function renderBackground() {
+    let backgroundOptions = {}
     if (options.plugins.background) {
-      background(
-        chart_area,
-        margin,
-        chart_width,
-        chart_height,
-        options.plugins.background
-      );
+      backgroundOptions = options.plugins.background
     }
+    background(
+      chart_area,
+      margin,
+      chart_width,
+      chart_height,
+      backgroundOptions
+    );
   }
   if (type === "bar") {
     let datasets = Data_pre_processing(data.labels, data.datasets, "namevalue");

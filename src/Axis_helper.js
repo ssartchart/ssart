@@ -246,6 +246,9 @@ export function yGrid (chart_area,length,options) {
         chart_area.selectAll("g.yAxis g.tick")
             .style("visibility", "hidden")
     }
+
+    // 맨 아래 x축과 겹치는 grid는 삭제
+    chart_area.select("g.yAxis g.tick line.gridline").remove()
 }
 
 
@@ -355,14 +358,9 @@ function xAxisOptions(chart_area, color, weight, opacity, dots) {
 
     if (dots.display===false) {
         xAxisDots
-            .style("stroke", "none")
+            .attr("stroke", "none")
+            .style("opacity", 0)
     }
-
-    xAxis.remove()
-    const recreatedXAxis = chart_area
-        .select("g.xAxis")
-        .append(function() { return xAxis })
-
 }
 
 function yAxisOptions(chart_area, color, weight, opacity, dots) {
@@ -396,7 +394,7 @@ function yAxisOptions(chart_area, color, weight, opacity, dots) {
 
     if (dots.display===false) {
         yAxisDots
-            .style("stroke", "none")
+            .attr("stroke", "none")
     }
 }
 
