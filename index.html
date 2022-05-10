@@ -12,97 +12,22 @@
     
     <link rel="icon" type="image/png" href="http://example.com/myicon.png">
 </head>
-<style>
-    body {
-        padding: 5%;
-        text-align: center;
-    }
 
-    #bargraph {
-        position: relative;
-    }
-
-    #tooltip {
-        position: absolute;
-        opacity: 1;
-        max-width: 30%;
-        /* max-height: 30%; */
-        min-width: 5%;
-        min-height: 5%;
-        line-height: 20px;
-        transition: all 0.3s;
-        border-radius: 5px;
-        padding: 5px 8px;
-        text-align: center;
-        color: rgb(0, 0, 0);
-        font-size: 14px;
-        font-weight: bold;
-        background-color: rgb(15, 14, 14);
-        display: inline-block;
-    }
-
-    .tooltip2 {
-        background-color: rgba(0, 0, 0, 0.75);
-        padding: 15px;
-        border-radius: 2px;
-        font-family: sans-serif;
-        color: white;
-        pointer-events: none;
-        box-shadow: 0 0 5px #999999;
-        background-color: rgb(115, 114, 214);
-        display: inline-block; 
-    }
-
-    .svg-container {
-        display: inline-block;
-        position: relative;
-        width: 100%;
-        padding-bottom: 100%;
-        /* aspect ratio */
-        vertical-align: top;
-        overflow: hidden;
-    }
-
-    .svg-content-responsive {
-        display: inline-block;
-        position: absolute;
-        top: 10px;
-        left: 0;
-    }
-
-
-
-    /* 컬러 CSS를 스타일안에 미리 해놔야하는지 ..? */
-    .blue {
-        fill: #5abae6;
-    }
-
-    .red {
-        fill: #d34e4e;
-    }
-
-    .green {
-        fill: #9dbb19;
-    }
-
-    .yellow {
-        fill: #f7b358;
-    }
-</style>
 </head>
 
 <body>
 
     <div id="bargraph">
-        <div id='tooltip' style="opacity: 0;"></div>
+        <!-- <div id='tooltip' style="opacity: 0;" class="tooltip"></div> -->
     </div>
 
     <div id="bargraph2"></div>
-    <!-- <div id="bargraph3"></div> -->
-    <!-- <div id="bargraph4"></div> -->
-    <!-- <div id="bargraph5"></div> -->
+    <div id="bargraph3"></div>
+    <div id="bargraph4"></div>
+    <div id="bargraph5"></div>
+    <div id="area"></div>
     <div id="circle"></div>
-    <!-- <div id="barH"></div> -->
+    <div id="barH"></div>
     <div id="radar"></div>
     
     <script src='https://d3js.org/d3.v5.min.js'></script>
@@ -170,7 +95,7 @@
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'right',// top bottom left right
+                        position: 'bottom',// top bottom left right
                         fontSize: '10px',
                         fontWeight: 'normal',
                         fontFamily: 'comic sans ms',
@@ -207,7 +132,8 @@
                         grid: true,
                         xGrid: true,
                         yGrid: true,
-                        background: true
+                        background: true,
+                        download: true
                     }
                 },
                 scales: {
@@ -277,7 +203,7 @@
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'left',// top bottom left right
+                        position: 'right',// top bottom left right
                     },
                     title: {
                         display: true,
@@ -311,14 +237,15 @@
                         grid: true,
                         xGrid: true,
                         yGrid: true,
-                        background: true
+                        background: true,
+                        download: true
                     },
-                    
+
                 },
-                scales :{
-                    dot :{
-                        size : 10,
-                        opacity : 1
+                scales: {
+                    dot: {
+                        size: 10,
+                        opacity: 1
                     }
                 }
             },
@@ -333,6 +260,30 @@
                         [
                             [1, 1, 1], [2, 2, 2], [3, 2, 3], [4, 2, 4], [5, 2, 5], [6, 2, 6]
                         ],
+                },
+                {
+                    label: 'Small Radius',
+                    data: [
+                        { x: 1, y: 15, r: 10 },
+                        { x: 2, y: 23, r: 20 },
+                        { x: 3, y: 25, r: 30 },
+                        { x: 4, y: 32, r: 30 },
+                        { x: 5, y: 29, r: 100 },
+                        { x: 6, y: 13, r: 20 },
+                        { x: 7, y: 15, r: 50 },
+                    ],
+                },
+                {
+                    label: 'Small Radius',
+                    data: [
+                        { x: 1, y: 15, r: 10 },
+                        { x: 2, y: 23, r: 20 },
+                        { x: 3, y: 25, r: 30 },
+                        { x: 4, y: 32, r: 30 },
+                        { x: 5, y: 29, r: 100 },
+                        { x: 6, y: 13, r: 20 },
+                        { x: 7, y: 15, r: 50 },
+                    ],
                 },
                 {
                     label: 'Small Radius',
@@ -360,19 +311,28 @@
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'top',// top bottom left right
+                        position: 'bottom',// top bottom left right
                     },
                     title: {
                         display: true,
-                        text: 'Chart.js bubble Chart'
+                        text: 'Chart.js bubble Chart',
+                        color: 'rgba(100, 150, 0, .5)',
+				        align: 'end' //start, end, center
                     },
                     xTitle: {
                         display: true,
-                        text: 'x'
+                        text: 'x213123123',
+                        size: "20px",
+                        // color: 'rgba(100, 150, 0, .5)',
+				        align: 'start' //start, end, center
                     },
                     yTitle: {
                         display: true,
-                        text: 'y'
+                        text: 'y423423432',
+                        rotate: true,
+                        position: 'left',
+                        color: 'rgba(100, 150, 0, 1)',
+				        align: 'bottom' //top, bottom, center
                     },
                     xGrid: {
                         color: "rgb(255, 0, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
@@ -386,6 +346,9 @@
                         weight: 1,        // 선 두께
                         opacity: .5,      // 선 투명도
                     },
+                    menu: {
+
+                    }
                 },
                 scales: {
                     xAxis: {
@@ -394,11 +357,11 @@
                             min: 0,
                             max: 10
                         }
-                    },    
-                    yAxis : {
-                        ticks:{
-                            max : 80,
-                            tick : 20
+                    },
+                    yAxis: {
+                        ticks: {
+                            max: 80,
+                            tick: 20
                         }
                     },
                     r: {
@@ -468,7 +431,7 @@
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'left',// top bottom left right
+                        position: 'bottom',// top bottom left right
                     },
                     title: {
                         display: true,
@@ -495,6 +458,74 @@
                         // grid: true,
                         xGrid: true,
                         yGrid: true,
+                        download: true
+
+                    }
+                },
+                scales: {
+                    xAxis: {
+                        type: "number",
+                        ticks: {
+
+                        }
+                    },
+                    yAxis: {
+                        ticks: {
+
+                        }
+                    },
+                    line: {
+                        width: 15,
+                        opacity: .5
+                    },
+                    dot: {
+                        size: 0,
+                        opacity: 1,
+                        visible: true
+                    }
+                }
+            },
+        };
+
+        const config5 = {
+            type: 'area',
+            width: 500,
+            height: 500,
+            margin: { top: 40, left: 40, bottom: 40, right: 40 },
+            padding: 0.1,
+            data: data4,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',// top bottom left right
+                    },
+                    title: {
+                        display: true,
+                        text: 'Chart.js Area Chart'
+                    },
+                    xTitle: {
+                        display: true,
+                        text: 'y'
+                    },
+                    yTitle: {
+                        display: true,
+                        text: 'x'
+                    },
+
+                    yGrid: {
+                        display: true,
+                        color: "#323233", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
+                        dash: "10,3",     // 점선, 10만큼 칠하고 3만큼 빈공간
+                        weight: 1,        // 선 두께
+                        opacity: .5       // 선 투명도
+                    },
+
+                    menu: {
+                        // grid: true,
+                        xGrid: true,
+                        yGrid: true,
+                        download: true
 
                     }
                 },
@@ -511,7 +542,7 @@
                         }
                     },
                     line :{
-                        width : 15,
+                        width : 10,
                         opacity : .5
                     },
                     dot :{
@@ -534,13 +565,14 @@
                 { name: 'E', value: 700, color: '#fae8a4' },
                 { name: 'F', value: 1200, color: '#df7454' },
                 { name: 'G', value: 1100, color: '#e88d5d' },
-                { name: 'H', value: 600, color:" '#f8d690'" }
+                { name: 'H', value: 600, color: '#f8d690' }
+                
             ]
         };
         const config6 = {
             type: 'donut',
-            width: 300,
-            height: 300,
+            width: 500,
+            height: 500,
             margin: { top: 40, left: 40, bottom: 40, right: 40 },
             padding: 0.1,
             data: data6,
@@ -548,14 +580,14 @@
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'right',// top bottom left right
+                        position: 'top',// top bottom left right
                     },
                     title: {
                         display: true,
                         text: 'Circle Chart Test'
                     },
                     sort: true,
-                    view: false,
+                    view: true,
                 },
             }
         }
@@ -577,9 +609,9 @@
         };
         const config_r = {
             type: 'radar',
-            width:600,
-            height: 600,
-            margin: { top:40, left: 40, bottom: 40, right: 40 },
+            width: 500,
+            height: 500,
+            margin: { top: 40, left: 40, bottom: 40, right: 40 },
             padding: 0.1,
             data: data_r,
             depth:7, // 구간 갯수
@@ -587,29 +619,38 @@
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'bottom',// top bottom left right
+                        position: 'top',// top bottom left right
                     },
                     title: {
                         display: true,
-                        text: 'Radar Chart Test'
+                        text: 'Circle Chart Test'
                     },
-                    sort: false,
+                    sort: true,
+                    view: true,
+                    menu: {
+                        download: true
+                    }
                 },
             }
         }
         // 레이더 차트 데이터 입력 부분.
     </script>
-
     <script type="module">
+
         import * as Chart from './src/index.js';
+
+
+        // Chart.Chart("bar",'#bargraph',dataset,width2,height2,margin2);
+        //Chart.Chart2("bar",'#bargraph',labels,dataset,width2,height2,margin2,padding);
         Chart.Chart('#bargraph2', config);
         Chart.Chart('#bargraph3', config2);
         Chart.Chart('#bargraph4', config3);
         Chart.Chart('#bargraph5', config4);
+        Chart.Chart('#area', config5);
     </script>
 
     <br>
-    
+    <div id="barH"></div>
 
     <script>
         const dataH = {
@@ -690,17 +731,25 @@
 
     </script>
 
+    </svg>
+    <script>
+        // var color = ['red', 'blue', 'yellow','green'];
+        // var widthH = 500;
+        // var heightH = 500;
+        // var marginH = {top: 40, left: 40, bottom: 40, right: 40};
+
+    </script>
     <script type="module">
         import * as Chart from './src/index.js';
 
         Chart.Chart('#barH', configH);
 
     </script>
-
     <script type="module">
         import * as Chart from './src/index.js';
 
         Chart.Chart('#circle', config6);
+        Chart.Chart('#radar', config7);
     </script>
 <!-- 레이더 차트 생성 부분 -->
     <script type="module">

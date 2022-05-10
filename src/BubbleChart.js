@@ -36,8 +36,6 @@ export class BubbleChart{
             .domain(r_domain).nice()
             .range([r_size_min, r_size_max]);
 
-        console.log(datasets);
-
         this.ChartBody = chart_area
             .append("g")
             .attr("class", "chartBody")
@@ -81,31 +79,47 @@ export class BubbleChart{
         const color = this.color;
         this.ChartBody.selectAll(".data")
         .on("mouseover", function(d){ 
-            const x = event.pageX;
-            const y = event.pageY;
+            // const x = event.pageX;
+            // const y = event.pageY;
             // const target = event.target;
-            const positionLeft =x;
-            const positionTop = y;
+            // const positionLeft =x;
+            // const positionTop = y;
             d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));
             console.log("툴팁 확인 : bubble");
-            const value = d.x;
-            const name =  d.y;
-            const key = d.r;
+            
             // const color = d;
             
-            tooltop.innerText = "x : " + value +"\n" + "y : " + name +"\n" + "r : " +key ; // 값 + 데이터 
+            
             // tooltop.style.background = '#ddd';
-            tooltop.style.top = positionTop -100+ 'px';
-            tooltop.style.left = positionLeft -80 + 'px';
+            // tooltop.style.top = positionTop -100+ 'px';
+            // tooltop.style.left = positionLeft -80 + 'px';
             // tooltip.style("left", (d3.event.pageX+10)+"px");
             // tooltip.style("top",  (d3.event.pageY-10)+"px");
             tooltop.style.opacity = "1.0";
+        })
+        .on("mousemove", function(d,index){
+            const value = d.x;
+            const name =  d.y;
+            const key = d.r;
+            tooltop.innerText = "x : " + value +"\n" + "y : " + name +"\n" + "r : " +key ; // 값 + 데이터 
+            
+            tooltop.style.left = d3.event.pageX + 20 + "px";
+            tooltop.style.top = d3.event.pageY + 20 + "px";
         })
         .on("mouseout", function(d){ 
             d3.select(this).style("fill", color(d.label_index));
             tooltop.style.opacity = "0";
         });
-}
+    }
+
+    animation(delay=1000,duration=1000){
+        this.slice.selectAll(".data")
+            .attr("r", 0)
+            .transition()
+            .delay(d=>{return Math.random()*delay;})
+            .duration(duration)
+            .attr("r", d=>{ return this.r(d.r); })
+    }
 }
 
 
