@@ -1,19 +1,23 @@
 export class CircleChart {
-  constructor({ id, type, svg, width, height, margin, datasets, options }) {
+  constructor({ id, type, chart_area, width, height, margin, datasets,color, options }) {
+    chart_area.selectAll('.chartBody').remove();
+    
     const nowWidth = width - margin.left - margin.right;
     const nowHeight = height - margin.top - margin.bottom;
-    
+    console.log(datasets)
     let sum = 0;
     datasets.forEach(function (currentElement) {
       sum += currentElement.value;
-      if (!currentElement.color) {
-        currentElement.color =
-          "#" + parseInt(Math.random() * 0xffffff).toString(16);
-      }
+      // if (!currentElement.color) {
+      //   currentElement.color =
+      //     "#" + parseInt(Math.random() * 0xffffff).toString(16);
+      // }
     });
     this.sum = sum;
+    this.color = color;
 
-    svg.attr("text-anchor", "middle").style("12px sans-serif");
+    chart_area
+      .attr("text-anchor", "middle").style("12px sans-serif");
     // 원의 넓이 결정
     const arc = d3.arc();
     if (type === "donut") {
@@ -43,21 +47,23 @@ export class CircleChart {
     const arcs = pie(datasets);
     const position = options.plugins.legend.position;
     let xPos, yPos;
-    if (position === "top") {
-      xPos = width / 2
-      yPos = height - nowHeight + height / 2
-    } else if (position === "bottom") {
-      xPos = width / 2
-      yPos = height / 2
-    } else if (position === "left") {
-      xPos = width - nowWidth + (nowWidth / 2) + nowWidth / datasets.length
-      yPos = height / 2
-    } else if (position === "right") {
-      xPos = width - nowWidth + (nowWidth / 2) - nowWidth / datasets.length
-      yPos = height / 2
-    }
+    xPos = width / 2
+    yPos = height / 2
+    // if (position === "top") {
+    //   xPos = width / 2
+    //   yPos = height - nowHeight + height / 2
+    // } else if (position === "bottom") {
+    //   xPos = width / 2
+    //   yPos = height / 2
+    // } else if (position === "left") {
+    //   xPos = width - nowWidth + (nowWidth / 2) + nowWidth / datasets.length
+    //   yPos = height / 2
+    // } else if (position === "right") {
+    //   xPos = width - nowWidth + (nowWidth / 2) - nowWidth / datasets.length
+    //   yPos = height / 2
+    // }
     // g 추가
-    const g = svg
+    this.ChartBody = chart_area
       .append("g")
       .attr("class", 'chartBody')
       // 중앙에 차트 그리기
@@ -65,22 +71,21 @@ export class CircleChart {
     // 색상 랜덤
 
     // 툴팁 추가
-    this.tooltip = d3
-      .select("#circle")
-      .append("div")
-      .attr("class", "tooltip2")
-      .style("display", "none");
+    // this.tooltip = document.getElementById('tooltip');
 
     //각각의 파이 그리기
-    g.selectAll("path")
+    this.ChartBody.selectAll("path")
       .data(arcs)
       .enter()
       .append("path")
       .attr("class", "data")
-      .attr("fill", (d) => d.data.color)
-      .on("mouseover", this.mouseover.bind(this))
-      .on("mousemove", this.mousemove.bind(this))
-      .on("mouseout", this.mouseout.bind(this))
+      .attr("fill", (d,index) => {
+        // console.log(d.data.color)
+        return d.data.color
+      })
+      // .on("mouseover", this.mouseover.bind(this))
+      // .on("mousemove", this.mousemove.bind(this))
+      // .on("mouseout", this.mouseout.bind(this))
       .attr("stroke", "white")
       .attr("d", arc)
       // 애니메이션 효과
@@ -95,7 +100,7 @@ export class CircleChart {
       });
 
     // 라벨 추가
-    const text = g
+    const text = this.ChartBody
       .selectAll("text")
       .data(arcs)
       .enter()
@@ -158,22 +163,54 @@ export class CircleChart {
     // svg.node();
   }
 
-  mouseover() {
-    this.tooltip.style("display", "inline-block").style("position", "absolute");
-  }
+  // mouseover(d,index) {
+  //   // console.log(d,index)
+  //   // console.log(this)
+  //   // this.selectAll(".data").style("fill", d3.rgb(this.color(index)).darker(2));
+  //   // console.log("222")
+  //   this.tooltip.style("display", "inline-block").style("position", "absolute");
+  // }
 
-  mousemove(data) {
-    const name = data.data.name;
-    const value = data.value;
+  // mousemove(data) {
+  //   const name = data.data.name;
+  //   const value = data.value;
+  //   const sum = this.sum;
+  //   this.tooltip
+  //     // .text(
+  //     //   [name, value, Math.round((value / sum) * 100, -3) + "%"].join(" | ")
+  //     // )
+  //     .style("left", d3.event.pageX + 20 + "px")
+  //     .style("top", d3.event.pageY + 20 + "px");
+  //   this.tooltip.innerHTML = "test"
+  // }
+  // mouseout() {
+  //   this.tooltip.style("display", "none");
+  // }
+
+  tooltip(){
+    console.log("22233");
+    const tooltop = document.getElementById('tooltip');
+    const color = this.color;
     const sum = this.sum;
-    this.tooltip
-      .text(
-        [name, value, Math.round((value / sum) * 100, -3) + "%"].join(" | ")
-      )
-      .style("left", d3.event.pageX + 20 + "px")
-      .style("top", d3.event.pageY + 20 + "px");
-  }
-  mouseout() {
-    this.tooltip.style("display", "none");
+    this.ChartBody.selectAll(".data")
+    .on("mouseover", function(d,index){ 
+
+        d3.select(this).style("fill", d3.rgb(d.data.color).darker(2));
+        console.log("툴팁 확인 : circle");
+
+        tooltop.style.opacity = "1.0";
+    })
+    .on("mousemove", function(d,index){
+      const name = d.data.name;
+      const value = d.value;
+
+      tooltop.innerText = "name : " + name +"\n" + "value : " + value +"\n" + Math.round((value / sum) * 100, -3) + "%"; // 값 + 데이터 
+      tooltop.style.left = d3.event.pageX + 20 + "px";
+      tooltop.style.top = d3.event.pageY + 20 + "px";
+    })
+    .on("mouseout", function(d,index){ 
+        d3.select(this).style("fill", d.data.color);
+        tooltop.style.opacity = "0";
+    });
   }
 }

@@ -9,90 +9,10 @@
     <!-- <link rel="stylesheet" href="https://uicdn.toast.com/chart/latest/toastui-chart.min.css" /> -->
     <!-- <script src="https://uicdn.toast.com/chart/latest/toastui-chart.min.js"></script> -->
     <link rel="stylesheet" href="src/css/index.css">
-
-    <script src="src/RadarChart.js"></script>
-
-
-
+    
     <link rel="icon" type="image/png" href="http://example.com/myicon.png">
 </head>
-<style>
-    body {
-        padding: 5%;
-        text-align: center;
-    }
 
-    #bargraph {
-        position: relative;
-    }
-
-    #tooltip {
-        position: absolute;
-        opacity: 1;
-        max-width: 30%;
-        /* max-height: 30%; */
-        min-width: 5%;
-        min-height: 5%;
-        line-height: 20px;
-        transition: all 0.3s;
-        border-radius: 5px;
-        padding: 5px 8px;
-        text-align: center;
-        color: rgb(0, 0, 0);
-        font-size: 14px;
-        font-weight: bold;
-        background-color: rgb(15, 14, 14);
-        display: inline-block;
-    }
-
-    .tooltip2 {
-        background-color: rgba(0, 0, 0, 0.75);
-        padding: 15px;
-        border-radius: 2px;
-        font-family: sans-serif;
-        color: white;
-        pointer-events: none;
-        box-shadow: 0 0 5px #999999;
-        background-color: rgb(115, 114, 214);
-        display: inline-block;
-    }
-
-    .svg-container {
-        display: inline-block;
-        position: relative;
-        width: 100%;
-        padding-bottom: 100%;
-        /* aspect ratio */
-        vertical-align: top;
-        overflow: hidden;
-    }
-
-    .svg-content-responsive {
-        display: inline-block;
-        position: absolute;
-        top: 10px;
-        left: 0;
-    }
-
-
-
-    /* 컬러 CSS를 스타일안에 미리 해놔야하는지 ..? */
-    .blue {
-        fill: #5abae6;
-    }
-
-    .red {
-        fill: #d34e4e;
-    }
-
-    .green {
-        fill: #9dbb19;
-    }
-
-    .yellow {
-        fill: #f7b358;
-    }
-</style>
 </head>
 
 <body>
@@ -110,17 +30,6 @@
     <div id="barH"></div>
     <div id="radar"></div>
     
-        <div id='tooltip'></div>
-    </div>
-
-    <div id="bargraph2"></div>
-
-
-    <div id="bargraph3"></div>
-    <div id="bargraph4"></div>
-    <div id="bargraph5"></div>
-    <div id="circle">
-    </div>
     <script src='https://d3js.org/d3.v5.min.js'></script>
 
     <script>
@@ -216,15 +125,49 @@
                         // weight: 1,        // 선 두께
                         // opacity: .5,      // 선 투명도
                     },
-                    background: {
+                    // background: {
 
-                    },
+                    // },
                     menu: {
                         grid: true,
                         xGrid: true,
                         yGrid: true,
-                        background: true
-                    }
+                        background: true,
+                        download: true
+                    },
+                    axis: {
+                        color: "rgb(255, 0, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
+                        weight: 5,
+                        opacity: .5,
+                        dots: {
+                            display: false,
+                            color: "rgb(255, 0, 255)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
+                            weight: 5,
+                            opacity: .5
+                        },
+                        xAxis: {
+                            color: "rgb(0, 255, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
+                            weight: 5,
+                            opacity: 1,
+                            dots: {
+                                display: false,
+                                color: "rgb(255, 0, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
+                                weight: 5,
+                                opacity: 1
+                            }
+                        },
+                        yAxis: {
+                            color: "rgb(255, 0, 255)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
+                            weight: 1,
+                            opacity: .5,
+                            dots: {
+                                display: false,
+                                color: "rgb(0, 0, 255)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
+                                weight: 5,
+                                opacity: .5
+                            }
+                        }
+                    },
                 },
                 scales: {
                     yAxis: {
@@ -327,7 +270,8 @@
                         grid: true,
                         xGrid: true,
                         yGrid: true,
-                        background: true
+                        background: true,
+                        download: true
                     },
 
                 },
@@ -520,7 +464,7 @@
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'left',// top bottom left right
+                        position: 'bottom',// top bottom left right
                     },
                     title: {
                         display: true,
@@ -547,6 +491,7 @@
                         // grid: true,
                         xGrid: true,
                         yGrid: true,
+                        download: true
 
                     }
                 },
@@ -613,6 +558,7 @@
                         // grid: true,
                         xGrid: true,
                         yGrid: true,
+                        download: true
 
                     }
                 },
@@ -653,6 +599,7 @@
                 { name: 'F', value: 1200, color: '#df7454' },
                 { name: 'G', value: 1100, color: '#e88d5d' },
                 { name: 'H', value: 600, color: '#f8d690' }
+                
             ]
         };
         const config6 = {
@@ -666,7 +613,7 @@
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'right',// top bottom left right
+                        position: 'top',// top bottom left right
                     },
                     title: {
                         display: true,
@@ -677,6 +624,49 @@
                 },
             }
         }
+// 레이더 차트 데이터 입력 부분.
+        const data_r = {
+            labels: ['A', 'B', 'C', 'D' ,'E' ,'F'],
+            datasets: [
+                { name: 'AAA' },
+                { name: 'BBB' },
+                { name: 'CC' },
+                { name : 'DDDDD'}
+            ],
+            data:[
+                [2700,2700,1200,13,1400,1700],
+                [1400,100,2800,2500,1200,2100],
+                [1200,1900,1400,12,2700,1600],
+                [20,2200,2000,520,2300,200],
+            ]            
+        };
+        const config_r = {
+            type: 'radar',
+            width: 500,
+            height: 500,
+            margin: { top: 40, left: 40, bottom: 40, right: 40 },
+            padding: 0.1,
+            data: data_r,
+            depth:7, // 구간 갯수
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',// top bottom left right
+                    },
+                    title: {
+                        display: true,
+                        text: 'Circle Chart Test'
+                    },
+                    sort: true,
+                    view: true,
+                    menu: {
+                        download: true
+                    }
+                },
+            }
+        }
+        // 레이더 차트 데이터 입력 부분.
     </script>
     <script type="module">
 
@@ -792,9 +782,14 @@
         import * as Chart from './src/index.js';
 
         Chart.Chart('#circle', config6);
+        Chart.Chart('#radar', config7);
     </script>
-
-    <script>MakeRadar();</script>
+<!-- 레이더 차트 생성 부분 -->
+    <script type="module">
+        import * as Chart from './src/index.js';
+        Chart.Chart('#radar', config_r);
+    </script>
+<!-- 레이더 차트 생성 부분 -->
 </body>
 
 </html>

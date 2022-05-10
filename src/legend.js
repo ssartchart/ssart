@@ -13,7 +13,7 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, optio
   }
   const legendList = [];  
   let labelsColor = labels.color
-  if (type === "donut" || type === "pie") {
+  if (type === "donut" || type === "pie" || type === "radar") {
     for (let i = 0; i < datasets.length; i++) {
       labels.label[i] = datasets[i].name
     }
@@ -121,7 +121,7 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, optio
     if (position === "top") {
       let currXPos = 0;
       let currYPos = margin.top;
-      chartContainer.attr("transform", `translate(0, ${currYPos})`)
+      
       legend.attr("transform", function (d, i) {
         let legendBBox = document.getElementById(`${id}-legend-${i}`).getBBox();
         let legendItem = document.getElementById(`${id}-legend-${i}`);
@@ -132,7 +132,7 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, optio
           currYPos += legendBBox.height + MARGINWIDTH
           currXPos = 0;
           console.log(chartContainer, '컨테')
-          chartContainer.attr("transform", `translate(0, ${currYPos})`)
+          // chartContainer.attr("transform", `translate(0, ${legendBBox.height + MARGINWIDTH})`)
           rowGroup.push(currGroup);
           currGroup = [];
         }
@@ -157,6 +157,7 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, optio
         groupItem.attr("transform", `translate(${startXPos}, 0)`)  
       }
       // d3.select('svg .legend-item').remove();
+      chartContainer.attr("transform", `translate(0, ${svg.select(`svg #${id}-legend`).node().getBBox().height+ margin.top})`)
       return {width : 0,
         height : svg.select(`svg #${id}-legend`).node().getBBox().height+ margin.top, legendList};
     } else if (position === "bottom") {

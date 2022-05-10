@@ -2,8 +2,8 @@ import { BarChart } from "./BarChart.js";
 import { BarHChart } from "./BarHChart.js";
 import { BarHClass } from "./BarHClass.js";
 // import {BarChart} from './BarChartfunction.js'
-import { xGrid as drawXGrid, yGrid as drawYGrid } from "./Axis_helper.js";
-import { LabelColor } from "./Color_helper.js";
+import { axisOptions, xGrid as drawXGrid, yGrid as drawYGrid } from "./Axis_helper.js";
+import { LabelColor, LabelsColor } from "./Color_helper.js";
 import { Data_pre_processing } from "./Dataset_helper.js";
 import { drawTitle, drawXTitle, drawYTitle } from "./Title.js";
 import { checkMargin } from "./checkMargin.js";
@@ -19,7 +19,7 @@ import { AreaChart } from "./AreaChart.js";
 
 function Chart(
   id,
-  { type, width, height, margin, padding = 0, data, options, y_max, y_min = 0 }
+  { type, width, height, margin, padding = 0, data, options, y_max, y_min = 0,depth }
 ) {
   const { plugins, scales } = options;
   let { legend = {position: "left"}, title, xTitle, yTitle, xGrid, yGrid, background, menu } = plugins;
@@ -34,6 +34,7 @@ function Chart(
 
   const labels = data.labels;
   const labelcolor = LabelColor(data.datasets);
+  const labelscolor = LabelsColor(data);
   const color = labelcolor.color;
   const legend_label = labelcolor.label;
   const chart_area = svg
@@ -44,37 +45,53 @@ function Chart(
   let legend_box = {
     width: width,
     height: height,
-    legendList: [],
-  }  
-  if (legend) {
-    legend_box = drawLegend(
-      oid,
-      svg,
-      labelcolor,
-      width,
-      height,
-      chart_area,
-      options,
-      margin,
-      data.datasets,
-      type
-    );
+    legendList: []
   }
-  
+  if (legend) {
+    if(type == "donut"|| type == "donut" || type == "radar"){
+      legend_box = drawLegend(
+        oid,
+        svg,
+        labelscolor,
+        width,
+        height,
+        chart_area,
+        options,
+        margin,
+        data.datasets,
+        type
+      );
+    } else {
+      legend_box = drawLegend(
+        oid,
+        svg,
+        labelcolor,
+        width,
+        height,
+        chart_area,
+        options,
+        margin,
+        data.datasets,
+        type
+      );
+    }    
+  }
   const chart_width = width - legend_box.width;
   const chart_height = height - legend_box.height;
   checkMargin(margin);
   renderBackground();
   function renderBackground() {
+    let backgroundOptions = {}
     if (background) {
-      drawBackground(
-        chart_area,
-        margin,
-        chart_width,
-        chart_height,
-        background
-      );
+      backgroundOptions = background
     }
+    drawBackground(
+      chart_area,
+      margin,
+      chart_width,
+      chart_height,
+      backgroundOptions
+    );
   }
   if (type === "bar") {
     let datasets = Data_pre_processing(data.labels, data.datasets, "namevalue");
@@ -104,7 +121,6 @@ function Chart(
         scales,
         position: legend.position,
       });
-      chart.tooltip();
       chart.animation();
       renderOptions();
     }
@@ -271,6 +287,7 @@ function Chart(
   }
 
   if (type === "donut" || type === "pie") {
+    // console.log(datasets)
     drawCicleChart(data.datasets);
     for (let i = 0; i < data.datasets.length; i++) {
       const item = d3.select(`${id}-legend-${i} rect`);
@@ -284,19 +301,30 @@ function Chart(
       {},
       renderBackground,
     );
+    // createLegendToggle(
+    //   data.datasets,
+    //   legend_box?.legendList,
+    //   chart_area,
+    //   drawCicleChart,
+    //   {},
+    //   renderBackground
+    // );
     function drawCicleChart(chartData) {      
-      const chart = new CircleChart({
+      const circleChart = new CircleChart({
         id: oid,
         type,
-        svg,
+        chart_area,
+        color,
         width: chart_width,
         height: chart_height,
         margin,
         datasets: chartData,
         options,
       });
+      circleChart.tooltip();
       renderOptions();
-    }
+      
+    }    
   }
   if (type === "radar" ) {
     const chart = new RadarChart({
@@ -306,9 +334,11 @@ function Chart(
       height,
       margin,
       data,
+      depth,
       options,
     });
     // chart.tooltip();
+    renderOptions();
   }
   function renderOptions() {
     if (title) {
@@ -341,6 +371,10 @@ function Chart(
         }
       }
     }
+    if (options.plugins.axis) {
+      axisOptions(chart_area, options)
+    }
+
     if (xGrid) {
       drawXGrid(
         chart_area,

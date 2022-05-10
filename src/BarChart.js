@@ -94,25 +94,34 @@ export class BarChart{
         const color = this.color;
         this.slice.selectAll(".data")
         .on("mouseover", function(d){ 
-            const x = event.pageX;
-            const y = event.pageY;
+            // const x = event.pageX;
+            // const y = event.pageY;
             // const target = event.target;
-            const positionLeft =x;
-            const positionTop = y;
+            // const positionLeft =x;
+            // const positionTop = y;
             d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));
             console.log("툴팁 확인 : BAR");
-            const value = d.value;
-            const name =  d.name;
-            const key = d3.rgb(color(d.label_index));
+            // const value = d.value;
+            // const name =  d.name;
+            // const key = d3.rgb(color(d.label_index));
             // const color = d;
             
-            tooltop.innerText = "value : " + value +"\n" + "name : " + name +"\n" + "color : " +key ; // 값 + 데이터 
+            // tooltop.innerText = "value : " + value +"\n" + "name : " + name +"\n" + "color : " +key ; // 값 + 데이터 
             // tooltop.style.background = '#ddd';
-            tooltop.style.top = positionTop -100+ 'px';
-            tooltop.style.left = positionLeft -80 + 'px';
+            // tooltop.style.top = positionTop -100+ 'px';
+            // tooltop.style.left = positionLeft -80 + 'px';
             // tooltip.style("left", (d3.event.pageX+10)+"px");
             // tooltip.style("top",  (d3.event.pageY-10)+"px");
             tooltop.style.opacity = "1.0";
+        })
+        .on("mousemove", function(d,index){
+            const value = d.value;
+            const name =  d.name;
+            const key = d3.rgb(color(d.label_index));
+            tooltop.innerText = "value : " + value +"\n" + "name : " + name +"\n" + "color : " +key ; // 값 + 데이터 
+            
+            tooltop.style.left = d3.event.pageX + 20 + "px";
+            tooltop.style.top = d3.event.pageY + 20 + "px";
         })
         .on("mouseout", function(d){ 
             d3.select(this).style("fill", color(d.label_index));
