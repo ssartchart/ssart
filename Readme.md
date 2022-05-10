@@ -9,6 +9,7 @@
 
 ![npm](https://img.shields.io/npm/v/ssart) <!-- 배포하면 버전이 찍힘  -->
 ![dependencies](https://img.shields.io/badge/dependencies-d3-brightengreen)
+[![install size](https://packagephobia.now.sh/badge?p=ssart)](https://packagephobia.now.sh/result?p=ssart)
 
 
 <br>
@@ -123,7 +124,6 @@ if you want to see more Examples , plz visit our sites and see more chart [SSART
   <br>
 
 ```js
-
 const data = {
   labels: ['a','b','c','d','e','f'],
   datasets: [
@@ -317,6 +317,12 @@ npm 배포 후 사용방법 간략히 정리.
   주요 사용하는 기능 추려서 정리 예정.
   </details>
 
+<br>
+
+## Browser Support
+![Chrome](https://raw.githubusercontent.com/alrra/browser-logos/main/src/chrome/chrome_48x48.png) | ![Edge](https://raw.githubusercontent.com/alrra/browser-logos/main/src/edge/edge_48x48.png) |![Opera](https://raw.githubusercontent.com/alrra/browser-logos/main/src/opera/opera_48x48.png) |
+--- | --- | --- |
+Latest ✔ | Latest ✔ | Latest ✔ |
 <br>
 
 ## Developers
