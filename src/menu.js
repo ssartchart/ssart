@@ -1,6 +1,8 @@
 import capture from "./saveSvgAsPng.js";
+import { Chart } from "./function.js";
 
-export function menu(chart_width, width, margin, chart_area, options, id) {
+// 메뉴 아이콘 생성
+function menuIcon(chart_width, width, margin, options, chart_area) {
   const menuWidth = 30;
   const menuHeight = 30;
 
@@ -63,18 +65,23 @@ export function menu(chart_width, width, margin, chart_area, options, id) {
     chartMenu.selectAll(".menuCircle").style("opacity", 0.2);
   });
 
-  // 드롭다운 부분 d3, svg로 작성
-  const dropDownWidth = 100;
-  const dropDownX = chart_width - margin.right - dropDownWidth;
+  return chartMenu
+};
+
+// dropdown 창 생성
+function createDropDown(width, margin, options, chart_area, dropDownWidth, dropDownX) {
+  if (
+    options.plugins.legend.position &&
+    options.plugins.legend.position == "left"
+  ) {
+    dropDownX = width - margin.right - dropDownWidth;
+  }
 
   const dropDown = chart_area
     .append("g")
     .attr("class", "dropDown")
     .attr("transform", "translate(" + dropDownX + "," + margin.top + ")");
 
-  // 일일히 옵션 생성해주기
-  // 어차피 함수 한개씩 일일히 지정해야한다
-  let dropDownIndex = 0;
   const dropDownLength = Object.keys(options.plugins.menu).length;
 
   dropDown
@@ -90,6 +97,18 @@ export function menu(chart_width, width, margin, chart_area, options, id) {
     .style("stroke", "black")
     .style("stroke-width", "2");
 
+  return dropDown
+};
+
+export function menu(chart_width, width, margin, chart_area, options, id, param) {
+  // 메뉴 아이콘 생성
+  const chartMenu = menuIcon(chart_width, width, margin, options, chart_area)
+  
+  // 드롭다운 생성
+  const dropDownWidth = 100;
+  let dropDownX = chart_width - margin.right - dropDownWidth;
+  const dropDown = createDropDown(width, margin, options, chart_area, dropDownWidth, dropDownX);
+
   const yGridGroup = chart_area.select("g.yAxis");
   const xGridGroup = chart_area.select("g.xAxis");
 
@@ -97,7 +116,9 @@ export function menu(chart_width, width, margin, chart_area, options, id) {
   const xGridButton = dropDown.append("text");
   const yGridButton = dropDown.append("text");
   const download = dropDown.append("text");
+  const legendButton = dropDown.append("g");
 
+  let dropDownIndex = 0;
   if (options.plugins.menu.grid) {
     dropDownIndex += 1;
 
@@ -110,6 +131,7 @@ export function menu(chart_width, width, margin, chart_area, options, id) {
       .attr("text-anchor", "end")
       .style("font-family", "sans-serif")
       .style("cursor", "pointer")
+      .style("user-select", "none")
       .on("click", function (event) {
         if (
           xGridGroup.property("visibleStatus") === "hidden" &&
@@ -162,6 +184,7 @@ export function menu(chart_width, width, margin, chart_area, options, id) {
       .attr("text-anchor", "end")
       .style("font-family", "sans-serif")
       .style("cursor", "pointer")
+      .style("user-select", "none")
       .on("click", function (event) {
         if (xGridGroup.property("visibleStatus") === "hidden") {
           xGridGroup.property("visibleStatus", "visible");
@@ -203,6 +226,7 @@ export function menu(chart_width, width, margin, chart_area, options, id) {
       .attr("text-anchor", "end")
       .style("font-family", "sans-serif")
       .style("cursor", "pointer")
+      .style("user-select", "none")
       .on("click", function (event) {
         if (yGridGroup.property("visibleStatus") === "hidden") {
           yGridGroup.property("visibleStatus", "visible");
@@ -253,6 +277,7 @@ export function menu(chart_width, width, margin, chart_area, options, id) {
       .attr("text-anchor", "end")
       .style("font-family", "sans-serif")
       .style("cursor", "pointer")
+      .style("user-select", "none")
       .on("click", function (event) {
         if (chartBackground.property("visibleStatus") === "hidden") {
           chartBackground.property("visibleStatus", "visible");
@@ -282,6 +307,7 @@ export function menu(chart_width, width, margin, chart_area, options, id) {
       .attr("text-anchor", "end")
       .style("font-family", "sans-serif")
       .style("cursor", "pointer")
+      .style("user-select", "none")
       .on("click", function (event) {
         // div 태그를 가져옴
         let divId = this.parentNode.parentNode.parentNode.getAttribute("id");
@@ -306,10 +332,120 @@ export function menu(chart_width, width, margin, chart_area, options, id) {
       });
   }
 
+  if (options.plugins.menu.legend) {
+    dropDownIndex += 1;
+    const legendDropDownWidth = 70
+    const legendDropDownX = dropDownX - legendDropDownWidth
+    const legendDropDownY = margin.top + dropDownIndex * 25 - 10
+    const legendDropDown = chart_area
+      .append("g")
+      .attr("class", "legendDropDown")
+      .attr("transform", "translate(" + legendDropDownX + "," + legendDropDownY + ")");
+    
+    legendDropDown
+      .append("rect")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", legendDropDownWidth)
+      .attr("height", 25 * 4 + 10)
+      .attr("rx", 5)
+      .attr("ry", 5)
+      .style("fill", "white")
+      .style("opacity", 0.8)
+      .style("stroke", "black")
+      .style("stroke-width", "2");
+
+    legendDropDown
+      .append("text")
+      .attr("x", legendDropDownWidth - 8)
+      .attr("y", 25)
+      .attr("class", "top")
+      .text("top")
+      .attr("text-anchor", "end")
+      .style("fill", "#aaaaaa")
+      .style("font-family", "sans-serif")
+      .style("cursor", "pointer")
+      .style("user-select", "none")
+      .on("click", function (event) {
+        param.options.plugins.legend.position = "top"
+        Chart(id, param)
+      });
+
+    legendDropDown
+      .append("text")
+      .attr("x", legendDropDownWidth - 8)
+      .attr("y", 50)
+      .attr("class", "bottom")
+      .text("bottom")
+      .attr("text-anchor", "end")
+      .style("fill", "#aaaaaa")
+      .style("font-family", "sans-serif")
+      .style("cursor", "pointer")
+      .style("user-select", "none")
+      .on("click", function (event) {
+        param.options.plugins.legend.position = "bottom"
+        Chart(id, param)
+      });
+
+    legendDropDown
+      .append("text")
+      .attr("x", legendDropDownWidth - 8)
+      .attr("y", 75)
+      .text("left")
+      .attr("class", "left")
+      .attr("text-anchor", "end")
+      .style("fill", "#aaaaaa")
+      .style("font-family", "sans-serif")
+      .style("cursor", "pointer")
+      .style("user-select", "none")
+      .on("click", function (event) {
+        param.options.plugins.legend.position = "left"
+        Chart(id, param)
+      });
+
+    legendDropDown
+      .append("text")
+      .attr("x", legendDropDownWidth - 8)
+      .attr("y", 100)
+      .text("right")
+      .attr("class", "right")
+      .attr("text-anchor", "end")
+      .style("fill", "#aaaaaa")
+      .style("font-family", "sans-serif")
+      .style("cursor", "pointer")
+      .style("user-select", "none")
+      .on("click", function (event) {
+        param.options.plugins.legend.position = "right"
+        Chart(id, param)
+      });
+    
+    legendDropDown
+      .select("." + options.plugins.legend.position)
+      .style("fill", "black")
+    
+    legendDropDown.style("visibility", "hidden").property("visibility", "hidden");
+
+    legendButton
+      .append("text")
+      .attr("x", dropDownWidth - 8)
+      .attr("y", dropDownIndex * 25)
+      .text("Legend")
+      .attr("text-anchor", "end")
+      .style("font-family", "sans-serif")
+      .style("cursor", "pointer")
+      .style("user-select", "none")
+      .on("click", function (event) {
+        if (legendDropDown.property("visibility") === "hidden") {
+          legendDropDown.style("visibility", "visible").property("visibility", "visible");
+        } else {
+          legendDropDown.style("visibility", "hidden").property("visibility", "hidden");
+        }
+      });     
+  }
+
   dropDown.style("visibility", "hidden").property("visibility", "hidden");
 
   chartMenu.on("click", function (e) {
-    console.log(dropDown.property("visibility"));
     if (dropDown.property("visibility") === "hidden") {
       dropDown.style("visibility", "visible").property("visibility", "visible");
     } else {
