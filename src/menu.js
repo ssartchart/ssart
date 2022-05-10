@@ -70,12 +70,6 @@ function menuIcon(chart_width, width, margin, options, chart_area) {
 
 // dropdown 창 생성
 function createDropDown(width, margin, options, chart_area, dropDownWidth, dropDownX) {
-  if (
-    options.plugins.legend.position &&
-    options.plugins.legend.position == "left"
-  ) {
-    dropDownX = width - margin.right - dropDownWidth;
-  }
 
   const dropDown = chart_area
     .append("g")
@@ -107,7 +101,14 @@ export function menu(chart_width, width, margin, chart_area, options, id, param)
   // 드롭다운 생성
   const dropDownWidth = 100;
   let dropDownX = chart_width - margin.right - dropDownWidth;
+  if (
+    options.plugins.legend.position &&
+    options.plugins.legend.position == "left"
+  ) {
+    dropDownX = width - margin.right - dropDownWidth;
+  }
   const dropDown = createDropDown(width, margin, options, chart_area, dropDownWidth, dropDownX);
+  const legendDropDown = chart_area.append("g")
 
   const yGridGroup = chart_area.select("g.yAxis");
   const xGridGroup = chart_area.select("g.xAxis");
@@ -337,8 +338,8 @@ export function menu(chart_width, width, margin, chart_area, options, id, param)
     const legendDropDownWidth = 70
     const legendDropDownX = dropDownX - legendDropDownWidth
     const legendDropDownY = margin.top + dropDownIndex * 25 - 10
-    const legendDropDown = chart_area
-      .append("g")
+
+    legendDropDown
       .attr("class", "legendDropDown")
       .attr("transform", "translate(" + legendDropDownX + "," + legendDropDownY + ")");
     
@@ -450,6 +451,7 @@ export function menu(chart_width, width, margin, chart_area, options, id, param)
       dropDown.style("visibility", "visible").property("visibility", "visible");
     } else {
       dropDown.style("visibility", "hidden").property("visibility", "hidden");
+      legendDropDown.style("visibility", "hidden").property("visibility", "hidden");
     }
   });
 }
