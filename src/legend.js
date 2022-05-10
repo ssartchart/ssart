@@ -320,6 +320,7 @@ export function createLegendToggle(id, datasets, items, chartArea, makeChart, re
       d3.selectAll(`${id} > svg > text`).remove();
       d3.selectAll(`${id} > svg > .chartMenu`).remove();
       d3.selectAll(`${id} > svg > .dropDown`).remove();
+      d3.selectAll(`${id} > svg > .legendDropDown`).remove();
       const idx = tid[tid.length - 1]
       if (removedSet[idx] === undefined ) {
         removedSet[idx] = true;
