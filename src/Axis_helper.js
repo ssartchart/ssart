@@ -246,6 +246,9 @@ export function yGrid (chart_area,length,options) {
         chart_area.selectAll("g.yAxis g.tick")
             .style("visibility", "hidden")
     }
+
+    // 맨 아래 x축과 겹치는 grid는 삭제
+    chart_area.select("g.yAxis g.tick line.gridline").remove()
 }
 
 
@@ -321,5 +324,155 @@ export function yGridShow(event) {
         event.target.style.fill = "steelblue"
         d3.selectAll(event.target.innerText + " svg g.yAxis g.tick line.gridline")
             .style("visibility", "visible")
+    }
+}
+
+function xAxisOptions(chart_area, color, weight, opacity, dots) {
+    const xAxisDots = chart_area.selectAll("g.xAxis g.tick line")
+    const xAxis = chart_area.select("g.xAxis path.domain")
+
+    let dotsColor = "black"
+    if (dots.color) {
+        dotsColor = dots.color
+    }
+
+    let dotsWeight = 1
+    if (dots.weight) {
+        dotsWeight = dots.weight
+    }
+
+    let dotsOpacity = 1
+    if (dots.opacity) {
+        dotsOpacity = dots.opacity
+    }
+
+    xAxis
+        .attr("stroke", color)
+        .attr("stroke-width", weight)
+        .style("opacity", opacity)
+    
+    xAxisDots
+        .attr("stroke", dotsColor)
+        .attr("stroke-width", dotsWeight)
+        .style("opacity", dotsOpacity)
+
+    if (dots.display===false) {
+        xAxisDots
+            .attr("stroke", "none")
+            .style("opacity", 0)
+    }
+}
+
+function yAxisOptions(chart_area, color, weight, opacity, dots) {
+    const yAxisDots = chart_area.selectAll("g.yAxis g.tick line")
+    const yAxis = chart_area.select("g.yAxis path.domain")
+
+    let dotsColor = "black"
+    if (dots.color) {
+        dotsColor = dots.color
+    }
+
+    let dotsWeight = 1
+    if (dots.weight) {
+        dotsWeight = dots.weight
+    }
+
+    let dotsOpacity = 1
+    if (dots.opacity) {
+        dotsOpacity = dots.opacity
+    }
+
+    yAxis
+        .attr("stroke", color)
+        .attr("stroke-width", weight)
+        .style("opacity", opacity)
+    
+    yAxisDots
+        .attr("stroke", dotsColor)
+        .attr("stroke-width", dotsWeight)
+        .style("opacity", dotsOpacity)
+
+    if (dots.display===false) {
+        yAxisDots
+            .attr("stroke", "none")
+    }
+}
+
+export function axisOptions(chart_area, options) {
+    let color = "black"
+    if (options.plugins.axis.color) {
+        color = options.plugins.axis.color
+    }
+
+    let weight = 1
+    if (options.plugins.axis.weight) {
+        weight = options.plugins.axis.weight
+    }
+
+    let opacity = 1
+    if (options.plugins.axis.opacity) {
+        opacity = options.plugins.axis.opacity
+    }
+
+    let dots = {
+        display: true,
+        color: "black",
+        weight: 1,
+        opacity: 1
+    }
+    
+    if (options.plugins.axis.dots) {
+        dots = options.plugins.axis.dots
+    }
+
+    xAxisOptions(chart_area, color, weight, opacity, dots)
+    yAxisOptions(chart_area, color, weight, opacity, dots)
+
+    if (options.plugins.axis.xAxis) {
+        let xAxisColor = color
+        if (options.plugins.axis.xAxis.color) {
+            xAxisColor = options.plugins.axis.xAxis.color
+        }
+    
+        let xAxisWeight = weight
+        if (options.plugins.axis.xAxis.weight) {
+            xAxisWeight = options.plugins.axis.xAxis.weight
+        }
+    
+        let xAxisOpacity = opacity
+        if (options.plugins.axis.xAxis.opacity) {
+            xAxisOpacity = options.plugins.axis.xAxis.opacity
+        }
+    
+        let xAxisDots = dots
+        if (options.plugins.axis.xAxis.dots) {
+            xAxisDots = options.plugins.axis.xAxis.dots
+        }
+
+        xAxisOptions(chart_area, xAxisColor, xAxisWeight, xAxisOpacity, xAxisDots)
+    }
+
+    if (options.plugins.axis.yAxis) {
+        let yAxisColor = color
+        if (options.plugins.axis.yAxis.color) {
+            yAxisColor = options.plugins.axis.yAxis.color
+        }
+    
+        let yAxisWeight = weight
+        if (options.plugins.axis.yAxis.weight) {
+            yAxisWeight = options.plugins.axis.yAxis.weight
+        }
+    
+        let yAxisOpacity = opacity
+        if (options.plugins.axis.yAxis.opacity) {
+            yAxisOpacity = options.plugins.axis.yAxis.opacity
+        }
+    
+        let yAxisDots = dots
+        if (options.plugins.axis.yAxis.dots) {
+            yAxisDots = options.plugins.axis.yAxis.dots
+        }
+
+        yAxisOptions(chart_area, yAxisColor, yAxisWeight, yAxisOpacity, yAxisDots)
     }
 }
