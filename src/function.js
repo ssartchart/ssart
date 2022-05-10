@@ -3,7 +3,7 @@ import { BarHChart } from "./BarHChart.js";
 import { BarHClass } from "./BarHClass.js";
 // import {BarChart} from './BarChartfunction.js'
 import { xGrid, yGrid } from "./Axis_helper.js";
-import { LabelColor } from "./Color_helper.js";
+import { LabelColor, LabelsColor } from "./Color_helper.js";
 import { Data_pre_processing } from "./Dataset_helper.js";
 import { drawTitle, drawXTitle, drawYTitle } from "./Title.js";
 import { checkMargin } from "./checkMargin.js";
@@ -33,6 +33,7 @@ function Chart(
 
   const labels = data.labels;
   const labelcolor = LabelColor(data.datasets);
+  const labelscolor = LabelsColor(data);
   const color = labelcolor.color;
   const legend_label = labelcolor.label;
   const chart_area = svg
@@ -45,18 +46,35 @@ function Chart(
     height: height,
   }
   if (options.plugins?.legend) {
-    legend_box = drawLegend(
-      oid,
-      svg,
-      labelcolor,
-      width,
-      height,
-      chart_area,
-      legend,
-      margin,
-      data.datasets,
-      type
-    );
+    if(type == "donut"|| type == "donut" || type == "radar"){
+      legend_box = drawLegend(
+        oid,
+        svg,
+        labelscolor,
+        width,
+        height,
+        chart_area,
+        legend,
+        margin,
+        data.datasets,
+        type
+      );
+    }
+    else{
+      legend_box = drawLegend(
+        oid,
+        svg,
+        labelcolor,
+        width,
+        height,
+        chart_area,
+        legend,
+        margin,
+        data.datasets,
+        type
+      );
+    }
+    
   }
   const scales = options.scales;
   const chart_width = width - legend_box.width;
@@ -262,32 +280,44 @@ function Chart(
   }
 
   if (type === "donut" || type === "pie") {
+    // console.log(datasets)
     drawCicleChart(data.datasets);
     for (let i = 0; i < data.datasets.length; i++) {
       const item = d3.select(`${id}-legend-${i} rect`);
       item.attr("fill", data.datasets[i].color);
     }
-    createCircleChartLegend(
-      id,
+    // createCircleChartLegend(
+    //   id,
+    //   data.datasets,
+    //   legend_box?.legendList,
+    //   drawCicleChart,
+    //   {},
+    //   renderBackground,
+    // );
+    createLegendToggle(
       data.datasets,
       legend_box?.legendList,
+      chart_area,
       drawCicleChart,
       {},
-      renderBackground,
+      renderBackground
     );
     function drawCicleChart(chartData) {      
-      const chart = new CircleChart({
+      const circleChart = new CircleChart({
         id: oid,
         type,
-        svg,
+        chart_area,
+        color,
         width: chart_width,
         height: chart_height,
         margin,
         datasets: chartData,
         options,
       });
+      circleChart.tooltip();
       renderOptions();
-    }
+      
+    }    
   }
   if (type === "radar" ) {
     const chart = new RadarChart({

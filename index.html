@@ -16,83 +16,7 @@
 
     <link rel="icon" type="image/png" href="http://example.com/myicon.png">
 </head>
-<style>
-    body {
-        padding: 5%;
-        text-align: center;
-    }
 
-    #bargraph {
-        position: relative;
-    }
-
-    #tooltip {
-        position: absolute;
-        opacity: 1;
-        max-width: 30%;
-        /* max-height: 30%; */
-        min-width: 5%;
-        min-height: 5%;
-        line-height: 20px;
-        transition: all 0.3s;
-        border-radius: 5px;
-        padding: 5px 8px;
-        text-align: center;
-        color: rgb(0, 0, 0);
-        font-size: 14px;
-        font-weight: bold;
-        background-color: rgb(15, 14, 14);
-        display: inline-block;
-    }
-
-    .tooltip2 {
-        background-color: rgba(0, 0, 0, 0.75);
-        padding: 15px;
-        border-radius: 2px;
-        font-family: sans-serif;
-        color: white;
-        pointer-events: none;
-        box-shadow: 0 0 5px #999999;
-        background-color: rgb(115, 114, 214);
-        display: inline-block;
-    }
-
-    .svg-container {
-        display: inline-block;
-        position: relative;
-        width: 100%;
-        padding-bottom: 100%;
-        /* aspect ratio */
-        vertical-align: top;
-        overflow: hidden;
-    }
-
-    .svg-content-responsive {
-        display: inline-block;
-        position: absolute;
-        top: 10px;
-        left: 0;
-    }
-
-
-
-    /* 컬러 CSS를 스타일안에 미리 해놔야하는지 ..? */
-    .blue {
-        fill: #5abae6;
-    }
-
-    .red {
-        fill: #d34e4e;
-    }
-
-    .green {
-        fill: #9dbb19;
-    }
-
-    .yellow {
-        fill: #f7b358;
-    }
-</style>
 </head>
 
 <body>
@@ -110,14 +34,6 @@
     <div id="barH"></div>
     <div id="radar"></div>
     
-        <div id='tooltip'></div>
-    </div>
-    <div id="bargraph2"></div>
-    <div id="bargraph3"></div>
-    <div id="bargraph4"></div>
-    <div id="bargraph5"></div>
-    <div id="circle">
-    </div>
     <script src='https://d3js.org/d3.v5.min.js'></script>
 
     <script>
@@ -519,7 +435,7 @@
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'left',// top bottom left right
+                        position: 'bottom',// top bottom left right
                     },
                     title: {
                         display: true,
@@ -654,6 +570,7 @@
                 { name: 'F', value: 1200, color: '#df7454' },
                 { name: 'G', value: 1100, color: '#e88d5d' },
                 { name: 'H', value: 600, color: '#f8d690' }
+                
             ]
         };
         const config6 = {
@@ -667,7 +584,29 @@
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'right',// top bottom left right
+                        position: 'top',// top bottom left right
+                    },
+                    title: {
+                        display: true,
+                        text: 'Circle Chart Test'
+                    },
+                    sort: true,
+                    view: true,
+                },
+            }
+        }
+        const config7 = {
+            type: 'radar',
+            width: 500,
+            height: 500,
+            margin: { top: 40, left: 40, bottom: 40, right: 40 },
+            padding: 0.1,
+            data: data6,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',// top bottom left right
                     },
                     title: {
                         display: true,
@@ -796,6 +735,7 @@
         import * as Chart from './src/index.js';
 
         Chart.Chart('#circle', config6);
+        Chart.Chart('#radar', config7);
     </script>
 
     <script>MakeRadar();</script>
