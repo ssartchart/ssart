@@ -172,6 +172,9 @@
                                                         var labelArray = barLabel.replace(/ /g,"").split(",");
                                                         data.labels = labelArray;
                                                     }
+                                                    data.datasets[0].backgroundColor=colorHex[barColor1];
+                                                    data.datasets[1].backgroundColor=colorHex[barColor2];
+                                                    data.datasets[2].backgroundColor=colorHex[barColor3];
                                                     console.log('==============================');
                                                     console.log(colorHex);
                                                     console.log(barColor1+", "+barColor2+" , "+barColor3);
@@ -643,7 +646,7 @@ options: {
 responsive: true,
 plugins: {
 legend: {
-position: 'right',// top bottom left right
+position: 'bottom',// top bottom left right
 fontSize: '10px',
 fontWeight: 'normal',
 fontFamily: 'comic sans ms',
@@ -651,7 +654,7 @@ legendType: 'rect', // rect(default), circle,
 },
 title: {
 display: true,
-text: 'Chart.js Bar Chart'
+text: 'Bar Chart'
 },
 xTitle: {
 display: true,
@@ -680,7 +683,8 @@ menu: {
 grid: true,
 xGrid: true,
 yGrid: true,
-background: true
+background: true,
+download: true
 }
 },
 scales: {                    
