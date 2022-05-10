@@ -9,11 +9,7 @@
     <!-- <link rel="stylesheet" href="https://uicdn.toast.com/chart/latest/toastui-chart.min.css" /> -->
     <!-- <script src="https://uicdn.toast.com/chart/latest/toastui-chart.min.js"></script> -->
     <link rel="stylesheet" href="src/css/index.css">
-
-    <script src="src/RadarChart.js"></script>
-
-
-
+    
     <link rel="icon" type="image/png" href="http://example.com/myicon.png">
 </head>
 
@@ -129,16 +125,49 @@
                         // weight: 1,        // 선 두께
                         // opacity: .5,      // 선 투명도
                     },
-                    background: {
+                    // background: {
 
-                    },
+                    // },
                     menu: {
                         grid: true,
                         xGrid: true,
                         yGrid: true,
                         background: true,
                         download: true
-                    }
+                    },
+                    axis: {
+                        color: "rgb(255, 0, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
+                        weight: 5,
+                        opacity: .5,
+                        dots: {
+                            display: false,
+                            color: "rgb(255, 0, 255)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
+                            weight: 5,
+                            opacity: .5
+                        },
+                        xAxis: {
+                            color: "rgb(0, 255, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
+                            weight: 5,
+                            opacity: 1,
+                            dots: {
+                                display: false,
+                                color: "rgb(255, 0, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
+                                weight: 5,
+                                opacity: 1
+                            }
+                        },
+                        yAxis: {
+                            color: "rgb(255, 0, 255)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
+                            weight: 1,
+                            opacity: .5,
+                            dots: {
+                                display: false,
+                                color: "rgb(0, 0, 255)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
+                                weight: 5,
+                                opacity: .5
+                            }
+                        }
+                    },
                 },
                 scales: {
                     yAxis: {
@@ -600,13 +629,30 @@
                 },
             }
         }
-        const config7 = {
+// 레이더 차트 데이터 입력 부분.
+        const data_r = {
+            labels: ['A', 'B', 'C', 'D' ,'E' ,'F'],
+            datasets: [
+                { name: 'AAA' },
+                { name: 'BBB' },
+                { name: 'CC' },
+                { name : 'DDDDD'}
+            ],
+            data:[
+                [2700,2700,1200,13,1400,1700],
+                [1400,100,2800,2500,1200,2100],
+                [1200,1900,1400,12,2700,1600],
+                [20,2200,2000,520,2300,200],
+            ]            
+        };
+        const config_r = {
             type: 'radar',
             width: 500,
             height: 500,
             margin: { top: 40, left: 40, bottom: 40, right: 40 },
             padding: 0.1,
-            data: data6,
+            data: data_r,
+            depth:7, // 구간 갯수
             options: {
                 responsive: true,
                 plugins: {
@@ -625,6 +671,7 @@
                 },
             }
         }
+        // 레이더 차트 데이터 입력 부분.
     </script>
     <script type="module">
 
@@ -742,8 +789,12 @@
         Chart.Chart('#circle', config6);
         Chart.Chart('#radar', config7);
     </script>
-
-    <script>MakeRadar();</script>
+<!-- 레이더 차트 생성 부분 -->
+    <script type="module">
+        import * as Chart from './src/index.js';
+        Chart.Chart('#radar', config_r);
+    </script>
+<!-- 레이더 차트 생성 부분 -->
 </body>
 
 </html>

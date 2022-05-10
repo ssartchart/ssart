@@ -2,14 +2,14 @@ import { BarChart } from "./BarChart.js";
 import { BarHChart } from "./BarHChart.js";
 import { BarHClass } from "./BarHClass.js";
 // import {BarChart} from './BarChartfunction.js'
-import { xGrid, yGrid } from "./Axis_helper.js";
+import { axisOptions, xGrid as drawXGrid, yGrid as drawYGrid } from "./Axis_helper.js";
 import { LabelColor, LabelsColor } from "./Color_helper.js";
 import { Data_pre_processing } from "./Dataset_helper.js";
 import { drawTitle, drawXTitle, drawYTitle } from "./Title.js";
 import { checkMargin } from "./checkMargin.js";
 import { createCircleChartLegend, createLegendToggle, drawLegend } from "./legend.js";
-import { menu } from "./menu.js";
-import { background } from "./background.js";
+import { menu as drawMenu } from "./menu.js";
+import { background as drawBackground } from "./background.js";
 import { ScatterChart } from "./ScatterChart.js";
 import { BubbleChart } from "./BubbleChart.js";
 import { CircleChart } from "./CircleChart.js";
@@ -19,9 +19,10 @@ import { AreaChart } from "./AreaChart.js";
 
 function Chart(
   id,
-  { type, width, height, margin, padding = 0, data, options, y_max, y_min = 0 }
+  { type, width, height, margin, padding = 0, data, options, y_max, y_min = 0,depth }
 ) {
-  const legend = options.plugins.legend;
+  const { plugins, scales } = options;
+  let { legend = {position: "left"}, title, xTitle, yTitle, xGrid, yGrid, background, menu } = plugins;
   const oid = id.slice(1, id.length);
   const svg = d3
     .select(id)
@@ -40,13 +41,14 @@ function Chart(
   const chart_area = svg
     .append("g")
     .style("width", width - 100)
-    .style("height", height - 100);
-    
+    .style("height", height - 100);  
+  
   let legend_box = {
     width: width,
     height: height,
+    legendList: []
   }
-  if (options.plugins?.legend) {
+  if (legend) {
     if(type == "donut"|| type == "donut" || type == "radar"){
       legend_box = drawLegend(
         oid,
@@ -55,13 +57,12 @@ function Chart(
         width,
         height,
         chart_area,
-        legend,
+        options,
         margin,
         data.datasets,
         type
       );
-    }
-    else{
+    } else {
       legend_box = drawLegend(
         oid,
         svg,
@@ -69,29 +70,29 @@ function Chart(
         width,
         height,
         chart_area,
-        legend,
+        options,
         margin,
         data.datasets,
         type
       );
-    }
-    
+    }    
   }
-  const scales = options.scales;
   const chart_width = width - legend_box.width;
   const chart_height = height - legend_box.height;
   checkMargin(margin);
   renderBackground();
   function renderBackground() {
-    if (options.plugins.background) {
-      background(
-        chart_area,
-        margin,
-        chart_width,
-        chart_height,
-        options.plugins.background
-      );
+    let backgroundOptions = {}
+    if (background) {
+      backgroundOptions = background
     }
+    drawBackground(
+      chart_area,
+      margin,
+      chart_width,
+      chart_height,
+      backgroundOptions
+    );
   }
   if (type === "bar") {
     let datasets = Data_pre_processing(data.labels, data.datasets, "namevalue");
@@ -99,6 +100,7 @@ function Chart(
     // width, height 조정 필요
     drawBarChart(datasets); // datasets으로 바차트 그리기
     createLegendToggle(
+      id,
       datasets,
       legend_box?.legendList,
       chart_area,
@@ -118,8 +120,8 @@ function Chart(
         margin,
         padding,
         scales,
+        position: legend.position,
       });
-      chart.tooltip();
       chart.animation();
       renderOptions();
     }
@@ -129,6 +131,7 @@ function Chart(
     const datasets = Data_pre_processing(data.labels, data.datasets, "xy");
     drawScatterChart(datasets);
     createLegendToggle(
+      id,
       datasets,
       legend_box?.legendList,
       chart_area,
@@ -159,6 +162,7 @@ function Chart(
     const datasets = Data_pre_processing(data.labels, data.datasets, "xyr");
     drawBubbleChart(datasets);
     createLegendToggle(
+      id,
       datasets,
       legend_box?.legendList,
       chart_area,
@@ -189,6 +193,7 @@ function Chart(
     const datasets = Data_pre_processing(data.labels, data.datasets, "xy");
     drawLineChart(datasets);
     createLegendToggle(
+      id,
       datasets,
       legend_box?.legendList,
       chart_area,
@@ -219,6 +224,7 @@ function Chart(
     const datasets = Data_pre_processing(data.labels, data.datasets, "xy");
     drawAreaChart(datasets);
     createLegendToggle(
+      id,
       datasets,
       legend_box?.legendList,
       chart_area,
@@ -253,6 +259,7 @@ function Chart(
     );
     drawbarHChart(datasets);
     createLegendToggle(
+      id,
       datasets,
       legend_box?.legendList,
       chart_area,
@@ -305,11 +312,18 @@ function Chart(
     createLegendToggle(
       datasets,
       legend_box?.legendList,
-      chart_area,
       drawCicleChart,
       {},
-      renderBackground
+      renderBackground,
     );
+    // createLegendToggle(
+    //   data.datasets,
+    //   legend_box?.legendList,
+    //   chart_area,
+    //   drawCicleChart,
+    //   {},
+    //   renderBackground
+    // );
     function drawCicleChart(chartData) {      
       const circleChart = new CircleChart({
         id: oid,
@@ -335,34 +349,36 @@ function Chart(
       height,
       margin,
       data,
+      depth,
       options,
     });
     // chart.tooltip();
+    renderOptions();
   }
   function renderOptions() {
-    if (options.plugins.title) {
+    if (title) {
       drawTitle(svg, options, width, chart_width, height, margin);      
     }
     // except circle
     if (type != "donut" && type != "pie") {
-      if (options.plugins.xTitle) {
+      if (xTitle) {
         // width, height 조정 필요
-        if (options.plugins.xTitle) {
+        if (xTitle) {
           drawXTitle(
             chart_area,
-            options.plugins.xTitle,
+            xTitle,
             chart_width,
             chart_height,
             margin
           );
         }
       }
-      if (options.plugins.yTitle) {
+      if (yTitle) {
         // width, height 조정 필요
-        if (options.plugins.yTitle) {
+        if (yTitle) {
           drawYTitle(
             chart_area,
-            options.plugins.yTitle,
+            yTitle,
             chart_width,
             chart_height,
             margin,
@@ -370,24 +386,28 @@ function Chart(
         }
       }
     }
-    if (options.plugins.xGrid) {
-      xGrid(
+    if (options.plugins.axis) {
+      axisOptions(chart_area, options)
+    }
+
+    if (xGrid) {
+      drawXGrid(
         chart_area,
         chart_height - margin.top - margin.bottom,
-        options.plugins.xGrid
+        xGrid
       );
     }
 
-    if (options.plugins.yGrid) {
-      yGrid(
+    if (yGrid) {
+      drawYGrid(
         chart_area,
         chart_width - margin.left - margin.right,
-        options.plugins.yGrid
+        yGrid
       );
     }
 
-    if (options.plugins.menu) {
-      menu(chart_width, width, margin, svg, options, id);
+    if (menu) {
+      drawMenu(chart_width, width, margin, svg, options, id);
     }
   }
 }
@@ -396,8 +416,8 @@ function ChartH(
   id,
   { type, width, height, margin, padding = 0, data, options, y_max, y_min = 0 }
 ) {
-  const { position } = options.plugins.legend;
-  const legend = options.plugins.legend;
+  const { position } = legend;
+  const legend = legend;
   const svg = d3
     .select(id)
     .append("svg")
@@ -447,51 +467,51 @@ function ChartH(
     barHchart.animation();
   }
 
-  drawTitle(svg, options.plugins.title.text, width, height, margin);
+  drawTitle(svg, title.text, width, height, margin);
   drawXTitle(
     chart_area,
-    options.plugins.xTitle.text,
+    xTitle.text,
     chart_width,
     chart_height,
     margin
   );
   drawYTitle(
     chart_area,
-    options.plugins.yTitle.text,
+    yTitle.text,
     chart_width,
     chart_height,
     margin,
-    options.plugins.yTitle.position
+    yTitle.position
   );
 
-  if (options.plugins.xGrid) {
-    xGrid(
+  if (xGrid) {
+    drawXGrid(
       chart_area,
       chart_height - margin.top - margin.bottom,
-      options.plugins.xGrid
+      xGrid
     );
   }
 
-  if (options.plugins.yGrid) {
-    yGrid(
+  if (yGrid) {
+    drawYGrid(
       chart_area,
       chart_width - margin.left - margin.right,
-      options.plugins.yGrid
+      yGrid
     );
   }
 
-  if (options.plugins.background) {
-    background(
+  if (background) {
+    drawBackground(
       chart_area,
       margin,
       chart_width,
       chart_height,
-      options.plugins.background
+      background
     );
   }
 
-  if (options.plugins.menu) {
-    menu(chart_width, width, margin, chart_area, options, id);
+  if (menu) {
+    drawMenu(chart_width, width, margin, chart_area, options, id);
   }
 
   /*
