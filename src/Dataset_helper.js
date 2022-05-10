@@ -156,6 +156,52 @@ export const Data_pre_processing = (labels, datasets, type="namevalue")=>{
                 });
             });
             break;   
+
+        case "namevaluecolor":
+            datasets.forEach((dataset,index) => {
+                const label_index = index;
+                if (dataset.label == null){
+                    dataset.label = "label_"+(label_index+1);
+                }
+                
+                if (typeof(dataset.data[0]) !== null && Array.isArray(dataset.data[0])){
+                    let rv = [];
+                    for (let i = 0; i < Math.min(dataset.data.length,labels.length); ++i){
+                        rv[i] = {name:dataset.data[i][0],value: dataset.data[i][1]};
+                    }
+                    dataset.data = rv;
+                }
+                    // 값으로 입력한 경우 object 로 변경
+                else if (typeof(dataset.data[0]) !== null && typeof(dataset.data[0]) !== 'object'){
+                    let rv = [];
+                    for (let i = 0; i < Math.min(dataset.data.length,labels.length); ++i){
+                        rv[i] = {name:labels[i],value: dataset.data[i]};
+                    }
+                    dataset.data = rv;
+                }
+                else {
+                    let rv = [];
+                    for (let i = 0; i < Math.min(dataset.data.length,labels.length); ++i){
+                        let keys = Object.keys(dataset.data[i]);
+                        if(!keys.includes("name") || !keys.includes("value")){
+                            let values = Object.values(dataset.data[i]);
+                            rv[i] = {name:values[0], value: values[1]};
+                        }
+                        else{
+                            rv[i] = dataset.data[i];
+                        }
+                        
+                        
+                    }
+                    dataset.data = rv;
+                }
+        
+                dataset.data.forEach(d=>{
+                    d.label = dataset.label;
+                    d.label_index = label_index;
+                });
+            });
+        break;
     }
     
     return datasets;

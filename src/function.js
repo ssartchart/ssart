@@ -2,14 +2,14 @@ import { BarChart } from "./BarChart.js";
 import { BarHChart } from "./BarHChart.js";
 import { BarHClass } from "./BarHClass.js";
 // import {BarChart} from './BarChartfunction.js'
-import { xGrid, yGrid } from "./Axis_helper.js";
-import { LabelColor } from "./Color_helper.js";
+import { axisOptions, xGrid as drawXGrid, yGrid as drawYGrid } from "./Axis_helper.js";
+import { LabelColor, LabelsColor } from "./Color_helper.js";
 import { Data_pre_processing } from "./Dataset_helper.js";
 import { drawTitle, drawXTitle, drawYTitle } from "./Title.js";
 import { checkMargin } from "./checkMargin.js";
-import { createLegendToggle, drawLegend } from "./legend.js";
-import { menu } from "./menu.js";
-import { background } from "./background.js";
+import { createCircleChartLegend, createLegendToggle, drawLegend } from "./legend.js";
+import { menu as drawMenu } from "./menu.js";
+import { background as drawBackground } from "./background.js";
 import { ScatterChart } from "./ScatterChart.js";
 import { BubbleChart } from "./BubbleChart.js";
 import { CircleChart } from "./CircleChart.js";
@@ -19,9 +19,10 @@ import { AreaChart } from "./AreaChart.js";
 
 function Chart(
   id,
-  { type, width, height, margin, padding = 0, data, options, y_max, y_min = 0 }
+  { type, width, height, margin, padding = 0, data, options, y_max, y_min = 0,depth }
 ) {
-  const legend = options.plugins.legend;
+  const { plugins, scales } = options;
+  let { legend = {position: "left"}, title, xTitle, yTitle, xGrid, yGrid, background, menu } = plugins;
   const oid = id.slice(1, id.length);
   const svg = d3
     .select(id)
@@ -33,40 +34,64 @@ function Chart(
 
   const labels = data.labels;
   const labelcolor = LabelColor(data.datasets);
+  const labelscolor = LabelsColor(data);
   const color = labelcolor.color;
   const legend_label = labelcolor.label;
   const chart_area = svg
     .append("g")
     .style("width", width - 100)
-    .style("height", height - 100);
-
-  const legend_box = drawLegend(
-    oid,
-    svg,
-    labelcolor,
-    width,
-    height,
-    chart_area,
-    legend,
-    margin,
-    data.datasets
-  );
-
-  const scales = options.scales;
+    .style("height", height - 100);  
+  
+  let legend_box = {
+    width: width,
+    height: height,
+    legendList: []
+  }
+  if (legend) {
+    if(type == "donut"|| type == "donut" || type == "radar"){
+      legend_box = drawLegend(
+        oid,
+        svg,
+        labelscolor,
+        width,
+        height,
+        chart_area,
+        options,
+        margin,
+        data.datasets,
+        type
+      );
+    } else {
+      legend_box = drawLegend(
+        oid,
+        svg,
+        labelcolor,
+        width,
+        height,
+        chart_area,
+        options,
+        margin,
+        data.datasets,
+        type
+      );
+    }    
+  }
   const chart_width = width - legend_box.width;
   const chart_height = height - legend_box.height;
   checkMargin(margin);
   renderBackground();
   function renderBackground() {
-    if (options.plugins.background) {
-      background(
-        chart_area,
-        margin,
-        chart_width,
-        chart_height,
-        options.plugins.background
-      );
+    let backgroundOptions = {}
+    if (background) {
+      backgroundOptions = background
     }
+    drawBackground(
+      chart_area,
+      margin,
+      chart_width,
+      chart_height,
+      backgroundOptions
+    );
   }
   if (type === "bar") {
     let datasets = Data_pre_processing(data.labels, data.datasets, "namevalue");
@@ -74,6 +99,7 @@ function Chart(
     // width, height 조정 필요
     drawBarChart(datasets); // datasets으로 바차트 그리기
     createLegendToggle(
+      id,
       datasets,
       legend_box?.legendList,
       chart_area,
@@ -93,8 +119,8 @@ function Chart(
         margin,
         padding,
         scales,
+        position: legend.position,
       });
-      chart.tooltip();
       chart.animation();
       renderOptions();
     }
@@ -104,6 +130,7 @@ function Chart(
     const datasets = Data_pre_processing(data.labels, data.datasets, "xy");
     drawScatterChart(datasets);
     createLegendToggle(
+      id,
       datasets,
       legend_box?.legendList,
       chart_area,
@@ -134,6 +161,7 @@ function Chart(
     const datasets = Data_pre_processing(data.labels, data.datasets, "xyr");
     drawBubbleChart(datasets);
     createLegendToggle(
+      id,
       datasets,
       legend_box?.legendList,
       chart_area,
@@ -164,6 +192,7 @@ function Chart(
     const datasets = Data_pre_processing(data.labels, data.datasets, "xy");
     drawLineChart(datasets);
     createLegendToggle(
+      id,
       datasets,
       legend_box?.legendList,
       chart_area,
@@ -194,6 +223,7 @@ function Chart(
     const datasets = Data_pre_processing(data.labels, data.datasets, "xy");
     drawAreaChart(datasets);
     createLegendToggle(
+      id,
       datasets,
       legend_box?.legendList,
       chart_area,
@@ -228,6 +258,7 @@ function Chart(
     );
     drawbarHChart(datasets);
     createLegendToggle(
+      id,
       datasets,
       legend_box?.legendList,
       chart_area,
@@ -256,16 +287,44 @@ function Chart(
   }
 
   if (type === "donut" || type === "pie") {
-    const chart = new CircleChart({
-      type,
-      svg,
-      width,
-      height,
-      margin,
-      data,
-      options,
-    });
-    renderOptions();
+    // console.log(datasets)
+    drawCicleChart(data.datasets);
+    for (let i = 0; i < data.datasets.length; i++) {
+      const item = d3.select(`${id}-legend-${i} rect`);
+      item.attr("fill", data.datasets[i].color);
+    }
+    createCircleChartLegend(
+      id,
+      data.datasets,
+      legend_box?.legendList,
+      drawCicleChart,
+      {},
+      renderBackground,
+    );
+    // createLegendToggle(
+    //   data.datasets,
+    //   legend_box?.legendList,
+    //   chart_area,
+    //   drawCicleChart,
+    //   {},
+    //   renderBackground
+    // );
+    function drawCicleChart(chartData) {      
+      const circleChart = new CircleChart({
+        id: oid,
+        type,
+        chart_area,
+        color,
+        width: chart_width,
+        height: chart_height,
+        margin,
+        datasets: chartData,
+        options,
+      });
+      circleChart.tooltip();
+      renderOptions();
+      
+    }    
   }
   if (type === "radar" ) {
     const chart = new RadarChart({
@@ -275,59 +334,65 @@ function Chart(
       height,
       margin,
       data,
+      depth,
       options,
     });
     // chart.tooltip();
-  }
-  if (options.plugins.menu) {
-    menu(chart_width, margin, svg, options, id);
+    renderOptions();
   }
   function renderOptions() {
-    if (options.plugins.title.display) {
-      drawTitle(svg, options.plugins.title.text, chart_width, height, margin);
+    if (title) {
+      drawTitle(svg, options, width, chart_width, height, margin);      
     }
     // except circle
     if (type != "donut" && type != "pie") {
-      if (options.plugins.xTitle) {
+      if (xTitle) {
         // width, height 조정 필요
-        if (options.plugins.xTitle.display) {
+        if (xTitle) {
           drawXTitle(
             chart_area,
-            options.plugins.xTitle.text,
+            xTitle,
             chart_width,
             chart_height,
             margin
           );
         }
       }
-      if (options.plugins.yTitle) {
+      if (yTitle) {
         // width, height 조정 필요
-        if (options.plugins.yTitle.display) {
+        if (yTitle) {
           drawYTitle(
             chart_area,
-            options.plugins.yTitle.text,
+            yTitle,
             chart_width,
             chart_height,
             margin,
-            options.plugins.yTitle.position
           );
         }
       }
     }
-    if (options.plugins.xGrid) {
-      xGrid(
+    if (options.plugins.axis) {
+      axisOptions(chart_area, options)
+    }
+
+    if (xGrid) {
+      drawXGrid(
         chart_area,
         chart_height - margin.top - margin.bottom,
-        options.plugins.xGrid
+        xGrid
       );
     }
 
-    if (options.plugins.yGrid) {
-      yGrid(
+    if (yGrid) {
+      drawYGrid(
         chart_area,
         chart_width - margin.left - margin.right,
-        options.plugins.yGrid
+        yGrid
       );
+    }
+
+    if (menu) {
+      drawMenu(chart_width, width, margin, svg, options, id);
     }
   }
 }
@@ -336,8 +401,8 @@ function ChartH(
   id,
   { type, width, height, margin, padding = 0, data, options, y_max, y_min = 0 }
 ) {
-  const { position } = options.plugins.legend;
-  const legend = options.plugins.legend;
+  const { position } = legend;
+  const legend = legend;
   const svg = d3
     .select(id)
     .append("svg")
@@ -387,111 +452,52 @@ function ChartH(
     barHchart.animation();
   }
 
-  drawTitle(svg, options.plugins.title.text, width, height, margin);
+  drawTitle(svg, title.text, width, height, margin);
   drawXTitle(
     chart_area,
-    options.plugins.xTitle.text,
+    xTitle.text,
     chart_width,
     chart_height,
     margin
   );
   drawYTitle(
     chart_area,
-    options.plugins.yTitle.text,
+    yTitle.text,
     chart_width,
     chart_height,
     margin,
-    options.plugins.yTitle.position
+    yTitle.position
   );
 
-  if (options.plugins.xGrid) {
-    xGrid(
+  if (xGrid) {
+    drawXGrid(
       chart_area,
       chart_height - margin.top - margin.bottom,
-      options.plugins.xGrid
+      xGrid
     );
   }
 
-  if (options.plugins.yGrid) {
-    yGrid(
+  if (yGrid) {
+    drawYGrid(
       chart_area,
       chart_width - margin.left - margin.right,
-      options.plugins.yGrid
+      yGrid
     );
   }
 
-  if (options.plugins.background) {
-    background(
+  if (background) {
+    drawBackground(
       chart_area,
       margin,
       chart_width,
       chart_height,
-      options.plugins.background
+      background
     );
   }
 
-  if (options.plugins.menu) {
-    menu(chart_width, margin, chart_area, options, id);
+  if (menu) {
+    drawMenu(chart_width, width, margin, chart_area, options, id);
   }
-
-  //   if (options.plugins.xGrid) {
-  //     xGrid(chart_area,chart_height - margin.top - margin.bottom,options.plugins.xGrid);
-
-  //     svg
-  //         .append('rect')
-  //         .attr('x', width - 20)
-  //         .attr('y', margin.top)
-  //         .attr('height', 20)
-  //         .attr('width', 20)
-  //         .attr('id', id+"xGridHiddenButton")
-
-  //     const xGridHiddenButton = document.getElementById(id+"xGridHiddenButton")
-  //     xGridHiddenButton.innerText = id
-  //     xGridHiddenButton.addEventListener("click", xGridHidden)
-
-  //     svg
-  //         .append('rect')
-  //         .attr('fill', "steelblue")
-  //         .attr('x', width - 20)
-  //         .attr('y', margin.top + 30)
-  //         .attr('height', 20)
-  //         .attr('width', 20)
-  //         .attr('id', id+"xGridShowButton")
-
-  //     const xGridShowButton = document.getElementById(id+"xGridShowButton")
-  //     xGridShowButton.innerText = id
-  //     xGridShowButton.addEventListener("click", xGridShow)
-
-  // }
-
-  // if (options.plugins.yGrid) {
-  //     yGrid(chart_area,chart_width - margin.left - margin.right,options.plugins.yGrid);
-
-  //     svg
-  //         .append('rect')
-  //         .attr('x', width - 20)
-  //         .attr('y', margin.top + 60)
-  //         .attr('height', 20)
-  //         .attr('width', 20)
-  //         .attr('id', id+"yGridHiddenButton")
-
-  //     const yGridHiddenButton = document.getElementById(id+"yGridHiddenButton")
-  //     yGridHiddenButton.innerText = id
-  //     yGridHiddenButton.addEventListener("click", yGridHidden)
-
-  //     svg
-  //         .append('rect')
-  //         .attr('fill', "steelblue")
-  //         .attr('x', width - 20)
-  //         .attr('y', margin.top + 90)
-  //         .attr('height', 20)
-  //         .attr('width', 20)
-  //         .attr('id', id+"yGridShowButton")
-
-  //     const yGridShowButton = document.getElementById(id+"yGridShowButton")
-  //     yGridShowButton.innerText = id
-  //     yGridShowButton.addEventListener("click", yGridShow)
-  // }
 
   /*
     const Type = document.getElementsByTagName('rect'); // 타입으로 받아서 처리해야할것같아요

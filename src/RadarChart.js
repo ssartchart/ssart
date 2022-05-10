@@ -1,5 +1,5 @@
 export class RadarChart {
-    constructor({type,svg,width,height,data}){
+    constructor({type,svg,width,height,data,depth}){
 
         const features = []; // 축 저장.
         for(var i = 0 ; i < data.labels.length ; i++){
@@ -9,26 +9,36 @@ export class RadarChart {
         // console.log("feature")
 
         const datas = [];
+        const datanames = [];
 
-        console.log(data)
+        for(var i = 0 ; i < data.datasets.length ; i++){
+            datanames.push(data.datasets[i]);
+        }
         let max = 0;
-
+        var sum = [] ;
         for (var i = 0; i < data.data.length; i++){
             var point = {};
+            var sumtemp = 0;
             var tmp = data.data[i];
             for(var j = 0; j < features.length; j++){
                 point[features[j]] = tmp[j]; 
                 if(tmp[j] > max){
                     max = tmp[j]
                 }
-                
+                // console.log(tmp[j])
+                sumtemp = sumtemp + tmp[j];
+                // console.log("sum")
+                // console.log(sumtemp)
             }
+            sum.push(sumtemp);
             datas.push(point);
         }
         
-        console.log(datas)
-        console.log("datas")
-        console.log("MX : " +max)
+        // console.log("datas")
+        // console.log(sum)
+
+        // console.log(datas)
+        // console.log("MX : " +max)
 
         svg.attr("width", width).attr("height", height);
         // console.log(width,height);
@@ -41,11 +51,11 @@ export class RadarChart {
     
         // console.log("radar chart")
         const ticks = [];
-        for(var i = 0 ; i < 5 ; i++){
-            ticks.push(max / 5 * (i+1));
+        for(var i = 0 ; i < depth ; i++){
+            ticks.push(max / depth * (i+1));
         }
-        console.log(ticks)
-    
+        // console.log(ticks)
+        // console.log(data.datasets)
     
         const g = svg
         .append("g")
@@ -92,6 +102,7 @@ export class RadarChart {
         const line = d3.line()
         .x(d => d.x)
         .y(d => d.y);
+        
         const colors = ["red", "blue", "green","yellow" ,"purple"]; // 폴리곤 색상.
         // console.log(colors)
         // const rcolor = [];
@@ -99,12 +110,14 @@ export class RadarChart {
         //     var tmp = data.datasets.color
         //     rcolor.push(tmp)
         // }
-        console.log("radarchart!")
+        // console.log("radarchart!")
         // console.log(rcolor)
-        console.log(data.datasets);
-        console.log(datas)
-        console.log(features)
-        console.log("radarchart chk!")
+        // console.log(data.datasets);
+        // console.log(datas)
+        // console.log("radarchart feature chk!")
+        // console.log(features)
+        // console.log("name")
+        // console.log(datanames)
 
 
         function getPathCoordinates(data_point){
@@ -113,19 +126,27 @@ export class RadarChart {
                 const ft_name = features[i];
                 const angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
                 coordinates.push(angleToCoordinate(angle, data_point[ft_name]));
-            }
+                }
             return coordinates;
         }
         
 
         for(var i = 0 ; i < datas.length ; i++){
             const d = datas[i];
+            // console.log("Hi")
+            
             const color = colors[i];
-            console.log("Hi")
-            console.log(datas[i]);
-            console.log(color)
-
+            // console.log(datas[i]);
             let coordinates = getPathCoordinates(d);
+            // console.log(color)
+            let name = datanames[i].name;
+            // console.log(coordinates)
+            // console.log(datanames[i])
+            // console.log(name)
+            // console.log("bye")
+            let avg =   Math.round(sum[i]/features.length); // 반올림한 평균값.
+            // console.log(avg)
+
 
             g.append("path")
             .datum(coordinates)
@@ -133,17 +154,53 @@ export class RadarChart {
             .attr("stroke-width", 3)
             .attr("stroke", color)
             .attr("fill", color)
+            .attr("class", "data")
             .attr("stroke-opacity", 1)
-            .attr("opacity", 0.5);
-            console.log("radar check")
+            .attr("opacity", 0.4)
+            // .attr("name" , name)
+            // .attr("avg" , avg)
+            .on("mouseover", this.mouseover.bind(this))
+            .on("mousemove", this.mousemove.bind(this))
+            .on("mouseout", this.mouseout.bind(this))
 
-           
-            
+            coordinates.push(avg)
+            coordinates.push(color)
+            coordinates.push(name)
+            // console.log(coordinates);
+            // console.log("레이더 차트 : ??" );
         }
-        
-        
-    
-        console.log("레이더 차트 : ??" );
+
         svg.node();
-        }
+
+        this.tooltip = d3
+        .select("#circle")
+        .append("div")
+        .attr("class", "tooltip2")
+        .style("display", "none");
+
+        
     }
+    mouseover(data) {
+        const color = data[data.length-2]
+        this.tooltip.style("display", "inline-block").style("position", "absolute");
+        // d3.select(this).style('fill' , 'black');
+        }
+    
+
+    mousemove(data) {
+        // console.log("radar tooltip")
+        // console.log(data)
+        const name = data[data.length-1];
+        const color = data[data.length-2];
+        const avg = data[data.length-3];
+        this.tooltip
+        .text(
+            [name,avg,color ].join(" | ")
+        )
+        .style("left", d3.event.pageX + 20 + "px")
+        .style("top", d3.event.pageY + 20 + "px");
+    }
+    mouseout() {
+        this.tooltip.style("display", "none");
+    }
+}
