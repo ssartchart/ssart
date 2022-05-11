@@ -24,6 +24,7 @@ function Chart(
   const { plugins, scales } = options;
   let { legend = {position: "left"}, title, xTitle, yTitle, xGrid, yGrid, background, menu } = plugins;
   const oid = id.slice(1, id.length);
+  d3.select(id).selectAll('*').remove();
   const svg = d3
     .select(id)
     .append("svg")
@@ -438,8 +439,9 @@ function Chart(
     }
 
     if (menu) {
-      drawMenu(chart_width, width, margin, svg, options, id);
-    }
+      const param = {type, width, height, margin, padding, data, options, y_max, y_min, depth};
+      drawMenu(chart_width, width, margin, svg, options, id, param);
+    };
   }
 }
 
