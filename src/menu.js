@@ -65,12 +65,19 @@ function menuIcon(chart_width, width, margin, options, chart_area) {
     chartMenu.selectAll(".menuCircle").style("opacity", 0.2);
   });
 
-  return chartMenu
-};
+  return chartMenu;
+}
+
 
 // dropdown 창 생성
-function createDropDown(width, margin, options, chart_area, dropDownWidth, dropDownX) {
-
+function createDropDown(
+  width,
+  margin,
+  options,
+  chart_area,
+  dropDownWidth,
+  dropDownX
+) {
   const dropDown = chart_area
     .append("g")
     .attr("class", "dropDown")
@@ -91,13 +98,21 @@ function createDropDown(width, margin, options, chart_area, dropDownWidth, dropD
     .style("stroke", "black")
     .style("stroke-width", "2");
 
-  return dropDown
-};
+  return dropDown;
+}
 
-export function menu(chart_width, width, margin, chart_area, options, id, param) {
+export function menu(
+  chart_width,
+  width,
+  margin,
+  chart_area,
+  options,
+  id,
+  param
+) {
   // 메뉴 아이콘 생성
-  const chartMenu = menuIcon(chart_width, width, margin, options, chart_area)
-  
+  const chartMenu = menuIcon(chart_width, width, margin, options, chart_area);
+
   // 드롭다운 생성
   const dropDownWidth = 100;
   let dropDownX = chart_width - margin.right - dropDownWidth;
@@ -107,8 +122,17 @@ export function menu(chart_width, width, margin, chart_area, options, id, param)
   ) {
     dropDownX = width - margin.right - dropDownWidth;
   }
-  const dropDown = createDropDown(width, margin, options, chart_area, dropDownWidth, dropDownX);
-  const legendDropDown = chart_area.append("g")
+
+  const dropDown = createDropDown(
+    width,
+    margin,
+    options,
+    chart_area,
+    dropDownWidth,
+    dropDownX
+  );
+  const legendDropDown = chart_area.append("g");
+  const colorDropDown = chart_area.append("g");
 
   const yGridGroup = chart_area.select("g.yAxis");
   const xGridGroup = chart_area.select("g.xAxis");
@@ -118,6 +142,7 @@ export function menu(chart_width, width, margin, chart_area, options, id, param)
   const yGridButton = dropDown.append("text");
   const download = dropDown.append("text");
   const legendButton = dropDown.append("g");
+  const colorButton = dropDown.append("g");
 
   let dropDownIndex = 0;
   if (options.plugins.menu.grid) {
@@ -335,14 +360,16 @@ export function menu(chart_width, width, margin, chart_area, options, id, param)
 
   if (options.plugins.menu.legend) {
     dropDownIndex += 1;
-    const legendDropDownWidth = 70
-    const legendDropDownX = dropDownX - legendDropDownWidth
-    const legendDropDownY = margin.top + dropDownIndex * 25 - 10
+    const legendDropDownWidth = 70;
+    const legendDropDownX = dropDownX - legendDropDownWidth;
+    const legendDropDownY = margin.top + dropDownIndex * 25 - 10;
 
     legendDropDown
       .attr("class", "legendDropDown")
-      .attr("transform", "translate(" + legendDropDownX + "," + legendDropDownY + ")");
-    
+      .attr(
+        "transform",
+        "translate(" + legendDropDownX + "," + legendDropDownY + ")"
+      );
     legendDropDown
       .append("rect")
       .attr("x", 0)
@@ -368,8 +395,8 @@ export function menu(chart_width, width, margin, chart_area, options, id, param)
       .style("cursor", "pointer")
       .style("user-select", "none")
       .on("click", function (event) {
-        param.options.plugins.legend.position = "top"
-        Chart(id, param)
+        param.options.plugins.legend.position = "top";
+        Chart(id, param);
       });
 
     legendDropDown
@@ -384,8 +411,8 @@ export function menu(chart_width, width, margin, chart_area, options, id, param)
       .style("cursor", "pointer")
       .style("user-select", "none")
       .on("click", function (event) {
-        param.options.plugins.legend.position = "bottom"
-        Chart(id, param)
+        param.options.plugins.legend.position = "bottom";
+        Chart(id, param);
       });
 
     legendDropDown
@@ -400,8 +427,8 @@ export function menu(chart_width, width, margin, chart_area, options, id, param)
       .style("cursor", "pointer")
       .style("user-select", "none")
       .on("click", function (event) {
-        param.options.plugins.legend.position = "left"
-        Chart(id, param)
+        param.options.plugins.legend.position = "left";
+        Chart(id, param);
       });
 
     legendDropDown
@@ -416,15 +443,17 @@ export function menu(chart_width, width, margin, chart_area, options, id, param)
       .style("cursor", "pointer")
       .style("user-select", "none")
       .on("click", function (event) {
-        param.options.plugins.legend.position = "right"
-        Chart(id, param)
+        param.options.plugins.legend.position = "right";
+        Chart(id, param);
       });
-    
+
     legendDropDown
       .select("." + options.plugins.legend.position)
-      .style("fill", "black")
-    
-    legendDropDown.style("visibility", "hidden").property("visibility", "hidden");
+      .style("fill", "black");
+
+    legendDropDown
+      .style("visibility", "hidden")
+      .property("visibility", "hidden");
 
     legendButton
       .append("text")
@@ -437,11 +466,110 @@ export function menu(chart_width, width, margin, chart_area, options, id, param)
       .style("user-select", "none")
       .on("click", function (event) {
         if (legendDropDown.property("visibility") === "hidden") {
-          legendDropDown.style("visibility", "visible").property("visibility", "visible");
+          legendDropDown
+            .style("visibility", "visible")
+            .property("visibility", "visible");
+          colorDropDown
+            .style("visibility", "hidden")
+            .property("visibility", "hidden");
         } else {
-          legendDropDown.style("visibility", "hidden").property("visibility", "hidden");
+          legendDropDown
+            .style("visibility", "hidden")
+            .property("visibility", "hidden");
+          colorDropDown
+            .style("visibility", "hidden")
+            .property("visibility", "hidden");
         }
-      });     
+      });
+  }
+
+  if (options.plugins.menu.color) {
+    dropDownIndex += 1;
+    const colorDropDownWidth = 120;
+    const colorDropDownX = dropDownX - colorDropDownWidth;
+    const colorDropDownY = margin.top + dropDownIndex * 25 - 10;
+
+    colorDropDown
+      .style("visibility", "hidden")
+      .property("visibility", "hidden");
+
+    colorButton
+      .append("text")
+      .attr("x", dropDownWidth - 8)
+      .attr("y", dropDownIndex * 25)
+      .text("color")
+      .attr("text-anchor", "end")
+      .style("font-family", "sans-serif")
+      .style("cursor", "pointer")
+      .style("user-select", "none")
+      .on("click", function (event) {
+        if (colorDropDown.property("visibility") === "hidden") {
+          let divId =
+            this.parentNode.parentNode.parentNode.parentNode.getAttribute("id");
+          let labelGroup = document.getElementById(divId + "-legend-group-0");
+
+          colorDropDown
+            .append("rect")
+            .attr("x", 0)
+            .attr("y", 0)
+            .attr("width", colorDropDownWidth)
+            .attr("height", 25 * labelGroup.childNodes.length + 15)
+            .attr("rx", 5)
+            .attr("ry", 5)
+            .style("fill", "white")
+            .style("opacity", 0.8)
+            .style("stroke", "black")
+            .style("stroke-width", "2");
+
+          colorDropDown
+            .attr("class", "colorDropDown")
+            .attr(
+              "transform",
+              "translate(" + colorDropDownX + "," + colorDropDownY + ")"
+            );
+
+          colorDropDown
+            .style("visibility", "hidden")
+            .property("visibility", "hidden");
+
+          for (let i = 0; i < labelGroup.childNodes.length; i++) {
+            let labelColor =
+              labelGroup.childNodes[i].firstChild.getAttribute("fill");
+            // console.log(labelColor);
+            colorDropDown
+              .append("text")
+              .attr("x", colorDropDownWidth - 8)
+              .attr("y", 25 * (i + 1))
+              .text(labelGroup.childNodes[i].__data__)
+              .attr("id", "colorLabel-" + i)
+              .attr("text-anchor", "end")
+              .style("fill", labelColor)
+              .style("font-family", "sans-serif")
+              .style("cursor", "pointer")
+              .style("user-select", "none")
+              .on("click", function (event) {
+                console.log(i);
+                console.log(labelGroup.childNodes[i].__data__);
+              });
+          }
+
+          colorDropDown
+            .style("visibility", "visible")
+            .property("visibility", "visible");
+          legendDropDown
+            .style("visibility", "hidden")
+            .property("visibility", "hidden");
+        } else {
+          colorDropDown.selectAll("rect").remove();
+          colorDropDown.selectAll("text").remove();
+          colorDropDown
+            .style("visibility", "hidden")
+            .property("visibility", "hidden");
+          legendDropDown
+            .style("visibility", "hidden")
+            .property("visibility", "hidden");
+        }
+      });
   }
 
   dropDown.style("visibility", "hidden").property("visibility", "hidden");
@@ -451,7 +579,12 @@ export function menu(chart_width, width, margin, chart_area, options, id, param)
       dropDown.style("visibility", "visible").property("visibility", "visible");
     } else {
       dropDown.style("visibility", "hidden").property("visibility", "hidden");
-      legendDropDown.style("visibility", "hidden").property("visibility", "hidden");
+      legendDropDown
+        .style("visibility", "hidden")
+        .property("visibility", "hidden");
+      colorDropDown
+        .style("visibility", "hidden")
+        .property("visibility", "hidden");
     }
   });
 }
