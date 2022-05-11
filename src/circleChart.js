@@ -1,5 +1,5 @@
 export class CircleChart {
-  constructor({ id, type, chart_area, width, height, margin, datasets,color, options }) {
+  constructor({ id, type,labels, chart_area, width, height, margin, datasets,color, options }) {
     chart_area.selectAll('.chartBody').remove();
     
     const nowWidth = width - margin.left - margin.right;
@@ -15,6 +15,12 @@ export class CircleChart {
     });
     this.sum = sum;
     this.color = color;
+    let fillopacity;
+    if (options.scales) {
+      if (options.scales.fillopacity) {
+        fillopacity = options.scales.fillopacity;
+      }
+    }
 
     chart_area
       .attr("text-anchor", "middle").style("12px sans-serif");
@@ -88,6 +94,7 @@ export class CircleChart {
       // .on("mouseout", this.mouseout.bind(this))
       .attr("stroke", "white")
       .attr("d", arc)
+      .style("fill-opacity", fillopacity)
       // 애니메이션 효과
       .transition()
       .duration(1500)
@@ -116,7 +123,7 @@ export class CircleChart {
         .attr("x", 0)
         .attr("y", "-0.7em")
         .attr("class", "name")
-        .text((d) => d.data.name);
+        .text((d) => labels[d.data.label_index]);
       text
         // 각이 좁으면 수치 나타내지 않음.
         .filter((d) => d.endAngle - d.startAngle > 0.25)
@@ -189,7 +196,7 @@ export class CircleChart {
 
   tooltip(){
     console.log("22233");
-    const tooltop = document.getElementById('tooltip');
+    const tooltop = document.getElementById('ssart-tooltip');
     const color = this.color;
     const sum = this.sum;
     this.ChartBody.selectAll(".data")
