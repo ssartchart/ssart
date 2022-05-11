@@ -11,6 +11,7 @@
      <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
      <!-- Core theme CSS (includes Bootstrap)-->
      <link href="/src/css/intro_styles.css" rel="stylesheet" />
+     <link href="/src/css/index.css" rel="stylesheet" />
 
      <script src='https://d3js.org/d3.v5.min.js'></script>
      
@@ -18,9 +19,59 @@
          import * as Chart from './src/index.js';
      </script>
                                             
-     
+     <style>
+body {
+  margin: 0;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 12%;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+li a {
+  display: block;
+  color: #000;
+  padding: 10px;
+  text-decoration: none;
+  height: 70px;
+  text-align: center;
+  line-height: 35px;
+}
+
+li a.active {
+  background-color: #555;
+  color: white;
+}
+
+li a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+
+#navHome {
+    height: 56px;
+}
+</style>
 </head>
 <body>
+    <ul>
+        <li><a id="navHome" class="active" href="index_temp.html"><i class="bi bi-house-door"> HOME</i></a></div></li>
+        <li><a href="#toBarChart">Bar Chart 1</a></li>
+        <li><a href="#toBarHChart">Bar Chart 2</a></li>
+        <li><a href="#toLineChart">Line Chart</a></li>
+        <li><a href="#toAreaChart">Area Chart</a></li>
+        <li><a href="#toScatterChart">Scatter Chart</a></li>
+        <li><a href="#toCircleChart">Circle Chart</a></li>
+        <li><a href="#toRadarChart">Radar Chart</a></li>
+    </ul>
+
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
         <a class="navbar-brand ps-3" href="index_temp.html">SSART HOME</a>
@@ -33,53 +84,76 @@
                 <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="bi bi-search"></i></button>
             </div>
         </form>
-      
     </nav>
-
 
     <div id="layoutSidenav_content">
                 <main>
-                    <div class="container px-3 my-4">
+                    <div class="container px-5 my-5">
                         
-                        <div class="container-fluid px-4">
+                        <div class="container-fluid px-5">
                             <h1 class="mt-4">차트 시각화 </h1>
+                            <br>
                             <div class="row">
                                 <div class="col-md-6">
-                                    
+                                    <!-- barchart  -->
                                     <div class="card mb-4">
-                                        <div class="card-body bg-primary text-white ">Bar chart</div>
+                                        <div class="card-body bg-primary text-white " id="toBarChart">Bar Chart 1 - Vertical</div>
                                          <p class="m-3"> 데이터 형식 예시</p>
-                                         차트 이름 <input class="form-control" id="chartTitle" type="text" placeholder=""  style="width: 90%; margin: 10px; margin-top: 5px;"/>
-                                         데이터 1 <input class="form-control" id="inputData1" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..."  style="width: 90%; margin: 10px; margin-top: 5px;"/>
-                                         데이터 2 <input class="form-control" id="inputData2" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
-                                         데이터 3 <input class="form-control" id="inputData3" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
-                                         config <input class="form-control" type="text" placeholder="해당 데이터의 라벨 ex) 데이터1, 데이터2, 데이터3 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp 차트 이름 <input class="form-control" id="barChartTitle" type="text" placeholder="예시 차트 이름"  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp 차트 Label <input class="form-control" id="barLabel" type="text" placeholder="해당 데이터별 라벨 ex) a, b, c, d, e, ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         <div class="row">
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp 데이터 1 <input class="form-control" id="barinputData1" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..."  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp&nbsp 데이터 1 라벨 <input class="form-control" id="barDataLabel1" type="text" placeholder="ex) 라벨1"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp 데이터 2 <input class="form-control" id="barinputData2" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp&nbsp 데이터 2 라벨 <input class="form-control" id="barDataLabel2" type="text" placeholder="ex) 라벨2"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp 데이터 3 <input class="form-control" id="barinputData3" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp&nbsp 데이터 3 라벨 <input class="form-control" id="barDataLabel3" type="text" placeholder="ex) 라벨3"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                        </div>
+                                         
                                          <div class="row">
                                             <div class="col-sm-4">
-                                                차트1 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
+                                                &nbsp&nbsp 데이터1 색깔  <select class="form-select" id="barColor1" style="margin: 3px; width: 95%;">
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
                                                   </select>
                                             </div>
                                             <div class="col-sm-4">
-                                                차트2 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
+                                                &nbsp&nbsp 데이터2 색깔  <select class="form-select" id="barColor2" style="margin: 3px; width: 95%;">
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
                                                   </select>
                                             </div>
                                             <div class="col-sm-4">
-                                                차트3 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
+                                                &nbsp&nbsp 데이터3 색깔  <select class="form-select" id="barColor3" style="margin: 3px; width: 95%;">
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
                                                   </select>
                                             </div>
                                          </div> <!-- select div row-->
@@ -88,98 +162,879 @@
                                          <br>
                                          
                                         <div class="card-footer d-flex align-items-center justify-content-between">
-                                            <button id="generateBar" type="button" class="btn btn-primary">생성</button>
-
+                                            <button id="generateBar1" type="button" class="btn btn-primary">생성</button>
                                             <script type="module">
                                                 
                                                 import * as Chart from './src/index.js';
 
-                                                const button = document.getElementById("generateBar");
-                                                button.addEventListener('click', generate);
+                                                const genButton = document.getElementById("generateBar1");
+                                                genButton.addEventListener('click', generate);
                                                 
                                                 function generate() {
-                                                    Chart.Chart('#result', config);
+                                                    window.scrollTo(0,100);
+                                                    const chartResult = document.getElementById("result");
+                                                    chartResult.innerText = '';
                                                     
-                                                    console.log(data);
                                                     //data 갱신
+                                                    var chartName = document.getElementById("barChartTitle").value;
+                                                    var barData1 = document.getElementById("barinputData1").value;
+                                                    var barData2 = document.getElementById("barinputData2").value;
+                                                    var barData3 = document.getElementById("barinputData3").value;
+                                                    var barDataLabel1 = document.getElementById("barDataLabel1").value;
+                                                    var barDataLabel2 = document.getElementById("barDataLabel2").value;
+                                                    var barDataLabel3 = document.getElementById("barDataLabel3").value;
+                                                    var barLabel = document.getElementById("barLabel").value;
+                                                    var barColor1 = document.getElementById("barColor1").selectedIndex;
+                                                    var barColor2 = document.getElementById("barColor2").selectedIndex;
+                                                    var barColor3 = document.getElementById("barColor3").selectedIndex;
+                                                    var colorHex = ["#ff0000", "#ff7f00", "#ffff00", "#00ff00", "#0000ff" ];
+                                                    config.options.plugins.title.text = chartName;
+                                                    
+                                                    if(barData1!=null && barData1!="") {
+                                                        var dataArray1 = barData1.replace(/ /g,"").split(",");
+                                                        data.datasets[0].data = dataArray1;
+                                                    }
+                                                    if(barDataLabel1!=null && barDataLabel1) {
+                                                        data.datasets[0].label = barDataLabel1;
+                                                    }
+
+                                                    if(barData2!=null && barData2!="") {
+                                                        var dataArray2 = barData2.replace(/ /g,"").split(",");
+                                                        data.datasets[1].data = dataArray2;
+                                                    }
+                                                    if(barDataLabel2!=null && barDataLabel2) {
+                                                        data.datasets[1].label = barDataLabel2;
+                                                    }
+
+                                                    if(barData3!=null && barData3!="") {
+                                                        var dataArray3 = barData3.replace(/ /g,"").split(",");
+                                                        data.datasets[2].data = dataArray3;
+                                                    }
+                                                    if(barDataLabel3!=null && barDataLabel3) {
+                                                        data.datasets[2].label = barDataLabel3;
+                                                    }
+
+                                                    if(barLabel!=null && barLabel!="") {
+                                                        var labelArray = barLabel.replace(/ /g,"").split(",");
+                                                        data.labels = labelArray;
+                                                    }
+                                                    data.datasets[0].backgroundColor=colorHex[barColor1];
+                                                    data.datasets[1].backgroundColor=colorHex[barColor2];
+                                                    data.datasets[2].backgroundColor=colorHex[barColor3];
+                                                    //생성
+                                                    Chart.Chart('#result', config);
 
                                                 }
                                             </script>
-
-                                            
-
                                             <div class="small "><i class="fas fa-angle-right"></i></div>
                                         </div>
                                     </div>
                                     <br>
 
+                                    <!-- barchart -H -->
                                     <div class="card mb-4">
-                                        <div class="card-body bg-primary text-white ">Bar Chart - 2</div>
-                                         <p class="m-3"> 데이터 형식 : xxxx , xxxx, xxxx, xxxx,</p>
-                                         
+                                        <div class="card-body bg-primary text-white " id="toBarHChart">Bar Chart 2 - Horizontal</div>
+                                        <p class="m-3"> 데이터 형식 예시</p>
+                                        &nbsp&nbsp 차트 이름 <input class="form-control" id="barHChartTitle" type="text" placeholder="예시 차트 이름"  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                        &nbsp&nbsp 차트 Label <input class="form-control" id="barHLabel" type="text" placeholder="해당 데이터별 라벨 ex) a, b, c, d, e, ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                        <div class="row">
+                                           <div class="col-sm-6">
+                                               &nbsp&nbsp 데이터 1 <input class="form-control" id="barHinputData1" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..."  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                           </div>
+                                           <div class="col-sm-6">
+                                               &nbsp&nbsp&nbsp 데이터 1 라벨 <input class="form-control" id="barHDataLabel1" type="text" placeholder="ex) 라벨1"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                           </div>
+                                       </div>
+
+                                       <div class="row">
+                                           <div class="col-sm-6">
+                                               &nbsp&nbsp 데이터 2 <input class="form-control" id="barHinputData2" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                           </div>
+                                           <div class="col-sm-6">
+                                               &nbsp&nbsp&nbsp 데이터 2 라벨 <input class="form-control" id="barHDataLabel2" type="text" placeholder="ex) 라벨2"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                           </div>
+                                       </div>
+
+                                       <div class="row">
+                                           <div class="col-sm-6">
+                                               &nbsp&nbsp 데이터 3 <input class="form-control" id="barHinputData3" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                           </div>
+                                           <div class="col-sm-6">
+                                               &nbsp&nbsp&nbsp 데이터 3 라벨 <input class="form-control" id="barHDataLabel3" type="text" placeholder="ex) 라벨3"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                           </div>
+                                       </div>
+                                        
+                                        <div class="row">
+                                           <div class="col-sm-4">
+                                               &nbsp&nbsp 데이터1 색깔  <select class="form-select" id="barHColor1" style="margin: 3px; width: 95%;">
+                                                   <option>빨강</option>
+                                                   <option>주황</option>
+                                                   <option>노랑</option>
+                                                   <option>초록</option>
+                                                   <option>파랑</option>
+                                                 </select>
+                                           </div>
+                                           <div class="col-sm-4">
+                                               &nbsp&nbsp 데이터2 색깔  <select class="form-select" id="barHColor2" style="margin: 3px; width: 95%;">
+                                                   <option>빨강</option>
+                                                   <option>주황</option>
+                                                   <option>노랑</option>
+                                                   <option>초록</option>
+                                                   <option>파랑</option>
+                                                 </select>
+                                           </div>
+                                           <div class="col-sm-4">
+                                               &nbsp&nbsp 데이터3 색깔  <select class="form-select" id="barHColor3" style="margin: 3px; width: 95%;">
+                                                   <option>빨강</option>
+                                                   <option>주황</option>
+                                                   <option>노랑</option>
+                                                   <option>초록</option>
+                                                   <option>파랑</option>
+                                                 </select>
+                                           </div>
+                                         </div>
+                                         <br>
                                          
                                         <div class="card-footer d-flex align-items-center justify-content-between">
-                                            <a class="" href="#">생성</a>
+                                            <button id="generateBar2" type="button" class="btn btn-primary">생성</button>
+                                            <script type="module">
+                                                
+                                                import * as Chart from './src/index.js';
+
+                                                const genButton2 = document.getElementById("generateBar2");
+                                                genButton2.addEventListener('click', generate);
+                                                
+                                                function generate() {
+                                                    window.scrollTo(0,100);
+                                                    const chartResult = document.getElementById("result");
+                                                    chartResult.innerText = '';
+ 
+                                                    //data 갱신
+                                                    var chartName = document.getElementById("barHChartTitle").value;
+                                                    var barData1 = document.getElementById("barHinputData1").value;
+                                                    var barData2 = document.getElementById("barHinputData2").value;
+                                                    var barData3 = document.getElementById("barHinputData3").value;
+                                                    var barDataLabel1 = document.getElementById("barHDataLabel1").value;
+                                                    var barDataLabel2 = document.getElementById("barHDataLabel2").value;
+                                                    var barDataLabel3 = document.getElementById("barHDataLabel3").value;
+                                                    var barLabel = document.getElementById("barHLabel").value;
+                                                    var barColor1 = document.getElementById("barHColor1").selectedIndex;
+                                                    var barColor2 = document.getElementById("barHColor2").selectedIndex;
+                                                    var barColor3 = document.getElementById("barHColor3").selectedIndex;
+                                                    var colorHex = ["#ff0000", "#ff7f00", "#ffff00", "#00ff00", "#0000ff" ];
+                                                    
+                                                    configH.options.plugins.title.text = chartName;
+                                                    
+                                                    if(barData1!=null && barData1!="") {
+                                                        var dataArray1 = barData1.replace(/ /g,"").split(",");
+                                                        dataH.datasets[0].data = dataArray1;
+                                                    }
+                                                    if(barDataLabel1!=null && barDataLabel1) {
+                                                        dataH.datasets[0].label = barDataLabel1;
+                                                    }
+
+                                                    if(barData2!=null && barData2!="") {
+                                                        var dataArray2 = barData2.replace(/ /g,"").split(",");
+                                                        dataH.datasets[1].data = dataArray2;
+                                                    }
+                                                    if(barDataLabel2!=null && barDataLabel2) {
+                                                        dataH.datasets[1].label = barDataLabel2;
+                                                    }
+
+                                                    if(barData3!=null && barData3!="") {
+                                                        var dataArray3 = barData3.replace(/ /g,"").split(",");
+                                                        dataH.datasets[2].data = dataArray3;
+                                                    }
+                                                    if(barDataLabel3!=null && barDataLabel3) {
+                                                        dataH.datasets[2].label = barDataLabel3;
+                                                    }
+
+                                                    if(barLabel!=null && barLabel!="") {
+                                                        var labelArray = barLabel.replace(/ /g,"").split(",");
+                                                        dataH.labels = labelArray;
+                                                    }
+                                                    dataH.datasets[0].backgroundColor=colorHex[barColor1];
+                                                    dataH.datasets[1].backgroundColor=colorHex[barColor2];
+                                                    dataH.datasets[2].backgroundColor=colorHex[barColor3];
+
+
+                                                    Chart.Chart('#result', configH);
+
+                                                }
+                                            </script>
                                             <div class="small "><i class="fas fa-angle-right"></i></div>
                                         </div>
                                     </div>
                                     <br>
 
+                                    <!-- linechart  -->
                                     <div class="card mb-4">
-                                        <div class="card-body bg-primary text-white ">Line Chart </div>
-                                         <p class="m-3"> 데이터 형식</p>
+                                        <div class="card-body bg-primary text-white " id="toLineChart">Line Chart </div>
+                                         <p class="m-3"> Line 차트 데이터 형식</p>
+                                         &nbsp&nbsp 차트 이름 <input class="form-control" id="LineChartTitle" type="text" placeholder="예시 차트 이름"  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                        
+                                        <div class="row">
+                                           <div class="col-sm-6">
+                                               &nbsp&nbsp 데이터 1 <input class="form-control" id="LineinputData1" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..."  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                           </div>
+                                           <div class="col-sm-6">
+                                               &nbsp&nbsp&nbsp 데이터 1 라벨 <input class="form-control" id="LineDataLabel1" type="text" placeholder="ex) 라벨1"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                           </div>
+                                       </div>
+
+                                       <div class="row">
+                                           <div class="col-sm-6">
+                                               &nbsp&nbsp 데이터 2 <input class="form-control" id="LineinputData2" type="text" placeholder="ex) 5,10,15,20,25,30 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                           </div>
+                                           <div class="col-sm-6">
+                                               &nbsp&nbsp&nbsp 데이터 2 라벨 <input class="form-control" id="LineDataLabel2" type="text" placeholder="ex) 라벨2"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                           </div>
+                                       </div>
+
+                                       <div class="row">
+                                           <div class="col-sm-6">
+                                               &nbsp&nbsp 데이터 3 <input class="form-control" id="LineinputData3" type="text" placeholder="ex) 1, 2, 3, 4, 4, 4 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                           </div>
+                                           <div class="col-sm-6">
+                                               &nbsp&nbsp&nbsp 데이터 3 라벨 <input class="form-control" id="LineDataLabel3" type="text" placeholder="ex) 라벨3"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                           </div>
+                                       </div>
+                                        
+                                        <div class="row">
+                                           <div class="col-sm-4">
+                                               &nbsp&nbsp 데이터1 색깔  <select class="form-select" id="LineColor1" style="margin: 3px; width: 95%;">
+                                                   <option>빨강</option>
+                                                   <option>주황</option>
+                                                   <option>노랑</option>
+                                                   <option>초록</option>
+                                                   <option>파랑</option>
+                                                 </select>
+                                           </div>
+                                           <div class="col-sm-4">
+                                               &nbsp&nbsp 데이터2 색깔  <select class="form-select" id="LineColor2" style="margin: 3px; width: 95%;">
+                                                   <option>빨강</option>
+                                                   <option>주황</option>
+                                                   <option>노랑</option>
+                                                   <option>초록</option>
+                                                   <option>파랑</option>
+                                                 </select>
+                                           </div>
+                                           <div class="col-sm-4">
+                                               &nbsp&nbsp 데이터3 색깔  <select class="form-select" id="LineColor3" style="margin: 3px; width: 95%;">
+                                                   <option>빨강</option>
+                                                   <option>주황</option>
+                                                   <option>노랑</option>
+                                                   <option>초록</option>
+                                                   <option>파랑</option>
+                                                 </select>
+                                           </div>
+                                         </div>
+                                         <br>
                                          
-                                         
-                                        <div class="card-footer d-flex align-items-center justify-content-between">
-                                            <a class="" href="#">생성</a>
+                                         <div class="card-footer d-flex align-items-center justify-content-between">
+                                            <button id="lineChart" type="button" class="btn btn-primary">생성</button>
+                                            <script type="module">
+                                                
+                                                import * as Chart from './src/index.js';
+
+                                                const genButton3 = document.getElementById("lineChart");
+                                                genButton3.addEventListener('click', generate);
+                                                
+                                                function generate() {
+                                                    window.scrollTo(0,100);
+                                                    const chartResult = document.getElementById("result");
+                                                    chartResult.innerText = '';
+
+                                                    //data 갱신
+                                                    var chartName = document.getElementById("LineChartTitle").value;
+                                                    var lineData1 = document.getElementById("LineinputData1").value;
+                                                    var lineData2 = document.getElementById("LineinputData2").value;
+                                                    var lineData3 = document.getElementById("LineinputData3").value;
+                                                    var lineDataLabel1 = document.getElementById("LineDataLabel1").value;
+                                                    var lineDataLabel2 = document.getElementById("LineDataLabel2").value;
+                                                    var lineDataLabel3 = document.getElementById("LineDataLabel3").value;
+                                                    
+                                                    var lineColor1 = document.getElementById("LineColor1").selectedIndex;
+                                                    var lineColor2 = document.getElementById("LineColor2").selectedIndex;
+                                                    var lineColor3 = document.getElementById("LineColor3").selectedIndex;
+                                                    var colorHex = ["#ff0000", "#ff7f00", "#ffff00", "#00ff00", "#0000ff" ];
+                                                    
+                                                    configLine.options.plugins.title.text = chartName;
+                                                    
+                                                    if(lineData1!=null && lineData1!="") {
+                                                        var dataArray1 = lineData1.replace(/ /g,"").split(",");
+                                                        dataLine.datasets[0].data = dataArray1;
+                                                    }
+                                                    if(lineDataLabel1!=null && lineDataLabel1) {
+                                                        dataLine.datasets[0].label = lineDataLabel1;
+                                                    }
+
+                                                    if(lineData2!=null && lineData2!="") {
+                                                        var dataArray2 = lineData2.replace(/ /g,"").split(",");
+                                                        dataLine.datasets[1].data = dataArray2;
+                                                    }
+                                                    if(lineDataLabel2!=null && lineDataLabel2) {
+                                                        dataLine.datasets[1].label = lineDataLabel2;
+                                                    }
+
+                                                    if(lineData3!=null && lineData3!="") {
+                                                        var dataArray3 = lineData3.replace(/ /g,"").split(",");
+                                                        dataLine.datasets[2].data = dataArray3;
+                                                    }
+                                                    if(lineDataLabel3!=null && lineDataLabel3) {
+                                                        dataLine.datasets[2].label = lineDataLabel3;
+                                                    }
+
+                                                   
+                                                    dataLine.datasets[0].backgroundColor=colorHex[lineColor1];
+                                                    dataLine.datasets[1].backgroundColor=colorHex[lineColor2];
+                                                    dataLine.datasets[2].backgroundColor=colorHex[lineColor3];
+
+                                                    Chart.Chart('#result', configLine);
+                                                    console.log(data);
+
+                                                }
+                                            </script>
                                             <div class="small "><i class="fas fa-angle-right"></i></div>
                                         </div>
                                     </div>
                                     <br>
 
+                                    <!-- Areachart  -->
                                     <div class="card mb-4">
-                                        <div class="card-body bg-primary text-white ">Scatter Chart </div>
-                                         <p class="m-3"> 데이터 형식 : xxxx , xxxx, xxxx, xxxx,</p>
+                                        <div class="card-body bg-primary text-white " id="toAreaChart">Area Chart </div>
+                                         <p class="m-3"> Area 차트 데이터 형식</p>
+                                         &nbsp&nbsp 차트 이름 <input class="form-control" id="AreaChartTitle" type="text" placeholder="예시 차트 이름"  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                        
+                                        <div class="row">
+                                           <div class="col-sm-6">
+                                               &nbsp&nbsp 데이터 1 <input class="form-control" id="AreainputData1" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..."  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                           </div>
+                                           <div class="col-sm-6">
+                                               &nbsp&nbsp&nbsp 데이터 1 라벨 <input class="form-control" id="AreaDataLabel1" type="text" placeholder="ex) 라벨1"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                           </div>
+                                       </div>
+
+                                       <div class="row">
+                                           <div class="col-sm-6">
+                                               &nbsp&nbsp 데이터 2 <input class="form-control" id="AreainputData2" type="text" placeholder="ex) 5,10,15,20,25,30 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                           </div>
+                                           <div class="col-sm-6">
+                                               &nbsp&nbsp&nbsp 데이터 2 라벨 <input class="form-control" id="AreaDataLabel2" type="text" placeholder="ex) 라벨2"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                           </div>
+                                       </div>
+
+                                       <div class="row">
+                                           <div class="col-sm-6">
+                                               &nbsp&nbsp 데이터 3 <input class="form-control" id="AreainputData3" type="text" placeholder="ex) 1, 2, 3, 4, 4, 4 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                           </div>
+                                           <div class="col-sm-6">
+                                               &nbsp&nbsp&nbsp 데이터 3 라벨 <input class="form-control" id="AreaDataLabel3" type="text" placeholder="ex) 라벨3"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                           </div>
+                                       </div>
+                                        
+                                        <div class="row">
+                                           <div class="col-sm-4">
+                                               &nbsp&nbsp 데이터1 색깔  <select class="form-select" id="AreaColor1" style="margin: 3px; width: 95%;">
+                                                   <option>빨강</option>
+                                                   <option>주황</option>
+                                                   <option>노랑</option>
+                                                   <option>초록</option>
+                                                   <option>파랑</option>
+                                                 </select>
+                                           </div>
+                                           <div class="col-sm-4">
+                                               &nbsp&nbsp 데이터2 색깔  <select class="form-select" id="AreaColor2" style="margin: 3px; width: 95%;">
+                                                   <option>빨강</option>
+                                                   <option>주황</option>
+                                                   <option>노랑</option>
+                                                   <option>초록</option>
+                                                   <option>파랑</option>
+                                                 </select>
+                                           </div>
+                                           <div class="col-sm-4">
+                                               &nbsp&nbsp 데이터3 색깔  <select class="form-select" id="AreaColor3" style="margin: 3px; width: 95%;">
+                                                   <option>빨강</option>
+                                                   <option>주황</option>
+                                                   <option>노랑</option>
+                                                   <option>초록</option>
+                                                   <option>파랑</option>
+                                                 </select>
+                                           </div>
+                                         </div>
+                                         <br>
                                          
-                                         
-                                        <div class="card-footer d-flex align-items-center justify-content-between">
-                                            <a class="small stretched-link" href="#">생성</a>
+                                         <div class="card-footer d-flex align-items-center justify-content-between">
+                                            <button id="areaChart" type="button" class="btn btn-primary">생성</button>
+                                            <script type="module">
+                                                
+                                                import * as Chart from './src/index.js';
+
+                                                const genButton4 = document.getElementById("areaChart");
+                                                genButton4.addEventListener('click', generate);
+                                                
+                                                function generate() {
+                                                    window.scrollTo(0,100);
+                                                    const chartResult = document.getElementById("result");
+                                                    chartResult.innerText = '';
+
+                                                    //data 갱신
+                                                    var chartName = document.getElementById("AreaChartTitle").value;
+                                                    var areaData1 = document.getElementById("AreainputData1").value;
+                                                    var areaData2 = document.getElementById("AreainputData2").value;
+                                                    var areaData3 = document.getElementById("AreainputData3").value;
+                                                    var areaDataLabel1 = document.getElementById("AreaDataLabel1").value;
+                                                    var areaDataLabel2 = document.getElementById("AreaDataLabel2").value;
+                                                    var areaDataLabel3 = document.getElementById("AreaDataLabel3").value;
+                                                    
+                                                    var areaColor1 = document.getElementById("AreaColor1").selectedIndex;
+                                                    var areaColor2 = document.getElementById("AreaColor2").selectedIndex;
+                                                    var areaColor3 = document.getElementById("AreaColor3").selectedIndex;
+                                                    var colorHex = ["#ff0000", "#ff7f00", "#ffff00", "#00ff00", "#0000ff" ];
+                                                    
+                                                    configArea.options.plugins.title.text = chartName;
+                                                    
+                                                    if(areaData1!=null && areaData1!="") {
+                                                        var dataArray1 = areaData1.replace(/ /g,"").split(",");
+                                                        dataArea.datasets[0].data = dataArray1;
+                                                    }
+                                                    if(areaDataLabel1!=null && areaDataLabel1) {
+                                                        dataArea.datasets[0].label = areaDataLabel1;
+                                                    }
+
+                                                    if(areaData2!=null && areaData2!="") {
+                                                        var dataArray2 = areaData2.replace(/ /g,"").split(",");
+                                                        dataArea.datasets[1].data = dataArray2;
+                                                    }
+                                                    if(areaDataLabel2!=null && areaDataLabel2) {
+                                                        dataArea.datasets[1].label = areaDataLabel2;
+                                                    }
+
+                                                    if(areaData3!=null && areaData3!="") {
+                                                        var dataArray3 = areaData3.replace(/ /g,"").split(",");
+                                                        dataArea.datasets[2].data = dataArray3;
+                                                    }
+                                                    if(areaDataLabel3!=null && areaDataLabel3) {
+                                                        dataArea.datasets[2].label = areaDataLabel3;
+                                                    }
+
+                                                   
+                                                    dataArea.datasets[0].backgroundColor=colorHex[areaColor1];
+                                                    dataArea.datasets[1].backgroundColor=colorHex[areaColor2];
+                                                    dataArea.datasets[2].backgroundColor=colorHex[areaColor3];
+
+                                                    Chart.Chart('#result', configArea);
+                                                    // console.log(data);
+
+                                                }
+                                            </script>
                                             <div class="small "><i class="fas fa-angle-right"></i></div>
                                         </div>
                                     </div>
                                     <br>
 
+                                    <!-- Scatter chart  -->
                                     <div class="card mb-4">
-                                        <div class="card-body bg-primary text-white ">Pie Chart</div>
-                                         <p class="m-3"> 데이터 형식 : xxxx , xxxx, xxxx, xxxx,</p>
+                                        <div class="card-body bg-primary text-white " id="toScatterChart">Scatter Chart </div>
+                                         <p class="m-3"> Scatter chart 데이터 형식 </p>
+                                         &nbsp&nbsp 차트 이름 <input class="form-control" id="ScatterChartTitle" type="text" placeholder="예시 차트 이름"  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                        
+                                         <div class="row">
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp 데이터 1 <input class="form-control" id="ScatterinputData1" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..."  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp&nbsp 데이터 1 라벨 <input class="form-control" id="ScatterDataLabel1" type="text" placeholder="ex) 라벨1"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                        </div>
+ 
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp 데이터 2 <input class="form-control" id="ScatterinputData2" type="text" placeholder="ex) 5,10,15,20,25,30 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp&nbsp 데이터 2 라벨 <input class="form-control" id="ScatterDataLabel2" type="text" placeholder="ex) 라벨2"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                        </div>
+ 
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp 데이터 3 <input class="form-control" id="ScatterinputData3" type="text" placeholder="ex) 1, 2, 3, 4, 4, 4 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp&nbsp 데이터 3 라벨 <input class="form-control" id="ScatterDataLabel3" type="text" placeholder="ex) 라벨3"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                        </div>
+                                         
+                                         <div class="row">
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 데이터1 색깔  <select class="form-select" id="ScatterColor1" style="margin: 3px; width: 95%;">
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
+                                                  </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 데이터2 색깔  <select class="form-select" id="ScatterColor2" style="margin: 3px; width: 95%;">
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
+                                                  </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 데이터3 색깔  <select class="form-select" id="ScatterColor3" style="margin: 3px; width: 95%;">
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
+                                                  </select>
+                                            </div>
+                                          </div>
+                                          <br>
                                          
                                          
-                                        <div class="card-footer d-flex align-items-center justify-content-between">
-                                            <a class="small stretched-link" href="#">생성</a>
+                                         <div class="card-footer d-flex align-items-center justify-content-between">
+                                            <button id="scatterChart" type="button" class="btn btn-primary">생성</button>
+                                            <script type="module">
+                                                
+                                                import * as Chart from './src/index.js';
+
+                                                const genButton5 = document.getElementById("scatterChart");
+                                                genButton5.addEventListener('click', generate);
+                                                
+                                                function generate() {
+                                                    window.scrollTo(0,100);
+                                                    const chartResult = document.getElementById("result");
+                                                    chartResult.innerText = '';
+                                                     //data 갱신
+                                                    var chartName = document.getElementById("ScatterChartTitle").value;
+                                                    var scatterData1 = document.getElementById("ScatterinputData1").value;
+                                                    var scatterData2 = document.getElementById("ScatterinputData2").value;
+                                                    var scatterData3 = document.getElementById("ScatterinputData3").value;
+                                                    var scatterDataLabel1 = document.getElementById("ScatterDataLabel1").value;
+                                                    var scatterDataLabel2 = document.getElementById("ScatterDataLabel2").value;
+                                                    var scatterDataLabel3 = document.getElementById("ScatterDataLabel3").value;
+                                                    
+                                                    var scatterColor1 = document.getElementById("ScatterColor1").selectedIndex;
+                                                    var scatterColor2 = document.getElementById("ScatterColor2").selectedIndex;
+                                                    var scatterColor3 = document.getElementById("ScatterColor3").selectedIndex;
+                                                    var colorHex = ["#ff0000", "#ff7f00", "#ffff00", "#00ff00", "#0000ff" ];
+                                                    
+                                                    configScatter.options.plugins.title.text = chartName;
+                                                    
+                                                    if(scatterData1!=null && scatterData1!="") {
+                                                        var dataArray1 = scatterData1.replace(/ /g,"").split(",");
+                                                        dataScatter.datasets[0].data = dataArray1;
+                                                    }
+                                                    if(scatterDataLabel1!=null && scatterDataLabel1) {
+                                                        dataScatter.datasets[0].label = scatterDataLabel1;
+                                                    }
+
+                                                    if(scatterData2!=null && scatterData2!="") {
+                                                        var dataArray2 = scatterData2.replace(/ /g,"").split(",");
+                                                        dataScatter.datasets[1].data = dataArray2;
+                                                    }
+                                                    if(scatterDataLabel2!=null && scatterDataLabel2) {
+                                                        dataScatter.datasets[1].label = scatterDataLabel2;
+                                                    }
+
+                                                    if(scatterData3!=null && scatterData3!="") {
+                                                        var dataArray3 = scatterData3.replace(/ /g,"").split(",");
+                                                        dataScatter.datasets[2].data = dataArray3;
+                                                    }
+                                                    if(scatterDataLabel3!=null && scatterDataLabel3) {
+                                                        dataScatter.datasets[2].label = scatterDataLabel3;
+                                                    }
+
+                                                   
+                                                    dataScatter.datasets[0].backgroundColor=colorHex[scatterColor1];
+                                                    dataScatter.datasets[1].backgroundColor=colorHex[scatterColor2];
+                                                    dataScatter.datasets[2].backgroundColor=colorHex[scatterColor3];
+
+                                                    Chart.Chart('#result', configScatter);
+                                                    // Chart.Chart('#result', configH);
+                                                    // console.log(data);
+
+                                                }
+                                            </script>
                                             <div class="small "><i class="fas fa-angle-right"></i></div>
                                         </div>
                                     </div>
                                     <br>
 
+                                    <!-- circle chart  -->
                                     <div class="card mb-4">
-                                        <div class="card-body bg-primary text-white ">Donut Chart</div>
-                                         <p class="m-3"> 데이터 형식 : xxxx , xxxx, xxxx, xxxx,</p>
+                                        <div class="card-body bg-primary text-white " id="toCircleChart">Circle Chart</div>
+                                         <p class="m-3"> Circle Chart 데이터 형식 </p> 
+                                         <div class="row" style="margin-bottom: 5px;">
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp&nbsp <input class="form-check-input" type="radio" name="circleFormat" value="1" checked style="margin: 5px; margin-top: 5px;"/>Donut
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input class="form-check-input" type="radio" name="circleFormat" value="2" style="margin: 5px; margin-top: 5px;"/>Pie
+                                            </div>
+                                        </div> 
+
+                                         &nbsp&nbsp 차트 이름 <input class="form-control" id="CircleChartTitle" type="text" placeholder="예시 차트 이름"  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                        
+                                         <div class="row">
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp 데이터 1 <input class="form-control" id="CircleinputData1" type="text" placeholder="데이터 1의 값 ex) 100 "  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp&nbsp 데이터 1 라벨 <input class="form-control" id="CircleDataLabel1" type="text" placeholder="ex) 라벨1"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                        </div>
+ 
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp 데이터 2 <input class="form-control" id="CircleinputData2" type="text" placeholder="데이터 2의 값 ex) 200 " style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp&nbsp 데이터 2 라벨 <input class="form-control" id="CircleDataLabel2" type="text" placeholder="ex) 라벨2"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                        </div>
+ 
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp 데이터 3 <input class="form-control" id="CircleinputData3" type="text" placeholder="데이터 3의 값 ex) 300 " style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp&nbsp 데이터 3 라벨 <input class="form-control" id="CircleDataLabel3" type="text" placeholder="ex) 라벨3"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                        </div>
                                          
-                                         
-                                        <div class="card-footer d-flex align-items-center justify-content-between">
-                                            <a class="small stretched-link" href="#">생성</a>
+                                         <div class="row">
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 데이터1 색깔  <select class="form-select" id="CircleColor1" style="margin: 3px; width: 95%;">
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
+                                                  </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 데이터2 색깔  <select class="form-select" id="CircleColor2" style="margin: 3px; width: 95%;">
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
+                                                  </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 데이터3 색깔  <select class="form-select" id="CircleColor3" style="margin: 3px; width: 95%;">
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
+                                                  </select>
+                                            </div>
+                                          </div>
+                                          <br>
+
+                                         <div class="card-footer d-flex align-items-center justify-content-between">
+                                            <button id="circleChart" type="button" class="btn btn-primary">생성</button>
+                                            <script type="module">
+                                                
+                                                import * as Chart from './src/index.js';
+
+                                                const genButton6 = document.getElementById("circleChart");
+                                                genButton6.addEventListener('click', generate);
+                                                
+                                                function generate() {
+                                                    window.scrollTo(0,100);
+                                                    const chartResult = document.getElementById("result");
+                                                    chartResult.innerText = '';
+
+                                                     //data 갱신
+                                                    var chartFormat = (document.getElementsByName("circleFormat")[0].checked)? "donut" : "pie";
+                                                    var chartName = document.getElementById("CircleChartTitle").value;
+                                                    var circleData1 = document.getElementById("CircleinputData1").value;
+                                                    var circleData2 = document.getElementById("CircleinputData2").value;
+                                                    var circleData3 = document.getElementById("CircleinputData3").value;
+                                                    var circleDataLabel1 = document.getElementById("CircleDataLabel1").value;
+                                                    var circleDataLabel2 = document.getElementById("CircleDataLabel2").value;
+                                                    var circleDataLabel3 = document.getElementById("CircleDataLabel3").value;
+                                                    
+                                                    var circleColor1 = document.getElementById("CircleColor1").selectedIndex;
+                                                    var circleColor2 = document.getElementById("CircleColor2").selectedIndex;
+                                                    var circleColor3 = document.getElementById("CircleColor3").selectedIndex;
+                                                    var colorHex = ["#ff0000", "#ff7f00", "#ffff00", "#00ff00", "#0000ff" ];
+                                                    
+                                                    configCircle.options.plugins.title.text = chartName;
+                                                    
+                                                    configCircle.type=chartFormat;
+                                                    
+                                                    
+                                                    if(circleData1!=null && circleData1!="") {
+                                                        dataCircle.datasets[0].data[0].value = circleData1;
+                                                    }
+                                                    if(circleDataLabel1!=null && circleDataLabel1) {
+                                                        dataCircle.labels[0] = circleDataLabel1;
+                                                    }
+
+                                                    if(circleData2!=null && circleData2!="") {
+                                                        dataCircle.datasets[0].data[1].value = circleData2;
+                                                    }
+                                                    if(circleDataLabel2!=null && circleDataLabel2) {
+                                                        dataCircle.labels[1] = circleDataLabel2;
+                                                    }
+
+                                                    if(circleData3!=null && circleData3!="") {
+                                                        dataCircle.datasets[0].data[2].value = circleData3;
+                                                    }
+                                                    if(circleDataLabel3!=null && circleDataLabel3) {
+                                                        dataCircle.labels[2] = circleDataLabel3;
+                                                    }
+                                                  
+                                                    dataCircle.datasets[0].data[0].color=colorHex[circleColor1];
+                                                    dataCircle.datasets[0].data[1].color=colorHex[circleColor2];
+                                                    dataCircle.datasets[0].data[2].color=colorHex[circleColor3];
+                                                    
+                                                    Chart.Chart('#result', configCircle);
+                                                    // console.log(data);
+
+                                                }
+                                            </script>
                                             <div class="small "><i class="fas fa-angle-right"></i></div>
                                         </div>
                                     </div>
                                     <br>
 
+
+                                    <!-- radar chart  -->
                                     <div class="card mb-4">
-                                        <div class="card-body bg-primary text-white ">Radar Chart</div>
-                                         <p class="m-3"> 데이터 형식 : xxxx , xxxx, xxxx, xxxx,</p>
+                                        <div class="card-body bg-primary text-white " id="toRadarChart">Radar Chart</div>
+                                         <p class="m-3"> (Pentagon) Radar Chart 데이터 형식 예시</p>
+                                         &nbsp&nbsp 차트 이름 <input class="form-control" id="RadarChartTitle" type="text" placeholder="예시 차트 이름"  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         <div class="row">
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp 데이터 1 <input class="form-control" id="RadarinputData1" type="text" placeholder="값 5개 ex) 10,20,30,40,50 "  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp&nbsp 데이터 1 라벨 <input class="form-control" id="RadarDataLabel1" type="text" placeholder="ex) 라벨1"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                        </div>
+ 
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp 데이터 2 <input class="form-control" id="RadarinputData2" type="text" placeholder="값 5개 ex) 15,25,35,45,55  " style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp&nbsp 데이터 2 라벨 <input class="form-control" id="RadarDataLabel2" type="text" placeholder="ex) 라벨2"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                        </div>
+ 
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp 데이터 3 <input class="form-control" id="RadarinputData3" type="text" placeholder="값 5개 ex) 30,30,30,30,30  " style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp&nbsp 데이터 3 라벨 <input class="form-control" id="RadarDataLabel3" type="text" placeholder="ex) 라벨3"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                        </div>
                                          
+                                         <!-- <div class="row">
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 차트1 색깔  <select class="form-select" id="RadarColor1" style="margin: 3px; width: 95%;">
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
+                                                  </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 차트2 색깔  <select class="form-select" id="RadarColor2" style="margin: 3px; width: 95%;">
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
+                                                  </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 차트3 색깔  <select class="form-select" id="RadarColor3" style="margin: 3px; width: 95%;">
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
+                                                  </select>
+                                            </div>
+                                          </div> -->
+                                          <br>
+
                                          
-                                        <div class="card-footer d-flex align-items-center justify-content-between">
-                                            <a class="small stretched-link" href="#">생성</a>
+                                         <div class="card-footer d-flex align-items-center justify-content-between">
+                                            <button id="radarChart" type="button" class="btn btn-primary">생성</button>
+                                            <script type="module">
+                                                
+                                                import * as Chart from './src/index.js';
+
+                                                const genButton7 = document.getElementById("radarChart");
+                                                genButton7.addEventListener('click', generate);
+                                                
+                                                function generate() {
+                                                    window.scrollTo(0,100);
+                                                    const chartResult = document.getElementById("result");
+                                                    chartResult.innerText = '';
+                                                    
+                                                     //data 갱신
+                                                    var chartName = document.getElementById("RadarChartTitle").value;
+                                                    var radarData1 = document.getElementById("RadarinputData1").value;
+                                                    var radarData2 = document.getElementById("RadarinputData2").value;
+                                                    var radarData3 = document.getElementById("RadarinputData3").value;
+                                                    var radarDataLabel1 = document.getElementById("RadarDataLabel1").value;
+                                                    var radarDataLabel2 = document.getElementById("RadarDataLabel2").value;
+                                                    var radarDataLabel3 = document.getElementById("RadarDataLabel3").value;
+                                                    
+                                                    // var radarColor1 = document.getElementById("RadarColor1").selectedIndex;
+                                                    // var radarColor2 = document.getElementById("RadarColor2").selectedIndex;
+                                                    // var radarColor3 = document.getElementById("RadarColor3").selectedIndex;
+                                                    // var colorHex = ["#ff0000", "#ff7f00", "#ffff00", "#00ff00", "#0000ff" ];
+                                                    
+                                                    configRadar.options.plugins.title.text = chartName;
+
+                                                    if(radarData1!=null && radarData1!="") {
+                                                        var dataArray1 = radarData1.replace(/ /g,"").split(",");
+                                                        dataRadar.datasets[0].data = dataArray1;
+                                                    }
+                                                    if(radarDataLabel1!=null && radarDataLabel1) {
+                                                        dataScatter.datasets[0].label = radarDataLabel1;
+                                                    }
+
+                                                    if(radarData2!=null && radarData2!="") {
+                                                        var dataArray2 = radarData2.replace(/ /g,"").split(",");
+                                                        dataRadar.datasets[1].data = dataArray2;
+                                                    }
+                                                    if(radarDataLabel2!=null && radarDataLabel2) {
+                                                        dataScatter.datasets[1].label = radarDataLabel2;
+                                                    }
+
+                                                    if(radarData3!=null && radarData3!="") {
+                                                        var dataArray3 = radarData3.replace(/ /g,"").split(",");
+                                                        dataRadar.datasets[2].data = dataArray3;
+                                                    }
+                                                    if(radarDataLabel3!=null && radarDataLabel3) {
+                                                        dataScatter.datasets[2].label = radarDataLabel3;
+                                                    }
+
+                                                    //radar 차트 색상 변경 ?
+
+                                                    Chart.Chart('#result', configRadar);
+                                                    // console.log(data);
+
+                                                }
+                                            </script>
                                             <div class="small "><i class="fas fa-angle-right"></i></div>
                                         </div>
                                     </div>
@@ -195,10 +1050,6 @@
                                         </div>
                                         <div id="result" class="card-body">
                                             차트 화면 결과 출력
-                                            <div id="chartResult">
-                                               
-
-                                            </div>
                                         </div>
                                     </div>
                                     
@@ -208,63 +1059,31 @@
                         </div>
                     </div>
                     
-                  
-                
-
-                    
                 </main>
             </div>
 
             <script>
+                //bar data
                 const data = {
-labels: ['a', 'b', 'c', 'd', 'e', 'f'],
+labels: ['a', 'b', 'c', 'd', 'e' ],
 datasets: [
 {
-label: 'Fully Rounded',
-data: [
-{ name: 'a', value: 10 },
-{ name: 'b', value: 29 },
-{ name: 'c', value: 32 },
-{ name: 'd', value: 25 },
-{ name: 'e', value: 23 },
-{ name: 'f', value: 15 }
-],
+label: '라벨 1',
+data: [10,20,30,40],
 // backgroundColor: "red",
-
 },
 {
-label: 'Small Radius',
-data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-,
+label: '라벨 2',
+data: [10,20,30,40],
 // backgroundColor: "blue",
 },
 {
-label: 'Small Radius',
+label: '라벨 3',
 data:
-[
-{ name: 'a', value: 15 },
-{ name: 'b', value: 23 },
-{ name: 'c', value: 25 },
-{ name: 'd', value: 32 },
-{ name: 'e', value: 29 },
-{ name: 'f', value: 12 },
-{ name: 'g', value: 15 },
-{ name: 'ㅎ', value: 1 },
-{ name: 't', value: 12 }
-],
+[10,20,30,40],
+
 },
-// {
-//     label: 'Small Radius',
-//     data : [
-//         {name: 'a', value: 15},
-//         {name: 'b', value: 23},
-//         {name: 'c', value: 25},
-//         {name: 'd', value: 32},
-//         {name: 'e', value: 29},
-//         {name: 'f', value: 13},
-//         {name: 'g', value: 15},
-//     ],
-// }
+
 ]
 };
 const config = {
@@ -278,7 +1097,7 @@ options: {
 responsive: true,
 plugins: {
 legend: {
-position: 'right',// top bottom left right
+position: 'bottom',// top bottom left right
 fontSize: '10px',
 fontWeight: 'normal',
 fontFamily: 'comic sans ms',
@@ -286,7 +1105,7 @@ legendType: 'rect', // rect(default), circle,
 },
 title: {
 display: true,
-text: 'Chart.js Bar Chart'
+text: 'Bar Chart'
 },
 xTitle: {
 display: true,
@@ -315,7 +1134,8 @@ menu: {
 grid: true,
 xGrid: true,
 yGrid: true,
-background: true
+background: true,
+download: true
 }
 },
 scales: {                    
@@ -332,6 +1152,443 @@ fillopacity : 0.5
 
 
 
+            </script>
+            <script>
+                //barH data
+                const dataH = {
+                    labels: ['a', 'b', 'c', 'd', 'e'],
+                    datasets: [
+                        {
+                            label: '라벨 1',
+                            data: [10,20,30,40],
+                           
+                        },
+        
+                        {
+                            label: '라벨 2',
+                            data: [10,20,30,40]
+                            ,
+                           
+                        },
+                        {
+                            label : '라벨 3',
+                            data : [10,20,30,40],
+                            
+                        }
+        
+                       
+                    ]
+                };
+        
+                const configH = {
+                    type: 'barH',
+                    width: 500,
+                    height: 500,
+                    margin: { top: 40, left: 40, bottom: 40, right: 40 },
+                    padding: 0.1,
+                    data: dataH,
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',// top bottom left right
+                            },
+                            title: {
+                                display: true,
+                                text: '가로막대 그래프'
+                            },
+                            xTitle: {
+                                display: true,
+                                text: 'name'
+                            },
+                            yTitle: {
+                                display: true,
+                                text: 'value'
+                            },
+                            xGrid: {
+                                color: "rgb(255, 0, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
+                                dash: "10,3",
+                                weight: 1,
+                                opacity: .5,
+                            },
+                            yGrid: {
+                                color: "#323233", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
+                                dash: "10,3",     // 점선, 10만큼 칠하고 3만큼 빈공간
+                                weight: 1,        // 선 두께
+                                opacity: .5,      // 선 투명도
+                            },
+        
+                        }
+                    },
+                    y_min: 0,
+                };
+        
+        
+            </script>
+            <script>
+    const dataLine = {
+            labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+            datasets: [
+                {
+                    label: '라벨 1',
+                    data: [
+                       10,20,30,40,50
+                    ],
+                    backgroundColor: "",
+
+                },
+                {
+                    label: '라벨 2',
+                    data: [5,10,15,20,25,30]
+                    ,
+                    backgroundColor: "",
+                },
+                {
+                    label: '라벨 3',
+                    data:
+                        [
+                            [1, 1], [2, 2], [3, 3], [4, 4], [5, 4], [6, 4]
+                        ],
+                },
+               
+            ]
+        };
+
+        const configLine = {
+            type: 'line',
+            width: 500,
+            height: 500,
+            margin: { top: 40, left: 40, bottom: 40, right: 40 },
+            padding: 0.1,
+            data: dataLine,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',// top bottom left right
+                    },
+                    title: {
+                        display: true,
+                        text: ''
+                    },
+                    xTitle: {
+                        display: true,
+                        text: 'y'
+                    },
+                    yTitle: {
+                        display: true,
+                        text: 'x'
+                    },
+
+                    yGrid: {
+                        display: true,
+                        color: "#323233", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
+                        dash: "10,3",     // 점선, 10만큼 칠하고 3만큼 빈공간
+                        weight: 1,        // 선 두께
+                        opacity: .5       // 선 투명도
+                    },
+
+                    menu: {
+                        // grid: true,
+                        xGrid: true,
+                        yGrid: true,
+                        download: true
+
+                    }
+                },
+                scales: {
+                    xAxis: {
+                        type: "number",
+                        ticks: {
+
+                        }
+                    },
+                    yAxis: {
+                        ticks: {
+
+                        }
+                    },
+                    line: {
+                        width: 5,
+                        opacity: .5
+                    },
+                    dot: {
+                        size: 0,
+                        opacity: 0.5,
+                        visible: true
+                    }
+                }
+            },
+        };
+
+            </script>
+            <script>
+            const dataArea = {
+            labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+            datasets: [
+                {
+                    label: '라벨 1',
+                    data: [
+                       10,20,30,40,50
+                    ],
+                    backgroundColor: "",
+
+                },
+                {
+                    label: '라벨 2',
+                    data: [5,10,15,20,25,30]
+                    ,
+                    backgroundColor: "",
+                },
+                {
+                    label: '라벨 3',
+                    data:
+                        [
+                            [1, 1], [2, 2], [3, 3], [4, 4], [5, 4], [6, 4]
+                        ],
+                },
+               
+            ]
+        };
+
+        const configArea = {
+            type: 'area',
+            width: 500,
+            height: 500,
+            margin: { top: 40, left: 40, bottom: 40, right: 40 },
+            padding: 0.1,
+            data: dataArea,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',// top bottom left right
+                    },
+                    title: {
+                        display: true,
+                        text: 'Chart.js Area Chart'
+                    },
+                    xTitle: {
+                        display: true,
+                        text: 'y'
+                    },
+                    yTitle: {
+                        display: true,
+                        text: 'x'
+                    },
+
+                    yGrid: {
+                        display: true,
+                        color: "#323233", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
+                        dash: "10,3",     // 점선, 10만큼 칠하고 3만큼 빈공간
+                        weight: 1,        // 선 두께
+                        opacity: .5       // 선 투명도
+                    },
+
+                    menu: {
+                        // grid: true,
+                        xGrid: true,
+                        yGrid: true,
+                        download: true
+
+                    }
+                },
+                scales: {
+                    xAxis : {
+                        type : "number",
+                        ticks:{
+
+                        }
+                    },    
+                    yAxis : {
+                        ticks:{
+
+                        }
+                    },
+                    line :{
+                        width : 10,
+                        opacity : .5
+                    },
+                    dot :{
+                        size : 0,
+                        opacity : 1,
+                        visible : true
+                    }
+                }
+            },
+        };
+            </script>
+            <script>
+
+            const dataScatter = {
+            labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+            datasets: [
+                {
+                    label: '라벨1',
+                    data: [ 10, 20, 30, 40, 50 ],
+                    backgroundColor: "red",
+
+                },
+                {
+                    label: '라벨2',
+                    data: [5,10,15,20,25,30]
+                    ,
+                    backgroundColor: "blue",
+                },
+                {
+                    label: '라벨3',
+                    data:
+                        [
+                            [1, 1], [2, 2], [3, 3], [4, 4], [5, 4], [6, 4]
+                        ],
+                },
+                
+            ]
+        };
+
+        const configScatter = {
+            type: 'scatter',
+            width: 500,
+            height: 500,
+            margin: { top: 40, left: 40, bottom: 40, right: 40 },
+            padding: 0.1,
+            data: dataScatter,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'right',// top bottom left right
+                    },
+                    title: {
+                        display: true,
+                        text: ''
+                    },
+                    xTitle: {
+                        display: true,
+                        text: 'y'
+                    },
+                    yTitle: {
+                        display: true,
+                        text: 'x'
+                    },
+                    xGrid: {
+                        color: "#323233", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
+                        dash: "10,3",
+                        weight: 1,
+                        opacity: .5
+                    },
+                    yGrid: {
+                        display: true,
+                        color: "#323233", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
+                        dash: "10,3",     // 점선, 10만큼 칠하고 3만큼 빈공간
+                        weight: 1,        // 선 두께
+                        opacity: .5       // 선 투명도
+                    },
+                    background: {
+
+                    },
+                    menu: {
+                        grid: true,
+                        xGrid: true,
+                        yGrid: true,
+                        background: true,
+                        download: true
+                    },
+
+                },
+                scales: {
+                    dot: {
+                        size: 7,
+                        opacity: 1
+                    }
+                }
+            },
+        };
+            </script>
+            <script>
+                const dataCircle = {
+            labels: ['라벨1', '라벨2', '라벨3'],
+            datasets: [{    
+                data : [
+                { name : '', value: 100, color: '#ff0000' },
+                { name:'', value: 200, color: '#ff0000' },
+                { name: '', value: 300, color: '#ff0000' },
+                
+                ]
+            }
+                
+            ]
+        };
+        const configCircle = {
+            type: 'donut',
+            width: 500,
+            height: 500,
+            margin: { top: 40, left: 40, bottom: 40, right: 40 },
+            padding: 0.1,
+            data: dataCircle,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',// top bottom left right
+                    },
+                    title: {
+                        display: true,
+                        text: ''
+                    },
+                    sort: true,
+                    view: true,
+                },
+            }
+        }
+
+            </script>
+            <script>
+                 const dataRadar = {
+            labels: ['ability1', 'ability2', 'ability3', 'ability4' ,'ability5'],
+            datasets: [
+                { 
+                    label: '라벨1',
+                    data : [10,20,30,40,50],
+                },
+                { 
+                    label: '라벨2', 
+                    data :[15,25,35,45,55],
+                },
+                { 
+                    label: '라벨3',
+                    data : [30,30,30,30,30],
+                },
+               
+            ],
+               
+        };
+        const configRadar = {
+            type: 'radar',
+            width: 500,
+            height: 500,
+            margin: { top: 40, left: 40, bottom: 40, right: 40 },
+            padding: 0.1,
+            data: dataRadar,
+            depth:6, // 구간 갯수
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',// top bottom left right
+                    },
+                    title: {
+                        display: true,
+                        text: ''
+                    },
+                    sort: true,
+                    view: true,
+                    menu: {
+                        download: true
+                    }
+                },
+            }
+        }
             </script>
 
             <!-- Footer-->
