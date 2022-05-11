@@ -60,7 +60,7 @@ function Chart(
     legendList: []
   }
   if (legend) {
-    if(type == "donut"|| type == "donut"){
+    if(type == "donut"|| type == "pie"){
       legend_box = drawLegend(
         oid,
         svg,
@@ -135,7 +135,7 @@ function Chart(
         position: legend.position,
       });
       chart.tooltip();
-      // chart.animation();
+      chart.animation();
       renderOptions();
     }
   }
@@ -291,6 +291,7 @@ function Chart(
         height: chart_height,
         margin,
         padding,
+        scales: options.scales
       });
       barHchart.tooltip();
       barHchart.animation();
@@ -308,18 +309,7 @@ function Chart(
     console.log(datasets)
     console.log(data.datasets)
     drawCicleChart(datasets);
-    // for (let i = 0; i < datasets.length; i++) {
-    //   const item = d3.select(`${id}-legend-${i} rect`);
-    //   item.attr("fill", datasets[i].color);
-    // }
-    // createCircleChartLegend(
-    //   id,
-    //   data.datasets,
-    //   legend_box?.legendList,
-    //   drawCicleChart,
-    //   {},
-    //   renderBackground,
-    // );
+
     createLegendToggle(
       id,
       datasets,
@@ -329,19 +319,12 @@ function Chart(
       {},
       renderBackground,
     );
-    // createLegendToggle(
-    //   data.datasets,
-    //   legend_box?.legendList,
-    //   chart_area,
-    //   drawCicleChart,
-    //   {},
-    //   renderBackground
-    // );
     function drawCicleChart(chartData) {      
       const circleChart = new CircleChart({
         id: oid,
         type,
         chart_area,
+        labels,
         color: labelcolor.color,
         width: chart_width,
         height: chart_height,
@@ -447,107 +430,107 @@ function Chart(
   }
 }
 
-function ChartH(
-  id,
-  { type, width, height, margin, padding = 0, data, options, y_max, y_min = 0 }
-) {
-  const { position } = legend;
-  const legend = legend;
-  const svg = d3
-    .select(id)
-    .append("svg")
-    .style("width", width)
-    .style("height", height);
+// function ChartH(
+//   id,
+//   { type, width, height, margin, padding = 0, data, options, y_max, y_min = 0 }
+// ) {
+//   const { position } = legend;
+//   const legend = legend;
+//   const svg = d3
+//     .select(id)
+//     .append("svg")
+//     .style("width", width)
+//     .style("height", height);
 
-  const datasets = Data_pre_processing(data.labels, data.datasets);
+//   const datasets = Data_pre_processing(data.labels, data.datasets);
 
-  const labelcolor = LabelColor(datasets);
-  const oid = id.slice(1, id.length);
-  const color = labelcolor.color;
-  const legend_label = labelcolor.label;
+//   const labelcolor = LabelColor(datasets);
+//   const oid = id.slice(1, id.length);
+//   const color = labelcolor.color;
+//   const legend_label = labelcolor.label;
 
-  const labels = data.labels;
-  const chart_area = svg
-    .append("g")
-    .style("width", width)
-    .style("height", height);
+//   const labels = data.labels;
+//   const chart_area = svg
+//     .append("g")
+//     .style("width", width)
+//     .style("height", height);
 
-  const legend_box = drawLegend(
-    oid,
-    svg,
-    labelcolor,
-    width,
-    height,
-    chart_area,
-    legend,
-    margin
-  );
-  const chart_width = width - legend_box.width;
-  const chart_height = height - legend_box.height;
+//   const legend_box = drawLegend(
+//     oid,
+//     svg,
+//     labelcolor,
+//     width,
+//     height,
+//     chart_area,
+//     legend,
+//     margin
+//   );
+//   const chart_width = width - legend_box.width;
+//   const chart_height = height - legend_box.height;
 
-  if (type === "barH") {
-    const barHchart = new BarHClass({
-      chart_area,
-      labels,
-      datasets,
-      color,
-      width: chart_width,
-      height: chart_height,
-      margin,
-      padding,
-      y_max,
-      y_min,
-    });
-    barHchart.tooltip();
-    barHchart.animation();
-  }
+//   if (type === "barH") {
+//     const barHchart = new BarHClass({
+//       chart_area,
+//       labels,
+//       datasets,
+//       color,
+//       width: chart_width,
+//       height: chart_height,
+//       margin,
+//       padding,
+//       y_max,
+//       y_min,
+//     });
+//     barHchart.tooltip();
+//     barHchart.animation();
+//   }
 
-  drawTitle(svg, title.text, width, height, margin);
-  drawXTitle(
-    chart_area,
-    xTitle.text,
-    chart_width,
-    chart_height,
-    margin
-  );
-  drawYTitle(
-    chart_area,
-    yTitle.text,
-    chart_width,
-    chart_height,
-    margin,
-    yTitle.position
-  );
+//   drawTitle(svg, title.text, width, height, margin);
+//   drawXTitle(
+//     chart_area,
+//     xTitle.text,
+//     chart_width,
+//     chart_height,
+//     margin
+//   );
+//   drawYTitle(
+//     chart_area,
+//     yTitle.text,
+//     chart_width,
+//     chart_height,
+//     margin,
+//     yTitle.position
+//   );
 
-  if (xGrid) {
-    drawXGrid(
-      chart_area,
-      chart_height - margin.top - margin.bottom,
-      xGrid
-    );
-  }
+//   if (xGrid) {
+//     drawXGrid(
+//       chart_area,
+//       chart_height - margin.top - margin.bottom,
+//       xGrid
+//     );
+//   }
 
-  if (yGrid) {
-    drawYGrid(
-      chart_area,
-      chart_width - margin.left - margin.right,
-      yGrid
-    );
-  }
+//   if (yGrid) {
+//     drawYGrid(
+//       chart_area,
+//       chart_width - margin.left - margin.right,
+//       yGrid
+//     );
+//   }
 
-  if (background) {
-    drawBackground(
-      chart_area,
-      margin,
-      chart_width,
-      chart_height,
-      background
-    );
-  }
+//   if (background) {
+//     drawBackground(
+//       chart_area,
+//       margin,
+//       chart_width,
+//       chart_height,
+//       background
+//     );
+//   }
 
-  if (menu) {
-    drawMenu(chart_width, width, margin, chart_area, options, id);
-  }
+//   if (menu) {
+//     drawMenu(chart_width, width, margin, chart_area, options, id);
+//   }
 
   /*
     const Type = document.getElementsByTagName('rect'); // 타입으로 받아서 처리해야할것같아요
@@ -610,6 +593,6 @@ function ChartH(
         });
     }
     */
-}
+// }
 
-export { Chart, ChartH };
+export { Chart};

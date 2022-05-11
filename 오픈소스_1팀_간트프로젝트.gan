@@ -1,17 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="자율" company="free" webLink="http://" view-date="2022-04-12" view-index="1" gantt-divider-location="466" resource-divider-location="640" version="3.2.3230" locale="ko_KR">
+<?xml version="1.0" encoding="UTF-8"?><project name="자율" company="free" webLink="http://" view-date="2022-04-14" view-index="0" gantt-divider-location="397" resource-divider-location="300" version="3.2.3230" locale="ko_KR">
     <description/>
     <view zooming-state="default:2" id="gantt-chart">
-        <field id="tpd3" name="이름" width="254" order="0"/>
-        <field id="tpd4" name="시작일" width="98" order="1"/>
-        <field id="tpd5" name="종료일" width="98" order="2"/>
+        <field id="tpd3" name="이름" width="215" order="0"/>
+        <field id="tpd4" name="시작일" width="83" order="1"/>
+        <field id="tpd5" name="종료일" width="83" order="2"/>
         <option id="filter.completedTasks" value="false"/>
         <option id="color.recent">
-            <![CDATA[#3333ff #33ff33 #0000ff #66ff66]]>
+            <![CDATA[#66ffff #ff0000]]>
         </option>
     </view>
     <view id="resource-table">
-        <field id="0" name="이름" width="380" order="0"/>
-        <field id="1" name="기본 역할" width="256" order="1"/>
+        <field id="0" name="이름" width="210" order="0"/>
+        <field id="1" name="기본 역할" width="86" order="1"/>
     </view>
     <!-- -->
     <calendars>
@@ -65,22 +65,19 @@
         <task id="7" name="조원빈 - 원형 차트 모듈 개발" color="#ccffcc" meeting="false" start="2022-04-28" duration="4" complete="0" thirdDate="2022-04-06" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <depend id="33" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="33" name="조원빈 - 원형 차트 디자인 적용" color="#ccffcc" meeting="false" start="2022-05-04" duration="3" complete="0" thirdDate="2022-04-06" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="33" name="조원빈 - 원형 차트 디자인 적용" color="#ccffcc" meeting="false" start="2022-05-04" duration="1" complete="0" thirdDate="2022-04-06" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <depend id="34" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="34" name="조원빈 - 우선순위2 공통 모듈 개발" color="#ff3300" meeting="false" start="2022-05-09" duration="4" complete="0" thirdDate="2022-04-06" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="34" name="조원빈 - SVG 이미지 저장" color="#ff3300" meeting="false" start="2022-05-05" duration="3" complete="0" thirdDate="2022-04-06" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <depend id="10" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="10" name="조원빈 - 프로젝트 종합 테스트1" color="#99ffff" meeting="false" start="2022-05-13" duration="2" complete="0" thirdDate="2022-04-06" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="10" name="조원빈 - 데이터 색상 변경" color="#99ffff" meeting="false" start="2022-05-10" duration="2" complete="0" thirdDate="2022-04-06" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <depend id="11" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="11" name="조원빈 - 프로젝트 종합 테스트2" color="#99ffff" meeting="false" start="2022-05-17" duration="1" complete="0" thirdDate="2022-04-06" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
-            <depend id="12" type="2" difference="0" hardness="Strong"/>
-        </task>
-        <task id="12" name="조원빈 - 프로젝트 종합 테스트3" color="#99ffff" meeting="false" start="2022-05-18" duration="1" complete="0" thirdDate="2022-04-06" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="11" name="조원빈 - 코드 리펙토링 및 배포" color="#99ffff" meeting="false" start="2022-05-12" duration="2" complete="0" thirdDate="2022-04-06" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <depend id="13" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="13" name="조원빈 - 배포 및 발표준비" color="#00cccc" meeting="false" start="2022-05-19" duration="2" complete="0" thirdDate="2022-04-06" thirdDate-constraint="0" expand="true"/>
+        <task id="13" name="조원빈 - 배포 및 발표준비" color="#00cccc" meeting="false" start="2022-05-16" duration="5" complete="0" thirdDate="2022-04-06" thirdDate-constraint="0" expand="true"/>
         <task id="35" name="배용한 - NPM배포, Library 학습" color="#8cb6ce" meeting="false" start="2022-04-18" duration="2" complete="0" thirdDate="2022-04-18" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <depend id="36" type="2" difference="0" hardness="Strong"/>
         </task>
@@ -99,13 +96,22 @@
         <task id="40" name="배용한 - 가로형 Bar 차트 모듈 구조 수정" color="#8cb6ce" meeting="false" start="2022-05-02" duration="2" complete="0" thirdDate="2022-04-27" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <depend id="41" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="41" name="배용한 - 차트 UI/UX 작업" color="#8cb6ce" meeting="false" start="2022-05-04" duration="3" complete="0" thirdDate="2022-04-27" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="41" name="배용한 - 차트 UI/UX 작업" color="#8cb6ce" meeting="false" start="2022-05-04" duration="2" complete="0" thirdDate="2022-04-27" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <depend id="29" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="29" name="배용한 - 프로젝트 종합/ 테스트" color="#8cb6ce" meeting="false" start="2022-05-09" duration="5" complete="0" thirdDate="2022-05-09" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="29" name="배용한 - 인덱스 페이지 제작" color="#8cb6ce" meeting="false" start="2022-05-06" duration="4" complete="0" thirdDate="2022-05-09" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <depend id="42" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="42" name="배용한 - UCC 제작" color="#8cb6ce" meeting="false" start="2022-05-16" duration="5" complete="0" thirdDate="2022-04-11" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true"/>
+        <task id="42" name="배용한 - UCC 제작" color="#8cb6ce" meeting="false" start="2022-05-12" duration="1" complete="0" thirdDate="2022-04-11" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+            <depend id="79" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="79" name="배용한 - 팀원별 UCC 스크립트 작성" color="#8cb6ce" meeting="false" start="2022-05-13" duration="1" complete="0" thirdDate="2022-05-13" thirdDate-constraint="0" expand="true">
+            <depend id="80" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="80" name="배용한 - UCC 제작" color="#8cb6ce" meeting="false" start="2022-05-16" duration="2" complete="0" thirdDate="2022-04-29" thirdDate-constraint="0" expand="true">
+            <depend id="81" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="81" name="배용한 - 테스트, 문서작업" color="#8cb6ce" meeting="false" start="2022-05-18" duration="3" complete="0" thirdDate="2022-04-29" thirdDate-constraint="0" expand="true"/>
         <task id="43" name="김영진 - 데이터 시각화 기술조사" color="#33ff33" meeting="false" start="2022-04-18" duration="2" complete="0" thirdDate="2022-04-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <notes>
                 <![CDATA[D3.js 분석
@@ -130,16 +136,19 @@ npm 배포 실습
         <task id="4" name="김영진 - 차트 배경 색 기능" color="#0000ff" meeting="false" start="2022-04-28" duration="2" complete="0" thirdDate="2022-04-11" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <depend id="46" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="46" name="김영진 - 바 차트 UI/UX" color="#0000ff" meeting="false" start="2022-05-02" duration="5" complete="0" thirdDate="2022-04-11" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="46" name="김영진 - 차트 메뉴 기능 개발" color="#0000ff" meeting="false" start="2022-05-02" duration="3" complete="0" thirdDate="2022-04-11" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <depend id="47" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="47" name="김영진 - area chart UI/UX" color="#0000ff" meeting="false" start="2022-05-09" duration="1" complete="0" thirdDate="2022-04-12" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="47" name="김영진 - 메뉴, 드롭다운 위치 버그 수정" color="#0000ff" meeting="false" start="2022-05-05" duration="2" complete="0" thirdDate="2022-04-12" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <depend id="48" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="48" name="김영진 - pie chart UI/UX" color="#3333ff" meeting="false" start="2022-05-10" duration="2" complete="0" thirdDate="2022-04-12" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="48" name="김영진 - xy Axis options 개발" color="#3333ff" meeting="false" start="2022-05-09" duration="1" complete="0" thirdDate="2022-04-12" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+            <depend id="82" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="82" name="김영진 - menu에 legend 기능 추가" color="#3333ff" meeting="false" start="2022-05-10" duration="1" complete="0" thirdDate="2022-05-09" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <depend id="49" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="49" name="김영진 - 프로젝트 종합/테스트" color="#3333ff" meeting="false" start="2022-05-12" duration="2" complete="0" thirdDate="2022-04-22" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="49" name="김영진 - 프로젝트 종합/테스트" color="#3333ff" meeting="false" start="2022-05-11" duration="3" complete="0" thirdDate="2022-04-22" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <depend id="50" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="50" name="김영진 - 배포 및 발표 준비" color="#3333ff" meeting="false" start="2022-05-16" duration="5" complete="0" thirdDate="2022-04-22" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true"/>
@@ -158,25 +167,34 @@ npm 배포 실습
         <task id="54" name="안재영 - Legend 모듈 UI/UX 코드 개발" color="#8cb6ce" meeting="false" start="2022-05-02" duration="1" complete="0" thirdDate="2022-04-28" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <depend id="55" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="55" name="안재영 - Legend 관련 선택 옵션 기능 개발" color="#8cb6ce" meeting="false" start="2022-05-03" duration="2" complete="0" thirdDate="2022-04-28" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="55" name="안재영 - Legend 모듈 관련 선택 옵션 추가 (legendType, position, size, border, color, opacity)" color="#8cb6ce" meeting="false" start="2022-05-03" duration="2" complete="0" thirdDate="2022-04-28" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <depend id="56" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="56" name="안재영 - donut chart UI/UX 코드 개발" color="#8cb6ce" meeting="false" start="2022-05-05" duration="2" complete="0" thirdDate="2022-04-28" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="56" name="안재영 - Legend 모듈 다양한 차트에 적용 (donut chart, pie chart)" color="#8cb6ce" meeting="false" start="2022-05-05" duration="2" complete="0" thirdDate="2022-04-28" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <depend id="57" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="57" name="안재영 - bubble chart UI/UX 코드 개발" color="#8cb6ce" meeting="false" start="2022-05-09" duration="2" complete="0" thirdDate="2022-04-28" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="57" name="안재영 - bar chart/scatter chart default UI 코드 개발 및 옵션 추가" color="#8cb6ce" meeting="false" start="2022-05-09" duration="1" complete="0" thirdDate="2022-04-28" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <depend id="58" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="58" name="안재영 - scattor graph UI/UX 코드 개발" color="#8cb6ce" meeting="false" start="2022-05-11" duration="2" complete="0" thirdDate="2022-04-28" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="58" name="안재영 - bubble chart/line chart/area chart default UI 코드 개발 및 옵션 추가" color="#8cb6ce" meeting="false" start="2022-05-10" duration="1" complete="0" thirdDate="2022-04-28" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <depend id="59" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="59" name="안재영 - 프로젝트 종합/테스트3" color="#8cb6ce" meeting="false" start="2022-05-13" duration="1" complete="0" thirdDate="2022-04-28" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="59" name="안재영 - circle chart/radar chart default UI 코드 개발 및 옵션 추가" color="#8cb6ce" meeting="false" start="2022-05-11" duration="1" complete="0" thirdDate="2022-04-28" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <depend id="60" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="60" name="안재영 - 라이브러리 사용법 문서화 및 간단한 홈페이지 개발" color="#8cb6ce" meeting="false" start="2022-05-16" duration="2" complete="0" thirdDate="2022-04-28" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="60" name="안재영 - chart 종합 테스트 및 오류 수정" color="#8cb6ce" meeting="false" start="2022-05-12" duration="1" complete="0" thirdDate="2022-04-28" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <depend id="61" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="61" name="안재영 - 배포 및 발표 준비" color="#8cb6ce" meeting="false" start="2022-05-18" duration="3" complete="0" thirdDate="2022-04-28" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true"/>
+        <task id="61" name="안재영 - [micro site] 웹 페이지 내에서 chart 그려볼 수 있는 code editor 기능 추가" color="#8cb6ce" meeting="false" start="2022-05-13" duration="1" complete="0" thirdDate="2022-04-28" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+            <depend id="97" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="97" name="안재영 - [micro site] UI/UX 추가 개발" color="#8cb6ce" meeting="false" start="2022-05-16" duration="1" complete="0" thirdDate="2022-04-06" thirdDate-constraint="0" expand="true">
+            <depend id="98" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="98" name="안재영 - [micro site] 데이터 입력에 따른 code generate 기능 추가" color="#8cb6ce" meeting="false" start="2022-05-17" duration="2" complete="0" thirdDate="2022-04-06" thirdDate-constraint="0" expand="true">
+            <depend id="99" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="99" name="안재영 - [micro site] UI/UX 최종 마무리 및 배포" color="#8cb6ce" meeting="false" start="2022-05-19" duration="2" complete="0" thirdDate="2022-04-06" thirdDate-constraint="0" expand="true"/>
         <task id="9" name="정해윤 - JS 라이브러리 개발 방법 공부" color="#8cb6ce" meeting="false" start="2022-04-18" duration="5" complete="0" thirdDate="2022-04-11" thirdDate-constraint="0" expand="true">
             <depend id="62" type="2" difference="0" hardness="Strong"/>
         </task>
@@ -192,24 +210,38 @@ npm 배포 실습
         </task>
         <task id="18" name="정해윤 - 개발 내용 병합 및 수정" color="#8cb6ce" meeting="false" start="2022-04-28" duration="1" complete="0" thirdDate="2022-04-18" thirdDate-constraint="0" expand="false" cost-manual-value="0.0" cost-calculated="true"/>
         <task id="63" name="정해윤 - 툴팁 세부 수정" color="#8cb6ce" meeting="false" start="2022-04-28" duration="2" complete="0" thirdDate="2022-04-21" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
-            <depend id="64" type="2" difference="0" hardness="Strong"/>
+            <depend id="83" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="64" name="정해윤 - 차트 추가 개발" color="#8cb6ce" meeting="false" start="2022-05-02" duration="2" complete="0" thirdDate="2022-05-02" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
-            <depend id="27" type="2" difference="0" hardness="Strong"/>
+        <task id="83" name="정해윤 - 차트 추가 작업" color="#66ffff" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2022-05-02" duration="3" complete="0" thirdDate="2022-04-14" thirdDate-constraint="0" expand="true">
+            <depend id="84" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="27" name="정해윤 - 내용 병합 및 수정" color="#8cb6ce" meeting="false" start="2022-05-04" duration="1" complete="0" thirdDate="2022-04-20" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
-            <depend id="65" type="2" difference="0" hardness="Strong"/>
+        <task id="84" name="정해윤 - 공휴일(어린이날)" color="#ff0000" meeting="false" start="2022-05-05" duration="1" complete="0" thirdDate="2022-04-14" thirdDate-constraint="0" expand="true">
+            <depend id="85" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="65" name="정해윤 - 차트 세부 기능 구현" color="#8cb6ce" meeting="false" start="2022-05-05" duration="2" complete="0" thirdDate="2022-04-21" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
-            <depend id="28" type="2" difference="0" hardness="Strong"/>
+        <task id="85" name="정해윤 - 차트 수정 및 모듈화" color="#66ffff" meeting="false" start="2022-05-06" duration="1" complete="0" thirdDate="2022-04-14" thirdDate-constraint="0" expand="true">
+            <depend id="86" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="28" name="정해윤 - 데이터 표 개발" color="#8cb6ce" meeting="false" start="2022-05-09" duration="3" complete="0" thirdDate="2022-04-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
-            <depend id="66" type="2" difference="0" hardness="Strong"/>
+        <task id="86" name="정해윤 - readme 작성" color="#66ffff" meeting="false" start="2022-05-09" duration="1" complete="0" thirdDate="2022-04-06" thirdDate-constraint="0" expand="true">
+            <depend id="87" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="66" name="정해윤 - 사용자 정의 색 지정" color="#8cb6ce" meeting="false" start="2022-05-12" duration="3" complete="0" thirdDate="2022-04-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
-            <depend id="30" type="2" difference="0" hardness="Strong"/>
+        <task id="87" name="정해윤 - readme 수정 및 pakage.json 작성" color="#66ffff" meeting="false" start="2022-05-10" duration="1" complete="0" thirdDate="2022-04-06" thirdDate-constraint="0" expand="true">
+            <depend id="88" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="30" name="정해윤 - 배포 및 발표준비" color="#8cb6ce" meeting="false" start="2022-05-17" duration="4" complete="0" thirdDate="2022-04-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true"/>
+        <task id="88" name="정해윤 - 레이더 차트 옵션 추가" color="#66ffff" meeting="false" start="2022-05-11" duration="1" complete="0" thirdDate="2022-04-07" thirdDate-constraint="0" expand="true">
+            <depend id="89" type="2" difference="0" hardness="Strong"/>
+            <depend id="90" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="89" name="정해윤 - 발표 준비" color="#66ffff" meeting="false" start="2022-05-12" duration="1" complete="0" thirdDate="2022-04-07" thirdDate-constraint="0" expand="true"/>
+        <task id="90" name="정해윤 - 배포 준비" color="#66ffff" meeting="false" start="2022-05-12" duration="2" complete="0" thirdDate="2022-04-07" thirdDate-constraint="0" expand="true">
+            <depend id="91" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="91" name="정해윤 - 기능 보완" color="#66ffff" meeting="false" start="2022-05-16" duration="3" complete="0" thirdDate="2022-04-18" thirdDate-constraint="0" expand="true">
+            <depend id="93" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="92" name="정해윤 - 안정화 작업" color="#66ffff" meeting="false" start="2022-05-18" duration="2" complete="0" thirdDate="2022-04-18" thirdDate-constraint="0" expand="true">
+            <depend id="93" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="93" name="정해윤 - 최종발표" color="#66ffff" meeting="false" start="2022-05-20" duration="1" complete="0" thirdDate="2022-04-18" thirdDate-constraint="0" expand="true"/>
         <task id="67" name="이정훈 - JS 라이브러리 개발 방법 공부" color="#8cb6ce" meeting="false" start="2022-04-18" duration="5" complete="0" thirdDate="2022-04-18" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <depend id="68" type="2" difference="0" hardness="Strong"/>
         </task>
@@ -228,22 +260,31 @@ npm 배포 실습
         <task id="72" name="이정훈 - barchart 옵션 추가" color="#8cb6ce" meeting="false" start="2022-04-29" duration="1" complete="0" thirdDate="2022-04-28" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <depend id="73" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="73" name="이정훈 - line chart 개발" color="#8cb6ce" meeting="false" start="2022-05-02" duration="2" complete="0" thirdDate="2022-05-02" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="73" name="이정훈 - scatter chart 개발" color="#8cb6ce" meeting="false" start="2022-05-02" duration="1" complete="0" thirdDate="2022-05-02" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+            <depend id="96" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="96" name="이정훈 - bubble chart 개발" color="#8cb6ce" meeting="false" start="2022-05-03" duration="1" complete="0" thirdDate="2022-05-02" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+            <depend id="95" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="95" name="이정훈 - line chart 개발" color="#8cb6ce" meeting="false" start="2022-05-04" duration="1" complete="0" thirdDate="2022-05-02" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+            <depend id="94" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="94" name="이정훈 - area chart 개발" color="#8cb6ce" meeting="false" start="2022-05-05" duration="2" complete="0" thirdDate="2022-05-02" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <depend id="74" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="74" name="이정훈 - 내용 병합 및 수정" color="#8cb6ce" meeting="false" start="2022-05-04" duration="1" complete="0" thirdDate="2022-05-04" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="74" name="이정훈 - circle chart 코드 통일화" color="#8cb6ce" meeting="false" start="2022-05-09" duration="1" complete="0" thirdDate="2022-05-04" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <depend id="75" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="75" name="이정훈 - area 차트 개발" color="#8cb6ce" meeting="false" start="2022-05-05" duration="3" complete="0" thirdDate="2022-05-05" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="75" name="이정훈 - radar chart 코드 통일화" color="#8cb6ce" meeting="false" start="2022-05-10" duration="1" complete="0" thirdDate="2022-05-05" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <depend id="76" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="76" name="이정훈 - 내용 병합 및 수정" color="#8cb6ce" meeting="false" start="2022-05-10" duration="1" complete="0" thirdDate="2022-05-09" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="76" name="이정훈 - 내용 병합 및 수정" color="#8cb6ce" meeting="false" start="2022-05-11" duration="1" complete="0" thirdDate="2022-05-09" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <depend id="77" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="77" name="이정훈 - svg 저장 기능 개발" color="#8cb6ce" meeting="false" start="2022-05-11" duration="3" complete="0" thirdDate="2022-05-11" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="77" name="이정훈 - 코드 리펙토링" color="#8cb6ce" meeting="false" start="2022-05-12" duration="3" complete="0" thirdDate="2022-05-11" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <depend id="78" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="78" name="이정훈 - 배포 및 발표준비" color="#8cb6ce" meeting="false" start="2022-05-16" duration="5" complete="0" thirdDate="2022-05-16" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true"/>
+        <task id="78" name="이정훈 - 배포 및 발표준비" color="#8cb6ce" meeting="false" start="2022-05-17" duration="4" complete="0" thirdDate="2022-05-16" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true"/>
     </tasks>
     <resources>
         <resource id="0" name="이정훈" function="SoftwareDevelopment:2" contacts="" phone=""/>
@@ -268,6 +309,9 @@ npm 배포 실습
         <allocation task-id="76" resource-id="0" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
         <allocation task-id="77" resource-id="0" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
         <allocation task-id="78" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="94" resource-id="0" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="95" resource-id="0" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="96" resource-id="0" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
         <allocation task-id="0" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="8" resource-id="1" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
         <allocation task-id="43" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
@@ -280,6 +324,7 @@ npm 배포 실습
         <allocation task-id="48" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="49" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="50" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="82" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="0" resource-id="2" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="8" resource-id="2" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
         <allocation task-id="35" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
@@ -291,6 +336,9 @@ npm 배포 실습
         <allocation task-id="41" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="29" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="42" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="79" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="80" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="81" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="0" resource-id="3" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="8" resource-id="3" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
         <allocation task-id="16" resource-id="3" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
@@ -305,6 +353,9 @@ npm 배포 실습
         <allocation task-id="59" resource-id="3" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
         <allocation task-id="60" resource-id="3" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
         <allocation task-id="61" resource-id="3" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="97" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="98" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="99" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="0" resource-id="4" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="8" resource-id="4" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
         <allocation task-id="62" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
@@ -312,13 +363,18 @@ npm 배포 실습
         <allocation task-id="26" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
         <allocation task-id="18" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
         <allocation task-id="63" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
-        <allocation task-id="64" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
-        <allocation task-id="27" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
-        <allocation task-id="65" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
-        <allocation task-id="28" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
-        <allocation task-id="66" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
-        <allocation task-id="30" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
         <allocation task-id="9" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="83" resource-id="4" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="84" resource-id="4" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="85" resource-id="4" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="86" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="93" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="87" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="88" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="91" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="89" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="92" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="90" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
         <allocation task-id="0" resource-id="5" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="8" resource-id="5" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
         <allocation task-id="5" resource-id="5" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
@@ -331,7 +387,6 @@ npm 배포 실습
         <allocation task-id="34" resource-id="5" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
         <allocation task-id="10" resource-id="5" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
         <allocation task-id="11" resource-id="5" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
-        <allocation task-id="12" resource-id="5" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
         <allocation task-id="13" resource-id="5" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
     </allocations>
     <vacations/>

@@ -175,7 +175,7 @@
                 scales: {
                     yAxis: {
                         ticks: {
-                            min: -20,
+                            // min: -20,
                             max: 40
                         }
                     },
@@ -303,7 +303,7 @@
                     label: 'Small Radius',
                     data:
                         [
-                            [1, 1, 1], [2, 2, 2], [3, 2, 3], [4, 2, 4], [5, 2, 5], [6, 2, 6]
+                            [1, -10, 1], [20, 20, 2], [3, 20, 3], [4, 20, 4], [5, 20, 5], [6, 20, 6]
                         ],
                 },
                 {
@@ -603,7 +603,7 @@
             labels: ['dd', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
             datasets: [{    
                 data : [
-                { name: 'AAAA', value: 100, color: '#efa86b' },
+                { name: 'AAAA', value: 1000, color: '#efa86b' },
                 { name: 'BBB', value: 1500, color: '#c1484f' },
                 // { name: 'C', value: 1300, color: '#d35d50' },
                 { name: 'C', value: 1300 },
@@ -754,7 +754,7 @@
 
                 {
                     label: 'Small Radius',
-                    data: [90, 170, 300, 415]
+                    data: [-90, 170, 300, 415]
                     ,
                     backgroundColor: "yellow",
                 },
@@ -799,9 +799,17 @@
                         opacity: .5,      // 선 투명도
                     },
 
+                },
+                scales:{
+                    yAxis : {
+                        ticks:{
+                            min : -10,
+                            max : 900
+                        }
+                    },
                 }
-            },
-            y_min: 0,
+                
+            }
         };
 
 
