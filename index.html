@@ -1,846 +1,154 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>SSART</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="/src/css/intro_styles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container px-5">
+                <a class="navbar-brand" href="#!">네비게이션 바 (필요한진 모르겠음)</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">메뉴 탭1</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">메뉴 탭2</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">메뉴 탭3</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">메뉴 탭4</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Header-->
+        <header class="bg-dark py-4">
+            <div class="container px-5">
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="text-center my-5">
+                            <h1 class="display-5 fw-bolder text-white mb-2">SSART OPENSOURCE LIBRARY </h1>
+                            <p class="lead text-white-50 mb-4">..............부연 설명..............</p>
+                            <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+                                
+                                <a class="btn btn-outline-light btn-lg px-4 me-sm-5" href="#!">메뉴얼</a>
+                                <a class="btn btn-outline-light btn-lg px-4 me-sm-5" href="./sample.html">차트 샘플</a>
+                                <a class="btn btn-outline-light btn-lg px-4 me-sm-5" href="#!">GitHub</a>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- <link rel="stylesheet" href="https://uicdn.toast.com/chart/latest/toastui-chart.min.css" /> -->
-    <!-- <script src="https://uicdn.toast.com/chart/latest/toastui-chart.min.js"></script> -->
-    <link rel="stylesheet" href="src/css/index.css">
-    
-    <link rel="icon" type="image/png" href="http://example.com/myicon.png">
-</head>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Chart Feature 섹션-->
+        <section class="py-4 border-bottom" id="features">
+            <div class="container px-3 my-4">
+                <div class="row gx-5">
+                    <div class="col-lg-4 mb-lg-0">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
+                            <i class="bi bi-bar-chart-line-fill"></i>
+                        </div>
+                        <h2 class="h4 fw-bolder">막대 그래프</h2>
+                        <p>..............................막대 그래프 대략 설명..........................................</p>
+                        <div>
+                            사진
+                        </div>
+                        <a class="text-decoration-none" href="#!">
+                            막대 그래프 상세 설명
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
 
-</head>
+                    <div class="col-lg-4 mb-lg-0">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
+                            <i class="bi bi-bar-chart-steps"></i>
+                        </div>
+                        <h2 class="h4 fw-bolder">막대 그래프</h2>
+                        <p>..............................막대 그래프 대략 설명..........................................</p>
+                        <div>
+                            사진
+                        </div>
+                        <a class="text-decoration-none" href="#!">
+                            막대 그래프 상세 설명
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
 
-<body>
+                    <div class="col-lg-4 mb-lg-0">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
+                            <i class="bi bi-graph-up"></i>
+                        </div>
+                        <h2 class="h4 fw-bolder">라인 그래프</h2>
+                        <p>..............................라인 그래프 대략 설명..........................................</p>
+                        <div>
+                            사진
+                        </div>
+                        <a class="text-decoration-none" href="#!">
+                            라인 그래프 상세 설명
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
 
-    <div id="bargraph">
-        <!-- <div id='tooltip' style="opacity: 0;" class="tooltip"></div> -->
-    </div>
+            </div>
 
-    <div id="bargraph2"></div>
-    <div id="bargraph3"></div>
-    <div id="bargraph4"></div>
-    <div id="bargraph5"></div>
-    
-    <div id="area"></div>
-    <div id="circle"></div>
-    <div id="barH"></div>
-    <div id="radar"></div>
-    
-    
-    <script src='https://d3js.org/d3.v5.min.js'></script>
+        <br><!-- 3개씩 container 나눠서 쓰면 위아래 간격 신경 쓸필요 없음 -->
 
-    <script>
-        const data = {
-            labels: ['a', 'b', 'c', 'd', 'e', 'f'],
-            datasets: [
-                {
-                    label: 'Fully Rounded',
-                    data: [
-                        { name: 'a', value: -10 },
-                        { name: 'b', value: 29 },
-                        { name: 'c', value: 32 },
-                        { name: 'd', value: 25 },
-                        { name: 'e', value: 23 },
-                        { name: 'f', value: 15 }
-                    ],
-                    // backgroundColor: "red",
+            <div class="container px-3 my-4">
+                <div class="row gx-5">
+                    <div class="col-lg-4 m-1 ">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
+                            <i class="bi bi-pie-chart"></i>
+                        </div>
+                        <h2 class="h4 fw-bolder">파이 그래프</h2>
+                        <p>..............................파이 그래프 대략 설명..........................................</p>
+                        <div>
+                            사진
+                        </div>
+                        <a class="text-decoration-none" href="#!">
+                            파이 그래프 상세 설명
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+        
+                    <div class="col-lg-4 mb-1 mb-lg-0">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
+                            <i class="bi bi-pentagon"></i>
+                        </div>
+                        <h2 class="h4 fw-bolder">레이다 그래프</h2>
+                        <p>..............................레이다 그래프 대략 설명..........................................</p>
+                        <div>
+                            사진
+                        </div>
+                        <a class="text-decoration-none" href="#!">
+                            레이다 그래프 상세 설명
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
 
-                },
-                {
-                    label: 'Small Radius',
-                    data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-                    ,
-                    // backgroundColor: "blue",
-                },
-                {
-                    label: 'Small Radius',
-                    data:
-                        [
-                            { name: 'a', value: 15 },
-                            { name: 'b', value: 23 },
-                            { name: 'c', value: 25 },
-                            { name: 'd', value: 32 },
-                            { name: 'e', value: 29 },
-                            { name: 'f', value: 12 },
-                            { name: 'g', value: 15 },
-                            { name: 'ㅎ', value: 1 },
-                            { name: 't', value: 12 }
-                        ],
-                },
-                // {
-                //     label: 'Small Radius',
-                //     data : [
-                //         {name: 'a', value: 15},
-                //         {name: 'b', value: 23},
-                //         {name: 'c', value: 25},
-                //         {name: 'd', value: 32},
-                //         {name: 'e', value: 29},
-                //         {name: 'f', value: 13},
-                //         {name: 'g', value: 15},
-                //     ],
-                // }
-            ]
-        };
-        const config = {
-            type: 'bar',
-            width: 500,
-            height: 500,
-            margin: { top: 40, left: 40, bottom: 40, right: 40 },
-            padding: 0.1,
-            data: data,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'left',// top bottom left right
-                        fontSize: '10px',
-                        fontWeight: 'normal',
-                        fontFamily: 'comic sans ms',
-                        legendType: 'rect', // rect(default), circle,
-                    },
-                    title: {
-                        display: true,
-                        text: 'Chart.js Bar Chart'
-                    },
-                    xTitle: {
-                        display: true,
-                        text: 'name'
-                    },
-                    yTitle: {
-                        display: true,
-                        text: 'value'
-                    },
-                    xGrid: {
-                        // color: "rgb(255, 0, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
-                        // dash: "10,3",
-                        // weight: 5,
-                        // opacity: .5,
-                    },
-                    yGrid: {
-                        // color: "#323233", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
-                        // dash: "10,3",     // 점선, 10만큼 칠하고 3만큼 빈공간
-                        // weight: 1,        // 선 두께
-                        // opacity: .5,      // 선 투명도
-                    },
-                    // background: {
+            </div>
 
-                    // },
-                    menu: {
-                        grid: true,
-                        xGrid: true,
-                        yGrid: true,
-                        background: true,
-                        download: true,
-                        legend: true
-                    },
-                    axis: {
-                        color: "rgb(255, 0, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
-                        weight: 5,
-                        opacity: .5,
-                        dots: {
-                            display: false,
-                            color: "rgb(255, 0, 255)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
-                            weight: 5,
-                            opacity: .5
-                        },
-                        xAxis: {
-                            color: "rgb(0, 255, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
-                            weight: 5,
-                            opacity: 1,
-                            dots: {
-                                display: false,
-                                color: "rgb(255, 0, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
-                                weight: 5,
-                                opacity: 1
-                            }
-                        },
-                        yAxis: {
-                            color: "rgb(255, 0, 255)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
-                            weight: 1,
-                            opacity: .5,
-                            dots: {
-                                display: false,
-                                color: "rgb(0, 0, 255)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
-                                weight: 5,
-                                opacity: .5
-                            }
-                        }
-                    },
-                },
-                scales: {
-                    yAxis: {
-                        ticks: {
-                            // min: -20,
-                            max: 40
-                        }
-                    },
-                    fillopacity: 0.5
-                }
-            },
+            
+            
+        </section>
+        
+       
+       
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container px-5"><p class="m-0 text-center text-white"> Footer 섹션 </p></div>
+        </footer>
 
-        };
-
-        const data2 = {
-            labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-            datasets: [
-                {
-                    label: 'Fully Rounded',
-                    data: [
-                        { name: 1, value: 10 },
-                        { name: 2, value: 29 },
-                        { name: 3, value: 32 },
-                        { name: 4, value: 25 },
-                        { name: 5, value: 23 },
-                        { name: 10, value: 15 }
-                    ],
-                    backgroundColor: "red",
-
-                },
-                {
-                    label: 'Small Radius',
-                    data: [1, 3, 3, 4, 5, 6, 7, 8, 9, 10]
-                    ,
-                    backgroundColor: "blue",
-                },
-                {
-                    label: 'Small Radius',
-                    data:
-                        [
-                            [1.5, 1], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2]
-                        ],
-                },
-                {
-                    label: 'Small Radius',
-                    data: [
-                        { x: 1, y: 15 },
-                        { x: 2, y: 23 },
-                        { x: 3, y: 25 },
-                        { x: 4, y: 32 },
-                        { x: 5, y: 29 },
-                        { x: -6, y: 13 },
-                        { x: 7, y: 15 },
-                    ],
-                }
-            ]
-        };
-
-        const config2 = {
-            type: 'scatter',
-            width: 500,
-            height: 500,
-            margin: { top: 40, left: 40, bottom: 40, right: 40 },
-            padding: 0.1,
-            data: data2,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'right',// top bottom left right
-                    },
-                    title: {
-                        display: true,
-                        text: 'Chart.js Scatter Chart'
-                    },
-                    xTitle: {
-                        display: true,
-                        text: 'y'
-                    },
-                    yTitle: {
-                        display: true,
-                        text: 'x'
-                    },
-                    xGrid: {
-                        color: "rgb(255, 0, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
-                        dash: "10,3",
-                        weight: 5,
-                        opacity: .5
-                    },
-                    yGrid: {
-                        display: true,
-                        color: "#323233", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
-                        dash: "10,3",     // 점선, 10만큼 칠하고 3만큼 빈공간
-                        weight: 1,        // 선 두께
-                        opacity: .5       // 선 투명도
-                    },
-                    background: {
-
-                    },
-                    menu: {
-                        grid: true,
-                        xGrid: true,
-                        yGrid: true,
-                        background: true,
-                        download: true
-                    },
-
-                },
-                
-                scales: {
-                    xAxis: {
-                        type: "number",
-                        ticks: {
-                            min: -10,
-                            max: 10
-                        }
-                    },
-                    dot: {
-                        size: 10,
-                        opacity: 1
-                    }
-                }
-            },
-        };
-
-        const data3 = {
-            labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-            datasets: [
-                {
-                    label: 'Small Radius',
-                    data:
-                        [
-                            [1, -10, 1], [20, 20, 2], [3, 20, 3], [4, 20, 4], [5, 20, 5], [6, 20, 6]
-                        ],
-                },
-                {
-                    label: 'Small Radius',
-                    data: [
-                        { x: 1, y: 15, r: 10 },
-                        { x: 2, y: 23, r: 20 },
-                        { x: 3, y: 25, r: 30 },
-                        { x: 4, y: 32, r: 30 },
-                        { x: 5, y: 29, r: 100 },
-                        { x: 6, y: 13, r: 20 },
-                        { x: 7, y: 15, r: 50 },
-                    ],
-                },
-                {
-                    label: 'Small Radius',
-                    data: [
-                        { x: 1, y: 15, r: 10 },
-                        { x: 2, y: 23, r: 20 },
-                        { x: 3, y: 25, r: 30 },
-                        { x: 4, y: 32, r: 30 },
-                        { x: 5, y: 29, r: 100 },
-                        { x: 6, y: 13, r: 20 },
-                        { x: 7, y: 15, r: 50 },
-                    ],
-                },
-                {
-                    label: 'Small Radius',
-                    data: [
-                        { x: 1, y: 15, r: 10 },
-                        { x: 2, y: 23, r: 20 },
-                        { x: 3, y: 25, r: 30 },
-                        { x: 4, y: 32, r: 30 },
-                        { x: 5, y: 29, r: 100 },
-                        { x: 6, y: 13, r: 20 },
-                        { x: 7, y: 15, r: 50 },
-                    ],
-                }
-            ]
-        };
-
-        const config3 = {
-            type: 'bubble',
-            width: 500,
-            height: 500,
-            margin: { top: 40, left: 40, bottom: 40, right: 40 },
-            padding: 0.1,
-            data: data3,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'bottom',// top bottom left right
-                    },
-                    title: {
-                        display: true,
-                        text: 'Chart.js bubble Chart',
-                        color: 'rgba(100, 150, 0, .5)',
-				        align: 'end' //start, end, center
-                    },
-                    xTitle: {
-                        display: true,
-                        text: 'x213123123',
-                        size: "20px",
-                        // color: 'rgba(100, 150, 0, .5)',
-				        align: 'start' //start, end, center
-                    },
-                    yTitle: {
-                        display: true,
-                        text: 'y423423432',
-                        rotate: true,
-                        position: 'left',
-                        color: 'rgba(100, 150, 0, 1)',
-				        align: 'bottom' //top, bottom, center
-                    },
-                    xGrid: {
-                        color: "rgb(255, 0, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
-                        dash: "10,3",
-                        weight: 1,
-                        opacity: .5,
-                    },
-                    yGrid: {
-                        color: "#323233", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
-                        dash: "10,3",     // 점선, 10만큼 칠하고 3만큼 빈공간
-                        weight: 1,        // 선 두께
-                        opacity: .5,      // 선 투명도
-                    },
-                    menu: {
-
-                    }
-                },
-                scales: {
-                    xAxis: {
-                        type: "number",
-                        ticks: {
-                            min: 0,
-                            max: 10
-                        }
-                    },
-                    yAxis: {
-                        ticks: {
-                            max: 80,
-                            tick: 20
-                        }
-                    },
-                    r: {
-                        size: {
-                            min: 10,
-                            max: 30
-                        }
-                    },
-                    fillopacity: 0.5
-                }
-            },
-        };
-
-        const data4 = {
-            labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-            datasets: [
-                {
-                    label: 'Fully Rounded',
-                    data: [
-                        { name: 1, value: 10 },
-                        { name: 2, value: 29 },
-                        { name: 3, value: 32 },
-                        { name: 4, value: 25 },
-                        { name: 5, value: 23 },
-                        { name: 10, value: 15 }
-                    ],
-                    backgroundColor: "red",
-
-                },
-                {
-                    label: 'Small Radius',
-                    data: [1, 3, 3, 4, 5, 6, 7, 8, 9, 10]
-                    ,
-                    backgroundColor: "blue",
-                },
-                {
-                    label: 'Small Radius',
-                    data:
-                        [
-                            [1, 1], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2]
-                        ],
-                },
-                {
-                    label: 'Small Radius',
-                    data: [
-                        { x: 1, y: 15 },
-                        { x: 2, y: 23 },
-                        { x: 3, y: 25 },
-                        { x: 4, y: 32 },
-                        { x: 5, y: NaN },
-                        { x: 6, y: 8 },
-                        { x: 7, y: 13 },
-                        { x: 8, y: 15 },
-                    ],
-                }
-            ]
-        };
-
-        const config4 = {
-            type: 'line',
-            width: 500,
-            height: 500,
-            margin: { top: 40, left: 40, bottom: 40, right: 40 },
-            padding: 0.1,
-            data: data4,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'bottom',// top bottom left right
-                    },
-                    title: {
-                        display: true,
-                        text: 'Chart.js Line Chart'
-                    },
-                    xTitle: {
-                        display: true,
-                        text: 'y'
-                    },
-                    yTitle: {
-                        display: true,
-                        text: 'x'
-                    },
-
-                    yGrid: {
-                        display: true,
-                        color: "#323233", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
-                        dash: "10,3",     // 점선, 10만큼 칠하고 3만큼 빈공간
-                        weight: 1,        // 선 두께
-                        opacity: .5       // 선 투명도
-                    },
-
-                    menu: {
-                        // grid: true,
-                        xGrid: true,
-                        yGrid: true,
-                        download: true
-
-                    }
-                },
-                scales: {
-                    xAxis: {
-                        type: "number",
-                        ticks: {
-
-                        }
-                    },
-                    yAxis: {
-                        ticks: {
-
-                        }
-                    },
-                    line: {
-                        width: 15,
-                        opacity: .5
-                    },
-                    dot: {
-                        size: 0,
-                        opacity: 1,
-                        visible: true
-                    }
-                }
-            },
-        };
-
-        const config5 = {
-            type: 'area',
-            width: 500,
-            height: 500,
-            margin: { top: 40, left: 40, bottom: 40, right: 40 },
-            padding: 0.1,
-            data: data4,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'bottom',// top bottom left right
-                    },
-                    title: {
-                        display: true,
-                        text: 'Chart.js Area Chart'
-                    },
-                    xTitle: {
-                        display: true,
-                        text: 'y'
-                    },
-                    yTitle: {
-                        display: true,
-                        text: 'x'
-                    },
-
-                    yGrid: {
-                        display: true,
-                        color: "#323233", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
-                        dash: "10,3",     // 점선, 10만큼 칠하고 3만큼 빈공간
-                        weight: 1,        // 선 두께
-                        opacity: .5       // 선 투명도
-                    },
-
-                    menu: {
-                        // grid: true,
-                        xGrid: true,
-                        yGrid: true,
-                        download: true
-
-                    }
-                },
-                scales: {
-                    xAxis : {
-                        type : "number",
-                        ticks:{
-
-                        }
-                    },    
-                    yAxis : {
-                        ticks:{
-
-                        }
-                    },
-                    line :{
-                        width : 10,
-                        opacity : .5
-                    },
-                    dot :{
-                        size : 0,
-                        opacity : 1,
-                        visible : true
-                    }
-                }
-            },
-        };
-
-        const data6 = {
-            labels: ['dd', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
-            datasets: [{    
-                data : [
-                { name: 'AAAA', value: 1000, color: '#efa86b' },
-                { name: 'BBB', value: 1500, color: '#c1484f' },
-                // { name: 'C', value: 1300, color: '#d35d50' },
-                { name: 'C', value: 1300 },
-                { name: 'D', value: 900, color: '#f4c17c' },
-                { name: 'E', value: 700, color: '#fae8a4' },
-                { name: 'F', value: 1200, color: '#df7454' },
-                { name: 'G', value: 1100, color: '#e88d5d' },
-                { name: 'H', value: 600, color: '#f8d690' },
-                
-                
-                ]
-            }
-                
-            ]
-        };
-        const config6 = {
-            type: 'pie',
-            width: 500,
-            height: 500,
-            margin: { top: 40, left: 40, bottom: 40, right: 40 },
-            padding: 0.1,
-            data: data6,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'left',// top bottom left right
-                    },
-                    title: {
-                        display: true,
-                        text: 'Circle Chart Test'
-                    },
-                    sort: true,
-                    view: true,
-                },
-            }
-        }
-// 레이더 차트 데이터 입력 부분.
-        // const data_r2 = {
-        //     labels: ['A', 'B', 'C', 'D' ,'E' ,'F'],
-        //     datasets: [
-        //         { name: 'AAA' },
-        //         { name: 'BBB' },
-        //         { name: 'CC' },
-        //         { name : 'DDDDD'}
-        //     ],
-        //     data:[
-        //         [2700,2700,1200,13,1400,1700],
-        //         [1400,100,2800,2500,1200,2100],
-        //         [1200,1900,1400,12,2700,1600],
-        //         [20,2200,2000,520,2300,200],
-        //     ]            
-        // };
-        const data_r = {
-            labels: ['A', 'B', 'C', 'D' ,'E' ,'F'],
-            datasets: [
-                { 
-                    label: 'AAA',
-                    data : [2700,2700,1200,13,1400,1700]
-                },
-                { 
-                    label: 'BBB', 
-                    data :[1400,100,2800,2500,1200,2100],
-                },
-                { 
-                    label: 'CC',
-                    data : [1200,1900,1400,12,2700,1600],
-                },
-                { 
-                    label : 'DDDDD',
-                    data : [20,2200,2000,520,2300,200],
-                }
-            ],        
-        };
-        const config_r = {
-            type: 'radar',
-            width: 500,
-            height: 500,
-            margin: { top: 40, left: 40, bottom: 40, right: 40 },
-            padding: 0.1,
-            data: data_r,
-            depth:7, // 구간 갯수
-            poly:true,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',// top bottom left right
-                    },
-                    title: {
-                        display: true,
-                        text: 'Circle Chart Test'
-                    },
-                    sort: true,
-                    view: true,
-                    menu: {
-                        download: true
-                    }
-                },
-                scales:{
-                    depth : 7
-                }
-            }
-        }
-        // 레이더 차트 데이터 입력 부분.
-    </script>
-    <script type="module">
-
-        import * as Chart from './src/index.js';
-
-
-        // Chart.Chart("bar",'#bargraph',dataset,width2,height2,margin2);
-        //Chart.Chart2("bar",'#bargraph',labels,dataset,width2,height2,margin2,padding);
-        Chart.Chart('#bargraph2', config);
-        Chart.Chart('#bargraph3', config2);
-        Chart.Chart('#bargraph4', config3);
-        Chart.Chart('#bargraph5', config4);
-        Chart.Chart('#area', config5);
-        Chart.Chart('#radar', config_r);
-    </script>
-
-    <br>
-    <div id="barH"></div>
-
-    <script>
-        const dataH = {
-            labels: ['a', 'b', 'c', 'd', 'e'],
-            datasets: [
-                {
-                    label: '1번 막대 label',
-                    data: [
-                        { name: 'a', value: 100 },
-                        { name: 'b', value: 290 },
-                        { name: 'c', value: 750 },
-                        { name: 'd', value: 250 },
-                        { name: 'e', value: 750 },
-                    ],
-                    backgroundColor: "red",
-
-                },
-
-                {
-                    label: 'Small Radius',
-                    data: [100, 200, 320, 45]
-                    ,
-                    backgroundColor: "blue",
-                },
-
-                {
-                    label: 'Small Radius',
-                    data: [-90, 170, 300, 415]
-                    ,
-                    backgroundColor: "yellow",
-                },
-            ]
-        };
-
-        const configH = {
-            type: 'barH',
-            width: 500,
-            height: 500,
-            margin: { top: 40, left: 40, bottom: 40, right: 40 },
-            padding: 0.1,
-            data: dataH,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'bottom',// top bottom left right
-                    },
-                    title: {
-                        display: true,
-                        text: '가로막대 그래프'
-                    },
-                    xTitle: {
-                        display: true,
-                        text: 'name'
-                    },
-                    yTitle: {
-                        display: true,
-                        text: 'value'
-                    },
-                    xGrid: {
-                        color: "rgb(255, 0, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
-                        dash: "10,3",
-                        weight: 1,
-                        opacity: .5,
-                    },
-                    yGrid: {
-                        color: "#323233", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
-                        dash: "10,3",     // 점선, 10만큼 칠하고 3만큼 빈공간
-                        weight: 1,        // 선 두께
-                        opacity: .5,      // 선 투명도
-                    },
-
-                },
-                scales:{
-                    yAxis : {
-                        ticks:{
-                            min : -10,
-                            max : 900
-                        }
-                    },
-                }
-                
-            }
-        };
-
-
-    </script>
-
-    </svg>
-    <script>
-        // var color = ['red', 'blue', 'yellow','green'];
-        // var widthH = 500;
-        // var heightH = 500;
-        // var marginH = {top: 40, left: 40, bottom: 40, right: 40};
-
-    </script>
-    <script type="module">
-        import * as Chart from './src/index.js';
-
-        Chart.Chart('#barH', configH);
-
-    </script>
-    <script type="module">
-        import * as Chart from './src/index.js';
-
-        Chart.Chart('#circle', config6);
-        // Chart.Chart('#radar', config7);
-    </script>
-<!-- 레이더 차트 생성 부분 -->
-    <script type="module">
-        import * as Chart from './src/index.js';
-        // Chart.Chart('#radar', config_r);
-    </script>
-<!-- 레이더 차트 생성 부분 -->
-</body>
-
+        
+    </body>
 </html>
