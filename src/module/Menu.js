@@ -1,4 +1,4 @@
-import capture from "./saveSvgAsPng.js";
+import capture from "./SaveSvgAsPng.js";
 import { Chart } from "../function.js";
 
 // 메뉴 아이콘 생성
