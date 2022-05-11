@@ -20,7 +20,7 @@ export class BarChart{
         
         const Axis = Set_Axis({chart_area,x_domain,y_domain,width,height,margin,padding,scales});
 
-
+        // console.log(y_)
         this.color = color;
         this.y_min = y_min;
         this.x0 = Axis.x.padding(padding);
@@ -29,32 +29,32 @@ export class BarChart{
             .domain(datasets.map((d,index)=>{return index}))
             .range([0, this.x0.bandwidth()]);
         
-        chart_area
+        this.ChartBody = chart_area
             .append("g")
             .attr("class", "chartBody")
-            .append("rect")
-            .attr("x", 0)
-            .attr("y", 0)
-            .attr("width", width - margin.left - margin.right)
-            .attr("height", height - margin.top - margin.bottom)
-            .style("fill", "none")
-            .style("fill-opacity", .8)
-            .attr("rx", 20)
-            .attr("ry", 20)
+            // .append("rect")
+            // .attr("x", 0)
+            // .attr("y", 0)
+            // .attr("width", width - margin.left - margin.right)
+            // .attr("height", height - margin.top - margin.bottom)
+            // .style("fill", "none")
+            // .style("fill-opacity", .8)
+            // .attr("rx", 20)
+            // .attr("ry", 20)
         
             
-        let XPos, YPos;
-        if (position === "left") {            
-            XPos = d3.select(`#${id} svg`).node().getBoundingClientRect().width - chart_area.node().getBoundingClientRect().width
-            YPos = 0
-            chart_area
-                .attr("transform", `translate(${XPos}, ${YPos})`)
-        } else if (position === "top") {           
-            chart_area
-                .attr("transform", `translate(${0}, ${margin.top})`)
-        }
+        // let XPos, YPos;
+        // if (position === "left") {            
+        //     XPos = d3.select(`#${id} svg`).node().getBoundingClientRect().width - chart_area.node().getBoundingClientRect().width
+        //     YPos = 0
+        //     chart_area
+        //         .attr("transform", `translate(${XPos}, ${YPos})`)
+        // } else if (position === "top") {           
+        //     chart_area
+        //         .attr("transform", `translate(${0}, ${margin.top})`)
+        // }
             
-        this.slice = chart_area.selectAll(".slice")
+        this.slice = this.ChartBody.selectAll(".slice")
             .data(datasets)
             .enter().append("g")
             .attr("class", "slice")

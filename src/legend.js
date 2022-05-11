@@ -13,12 +13,13 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, optio
   }
   const legendList = [];  
   let labelsColor = labels.color
-  if (type === "donut" || type === "pie" || type === "radar") {
-    for (let i = 0; i < datasets.length; i++) {
-      labels.label[i] = datasets[i].name
-    }
-  }  
+  // if (type === "donut" || type === "pie" || type === "radar") {
+  //   for (let i = 0; i < datasets.length; i++) {
+  //     labels.label[i] = datasets[i].name
+  //   }
+  // }  
   labels = labels.label;  
+  
   let pointStyle;
   let rowCnt = 1;
   let colCnt = 1;
@@ -92,6 +93,10 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, optio
       .attr("transform", (d, i) => {
             if (legendType === "rectRot") {
               return 'rotate(45)'
+            } else if (legendType === "triangle") {
+              console.log(d3.select(`#${id}-legend-${i} > text`).node)
+              // console.log(d3.select(`#${legend.node().id} text`).node())
+              return `translate(0, ${3})`
             } else if (legendType === "triangleRot") {
               return `translate(0, ${fontSize * -0.1}) rotate(180)`
             } else {
@@ -119,7 +124,7 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, optio
     const MARGINWIDTH = fontSize / 3 * 4;
     let res;
     if (position === "top") {
-      let currXPos = 0;
+      let currXPos = Number(fontSize) / 2;
       let currYPos = margin.top;
       
       legend.attr("transform", function (d, i) {
@@ -131,7 +136,6 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, optio
           rowCnt++;
           currYPos += legendBBox.height + MARGINWIDTH
           currXPos = 0;
-          console.log(chartContainer, '컨테')
           // chartContainer.attr("transform", `translate(0, ${legendBBox.height + MARGINWIDTH})`)
           rowGroup.push(currGroup);
           currGroup = [];
@@ -160,8 +164,8 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, optio
       chartContainer.attr("transform", `translate(0, ${svg.select(`svg #${id}-legend`).node().getBBox().height+ margin.top})`)
       return {width : 0,
         height : svg.select(`svg #${id}-legend`).node().getBBox().height+ margin.top, legendList};
-    } else if (position === "bottom") {
-      let currXPos = 0;
+    } else if (position === "bottom") {      
+      let currXPos = Number(fontSize) / 2;
       let currYPos = height;
             
       legend.attr("transform", function (d, i) {
@@ -317,6 +321,7 @@ export function createLegendToggle(id, datasets, items, chartArea, makeChart, re
       d3.selectAll(`${id} > svg > text`).remove();
       d3.selectAll(`${id} > svg > .chartMenu`).remove();
       d3.selectAll(`${id} > svg > .dropDown`).remove();
+      d3.selectAll(`${id} > svg > .legendDropDown`).remove();
       const idx = tid[tid.length - 1]
       if (removedSet[idx] === undefined ) {
         removedSet[idx] = true;
