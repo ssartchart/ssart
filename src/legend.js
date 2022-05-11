@@ -1,11 +1,25 @@
 export function drawLegend(id, svg, labels, width, height, chartContainer, options, margin, datasets, type) {    
-  const { plugins, scales } = options;  
+  let { plugins, scales } = options;
+  let opacity;
+  if (scales === undefined || scales === null) {    
+    opacity = .7;    
+  } else {
+    if (scales.fillopacity) {
+      opacity = scales.fillopacity;
+    } else if (scales.dot?.opacity) {
+      opacity = scales.dot.opacity;
+    } else {
+      opacity = .7
+    }
+  }  
   
   if (plugins.legend === undefined) {
     plugins.legend = {};    
   }
-  let { position = "left", fontSize = 12, fontFamily = "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif", fontWeight = "normal", legendType = "rect" } = plugins.legend;   
-  
+  let { position = "bottom", fontSize = 12, fontFamily = "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif", fontWeight = "normal", legendType = "rect", legendOpacity } = plugins.legend;
+  if (plugins.legend.legendOpacity !== undefined) {
+    opacity = legendOpacity;
+  }
   if (typeof fontSize !== "number") {
     if (fontSize?.includes("px")) {
       fontSize = fontSize.slice(0, fontSize.length - 2)
@@ -44,7 +58,7 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, optio
       .attr("width", fontSize)
       .attr("height", fontSize)
       .attr('fill', (d, i) => labelsColor(i))      
-      .style("fill-opacity", scales?.fillopacity ? scales.fillopacity : 1)
+      .style("fill-opacity", opacity)
       .attr("stroke-width", (d, i) => datasets[i]?.borderWidth)
       .attr("stroke", (d, i) => datasets[i]?.borderColor)
       .attr("rx", (d, i) => datasets[i]?.borderRadius)
@@ -65,29 +79,29 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, optio
     pointStyle = d3
       .symbol()
       .type(d3.symbolTriangle)
-      .size(fontSize * 5)    
+      .size(fontSize * 10)    
   } else if (legendType === "diamond") {
     pointStyle = d3
       .symbol()
       .type(d3.symbolDiamond)
-      .size(fontSize * 5)    
+      .size(fontSize * 10)    
   } else if (legendType === "star") {
     pointStyle = d3
       .symbol()
       .type(d3.symbolStar)
-      .size(fontSize * 5)
+      .size(fontSize * 10)
   } else if (legendType === "rectRot") {
     pointStyle = d3
       .symbol()
       .type(d3.symbolSquare)
-      .size(fontSize * 5)   
+      .size(fontSize * 10)   
   }
   if (legendType !== "rect") {
     legend
       .append("path")              
       .attr("d", pointStyle)
       .attr('fill', (d, i) => labelsColor(i))
-      .style("fill-opacity", scales?.fillopacity ? scales.fillopacity : 1)
+      .style("fill-opacity", opacity)
       .attr("stroke-width", (d, i) => datasets[i]?.borderWidth)
       .attr("stroke", (d, i) => datasets[i]?.borderColor)
       .attr("transform", (d, i) => {
@@ -309,7 +323,7 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, optio
 }
 
 // legend 클릭 이벤트에 따라 차트 데이터를 바꾸는 Toggle 기능 생성
-export function createLegendToggle(id, datasets, items, chartArea, makeChart, removedSet, renderBackgroundColor) {
+export function createLegendToggle(id, datasets, items, chartArea, drawNewChart, removedSet, renderBackgroundColor) {
   const dataList = {};
   for (let i = 0; i < items.length; i++) {
     dataList[i] = datasets[i]
@@ -317,7 +331,7 @@ export function createLegendToggle(id, datasets, items, chartArea, makeChart, re
   items.forEach(item => {    
     const toggleItem = d3.select(`#${item.id}`)
     const tid = toggleItem.node().id
-    toggleItem.on("click", () => {     
+    toggleItem.on("click", () => {
       d3.selectAll(`${id} > svg > text`).remove();
       d3.selectAll(`${id} > svg > .chartMenu`).remove();
       d3.selectAll(`${id} > svg > .dropDown`).remove();
@@ -342,7 +356,7 @@ export function createLegendToggle(id, datasets, items, chartArea, makeChart, re
       }
       chartArea.selectAll('*').remove();
       renderBackgroundColor();
-      makeChart(datasets);
+      drawNewChart(datasets);
     })
   })
 }
