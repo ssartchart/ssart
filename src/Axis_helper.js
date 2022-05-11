@@ -65,10 +65,12 @@ export const Axis_Option = (labels, datasets, scales, f = 1) =>{
     let r_size_min = 10;
     let r_size_max = 50;
     let fillopacity = f;
-    let line_width = 2;
+    let line_width = 0.5;
     let line_opacity = 1;
-    let dot_opacity = 1;
-    let dot_size = 5;
+    let line_color = "red";
+    let dot_opacity = 0.7;
+    let dot_size = 3;
+    let dot_color = false;
     if (scales){
         if (scales.xAxis){
             if (scales.xAxis.type){
@@ -118,16 +120,23 @@ export const Axis_Option = (labels, datasets, scales, f = 1) =>{
             if (scales.line.opacity){
                 line_opacity = scales.line.opacity
             }
+            if (scales.line.color) {
+                line_color = scales.line.color;
+            }
         }
         if (scales.dot){
             if (scales.dot.opacity){
                 dot_opacity = scales.dot.opacity
             }
             if (scales.dot.visible != null && scales.dot.visible == false){
-                dot_opacity = 0
+                dot_opacity = 0;
+                // line_opacity = 0;
             }
             if (scales.dot.size){
                 dot_size = scales.dot.size
+            }
+            if (scales.dot.color) {
+                dot_color = scales.dot.color;
             }
 
         }
@@ -181,8 +190,10 @@ export const Axis_Option = (labels, datasets, scales, f = 1) =>{
         fillopacity: fillopacity,
         line_width: line_width,
         line_opacity: line_opacity,
+        line_color: line_color,
         dot_opacity: dot_opacity,
-        dot_size: dot_size
+        dot_size: dot_size,
+        dot_color: dot_color,
     }
 }
 
