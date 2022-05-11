@@ -67,35 +67,20 @@ export class ScatterChart{
 
     // 툴팁 효과
     tooltip(){
-            const tooltop = document.getElementById('tooltip');
+            const tooltop = document.getElementById('ssart-tooltip');
             const color = this.color;
             this.ChartBody.selectAll(".data")
             .on("mouseover", function(d){ 
-                // const x = event.pageX;
-                // const y = event.pageY;
-                // const target = event.target;
-                // const positionLeft =x;
-                // const positionTop = y;
+
                 d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));
                 console.log("툴팁 확인 : scatter");
-                // const value = d.x;
-                // const name =  d.y;
-                // const key = d3.rgb(color(d.label_index));
-                // const color = d;
-                
-                // tooltop.innerText = "x : " + value +"\n" + "y : " + name +"\n" + "label : " +key ; // 값 + 데이터 
-                // tooltop.style.background = '#ddd';
-                // tooltop.style.top = positionTop -100+ 'px';
-                // tooltop.style.left = positionLeft -80 + 'px';
-                // tooltip.style("left", (d3.event.pageX+10)+"px");
-                // tooltip.style("top",  (d3.event.pageY-10)+"px");
+
                 tooltop.style.opacity = "1.0";
             }).on("mousemove", function(d,index){
                 const value = d.x;
                 const name =  d.y;
                 const key = d3.rgb(color(d.label_index));
-                // const color = d;
-                
+
                 tooltop.innerText = "x : " + value +"\n" + "y : " + name +"\n" + "label : " +key ; // 값 + 데이터 
                 
                 tooltop.style.left = d3.event.pageX + 20 + "px";

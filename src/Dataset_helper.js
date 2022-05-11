@@ -162,10 +162,10 @@ export const Data_pre_processing = (labels, datasets, type="namevalue")=>{
             if (datasets[0].data == null){
                 datasets.forEach((dataset,index) => {
                     const label_index = index;
-                    if (dataset.name == null){
-                        dataset.name = "label_"+(label_index+1);
-                    }
-                    // console.log(typeof(dataset));
+                    // if (dataset.name == null){
+                    //     dataset.name = "label_"+(label_index+1);
+                    // }
+                    // // console.log(typeof(dataset));
                     if (typeof(dataset) !== null && Array.isArray(dataset)){
                         console.log(2);
                         dataset =  {name:dataset[0],value: dataset[1], label_index: index};
@@ -179,30 +179,42 @@ export const Data_pre_processing = (labels, datasets, type="namevalue")=>{
                     }
                     else {
                         let keys = Object.keys(dataset);
-                        
-                        if(!keys.includes("name") || !keys.includes("value")){
-                            let values = Object.values(dataset[index]);
-                            dataset =  {name:values[0], value: values[1], label_index: index};
+                        keys = keys.filter(d=>{return  d!== "color"})
+                        console.log(keys)
+                        console.log(dataset)
+                        if(!keys.includes("name") && !keys.includes("value")){
+                            if (keys.length > 2){
+                                let values = Object.values(dataset[index]);
+                                dataset =  {name:values[0], value: values[1], label_index: index};
+                            }
+                            if (keys.length == 1){
+                                let values = Object.values(dataset[index]);
+                                dataset =  {name:labels[index], value: values[0], label_index: index};
+                            }
+                        }
+                        else if(keys.includes("name") && keys.includes("value")){
+                            console.log(2)
+                            let values = Object.values(dataset);
+                            dataset =  {name:dataset["name"], value: dataset["value"], label_index: index};
                         }
                         else if(keys.includes("value")){
+                            console.log(3)
                             let values = Object.values(dataset);
-                            dataset =  {name:labels[index], value: values[1], label_index: index};
+                            dataset =  {name:labels[index], value: dataset["value"], label_index: index};
                         }
                         else{
+                            console.log(4)
                             dataset =  {name:labels[index], value: dataset['value'], label_index: index};
                         }
                     }
-                    datasets[0] = dataset;
-                    // console.log(dataset);
+                    
+                    datasets[index] = dataset;
+                    
                 });
             }
             else{
                 datasets[0].data.forEach((dataset,index) => {
                     const label_index = index;
-                    if (dataset.name == null){
-                        dataset.name = "label_"+(label_index+1);
-                    }
-                    // console.log(typeof(dataset));
                     if (typeof(dataset) !== null && Array.isArray(dataset)){
                         console.log(2);
                         dataset =  {name:dataset[0],value: dataset[1], label_index: index};
@@ -216,23 +228,36 @@ export const Data_pre_processing = (labels, datasets, type="namevalue")=>{
                     }
                     else {
                         let keys = Object.keys(dataset);
-                        
-                        if(!keys.includes("name") || !keys.includes("value")){
-                            let values = Object.values(dataset[index]);
-                            dataset =  {name:values[0], value: values[1], label_index: index};
+                        keys = keys.filter(d=>{return  d!== "color"})
+                        console.log(keys)
+                        console.log(dataset)
+                        if(!keys.includes("name") && !keys.includes("value")){
+                            if (keys.length > 2){
+                                let values = Object.values(dataset[index]);
+                                dataset =  {name:values[0], value: values[1], label_index: index};
+                            }
+                            if (keys.length == 1){
+                                let values = Object.values(dataset[index]);
+                                dataset =  {name:labels[index], value: values[0], label_index: index};
+                            }
+                        }
+                        else if(keys.includes("name") && keys.includes("value")){
+                            console.log(2)
+                            let values = Object.values(dataset);
+                            dataset =  {name:dataset["name"], value: dataset["value"], label_index: index};
                         }
                         else if(keys.includes("value")){
+                            console.log(3)
                             let values = Object.values(dataset);
-                            dataset =  {name:labels[index], value: values[1], label_index: index};
+                            dataset =  {name:labels[index], value: dataset["value"], label_index: index};
                         }
                         else{
+                            console.log(4)
                             dataset =  {name:labels[index], value: dataset['value'], label_index: index};
                         }
                     }
                     datasets[0].data[index] = dataset;
-                    // console.log(dataset);
                 });
-                // console.log(datasets[0].data)
                 datasets = datasets[0].data;
             }
             
