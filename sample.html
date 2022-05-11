@@ -38,8 +38,11 @@ ul {
 li a {
   display: block;
   color: #000;
-  padding: 8px 16px;
+  padding: 10px;
   text-decoration: none;
+  height: 70px;
+  text-align: center;
+  line-height: 35px;
 }
 
 li a.active {
@@ -51,18 +54,21 @@ li a:hover:not(.active) {
   background-color: #555;
   color: white;
 }
+
+#navHome {
+    height: 56px;
+}
 </style>
 </head>
 <body>
     <ul>
-        <li><div style="height: 56px;"><a class="active" href="index_temp.html"><i class="bi bi-house-door"> HOME</i></a></div></li>
+        <li><a id="navHome" class="active" href="index_temp.html"><i class="bi bi-house-door"> HOME</i></a></div></li>
         <li><a href="#toBarChart">Bar Chart 1</a></li>
         <li><a href="#toBarHChart">Bar Chart 2</a></li>
         <li><a href="#toLineChart">Line Chart</a></li>
         <li><a href="#toAreaChart">Area Chart</a></li>
         <li><a href="#toScatterChart">Scatter Chart</a></li>
-        <li><a href="#toPieChart">Pie Chart</a></li>
-        <li><a href="#toDonutChart">Donut Chart</a></li>
+        <li><a href="#toCircleChart">Circle Chart</a></li>
         <li><a href="#toRadarChart">Radar Chart</a></li>
     </ul>
 
@@ -622,7 +628,7 @@ li a:hover:not(.active) {
                                                     dataArea.datasets[2].backgroundColor=colorHex[areaColor3];
 
                                                     Chart.Chart('#result', configArea);
-                                                    console.log(data);
+                                                    // console.log(data);
 
                                                 }
                                             </script>
@@ -635,14 +641,38 @@ li a:hover:not(.active) {
                                     <div class="card mb-4">
                                         <div class="card-body bg-primary text-white " id="toScatterChart">Scatter Chart </div>
                                          <p class="m-3"> Scatter chart 데이터 형식 </p>
-                                         &nbsp&nbsp 차트 이름 <input class="form-control" id="chartTitle" type="text" placeholder=""  style="width: 90%; margin: 10px; margin-top: 5px;"/>
-                                         &nbsp&nbsp 데이터 1 <input class="form-control" id="inputData1" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..."  style="width: 90%; margin: 10px; margin-top: 5px;"/>
-                                         &nbsp&nbsp 데이터 2 <input class="form-control" id="inputData2" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
-                                         &nbsp&nbsp 데이터 3 <input class="form-control" id="inputData3" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
-                                         &nbsp&nbsp config <input class="form-control" type="text" placeholder="해당 데이터의 라벨 ex) 데이터1, 데이터2, 데이터3 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                         &nbsp&nbsp 차트 이름 <input class="form-control" id="ScatterChartTitle" type="text" placeholder="예시 차트 이름"  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                        
+                                         <div class="row">
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp 데이터 1 <input class="form-control" id="ScatterinputData1" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..."  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp&nbsp 데이터 1 라벨 <input class="form-control" id="ScatterDataLabel1" type="text" placeholder="ex) 라벨1"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                        </div>
+ 
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp 데이터 2 <input class="form-control" id="ScatterinputData2" type="text" placeholder="ex) 5,10,15,20,25,30 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp&nbsp 데이터 2 라벨 <input class="form-control" id="ScatterDataLabel2" type="text" placeholder="ex) 라벨2"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                        </div>
+ 
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp 데이터 3 <input class="form-control" id="ScatterinputData3" type="text" placeholder="ex) 1, 2, 3, 4, 4, 4 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp&nbsp 데이터 3 라벨 <input class="form-control" id="ScatterDataLabel3" type="text" placeholder="ex) 라벨3"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                        </div>
+                                         
                                          <div class="row">
                                             <div class="col-sm-4">
-                                                &nbsp&nbsp 차트1 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
+                                                &nbsp&nbsp 차트1 색깔  <select class="form-select" id="ScatterColor1" style="margin: 3px; width: 95%;">
                                                     <option>빨강</option>
                                                     <option>주황</option>
                                                     <option>노랑</option>
@@ -651,7 +681,7 @@ li a:hover:not(.active) {
                                                   </select>
                                             </div>
                                             <div class="col-sm-4">
-                                                &nbsp&nbsp 차트2 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
+                                                &nbsp&nbsp 차트2 색깔  <select class="form-select" id="ScatterColor2" style="margin: 3px; width: 95%;">
                                                     <option>빨강</option>
                                                     <option>주황</option>
                                                     <option>노랑</option>
@@ -660,7 +690,7 @@ li a:hover:not(.active) {
                                                   </select>
                                             </div>
                                             <div class="col-sm-4">
-                                                &nbsp&nbsp 차트3 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
+                                                &nbsp&nbsp 차트3 색깔  <select class="form-select" id="ScatterColor3" style="margin: 3px; width: 95%;">
                                                     <option>빨강</option>
                                                     <option>주황</option>
                                                     <option>노랑</option>
@@ -668,8 +698,8 @@ li a:hover:not(.active) {
                                                     <option>파랑</option>
                                                   </select>
                                             </div>
-                                         </div>
-                                         <br>
+                                          </div>
+                                          <br>
                                          
                                          
                                          <div class="card-footer d-flex align-items-center justify-content-between">
@@ -684,9 +714,55 @@ li a:hover:not(.active) {
                                                 function generate() {
                                                     window.scrollTo(0,100);
                                                     const chartResult = document.getElementById("result");
-                                                    chartResult.innerText = 'scatter chart 생성 !';
+                                                    chartResult.innerText = '';
+                                                     //data 갱신
+                                                    var chartName = document.getElementById("ScatterChartTitle").value;
+                                                    var scatterData1 = document.getElementById("ScatterinputData1").value;
+                                                    var scatterData2 = document.getElementById("ScatterinputData2").value;
+                                                    var scatterData3 = document.getElementById("ScatterinputData3").value;
+                                                    var scatterDataLabel1 = document.getElementById("ScatterDataLabel1").value;
+                                                    var scatterDataLabel2 = document.getElementById("ScatterDataLabel2").value;
+                                                    var scatterDataLabel3 = document.getElementById("ScatterDataLabel3").value;
+                                                    
+                                                    var scatterColor1 = document.getElementById("ScatterColor1").selectedIndex;
+                                                    var scatterColor2 = document.getElementById("ScatterColor2").selectedIndex;
+                                                    var scatterColor3 = document.getElementById("ScatterColor3").selectedIndex;
+                                                    var colorHex = ["#ff0000", "#ff7f00", "#ffff00", "#00ff00", "#0000ff" ];
+                                                    
+                                                    configScatter.options.plugins.title.text = chartName;
+                                                    
+                                                    if(scatterData1!=null && scatterData1!="") {
+                                                        var dataArray1 = scatterData1.replace(/ /g,"").split(",");
+                                                        dataScatter.datasets[0].data = dataArray1;
+                                                    }
+                                                    if(scatterDataLabel1!=null && scatterDataLabel1) {
+                                                        dataScatter.datasets[0].label = scatterDataLabel1;
+                                                    }
+
+                                                    if(scatterData2!=null && scatterData2!="") {
+                                                        var dataArray2 = scatterData2.replace(/ /g,"").split(",");
+                                                        dataScatter.datasets[1].data = dataArray2;
+                                                    }
+                                                    if(scatterDataLabel2!=null && scatterDataLabel2) {
+                                                        dataScatter.datasets[1].label = scatterDataLabel2;
+                                                    }
+
+                                                    if(scatterData3!=null && scatterData3!="") {
+                                                        var dataArray3 = scatterData3.replace(/ /g,"").split(",");
+                                                        dataScatter.datasets[2].data = dataArray3;
+                                                    }
+                                                    if(scatterDataLabel3!=null && scatterDataLabel3) {
+                                                        dataScatter.datasets[2].label = scatterDataLabel3;
+                                                    }
+
+                                                   
+                                                    dataScatter.datasets[0].backgroundColor=colorHex[scatterColor1];
+                                                    dataScatter.datasets[1].backgroundColor=colorHex[scatterColor2];
+                                                    dataScatter.datasets[2].backgroundColor=colorHex[scatterColor3];
+
+                                                    Chart.Chart('#result', configScatter);
                                                     // Chart.Chart('#result', configH);
-                                                    console.log(data);
+                                                    // console.log(data);
 
                                                 }
                                             </script>
@@ -695,18 +771,51 @@ li a:hover:not(.active) {
                                     </div>
                                     <br>
 
-                                    <!-- piechart  -->
+                                    <!-- circle chart  -->
                                     <div class="card mb-4">
-                                        <div class="card-body bg-primary text-white " id="toPieChart">Pie Chart</div>
-                                         <p class="m-3"> Pice chart 데이터 형식 </p>
-                                         &nbsp&nbsp 차트 이름 <input class="form-control" id="chartTitle" type="text" placeholder=""  style="width: 90%; margin: 10px; margin-top: 5px;"/>
-                                         &nbsp&nbsp 데이터 1 <input class="form-control" id="inputData1" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..."  style="width: 90%; margin: 10px; margin-top: 5px;"/>
-                                         &nbsp&nbsp 데이터 2 <input class="form-control" id="inputData2" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
-                                         &nbsp&nbsp 데이터 3 <input class="form-control" id="inputData3" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
-                                         &nbsp&nbsp config <input class="form-control" type="text" placeholder="해당 데이터의 라벨 ex) 데이터1, 데이터2, 데이터3 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                        <div class="card-body bg-primary text-white " id="toCircleChart">Circle Chart</div>
+                                         <p class="m-3"> Circle Chart 데이터 형식 </p> 
+                                         <div class="row" style="margin-bottom: 5px;">
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp&nbsp <input class="form-check-input" type="radio" name="circleFormat" value="1" checked style="margin: 5px; margin-top: 5px;"/>Donut
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input class="form-check-input" type="radio" name="circleFormat" value="2" style="margin: 5px; margin-top: 5px;"/>Pie
+                                            </div>
+                                        </div> 
+
+                                         &nbsp&nbsp 차트 이름 <input class="form-control" id="CircleChartTitle" type="text" placeholder="예시 차트 이름"  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                        
+                                         <div class="row">
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp 데이터 1 <input class="form-control" id="CircleinputData1" type="text" placeholder="데이터 1의 값 ex) 100 "  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp&nbsp 데이터 1 라벨 <input class="form-control" id="CircleDataLabel1" type="text" placeholder="ex) 라벨1"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                        </div>
+ 
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp 데이터 2 <input class="form-control" id="CircleinputData2" type="text" placeholder="데이터 2의 값 ex) 200 " style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp&nbsp 데이터 2 라벨 <input class="form-control" id="CircleDataLabel2" type="text" placeholder="ex) 라벨2"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                        </div>
+ 
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp 데이터 3 <input class="form-control" id="CircleinputData3" type="text" placeholder="데이터 3의 값 ex) 300 " style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp&nbsp 데이터 3 라벨 <input class="form-control" id="CircleDataLabel3" type="text" placeholder="ex) 라벨3"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                        </div>
+                                         
                                          <div class="row">
                                             <div class="col-sm-4">
-                                                &nbsp&nbsp 차트1 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
+                                                &nbsp&nbsp 차트1 색깔  <select class="form-select" id="CircleColor1" style="margin: 3px; width: 95%;">
                                                     <option>빨강</option>
                                                     <option>주황</option>
                                                     <option>노랑</option>
@@ -715,7 +824,7 @@ li a:hover:not(.active) {
                                                   </select>
                                             </div>
                                             <div class="col-sm-4">
-                                                &nbsp&nbsp 차트2 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
+                                                &nbsp&nbsp 차트2 색깔  <select class="form-select" id="CircleColor2" style="margin: 3px; width: 95%;">
                                                     <option>빨강</option>
                                                     <option>주황</option>
                                                     <option>노랑</option>
@@ -724,7 +833,7 @@ li a:hover:not(.active) {
                                                   </select>
                                             </div>
                                             <div class="col-sm-4">
-                                                &nbsp&nbsp 차트3 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
+                                                &nbsp&nbsp 차트3 색깔  <select class="form-select" id="CircleColor3" style="margin: 3px; width: 95%;">
                                                     <option>빨강</option>
                                                     <option>주황</option>
                                                     <option>노랑</option>
@@ -732,24 +841,68 @@ li a:hover:not(.active) {
                                                     <option>파랑</option>
                                                   </select>
                                             </div>
-                                         </div>
-                                         <br>
-                                         
+                                          </div>
+                                          <br>
+
                                          <div class="card-footer d-flex align-items-center justify-content-between">
-                                            <button id="pieChart" type="button" class="btn btn-primary">생성</button>
+                                            <button id="circleChart" type="button" class="btn btn-primary">생성</button>
                                             <script type="module">
                                                 
                                                 import * as Chart from './src/index.js';
 
-                                                const button = document.getElementById("pieChart");
+                                                const button = document.getElementById("circleChart");
                                                 button.addEventListener('click', generate);
                                                 
                                                 function generate() {
                                                     window.scrollTo(0,100);
                                                     const chartResult = document.getElementById("result");
-                                                    chartResult.innerText = 'Pirce chart 생성 !';
-                                                    // Chart.Chart('#result', configH);
-                                                    console.log(data);
+                                                    chartResult.innerText = '';
+
+                                                     //data 갱신
+                                                    var chartFormat = (document.getElementsByName("circleFormat")[0].checked)? "donut" : "pie";
+                                                    var chartName = document.getElementById("CircleChartTitle").value;
+                                                    var circleData1 = document.getElementById("CircleinputData1").value;
+                                                    var circleData2 = document.getElementById("CircleinputData2").value;
+                                                    var circleData3 = document.getElementById("CircleinputData3").value;
+                                                    var circleDataLabel1 = document.getElementById("CircleDataLabel1").value;
+                                                    var circleDataLabel2 = document.getElementById("CircleDataLabel2").value;
+                                                    var circleDataLabel3 = document.getElementById("CircleDataLabel3").value;
+                                                    
+                                                    var circleColor1 = document.getElementById("CircleColor1").selectedIndex;
+                                                    var circleColor2 = document.getElementById("CircleColor2").selectedIndex;
+                                                    var circleColor3 = document.getElementById("CircleColor3").selectedIndex;
+                                                    var colorHex = ["#ff0000", "#ff7f00", "#ffff00", "#00ff00", "#0000ff" ];
+                                                    
+                                                    configCircle.options.plugins.title.text = chartName;
+                                                    configArea.type=chartFormat;
+                                                    
+                                                    if(circleData1!=null && circleData1!="") {
+                                                        dataCircle.datasets[0].value = circleData1;
+                                                    }
+                                                    if(circleDataLabel1!=null && circleDataLabel1) {
+                                                        dataCircle.datasets[0].name = circleDataLabel1;
+                                                    }
+
+                                                    if(circleData2!=null && circleData2!="") {
+                                                        dataCircle.datasets[1].value = circleData2;
+                                                    }
+                                                    if(circleDataLabel2!=null && circleDataLabel2) {
+                                                        dataCircle.datasets[1].name = circleDataLabel2;
+                                                    }
+
+                                                    if(circleData3!=null && circleData3!="") {
+                                                        dataCircle.datasets[2].value = circleData3;
+                                                    }
+                                                    if(circleDataLabel3!=null && circleDataLabel3) {
+                                                        dataCircle.datasets[2].name = circleDataLabel3;
+                                                    }
+                                                   
+                                                    dataCircle.datasets[0].color=colorHex[circleColor1];
+                                                    dataCircle.datasets[1].color=colorHex[circleColor2];
+                                                    dataCircle.datasets[2].color=colorHex[circleColor3];
+                                                    
+                                                    Chart.Chart('#result', configCircle);
+                                                    // console.log(data);
 
                                                 }
                                             </script>
@@ -758,68 +911,6 @@ li a:hover:not(.active) {
                                     </div>
                                     <br>
 
-                                    <!-- donutchart  -->
-                                    <div class="card mb-4">
-                                        <div class="card-body bg-primary text-white " id="toDonutChart">Donut Chart</div>
-                                         <p class="m-3"> Donut Chart 데이터 형식</p>
-                                         &nbsp&nbsp 차트 이름 <input class="form-control" id="chartTitle" type="text" placeholder=""  style="width: 90%; margin: 10px; margin-top: 5px;"/>
-                                         &nbsp&nbsp 데이터 1 <input class="form-control" id="inputData1" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..."  style="width: 90%; margin: 10px; margin-top: 5px;"/>
-                                         &nbsp&nbsp 데이터 2 <input class="form-control" id="inputData2" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
-                                         &nbsp&nbsp 데이터 3 <input class="form-control" id="inputData3" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
-                                         &nbsp&nbsp config <input class="form-control" type="text" placeholder="해당 데이터의 라벨 ex) 데이터1, 데이터2, 데이터3 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
-                                         <div class="row">
-                                            <div class="col-sm-4">
-                                                &nbsp&nbsp 차트1 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
-                                                    <option>빨강</option>
-                                                    <option>주황</option>
-                                                    <option>노랑</option>
-                                                    <option>초록</option>
-                                                    <option>파랑</option>
-                                                  </select>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                &nbsp&nbsp 차트2 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
-                                                    <option>빨강</option>
-                                                    <option>주황</option>
-                                                    <option>노랑</option>
-                                                    <option>초록</option>
-                                                    <option>파랑</option>
-                                                  </select>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                &nbsp&nbsp 차트3 색깔  <select class="form-select" id="option" style="margin: 3px; width: 95%;">
-                                                    <option>빨강</option>
-                                                    <option>주황</option>
-                                                    <option>노랑</option>
-                                                    <option>초록</option>
-                                                    <option>파랑</option>
-                                                  </select>
-                                            </div>
-                                         </div>
-                                         <br>
-                                         
-                                         <div class="card-footer d-flex align-items-center justify-content-between">
-                                            <button id="donutChart" type="button" class="btn btn-primary">생성</button>
-                                            <script type="module">
-                                                
-                                                import * as Chart from './src/index.js';
-
-                                                const button = document.getElementById("donutChart");
-                                                button.addEventListener('click', generate);
-                                                
-                                                function generate() {
-                                                    window.scrollTo(0,100);
-                                                    const chartResult = document.getElementById("result");
-                                                    chartResult.innerText = 'donut Chart 생성 !';
-                                                    // Chart.Chart('#result', configH);
-                                                    console.log(data);
-
-                                                }
-                                            </script>
-                                            <div class="small "><i class="fas fa-angle-right"></i></div>
-                                        </div>
-                                    </div>
-                                    <br>
 
                                     <!-- radar chart  -->
                                     <div class="card mb-4">
@@ -875,7 +966,8 @@ li a:hover:not(.active) {
                                                     window.scrollTo(0,100);
                                                     const chartResult = document.getElementById("result");
                                                     chartResult.innerText = 'radar Chart 생성 !';
-                                                    // Chart.Chart('#result', configH);
+                                                    
+                                                    Chart.Chart('#result', configRadar);
                                                     console.log(data);
 
                                                 }
@@ -1263,7 +1355,177 @@ fillopacity : 0.5
             },
         };
             </script>
+            <script>
 
+            const dataScatter = {
+            labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+            datasets: [
+                {
+                    label: '라벨1',
+                    data: [ 10, 20, 30, 40, 50 ],
+                    backgroundColor: "red",
+
+                },
+                {
+                    label: '라벨2',
+                    data: [5,10,15,20,25,30]
+                    ,
+                    backgroundColor: "blue",
+                },
+                {
+                    label: '라벨3',
+                    data:
+                        [
+                            [1, 1], [2, 2], [3, 3], [4, 4], [5, 4], [6, 4]
+                        ],
+                },
+                
+            ]
+        };
+
+        const configScatter = {
+            type: 'scatter',
+            width: 500,
+            height: 500,
+            margin: { top: 40, left: 40, bottom: 40, right: 40 },
+            padding: 0.1,
+            data: dataScatter,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'right',// top bottom left right
+                    },
+                    title: {
+                        display: true,
+                        text: ''
+                    },
+                    xTitle: {
+                        display: true,
+                        text: 'y'
+                    },
+                    yTitle: {
+                        display: true,
+                        text: 'x'
+                    },
+                    xGrid: {
+                        color: "#323233", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
+                        dash: "10,3",
+                        weight: 1,
+                        opacity: .5
+                    },
+                    yGrid: {
+                        display: true,
+                        color: "#323233", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
+                        dash: "10,3",     // 점선, 10만큼 칠하고 3만큼 빈공간
+                        weight: 1,        // 선 두께
+                        opacity: .5       // 선 투명도
+                    },
+                    background: {
+
+                    },
+                    menu: {
+                        grid: true,
+                        xGrid: true,
+                        yGrid: true,
+                        background: true,
+                        download: true
+                    },
+
+                },
+                scales: {
+                    dot: {
+                        size: 7,
+                        opacity: 1
+                    }
+                }
+            },
+        };
+            </script>
+            <script>
+                const dataCircle = {
+            labels: ['A', 'B', 'C'],
+            datasets: [
+                { name: '데이터1', value: 100, color: '#ff0000' },
+                { name: '데이터2', value: 200, color: '#ff0000' },
+                { name: '데이터3', value: 300, color: '#ff0000'},
+                
+            ]
+        };
+        const configCircle = {
+            type: 'donut',
+            width: 500,
+            height: 500,
+            margin: { top: 40, left: 40, bottom: 40, right: 40 },
+            padding: 0.1,
+            data: dataCircle,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',// top bottom left right
+                    },
+                    title: {
+                        display: true,
+                        text: ''
+                    },
+                    sort: true,
+                    view: true,
+                },
+            }
+        }
+
+            </script>
+            <script>
+                 const dataRadar = {
+            labels: ['창의력', '사고력', '해결능력', '소통능력' ,'능력5'],
+            datasets: [
+                { 
+                    label: 'AAA',
+                    data : [2700,2700,1200,13,1400,1700]
+                },
+                { 
+                    label: 'BBB', 
+                    data :[1400,100,2800,2500,1200,2100],
+                },
+                { 
+                    label: 'CC',
+                    data : [1200,1900,1400,12,2700,1600],
+                },
+                { 
+                    label : 'DDDDD',
+                    data : [20,2200,2000,520,2300,200],
+                }
+            ],
+               
+        };
+        const configRadar = {
+            type: 'radar',
+            width: 500,
+            height: 500,
+            margin: { top: 40, left: 40, bottom: 40, right: 40 },
+            padding: 0.1,
+            data: dataRadar,
+            depth:6, // 구간 갯수
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',// top bottom left right
+                    },
+                    title: {
+                        display: true,
+                        text: 'Circle Chart Test'
+                    },
+                    sort: true,
+                    view: true,
+                    menu: {
+                        download: true
+                    }
+                },
+            }
+        }
+            </script>
             <!-- Footer-->
         <footer class="py-5 bg-dark">
             <div class="container px-5"><p class="m-0 text-center text-white"> Footer 섹션 </p></div>
