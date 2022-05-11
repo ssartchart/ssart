@@ -439,7 +439,8 @@ function Chart(
     }
 
     if (menu) {
-      const param = {type, width, height, margin, padding, data, options, y_max, y_min, depth};
+      // const param = {type, width, height, margin, padding, data, options, y_max, y_min, depth};
+      const param = {type, width, height, margin, padding, data, options};
       drawMenu(chart_width, width, margin, svg, options, id, param);
     };
   }
