@@ -15,6 +15,12 @@ export class CircleChart {
     });
     this.sum = sum;
     this.color = color;
+    let fillopacity;
+    if (options.scales) {
+      if (options.scales.fillopacity) {
+        fillopacity = options.scales.fillopacity;
+      }
+    }
 
     chart_area
       .attr("text-anchor", "middle").style("12px sans-serif");
@@ -88,6 +94,7 @@ export class CircleChart {
       // .on("mouseout", this.mouseout.bind(this))
       .attr("stroke", "white")
       .attr("d", arc)
+      .style("fill-opacity", fillopacity)
       // 애니메이션 효과
       .transition()
       .duration(1500)
