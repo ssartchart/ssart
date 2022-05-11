@@ -1,12 +1,12 @@
 export { Chart } from "./function.js";
 
-export { drawTitle, drawXTitle, drawYTitle } from "./Title.js";
+export { drawTitle, drawXTitle, drawYTitle } from "./module/Title.js";
 
-export { checkMargin } from "./checkMargin.js";
+export { checkMargin } from "./module/CheckMargin.js";
 
 // export { CircleChart } from "./CircleChart.js";
 
-export { RadarChart } from "./RadarChart.js";
+// export { RadarChart } from "./RadarChart.js";
 
 
 d3
