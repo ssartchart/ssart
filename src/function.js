@@ -19,7 +19,7 @@ import { AreaChart } from "./AreaChart.js";
 
 function Chart(
   id,
-  { type, width, height, margin, padding = 0, data, options,depth }
+  { type, width, height, margin, padding = 0, data, options,depth,poly }
 ) {
   const { plugins, scales } = options;
   let { legend = {position: "left"}, title, xTitle, yTitle, xGrid, yGrid, background, menu } = plugins;
@@ -365,6 +365,7 @@ function Chart(
         color: labelcolor.color,
         datasets : datasets,
         scales,
+        poly,
       });
       radarChart.tooltip();
       renderOptions();
