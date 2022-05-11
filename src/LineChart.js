@@ -52,7 +52,6 @@ export class LineChart{
         if (x_type == "band"){
             this.slice.attr("transform", "translate(" + this.x.bandwidth()/2 + "," + 0 + ")")
         }
-        // this.slice.attr("transform", "translate(" + 0 + "," + 0 + ")")
         
         this.path = this.slice
             .append("path")    
@@ -65,6 +64,8 @@ export class LineChart{
             .attr("stroke-opacity", line_opacity)
             .attr("d", line)
 
+        console.log(this.path.node())
+        console.log(this.path)
         this.pathLength = this.path.node().getTotalLength();
         console.log("p",this.pathLength)
 
@@ -89,36 +90,21 @@ export class LineChart{
 
     // 툴팁 효과
     tooltip(){
-            const tooltop = document.getElementById('tooltip');
+            const tooltop = document.getElementById('ssart-tooltip');
             const color = this.color;
             this.ChartBody.selectAll(".data")
             .on("mouseover", function(d){ 
-                // const x = event.pageX;
-                // const y = event.pageY;
-                // const target = event.target;
-                // const positionLeft =x;
-                // const positionTop = y;
+
                 d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));
                 console.log("툴팁 확인 : line");
-                // const value = d.x;
-                // const name =  d.y;
-                // const key = d3.rgb(color(d.label_index));
-                // const color = d;
-                
-                // tooltop.innerText = "x : " + value +"\n" + "y : " + name +"\n" + "label : " +key ; // 값 + 데이터 
-                // tooltop.style.background = '#ddd';
-                // tooltop.style.top = positionTop -100+ 'px';
-                // tooltop.style.left = positionLeft -80 + 'px';
-                // tooltip.style("left", (d3.event.pageX+10)+"px");
-                // tooltip.style("top",  (d3.event.pageY-10)+"px");
+
                 tooltop.style.opacity = "1.0";
             })
             .on("mousemove", function(d,index){
                 const value = d.x;
                 const name =  d.y;
                 const key = d3.rgb(color(d.label_index));
-                // const color = d;
-                
+
                 tooltop.innerText = "x : " + value +"\n" + "y : " + name +"\n" + "label : " +key ; // 값 + 데이터 
                 
                 tooltop.style.left = d3.event.pageX + 20 + "px";
@@ -137,12 +123,14 @@ export class LineChart{
             .delay(d=>{return Math.random()*delay;})
             .duration(duration);
 
-        this.path
-        .attr("stroke-dashoffset", this.pathLength)
-        .attr("stroke-dasharray", this.pathLength)
+        this.slice.selectAll("path")
+        .attr("stroke-dashoffset", function(d){
+            return this.getTotalLength()
+        })
+        .attr("stroke-dasharray", function(d){
+            return this.getTotalLength()
+        })
         .transition(transitionPath)     
-        
-        // .attr("stroke-dasharray", 0)
         .attr("stroke-dashoffset",0)
         
     }

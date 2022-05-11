@@ -188,14 +188,13 @@ export class RadarChart {
         
     }
     tooltip(){
-        const tooltop = document.getElementById('tooltip');
+        const tooltop = document.getElementById('ssart-tooltip');
         const color = this.color;
         const datasets = this.datasets;
         const coordinates = this.coordinates;
 
         this.ChartBody.selectAll(".data")
         .on("mouseover", function(d,index){ 
-            console.log(d)
             const label_index = datasets[index].data[0].label_index;
             // const color = data[data.length-2];
             d3.select(this).style("fill", d3.rgb(color(label_index)).darker(2));

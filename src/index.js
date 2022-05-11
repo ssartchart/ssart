@@ -1,4 +1,4 @@
-export { Chart, ChartH } from "./function.js";
+export { Chart } from "./function.js";
 
 export { drawTitle, drawXTitle, drawYTitle } from "./Title.js";
 
@@ -12,6 +12,7 @@ export { RadarChart } from "./RadarChart.js";
 d3
 .select("body")
 .append("div")
-.attr("id","tooltip")
+.attr("id","ssart-tooltip")
+.attr("class","ssart")
 .attr("class","tooltip")
 .style("opacity",0);
