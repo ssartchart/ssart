@@ -37,7 +37,7 @@ function Chart(
   const labels = data.labels;
   
   let labelcolor;
-  if(type == "donut"|| type == "donut"){
+  if(type == "donut"|| type == "pie"){
     labelcolor = LabelsColor(data);
   }
   else{
