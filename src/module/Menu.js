@@ -1,5 +1,5 @@
-import capture from "./saveSvgAsPng.js";
-import { Chart } from "./function.js";
+import capture from "./SaveSvgAsPng.js";
+import { Chart } from "../function.js";
 
 // 메뉴 아이콘 생성
 function menuIcon(chart_width, width, margin, options, chart_area) {

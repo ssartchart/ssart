@@ -1,21 +1,22 @@
-import { BarChart } from "./BarChart.js";
-import { BarHChart } from "./BarHChart.js";
-import { BarHClass } from "./BarHClass.js";
+
 // import {BarChart} from './BarChartfunction.js'
-import { axisOptions, xGrid as drawXGrid, yGrid as drawYGrid } from "./Axis_helper.js";
-import { LabelColor, LabelsColor } from "./Color_helper.js";
-import { Data_pre_processing } from "./Dataset_helper.js";
-import { drawTitle, drawXTitle, drawYTitle } from "./Title.js";
-import { checkMargin } from "./checkMargin.js";
-import { createCircleChartLegend, createLegendToggle, drawLegend } from "./legend.js";
-import { menu as drawMenu } from "./menu.js";
-import { background as drawBackground } from "./background.js";
-import { ScatterChart } from "./ScatterChart.js";
-import { BubbleChart } from "./BubbleChart.js";
-import { CircleChart } from "./CircleChart.js";
-import { RadarChart } from "./RadarChart.js";
-import { LineChart } from "./LineChart.js";
-import { AreaChart } from "./AreaChart.js";
+import { axisOptions, xGrid as drawXGrid, yGrid as drawYGrid } from "./module/Axis_helper.js";
+import { LabelColor, LabelsColor } from "./module/Color_helper.js";
+import { Data_pre_processing } from "./module/Dataset_helper.js";
+import { drawTitle, drawXTitle, drawYTitle } from "./module/Title.js";
+import { checkMargin } from "./module/CheckMargin.js";
+import { createCircleChartLegend, createLegendToggle, drawLegend } from "./module/Legend.js";
+import { menu as drawMenu } from "./module/Menu.js";
+import { background as drawBackground } from "./module/Background.js";
+
+import { BarChart } from "./chart/BarChart.js";
+import { BarHClass } from "./chart/BarHChart.js";
+import { ScatterChart } from "./chart/ScatterChart.js";
+import { BubbleChart } from "./chart/BubbleChart.js";
+import { CircleChart } from "./chart/CircleChart.js";
+import { RadarChart } from "./chart/RadarChart.js";
+import { LineChart } from "./chart/LineChart.js";
+import { AreaChart } from "./chart/AreaChart.js";
 
 function Chart(
   id,

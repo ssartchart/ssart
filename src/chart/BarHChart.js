@@ -1,4 +1,4 @@
-import {Axis_Option, Set_Axis, Set_Axis_reverse, xGrid, yGrid} from './Axis_helper.js';
+import {Axis_Option, Set_Axis, Set_Axis_reverse, xGrid, yGrid} from '../module/Axis_helper.js';
 
 export class BarHClass{
     constructor({id,chart_area,labels,datasets,color,width,height,margin,padding,scales}){
