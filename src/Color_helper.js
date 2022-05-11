@@ -80,17 +80,8 @@ export const LabelsColor=(data) =>{
         });
     }
     if (data.datasets != null){
-        if(data.datasets[0].data == null){
-            data.datasets.forEach((d,index) => {
-                if (d.color != null){
-                    colors[index] = d.color;
-                }
-                else{
-                    d.color = colors[index] ;
-                }
-            });    
-        }
-        else{
+        console.log(data.datasets)
+        if(data.datasets[0].data != null){           
             data.datasets[0].data.forEach((d,index) => {
                 if (d.color != null){
                     colors[index] = d.color;
@@ -99,9 +90,22 @@ export const LabelsColor=(data) =>{
                     d.color = colors[index] ;
                 }
             });
+            
+        }
+        else{
+            data.datasets.forEach((d,index) => {
+                
+                if (d.color != null){
+                    colors[index] = d.color;
+                }
+                else{
+                    d.color = colors[index] ;
+                }
+                data.datasets[index] = d
+            });    
         }
     }
-    console.log(data.labels)
+    console.log(colors)
     // console.log(colors);
     const color = d3.scaleOrdinal().range(colors);
 

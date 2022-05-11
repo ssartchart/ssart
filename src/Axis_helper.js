@@ -14,8 +14,6 @@ export const Set_Axis = ({chart_area,x_domain,y_domain,width,height,margin,scale
         .attr("class", "xAxis")
         .attr('transform', `translate(0, ${height - margin.bottom})`)
         .call(x_axis)
-        // .call(g => g.select('.domain').remove())
-        // .call(g => g.selectAll('line').remove());
 
     const y_axis = d3.axisLeft(y);
     if (scales !=null && scales.yAxis && scales.yAxis.ticks && scales.yAxis.ticks.tick != null){
@@ -25,8 +23,6 @@ export const Set_Axis = ({chart_area,x_domain,y_domain,width,height,margin,scale
         .attr("class", "yAxis")
         .attr('transform', `translate(${margin.left}, 0)`)
         .call(y_axis)
-        // .call(g => g.select('.domain').remove())   
-        // .call(g => g.selectAll('line').remove());
 
     chart_area.append('g').call(xAxis);
     chart_area.append('g').call(yAxis);
@@ -62,17 +58,19 @@ export const Axis_Option = (labels, datasets, scales, f = 1) =>{
     let x_domain = labels.map(d => d);     
     let x_type = "band";
     
-    let y_min = 0;
+    let y_min = null;
     let y_max = null;
     let r_min = 0;
     let r_max = null;
     let r_size_min = 10;
     let r_size_max = 50;
     let fillopacity = f;
-    let line_width = 2;
+    let line_width = 0.5;
     let line_opacity = 1;
-    let dot_opacity = 1;
-    let dot_size = 5;
+    let line_color = "red";
+    let dot_opacity = 0.7;
+    let dot_size = 3;
+    let dot_color = false;
     if (scales){
         if (scales.xAxis){
             if (scales.xAxis.type){
@@ -122,16 +120,23 @@ export const Axis_Option = (labels, datasets, scales, f = 1) =>{
             if (scales.line.opacity){
                 line_opacity = scales.line.opacity
             }
+            if (scales.line.color) {
+                line_color = scales.line.color;
+            }
         }
         if (scales.dot){
             if (scales.dot.opacity){
                 dot_opacity = scales.dot.opacity
             }
             if (scales.dot.visible != null && scales.dot.visible == false){
-                dot_opacity = 0
+                dot_opacity = 0;
+                // line_opacity = 0;
             }
             if (scales.dot.size){
                 dot_size = scales.dot.size
+            }
+            if (scales.dot.color) {
+                dot_color = scales.dot.color;
             }
 
         }
@@ -139,8 +144,29 @@ export const Axis_Option = (labels, datasets, scales, f = 1) =>{
         
         
     }       
-    console.log(y_max)
-    const y_domain = [y_min,  (y_max != null) ? y_max : d3.max(datasets, label=>{
+    // console.log(y_max)
+    
+    const y_domain = [
+        
+        (y_min != null) ? y_min : d3.min(datasets, label=>{
+            
+            y_min = d3.min(label.data, d=>{
+                if (d.value){
+                    return d.value;
+                }else{
+                    return d.y;
+                }
+                }); 
+            if (y_min > 0){
+                y_min = 0
+                return 0
+            }
+            else return y_min
+    }),
+            
+        
+        
+        (y_max != null) ? y_max : d3.max(datasets, label=>{
             return d3.max(label.data, d=>{
                 if (d.value){
                     return d.value;
@@ -149,7 +175,7 @@ export const Axis_Option = (labels, datasets, scales, f = 1) =>{
                 }
                 });            
     })];
-    
+    // console.log(y_domain)
 
     return {
         x_domain: x_domain,
@@ -164,8 +190,10 @@ export const Axis_Option = (labels, datasets, scales, f = 1) =>{
         fillopacity: fillopacity,
         line_width: line_width,
         line_opacity: line_opacity,
+        line_color: line_color,
         dot_opacity: dot_opacity,
-        dot_size: dot_size
+        dot_size: dot_size,
+        dot_color: dot_color,
     }
 }
 

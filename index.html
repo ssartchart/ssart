@@ -175,7 +175,7 @@
                 scales: {
                     yAxis: {
                         ticks: {
-                            min: -20,
+                            // min: -20,
                             max: 40
                         }
                     },
@@ -303,7 +303,7 @@
                     label: 'Small Radius',
                     data:
                         [
-                            [1, 1, 1], [2, 2, 2], [3, 2, 3], [4, 2, 4], [5, 2, 5], [6, 2, 6]
+                            [1, -10, 1], [20, 20, 2], [3, 20, 3], [4, 20, 4], [5, 20, 5], [6, 20, 6]
                         ],
                 },
                 {
@@ -603,7 +603,7 @@
             labels: ['dd', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
             datasets: [{    
                 data : [
-                { name: 'AAAA', value: 100, color: '#efa86b' },
+                { name: 'AAAA', value: 1000, color: '#efa86b' },
                 { name: 'BBB', value: 1500, color: '#c1484f' },
                 // { name: 'C', value: 1300, color: '#d35d50' },
                 { name: 'C', value: 1300 },
@@ -620,7 +620,7 @@
             ]
         };
         const config6 = {
-            type: 'donut',
+            type: 'pie',
             width: 500,
             height: 500,
             margin: { top: 40, left: 40, bottom: 40, right: 40 },
@@ -642,21 +642,21 @@
             }
         }
 // 레이더 차트 데이터 입력 부분.
-        const data_r2 = {
-            labels: ['A', 'B', 'C', 'D' ,'E' ,'F'],
-            datasets: [
-                { name: 'AAA' },
-                { name: 'BBB' },
-                { name: 'CC' },
-                { name : 'DDDDD'}
-            ],
-            data:[
-                [2700,2700,1200,13,1400,1700],
-                [1400,100,2800,2500,1200,2100],
-                [1200,1900,1400,12,2700,1600],
-                [20,2200,2000,520,2300,200],
-            ]            
-        };
+        // const data_r2 = {
+        //     labels: ['A', 'B', 'C', 'D' ,'E' ,'F'],
+        //     datasets: [
+        //         { name: 'AAA' },
+        //         { name: 'BBB' },
+        //         { name: 'CC' },
+        //         { name : 'DDDDD'}
+        //     ],
+        //     data:[
+        //         [2700,2700,1200,13,1400,1700],
+        //         [1400,100,2800,2500,1200,2100],
+        //         [1200,1900,1400,12,2700,1600],
+        //         [20,2200,2000,520,2300,200],
+        //     ]            
+        // };
         const data_r = {
             labels: ['A', 'B', 'C', 'D' ,'E' ,'F'],
             datasets: [
@@ -686,6 +686,7 @@
             padding: 0.1,
             data: data_r,
             depth:7, // 구간 갯수
+            poly:true,
             options: {
                 responsive: true,
                 plugins: {
@@ -753,7 +754,7 @@
 
                 {
                     label: 'Small Radius',
-                    data: [90, 170, 300, 415]
+                    data: [-90, 170, 300, 415]
                     ,
                     backgroundColor: "yellow",
                 },
@@ -798,9 +799,17 @@
                         opacity: .5,      // 선 투명도
                     },
 
+                },
+                scales:{
+                    yAxis : {
+                        ticks:{
+                            min : -10,
+                            max : 900
+                        }
+                    },
                 }
-            },
-            y_min: 0,
+                
+            }
         };
 
 

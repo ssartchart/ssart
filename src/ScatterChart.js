@@ -15,13 +15,9 @@ export class ScatterChart{
         const y_min = axis_option.y_min;
         const y_max = axis_option.y_max;
 
-        const fillopacity = axis_option.fillopacity;
-        const y_domain = axis_option.y_domain
-        const dot_opacity = axis_option.dot_opacity;
-        const dot_size = axis_option.dot_size;
-
-        const Axis = Set_Axis({chart_area,x_domain,y_domain,width,height,margin,padding,scales,x_type});
-
+        
+        const { fillopacity, y_domain, dot_opacity, dot_size, line_opacity, line_width, line_color } = axis_option;
+        const Axis = Set_Axis({chart_area,x_domain,y_domain,width,height,margin,padding,scales,x_type});        
 
         this.color = color;
         this.y_min = y_min;
@@ -38,13 +34,13 @@ export class ScatterChart{
             .enter().append("g")
             .attr("class", "slice")
             .attr("id", (d, i) => `${id}-chart-legend-${i}`)
-        if (x_type == "band"){
-            this.slice.attr("transform", "translate(" + this.x.bandwidth()/2 + "," + 0 + ")")
-        }
-        else{
-            this.slice.attr("transform", "translate(" + 0 + "," + 0 + ")")
-        }
-
+        // if (x_type == "band"){
+        //     this.slice.attr("transform", "translate(" + this.x.bandwidth()/2 + "," + 0 + ")")
+        // }
+        // else{
+        //     this.slice.attr("transform", "translate(" + 0 + "," + 0 + ")")
+        // }
+        this.slice.attr("transform", "translate(" + 0 + "," + 0 + ")")
 
         this.slice.selectAll(".data")
             .data(datasets=>{return datasets.data;})
@@ -59,6 +55,9 @@ export class ScatterChart{
             .attr("r", this.dot_size)
             .style("fill",d=>{return this.color(d.label_index);})
             .style("fill-opacity", dot_opacity)
+            .attr("stroke", line_color)
+            .attr("stroke-width", line_width)
+            .style("stroke-opacity", line_opacity)
             // .on("mouseover", onMouseOver)
             // .on("mouseout", onMouseOut);
 
@@ -68,35 +67,20 @@ export class ScatterChart{
 
     // 툴팁 효과
     tooltip(){
-            const tooltop = document.getElementById('tooltip');
+            const tooltop = document.getElementById('ssart-tooltip');
             const color = this.color;
             this.ChartBody.selectAll(".data")
             .on("mouseover", function(d){ 
-                // const x = event.pageX;
-                // const y = event.pageY;
-                // const target = event.target;
-                // const positionLeft =x;
-                // const positionTop = y;
+
                 d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));
                 console.log("툴팁 확인 : scatter");
-                // const value = d.x;
-                // const name =  d.y;
-                // const key = d3.rgb(color(d.label_index));
-                // const color = d;
-                
-                // tooltop.innerText = "x : " + value +"\n" + "y : " + name +"\n" + "label : " +key ; // 값 + 데이터 
-                // tooltop.style.background = '#ddd';
-                // tooltop.style.top = positionTop -100+ 'px';
-                // tooltop.style.left = positionLeft -80 + 'px';
-                // tooltip.style("left", (d3.event.pageX+10)+"px");
-                // tooltip.style("top",  (d3.event.pageY-10)+"px");
+
                 tooltop.style.opacity = "1.0";
             }).on("mousemove", function(d,index){
                 const value = d.x;
                 const name =  d.y;
                 const key = d3.rgb(color(d.label_index));
-                // const color = d;
-                
+
                 tooltop.innerText = "x : " + value +"\n" + "y : " + name +"\n" + "label : " +key ; // 값 + 데이터 
                 
                 tooltop.style.left = d3.event.pageX + 20 + "px";
