@@ -62,19 +62,43 @@ export class RadarChart {
         }
         // console.log(ticks)
         // console.log(data.datasets)
-    
+
+
         this.ChartBody = chart_area
         .append("g")
         .attr("transform", `translate(${width / 2}, ${(height/2)+10})`);
         
-        ticks.forEach(t =>
+        if(datas.length == 0){
+            chart_area.attr("opacity" , 0)
+        }else{
+            chart_area.attr("opacity" , 1)
+        }
+
+        for(var i = 0 ; i < ticks.length ; i++){
+
+            const value = ticks[i];
+
+            console.log(radialScale(value))
+
             this.ChartBody.append("circle")
             .attr("cx", 0)
             .attr("cy", 0)
             .attr("fill", "none")
             .attr("stroke", "black")
-            .attr("r", radialScale(t))
-        );  // 원 축 그리는 기능.
+            .attr("r", radialScale(value))
+            
+            // .attr("opacity" , 0.3)
+
+       
+            this.ChartBody.append("text")
+            .attr("x" , -10)
+            .attr("y", -radialScale(value))
+            .attr("font-size" , 12)
+            .text(Math.round(value))
+           
+        };
+
+
     
         function angleToCoordinate(angle, value){ // 중간 좌표 return 함수.
             const x = Math.cos(angle) * radialScale(value);
@@ -83,6 +107,12 @@ export class RadarChart {
         }
     
         for (var i = 0; i < features.length; i++) { // 축 갯수에 따른 세분화
+            if(datas.length == 0 ){
+                break;
+            }
+            console.log("feature")
+            console.log(datas.length)
+            
             const ft_name = features[i]; 
             const angle = (Math.PI / 2) + (2 * Math.PI * i / features.length); //각도
             const line_coordinate = angleToCoordinate(angle, max); // 라인
