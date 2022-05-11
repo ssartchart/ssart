@@ -75,26 +75,14 @@ export class BubbleChart{
 
     // 툴팁 효과
     tooltip(){
-        const tooltop = document.getElementById('tooltip');
+        const tooltop = document.getElementById('ssart-tooltip');
         const color = this.color;
         this.ChartBody.selectAll(".data")
         .on("mouseover", function(d){ 
-            // const x = event.pageX;
-            // const y = event.pageY;
-            // const target = event.target;
-            // const positionLeft =x;
-            // const positionTop = y;
+
             d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));
             console.log("툴팁 확인 : bubble");
-            
-            // const color = d;
-            
-            
-            // tooltop.style.background = '#ddd';
-            // tooltop.style.top = positionTop -100+ 'px';
-            // tooltop.style.left = positionLeft -80 + 'px';
-            // tooltip.style("left", (d3.event.pageX+10)+"px");
-            // tooltip.style("top",  (d3.event.pageY-10)+"px");
+
             tooltop.style.opacity = "1.0";
         })
         .on("mousemove", function(d,index){

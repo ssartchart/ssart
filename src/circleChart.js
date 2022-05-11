@@ -1,10 +1,10 @@
 export class CircleChart {
-  constructor({ id, type, chart_area, width, height, margin, datasets,color, options }) {
+  constructor({ id, type,labels, chart_area, width, height, margin, datasets,color, options }) {
     chart_area.selectAll('.chartBody').remove();
     
     const nowWidth = width - margin.left - margin.right;
     const nowHeight = height - margin.top - margin.bottom;
-    console.log(datasets)
+    // console.log(datasets)
     let sum = 0;
     datasets.forEach(function (currentElement) {
       sum += currentElement.value;
@@ -15,6 +15,12 @@ export class CircleChart {
     });
     this.sum = sum;
     this.color = color;
+    let fillopacity;
+    if (options.scales) {
+      if (options.scales.fillopacity) {
+        fillopacity = options.scales.fillopacity;
+      }
+    }
 
     chart_area
       .attr("text-anchor", "middle").style("12px sans-serif");
@@ -81,13 +87,14 @@ export class CircleChart {
       .attr("class", "data")
       .attr("fill", (d,index) => {
         // console.log(d.data.color)
-        return d.data.color
+        return color(d.data.label_index)
       })
       // .on("mouseover", this.mouseover.bind(this))
       // .on("mousemove", this.mousemove.bind(this))
       // .on("mouseout", this.mouseout.bind(this))
       .attr("stroke", "white")
       .attr("d", arc)
+      .style("fill-opacity", fillopacity)
       // 애니메이션 효과
       .transition()
       .duration(1500)
@@ -116,7 +123,7 @@ export class CircleChart {
         .attr("x", 0)
         .attr("y", "-0.7em")
         .attr("class", "name")
-        .text((d) => d.data.name);
+        .text((d) => labels[d.data.label_index]);
       text
         // 각이 좁으면 수치 나타내지 않음.
         .filter((d) => d.endAngle - d.startAngle > 0.25)
@@ -189,13 +196,13 @@ export class CircleChart {
 
   tooltip(){
     console.log("22233");
-    const tooltop = document.getElementById('tooltip');
+    const tooltop = document.getElementById('ssart-tooltip');
     const color = this.color;
     const sum = this.sum;
     this.ChartBody.selectAll(".data")
     .on("mouseover", function(d,index){ 
-
-        d3.select(this).style("fill", d3.rgb(d.data.color).darker(2));
+        // console.log(d.data)
+        d3.select(this).style("fill", d3.rgb(color(d.data.label_index)).darker(2));
         console.log("툴팁 확인 : circle");
 
         tooltop.style.opacity = "1.0";
@@ -209,7 +216,7 @@ export class CircleChart {
       tooltop.style.top = d3.event.pageY + 20 + "px";
     })
     .on("mouseout", function(d,index){ 
-        d3.select(this).style("fill", d.data.color);
+        d3.select(this).style("fill", color(d.data.label_index));
         tooltop.style.opacity = "0";
     });
   }

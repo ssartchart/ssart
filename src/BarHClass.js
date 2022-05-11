@@ -1,39 +1,25 @@
-import {Set_Axis, Set_Axis_reverse, xGrid, yGrid} from './Axis_helper.js';
+import {Axis_Option, Set_Axis, Set_Axis_reverse, xGrid, yGrid} from './Axis_helper.js';
 
 export class BarHClass{
     constructor({id,chart_area,labels,datasets,color,width,height,margin,padding,scales}){
         
-        chart_area.selectAll('*').remove();
+        chart_area.selectAll('.chartBody').remove();
+        chart_area.selectAll('.xAxis').remove();
+        chart_area.selectAll('.yAxis').remove();
 
-        var y_min = 0;
-        var y_max = null;
-        var fillopacity = 1;
-        if (scales != null){
-            console.log(scales)
-            if (scales.yAxis){
-                if(scales.yAxis[0].ticks){
-                    if(scales.yAxis[0].ticks.max){
-                        y_max = scales.yAxis[0].ticks.max;
-                    }
-                    if(scales.yAxis[0].ticks.min){
-                        y_min = scales.yAxis[0].ticks.min;
-                    }
-                }
-            }
-            if (scales.fillopacity){
-                fillopacity = scales.fillopacity;
-            }
-            
-        }
 
-        const x_domain = labels.map(d => d);        
-        const y_domain = [y_min,  (y_max != null) ? y_max : d3.max(datasets, label=>{
-                return d3.max(label.data, d=>{
-                    return d.value;});            
-                })];        
+        const axis_option = Axis_Option(labels,datasets,scales,1);
+        const x_domain = axis_option.x_domain;
+
+        const y_min = axis_option.y_min;
+        const y_max = axis_option.y_max;
+
+        const fillopacity = axis_option.fillopacity;
+        const y_domain = axis_option.y_domain
+
         const Axis = Set_Axis_reverse({chart_area,x_domain,y_domain,width,height,margin,padding,scales});
 
-
+        console.log(y_min)
         this.color = color;
         this.y_min = y_min;
         this.x0 = Axis.x.padding(padding);
@@ -51,7 +37,6 @@ export class BarHClass{
             .enter().append("g")
             .attr("class", "slice")
             .attr("id", (d, i) => `${id}-chart-legend-${i}`)
-            // .attr("transform",(d,index)=>{ return "translate(" + this.x1(index) + ",0)"; });
             .attr("transform",(d,index)=>{ return "translate(0," + this.x1(index) +")"; });
 
         this.slice.selectAll("rect")
@@ -62,11 +47,21 @@ export class BarHClass{
             .attr("y",d=>{ return this.x0(d.name);})
             .attr("height", this.x0.bandwidth()/datasets.length)
             .style("fill",d=>{return this.color(d.label_index);})
-            .style("fill-opacity", fillopacity)
-            
-            .attr("x", d=>{return this.y(this.y_min) })
-            // .attr("width", d=>{ return this.y(this.y_min) - this.y(d.value); })
-            .attr("width", d=>{ return this.y(d.value); })
+            .style("fill-opacity", fillopacity)            
+            .attr("x", d=>{
+                if (d.value > 0)
+                    return this.y(Math.max(this.y_min,0)) 
+                else{
+                    return (this.y(d.value));
+                }
+            })
+            .attr("width", d=>{ 
+                if (d.value > 0)
+                    return this.y(d.value) - this.y(Math.max(this.y_min,0));
+                else{
+                    return this.y(Math.max(this.y_min,0)) - this.y(d.value);
+                }
+            })
             
 
         chart_area.node();
@@ -74,28 +69,13 @@ export class BarHClass{
     };
     // 툴팁 효과 + 하이라이트
     tooltip(){
-        const tooltop = document.getElementById('tooltip');
+        const tooltop = document.getElementById('ssart-tooltip');
         const color = this.color;
         this.slice.selectAll("rect")
         .on("mouseover", function(d){ 
-            // const x = event.pageX;
-            // const y = event.pageY;
-            // const target = event.target;
-            // const positionLeft =x;
-            // const positionTop = y;
             d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));
             console.log("툴팁 확인 BarHC");
-            // const value = d.value;
-            // const name =  d.name;
-            // const key = d3.rgb(color(d.label_index));
-            // const color = d;
-            
-            // tooltop.innerText = "value : " + value +"\n" + "name : " + name +"\n" + "color : " +key ; // 값 + 데이터 
-            // tooltop.style.background = '#ddd';
-            // tooltop.style.top = positionTop -30+ 'px';
-            // tooltop.style.left = positionLeft -80 + 'px';
-            // tooltip.style("left", (d3.event.pageX+10)+"px");
-            // tooltip.style("top",  (d3.event.pageY-10)+"px");
+
             tooltop.style.opacity = "1.0";
         })
         .on("mousemove", function(d,index){
@@ -115,15 +95,30 @@ export class BarHClass{
 
     }
     // 애니메이션 효과
-        animation(delay=800, duration=800) {
+    animation(delay=800, duration=800) {
+        console.log()
         this.slice.selectAll("rect")
+            .attr("x", d=>{ return this.y(0); })
             .attr('width', '1')
             .transition()
             .delay(d=>{return Math.random()*delay;})
             .duration(duration)
-            .attr("width", d=>{ return this.y(d.value) - this.y(this.y_min); })
+            .attr("x", d=>{
+                if (d.value > 0)
+                    return this.y(Math.max(this.y_min,0)) 
+                else{
+                    return (this.y(d.value));
+                }
+            })
+            .attr("width", d=>{ 
+                if (d.value > 0)
+                    return this.y(d.value) - this.y(Math.max(this.y_min,0));
+                else{
+                    return this.y(Math.max(this.y_min,0)) - this.y(d.value);
+                }
+            })
     }
-   
+
     
 }
 

@@ -1,7 +1,7 @@
 // chart title
-function drawTitle(svg, options, width, chart_width, height, margin) {
+export function drawTitle(svg, options, width, chart_width, height, margin) {
   let xTitle = chart_width/2
-  if (options.plugins.legend.position && options.plugins.legend.position == "left"){
+  if (options.plugins.legend?.position && options.plugins.legend.position == "left"){
     xTitle = width - chart_width/2
   }
 
@@ -64,7 +64,7 @@ function drawTitle(svg, options, width, chart_width, height, margin) {
 }
 
 // x title
-function drawXTitle(svg, options, width, height, margin) {
+export function drawXTitle(svg, options, width, height, margin) {
   const xTitle = svg
     .append("text")
     .attr("id", "xTitle")
@@ -73,7 +73,6 @@ function drawXTitle(svg, options, width, height, margin) {
     .attr("text-anchor", "middle")
     .text(options.text);
 
-  console.log(options.size)
   if (options.size) {
     xTitle
       .style("font-size", options.size)
@@ -105,7 +104,7 @@ function drawXTitle(svg, options, width, height, margin) {
 }
 
 // y title
-function drawYTitle(svg, options, width, height, margin) {
+export function drawYTitle(svg, options, width, height, margin) {
   const yTitle = svg
     .append("text")
     .attr("id", "yTitle")
@@ -150,7 +149,7 @@ function drawYTitle(svg, options, width, height, margin) {
         .attr("text-anchor", "start")
     }
   }
-  console.log(options.rotate)
+
   if (options.rotate) {
     yTitle
       .attr("writing-mode", "none")
@@ -167,5 +166,3 @@ function drawYTitle(svg, options, width, height, margin) {
   }
   
 }
-
-export { drawTitle, drawXTitle, drawYTitle };

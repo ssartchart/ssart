@@ -68,6 +68,7 @@ function menuIcon(chart_width, width, margin, options, chart_area) {
   return chartMenu;
 }
 
+
 // dropdown 창 생성
 function createDropDown(
   width,
@@ -121,6 +122,7 @@ export function menu(
   ) {
     dropDownX = width - margin.right - dropDownWidth;
   }
+
   const dropDown = createDropDown(
     width,
     margin,
@@ -368,7 +370,6 @@ export function menu(
         "transform",
         "translate(" + legendDropDownX + "," + legendDropDownY + ")"
       );
-
     legendDropDown
       .append("rect")
       .attr("x", 0)
@@ -547,10 +548,6 @@ export function menu(
               .style("cursor", "pointer")
               .style("user-select", "none")
               .on("click", function (event) {
-                // const colorPicker = this.parentNode.parentNode
-                //   .append("svg")
-                //   .attr("width", 100)
-                //   .attr("height", 100);
                 console.log(i);
                 console.log(labelGroup.childNodes[i].__data__);
               });
@@ -572,26 +569,6 @@ export function menu(
             .style("visibility", "hidden")
             .property("visibility", "hidden");
         }
-
-        // legendA.setAttribute("fill", "#000000");
-        // let chartGroup = document.getElementById(divId + "-chart-legend-0");
-        // let chartA = chartGroup.childNodes;
-        // for (let i = 0; i < chartA.length; i++) {
-        //   // chartA[i].setAttribute("fill", "#000000");
-        //   chartA[i].style.fill = "#000000";
-        //   // legendA.style.color = "#FFFFFF";
-        //   console.log(chartA[i]);
-        //   // console.log(legendGroup.childNodes[i].__data__);
-        // }
-        // if (colorDropDown.property("visibility") === "hidden") {
-        //   colorDropDown
-        //     .style("visibility", "visible")
-        //     .property("visibility", "visible");
-        // } else {
-        //   colorDropDown
-        //     .style("visibility", "hidden")
-        //     .property("visibility", "hidden");
-        // }
       });
   }
 
