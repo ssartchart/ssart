@@ -40,16 +40,27 @@ let colors = [
     "#20f6ba", "#07d7f6", "#dce77a", "#77ecca"
 ]
 
-export const LabelColor=(datasets) =>{
+export const LabelColor=({datasets}) =>{
     // 색깔 지정 안했을 시, 지정되는 기본값 색깔 리스트
     
-    let label = [];
+    // console.log(datasets)
+    var label = [];
+    // console.log(label);
     datasets.forEach((d,index) => {
+        // console.log(index)
         if (d.backgroundColor != null){
             colors[index] = d.backgroundColor;
         }
-        label[index] = d.label;
+        console.log(d.label)
+        if (d.label == null){
+            label[index] = "label_"+(index+1);
+        }
+        else{
+            label[index] = d.label;
+        }
+        
     });
+    // console.log(label);
 
     const color = d3.scaleOrdinal().range(colors);
 
@@ -90,7 +101,8 @@ export const LabelsColor=(data) =>{
             });
         }
     }
-    console.log(colors);
+    console.log(data.labels)
+    // console.log(colors);
     const color = d3.scaleOrdinal().range(colors);
 
     return {label : data.labels,

@@ -139,10 +139,17 @@ export const Axis_Option = (labels, datasets, scales, f = 1) =>{
         
         
     }       
+    console.log(y_max)
     const y_domain = [y_min,  (y_max != null) ? y_max : d3.max(datasets, label=>{
             return d3.max(label.data, d=>{
-                return d.y;});            
+                if (d.value){
+                    return d.value;
+                }else{
+                    return d.y;
+                }
+                });            
     })];
+    
 
     return {
         x_domain: x_domain,

@@ -25,10 +25,12 @@
     <div id="bargraph3"></div>
     <div id="bargraph4"></div>
     <div id="bargraph5"></div>
+    
     <div id="area"></div>
     <div id="circle"></div>
     <div id="barH"></div>
     <div id="radar"></div>
+    
     
     <script src='https://d3js.org/d3.v5.min.js'></script>
 
@@ -39,7 +41,7 @@
                 {
                     label: 'Fully Rounded',
                     data: [
-                        { name: 'a', value: 10 },
+                        { name: 'a', value: -10 },
                         { name: 'b', value: 29 },
                         { name: 'c', value: 32 },
                         { name: 'd', value: 25 },
@@ -95,7 +97,7 @@
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'bottom',// top bottom left right
+                        position: 'left',// top bottom left right
                         fontSize: '10px',
                         fontWeight: 'normal',
                         fontFamily: 'comic sans ms',
@@ -172,6 +174,7 @@
                 scales: {
                     yAxis: {
                         ticks: {
+                            min: -20,
                             max: 40
                         }
                     },
@@ -207,7 +210,7 @@
                     label: 'Small Radius',
                     data:
                         [
-                            [1, 1], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2]
+                            [1.5, 1], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2]
                         ],
                 },
                 {
@@ -218,7 +221,7 @@
                         { x: 3, y: 25 },
                         { x: 4, y: 32 },
                         { x: 5, y: 29 },
-                        { x: 6, y: 13 },
+                        { x: -6, y: 13 },
                         { x: 7, y: 15 },
                     ],
                 }
@@ -275,7 +278,15 @@
                     },
 
                 },
+                
                 scales: {
+                    xAxis: {
+                        type: "number",
+                        ticks: {
+                            min: -10,
+                            max: 10
+                        }
+                    },
                     dot: {
                         size: 10,
                         opacity: 1
@@ -630,7 +641,7 @@
             }
         }
 // 레이더 차트 데이터 입력 부분.
-        const data_r = {
+        const data_r2 = {
             labels: ['A', 'B', 'C', 'D' ,'E' ,'F'],
             datasets: [
                 { name: 'AAA' },
@@ -644,6 +655,27 @@
                 [1200,1900,1400,12,2700,1600],
                 [20,2200,2000,520,2300,200],
             ]            
+        };
+        const data_r = {
+            labels: ['A', 'B', 'C', 'D' ,'E' ,'F'],
+            datasets: [
+                { 
+                    label: 'AAA',
+                    data : [2700,2700,1200,13,1400,1700]
+                },
+                { 
+                    label: 'BBB', 
+                    data :[1400,100,2800,2500,1200,2100],
+                },
+                { 
+                    label: 'CC',
+                    data : [1200,1900,1400,12,2700,1600],
+                },
+                { 
+                    label : 'DDDDD',
+                    data : [20,2200,2000,520,2300,200],
+                }
+            ],        
         };
         const config_r = {
             type: 'radar',
@@ -669,6 +701,9 @@
                         download: true
                     }
                 },
+                scales:{
+                    depth : 7
+                }
             }
         }
         // 레이더 차트 데이터 입력 부분.
@@ -685,6 +720,7 @@
         Chart.Chart('#bargraph4', config3);
         Chart.Chart('#bargraph5', config4);
         Chart.Chart('#area', config5);
+        Chart.Chart('#radar', config_r);
     </script>
 
     <br>
@@ -787,12 +823,12 @@
         import * as Chart from './src/index.js';
 
         Chart.Chart('#circle', config6);
-        Chart.Chart('#radar', config7);
+        // Chart.Chart('#radar', config7);
     </script>
 <!-- 레이더 차트 생성 부분 -->
     <script type="module">
         import * as Chart from './src/index.js';
-        Chart.Chart('#radar', config_r);
+        // Chart.Chart('#radar', config_r);
     </script>
 <!-- 레이더 차트 생성 부분 -->
 </body>

@@ -13,12 +13,13 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, optio
   }
   const legendList = [];  
   let labelsColor = labels.color
-  if (type === "donut" || type === "pie" || type === "radar") {
-    for (let i = 0; i < datasets.length; i++) {
-      labels.label[i] = datasets[i].name
-    }
-  }  
+  // if (type === "donut" || type === "pie" || type === "radar") {
+  //   for (let i = 0; i < datasets.length; i++) {
+  //     labels.label[i] = datasets[i].name
+  //   }
+  // }  
   labels = labels.label;  
+  
   let pointStyle;
   let rowCnt = 1;
   let colCnt = 1;

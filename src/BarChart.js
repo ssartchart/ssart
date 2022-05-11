@@ -20,7 +20,7 @@ export class BarChart{
         
         const Axis = Set_Axis({chart_area,x_domain,y_domain,width,height,margin,padding,scales});
 
-
+        // console.log(y_)
         this.color = color;
         this.y_min = y_min;
         this.x0 = Axis.x.padding(padding);

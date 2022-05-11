@@ -4,7 +4,7 @@ export class CircleChart {
     
     const nowWidth = width - margin.left - margin.right;
     const nowHeight = height - margin.top - margin.bottom;
-    console.log(datasets)
+    // console.log(datasets)
     let sum = 0;
     datasets.forEach(function (currentElement) {
       sum += currentElement.value;

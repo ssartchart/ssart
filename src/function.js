@@ -19,7 +19,7 @@ import { AreaChart } from "./AreaChart.js";
 
 function Chart(
   id,
-  { type, width, height, margin, padding = 0, data, options, y_max, y_min = 0,depth }
+  { type, width, height, margin, padding = 0, data, options,depth }
 ) {
   const { plugins, scales } = options;
   let { legend = {position: "left"}, title, xTitle, yTitle, xGrid, yGrid, background, menu } = plugins;
@@ -31,13 +31,23 @@ function Chart(
     .style("height", height);
 
   console.log(`Hello, ${type}!`);
-  console.log(data.datasets);
-
+  // console.log(data);
+  // console.log(data.labels);
   const labels = data.labels;
-  const labelcolor = LabelColor(data.datasets);
-  const labelscolor = LabelsColor(data);
+  
+  let labelcolor;
+  if(type == "donut"|| type == "donut"){
+    labelcolor = LabelsColor(data);
+  }
+  else{
+    labelcolor = LabelColor({datasets: data.datasets});
+  }
+  // console.log(label);
+  
+
   const color = labelcolor.color;
   const legend_label = labelcolor.label;
+  console.log(type,"22",legend_label)
   const chart_area = svg
     .append("g")
     .style("width", width - 100)
@@ -49,11 +59,11 @@ function Chart(
     legendList: []
   }
   if (legend) {
-    if(type == "donut"|| type == "donut" || type == "radar"){
+    if(type == "donut"|| type == "donut"){
       legend_box = drawLegend(
         oid,
         svg,
-        labelscolor,
+        labelcolor,
         width,
         height,
         chart_area,
@@ -77,6 +87,7 @@ function Chart(
       );
     }    
   }
+  console.log(type,"33",labelcolor.label)
   const chart_width = width - legend_box.width;
   const chart_height = height - legend_box.height;
   checkMargin(margin);
@@ -122,7 +133,8 @@ function Chart(
         scales,
         position: legend.position,
       });
-      chart.animation();
+      chart.tooltip();
+      // chart.animation();
       renderOptions();
     }
   }
@@ -278,8 +290,6 @@ function Chart(
         height: chart_height,
         margin,
         padding,
-        y_max,
-        y_min,
       });
       barHchart.tooltip();
       barHchart.animation();
@@ -310,8 +320,10 @@ function Chart(
     //   renderBackground,
     // );
     createLegendToggle(
+      id,
       datasets,
       legend_box?.legendList,
+      chart_area,
       drawCicleChart,
       {},
       renderBackground,
@@ -329,7 +341,7 @@ function Chart(
         id: oid,
         type,
         chart_area,
-        color: labelscolor.color,
+        color: labelcolor.color,
         width: chart_width,
         height: chart_height,
         margin,
@@ -342,18 +354,37 @@ function Chart(
     }    
   }
   if (type === "radar" ) {
-    const chart = new RadarChart({
-      type,
-      svg,
-      width,
-      height,
-      margin,
-      data,
-      depth,
-      options,
-    });
-    // chart.tooltip();
-    renderOptions();
+    const datasets = Data_pre_processing(
+      data.labels,
+      data.datasets,
+      "namevalue"
+    );
+    drawRadarChart(datasets);
+    console.log(legend_box)
+    createLegendToggle(
+      id,
+      datasets,
+      legend_box?.legendList,
+      chart_area,
+      drawRadarChart,
+      {},
+      renderBackground
+    );
+    function drawRadarChart(datasets) {
+      const radarChart = new RadarChart({
+        type,
+        chart_area: chart_area,
+        width : chart_width,
+        height : chart_height,
+        margin,
+        labels,
+        color: labelcolor.color,
+        datasets : datasets,
+        scales,
+      });
+      radarChart.tooltip();
+      renderOptions();
+    }
   }
   function renderOptions() {
     if (title) {
