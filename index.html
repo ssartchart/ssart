@@ -658,23 +658,23 @@
         //     ]            
         // };
         const data_r = {
-            labels: ['A', 'B', 'C', 'D' ,'E' ,'F'],
+            labels: ['str', 'dex', 'int', 'luk' ,'con'],
             datasets: [
                 { 
                     label: 'AAA',
-                    data : [2700,2700,1200,13,1400,1700]
+                    data : [270,270,120,1,140]
                 },
                 { 
                     label: 'BBB', 
-                    data :[1400,100,2800,2500,1200,2100],
+                    data :[140,100,280,250,120],
                 },
                 { 
                     label: 'CC',
-                    data : [1200,1900,1400,12,2700,1600],
+                    data : [100,190,140,12,270],
                 },
                 { 
                     label : 'DDDDD',
-                    data : [20,2200,2000,520,2300,200],
+                    data : [20,200,200,52,230],
                 }
             ],        
         };
@@ -695,7 +695,7 @@
                     },
                     title: {
                         display: true,
-                        text: 'Circle Chart Test'
+                        text: 'Radar Chart Test'
                     },
                     sort: true,
                     view: true,
@@ -722,6 +722,8 @@
         Chart.Chart('#bargraph4', config3);
         Chart.Chart('#bargraph5', config4);
         Chart.Chart('#area', config5);
+
+
         Chart.Chart('#radar', config_r);
     </script>
 

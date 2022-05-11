@@ -17,6 +17,14 @@ export class RadarChart {
         this.datasets = datasets;
         this.coordinates = [];
 
+
+        let defaultpoly = false;
+        
+        if (poly != null){
+            defaultpoly = poly;
+        }
+        
+
         // for(var i = 0 ; i < datasets.length ; i++){
         //     this.datanames.push(datasets[i]);
         // }
@@ -87,7 +95,7 @@ export class RadarChart {
 
             console.log(radialScale(value)) // 반지름
 
-            if(poly == false){
+            if(defaultpoly == false){
                 this.ChartBody.append("circle")
                 .attr("cx", 0)
                 .attr("cy", 0)
@@ -108,7 +116,7 @@ export class RadarChart {
             var start = {"x": 0, "y": 0 };
             
 
-            if(poly == true){
+            if(defaultpoly == true){
                 for(var j = 0 ; j < features.length ; j++){
                     const angle = (Math.PI / 2) + (2 * Math.PI * j / features.length); //각도
                     const poly_coordinates = angleToCoordinate(angle , ticks[i]);
