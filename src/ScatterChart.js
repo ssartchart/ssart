@@ -17,8 +17,7 @@ export class ScatterChart{
 
         
         const { fillopacity, y_domain, dot_opacity, dot_size, line_opacity, line_width, line_color } = axis_option;
-        const Axis = Set_Axis({chart_area,x_domain,y_domain,width,height,margin,padding,scales,x_type});
-
+        const Axis = Set_Axis({chart_area,x_domain,y_domain,width,height,margin,padding,scales,x_type});        
 
         this.color = color;
         this.y_min = y_min;
@@ -35,13 +34,13 @@ export class ScatterChart{
             .enter().append("g")
             .attr("class", "slice")
             .attr("id", (d, i) => `${id}-chart-legend-${i}`)
-        if (x_type == "band"){
-            this.slice.attr("transform", "translate(" + this.x.bandwidth()/2 + "," + 0 + ")")
-        }
-        else{
-            this.slice.attr("transform", "translate(" + 0 + "," + 0 + ")")
-        }
-
+        // if (x_type == "band"){
+        //     this.slice.attr("transform", "translate(" + this.x.bandwidth()/2 + "," + 0 + ")")
+        // }
+        // else{
+        //     this.slice.attr("transform", "translate(" + 0 + "," + 0 + ")")
+        // }
+        this.slice.attr("transform", "translate(" + 0 + "," + 0 + ")")
 
         this.slice.selectAll(".data")
             .data(datasets=>{return datasets.data;})
