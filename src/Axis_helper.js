@@ -74,6 +74,7 @@ export const Axis_Option = (labels, datasets, scales, f = 1) =>{
     let line_color = "red";
     let dot_opacity = 0.7;
     let dot_size = 3;
+    let dot_color = false;
     if (scales){
         if (scales.xAxis){
             if (scales.xAxis.type){
@@ -138,6 +139,9 @@ export const Axis_Option = (labels, datasets, scales, f = 1) =>{
             if (scales.dot.size){
                 dot_size = scales.dot.size
             }
+            if (scales.dot.color) {
+                dot_color = scales.dot.color;
+            }
 
         }
 
@@ -172,6 +176,7 @@ export const Axis_Option = (labels, datasets, scales, f = 1) =>{
         line_color: line_color,
         dot_opacity: dot_opacity,
         dot_size: dot_size,
+        dot_color: dot_color,
     }
 }
 

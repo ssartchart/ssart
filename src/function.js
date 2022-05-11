@@ -19,7 +19,7 @@ import { AreaChart } from "./AreaChart.js";
 
 function Chart(
   id,
-  { type, width, height, margin, padding = 0, data, options,depth }
+  { type, width, height, margin, padding = 0, data, options, depth }
 ) {
   const { plugins, scales } = options;
   let { legend = {position: "left"}, title, xTitle, yTitle, xGrid, yGrid, background, menu } = plugins;
@@ -291,6 +291,7 @@ function Chart(
         height: chart_height,
         margin,
         padding,
+        scales,
       });
       barHchart.tooltip();
       barHchart.animation();
