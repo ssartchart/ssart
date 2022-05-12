@@ -68,6 +68,7 @@ li a:hover:not(.active) {
         <li><a href="#toLineChart">Line Chart</a></li>
         <li><a href="#toAreaChart">Area Chart</a></li>
         <li><a href="#toScatterChart">Scatter Chart</a></li>
+        <li><a href="#toBubbleChart">Bubble Chart</a></li>
         <li><a href="#toCircleChart">Circle Chart</a></li>
         <li><a href="#toRadarChart">Radar Chart</a></li>
     </ul>
@@ -767,6 +768,141 @@ li a:hover:not(.active) {
                                     </div>
                                     <br>
 
+                                    <!-- bubble chart  -->
+                                    <div class="card mb-4">
+                                        <div class="card-body bg-primary text-white " id="toBubbleChart">Bubble Chart </div>
+                                         <p class="m-3"> Bubble chart 데이터 형식 </p>
+                                         &nbsp&nbsp 차트 이름 <input class="form-control" id="BubbleChartTitle" type="text" placeholder="예시 차트 이름"  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                        
+                                         <div class="row">
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp 데이터 1 <input class="form-control" id="BubbleinputData1" type="text" placeholder="ex) 10, 20, 30, 40, 50 ..."  style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp&nbsp 데이터 1 라벨 <input class="form-control" id="BubbleDataLabel1" type="text" placeholder="ex) 라벨1"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                        </div>
+ 
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp 데이터 2 <input class="form-control" id="BubbleinputData2" type="text" placeholder="ex) 5,10,15,20,25,30 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp&nbsp 데이터 2 라벨 <input class="form-control" id="BubbleDataLabel2" type="text" placeholder="ex) 라벨2"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                        </div>
+ 
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp 데이터 3 <input class="form-control" id="BubbleinputData3" type="text" placeholder="ex) 1, 2, 3, 4, 4, 4 ..." style="width: 90%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp&nbsp 데이터 3 라벨 <input class="form-control" id="BubbleDataLabel3" type="text" placeholder="ex) 라벨3"  style="width: 80%; margin: 10px; margin-top: 5px;"/>
+                                            </div>
+                                        </div>
+                                         
+                                         <div class="row">
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 데이터1 색깔  <select class="form-select" id="BubbleColor1" style="margin: 3px; width: 95%;">
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
+                                                  </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 데이터2 색깔  <select class="form-select" id="BubbleColor2" style="margin: 3px; width: 95%;">
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
+                                                  </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                &nbsp&nbsp 데이터3 색깔  <select class="form-select" id="BubbleColor3" style="margin: 3px; width: 95%;">
+                                                    <option>빨강</option>
+                                                    <option>주황</option>
+                                                    <option>노랑</option>
+                                                    <option>초록</option>
+                                                    <option>파랑</option>
+                                                  </select>
+                                            </div>
+                                          </div>
+                                          <br>
+                                         
+                                         
+                                         <div class="card-footer d-flex align-items-center justify-content-between">
+                                            <button id="bubbleChart" type="button" class="btn btn-primary">생성</button>
+                                            <script type="module">
+                                                
+                                                import * as Chart from './src/index.js';
+
+                                                const genButtonBub = document.getElementById("bubbleChart");
+                                                genButtonBub.addEventListener('click', generate);
+                                                
+                                                function generate() {
+                                                    window.scrollTo(0,100);
+                                                    const chartResult = document.getElementById("result");
+                                                    chartResult.innerText = '';
+                                                     //data 갱신
+                                                    var chartName = document.getElementById("BubbleChartTitle").value;
+                                                    configBubble.options.plugins.title.text = chartName;
+
+                                                    // var scatterData1 = document.getElementById("ScatterinputData1").value;
+                                                    // var scatterData2 = document.getElementById("ScatterinputData2").value;
+                                                    // var scatterData3 = document.getElementById("ScatterinputData3").value;
+                                                    // var scatterDataLabel1 = document.getElementById("ScatterDataLabel1").value;
+                                                    // var scatterDataLabel2 = document.getElementById("ScatterDataLabel2").value;
+                                                    // var scatterDataLabel3 = document.getElementById("ScatterDataLabel3").value;
+                                                    
+                                                    // var scatterColor1 = document.getElementById("ScatterColor1").selectedIndex;
+                                                    // var scatterColor2 = document.getElementById("ScatterColor2").selectedIndex;
+                                                    // var scatterColor3 = document.getElementById("ScatterColor3").selectedIndex;
+                                                    // var colorHex = ["#ff0000", "#ff7f00", "#ffff00", "#00ff00", "#0000ff" ];
+                                                    
+                                                    
+                                                    
+                                                    // if(scatterData1!=null && scatterData1!="") {
+                                                    //     var dataArray1 = scatterData1.replace(/ /g,"").split(",");
+                                                    //     dataScatter.datasets[0].data = dataArray1;
+                                                    // }
+                                                    // if(scatterDataLabel1!=null && scatterDataLabel1) {
+                                                    //     dataScatter.datasets[0].label = scatterDataLabel1;
+                                                    // }
+
+                                                    // if(scatterData2!=null && scatterData2!="") {
+                                                    //     var dataArray2 = scatterData2.replace(/ /g,"").split(",");
+                                                    //     dataScatter.datasets[1].data = dataArray2;
+                                                    // }
+                                                    // if(scatterDataLabel2!=null && scatterDataLabel2) {
+                                                    //     dataScatter.datasets[1].label = scatterDataLabel2;
+                                                    // }
+
+                                                    // if(scatterData3!=null && scatterData3!="") {
+                                                    //     var dataArray3 = scatterData3.replace(/ /g,"").split(",");
+                                                    //     dataScatter.datasets[2].data = dataArray3;
+                                                    // }
+                                                    // if(scatterDataLabel3!=null && scatterDataLabel3) {
+                                                    //     dataScatter.datasets[2].label = scatterDataLabel3;
+                                                    // }
+
+                                                   
+                                                    // dataScatter.datasets[0].backgroundColor=colorHex[scatterColor1];
+                                                    // dataScatter.datasets[1].backgroundColor=colorHex[scatterColor2];
+                                                    // dataScatter.datasets[2].backgroundColor=colorHex[scatterColor3];
+
+                                                    Chart.Chart('#result', configBubble);
+                                                    // console.log(data);
+
+                                                }
+                                            </script>
+                                            <div class="small "><i class="fas fa-angle-right"></i></div>
+                                        </div>
+                                    </div>
+                                    <br>
+
                                     <!-- circle chart  -->
                                     <div class="card mb-4">
                                         <div class="card-body bg-primary text-white " id="toCircleChart">Circle Chart</div>
@@ -914,6 +1050,15 @@ li a:hover:not(.active) {
                                     <div class="card mb-4">
                                         <div class="card-body bg-primary text-white " id="toRadarChart">Radar Chart</div>
                                          <p class="m-3"> (Pentagon) Radar Chart 데이터 형식 예시</p>
+                                         <div class="row" style="margin-bottom: 5px;">
+                                            <div class="col-sm-6">
+                                                &nbsp&nbsp&nbsp <input class="form-check-input" type="radio" name="radarFormat" value="1" checked style="margin: 5px; margin-top: 5px;"/>poly
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input class="form-check-input" type="radio" name="radarFormat" value="2" style="margin: 5px; margin-top: 5px;"/>circle
+                                            </div>
+                                        </div> 
+
                                          &nbsp&nbsp 차트 이름 <input class="form-control" id="RadarChartTitle" type="text" placeholder="예시 차트 이름"  style="width: 90%; margin: 10px; margin-top: 5px;"/>
                                          <div class="row">
                                             <div class="col-sm-6">
@@ -989,6 +1134,7 @@ li a:hover:not(.active) {
                                                     chartResult.innerText = '';
                                                     
                                                      //data 갱신
+                                                    var chartFormat = (document.getElementsByName("radarFormat")[0].checked)? true : false;
                                                     var chartName = document.getElementById("RadarChartTitle").value;
                                                     var radarData1 = document.getElementById("RadarinputData1").value;
                                                     var radarData2 = document.getElementById("RadarinputData2").value;
@@ -1001,7 +1147,7 @@ li a:hover:not(.active) {
                                                     // var radarColor2 = document.getElementById("RadarColor2").selectedIndex;
                                                     // var radarColor3 = document.getElementById("RadarColor3").selectedIndex;
                                                     // var colorHex = ["#ff0000", "#ff7f00", "#ffff00", "#00ff00", "#0000ff" ];
-                                                    
+                                                    configRadar.poly=chartFormat;
                                                     configRadar.options.plugins.title.text = chartName;
 
                                                     if(radarData1!=null && radarData1!="") {
@@ -1506,6 +1652,118 @@ fillopacity : 0.5
         };
             </script>
             <script>
+                const dataBubble = {
+            labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+            datasets: [
+                {
+                    label: '라벨 1',
+                    data:
+                        [
+                            [20, -10, 1], [5, 20, 5], [6, 20, 6]
+                        ],
+                },
+                {
+                    label: '라벨 2',
+                    data: [
+                        { x: 110, y: 15, r: 10 },
+                        { x: 120, y: 23, r: 20 },
+                        { x: 3, y: 25, r: 30 },
+                        { x: 7, y: 1575, r: 50 },
+                    ],
+                },
+                {
+                    label: '라벨 3',
+                    data: [
+                        { x: 1, y: 15, r: 10 },
+                        { x: 2, y: 23, r: 20 },
+                        { x: 3, y: 25, r: 30 },
+                        { x: 4, y: 32, r: 30 },
+                        { x: 5, y: 29, r: 100 },
+                        { x: 6, y: 13, r: 20 },
+                        { x: 7, y: 15, r: 50 },
+                    ],
+                },
+               
+            ]
+        };
+
+        const configBubble = {
+            type: 'bubble',
+            width: 500,
+            height: 500,
+            margin: { top: 40, left: 40, bottom: 40, right: 40 },
+            padding: 0.1,
+            data: dataBubble,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',// top bottom left right
+                    },
+                    title: {
+                        display: true,
+                        text: '',
+                        color: 'rgba(100, 150, 0, .5)',
+				        align: 'center' //start, end, center
+                    },
+                    xTitle: {
+                        display: true,
+                        text: 'x축',
+                        size: "20px",
+                        // color: 'rgba(100, 150, 0, .5)',
+				        align: 'start' //start, end, center
+                    },
+                    yTitle: {
+                        display: true,
+                        text: 'y축',
+                        rotate: true,
+                        position: 'left',
+                        color: 'rgba(100, 150, 0, 1)',
+				        align: 'bottom' //top, bottom, center
+                    },
+                    xGrid: {
+                        color: "rgb(255, 0, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
+                        dash: "10,3",
+                        weight: 1,
+                        opacity: .5,
+                    },
+                    yGrid: {
+                        color: "#323233", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
+                        dash: "10,3",     // 점선, 10만큼 칠하고 3만큼 빈공간
+                        weight: 1,        // 선 두께
+                        opacity: .5,      // 선 투명도
+                    },
+                    menu: {
+
+                    }
+                },
+                scales: {
+                    xAxis: {
+                        // type: "number",
+                        ticks: {
+                            min: 0,
+                            // max: 10
+                            tick : 10
+                        }
+                    },
+                    yAxis: {
+                        ticks: {
+                            // max: 80,
+                            tick: 20
+                        }
+                    },
+                    r: {
+                        size: {
+                            min: 10,
+                            max: 30
+                        }
+                    },
+                    fillopacity: 0.5
+                }
+            },
+        };
+            </script>
+            <script>
                 const dataCircle = {
             labels: ['라벨1', '라벨2', '라벨3'],
             datasets: [{    
@@ -1571,6 +1829,7 @@ fillopacity : 0.5
             padding: 0.1,
             data: dataRadar,
             depth:6, // 구간 갯수
+            poly:true,
             options: {
                 responsive: true,
                 plugins: {
