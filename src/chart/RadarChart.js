@@ -17,7 +17,7 @@ export class RadarChart {
         this.datasets = datasets;
         this.coordinates = [];
         this.dot_idx = [];
-
+        this.lables = labels;
         let defaultpoly = false;
         
         if (poly != null){
@@ -182,7 +182,7 @@ export class RadarChart {
             this.ChartBody.append("text") // 축 이름 라벨링
                 .attr("x", label_coordinate.x)
                 .attr("y", label_coordinate.y)
-                .attr("text-anchor", "middle")
+                .attr("text-anchor", "middle")                
                 .text(ft_name);
         }
     
@@ -273,11 +273,12 @@ export class RadarChart {
                     .attr("pointer-events", "all");
                 // dot_idx.push(labels.length * i + j)                
             }
+            const chartColor = color(this.datasets[i].data[0].label_index);
             const object = datas[i];
             for (const property in object) {
-                this.dot_idx.push([object[property], this.coordinates[i][this.coordinates[i].length - 1]])
+                this.dot_idx.push([object[property], this.coordinates[i][this.coordinates[i].length - 1], chartColor])
             }
-        }
+        }        
         chart_area.node();
         // this.tooltip = d3
         // .select("#circle")
@@ -287,34 +288,50 @@ export class RadarChart {
 
         
     }
-    tooltip(){
+    tooltip() {        
         const tooltop = document.getElementById('ssart-tooltip');
         const color = this.color;
         const datasets = this.datasets;
         const coordinates = this.coordinates;
-        const dot_idx = this.dot_idx
+        const labels = this.lables;
+        const dot_idx = this.dot_idx;
         this.ChartBody.selectAll(".dot")
             .on("mouseover", function (d, index) {           
                 // console.log(dot_idx[index])
             // const label_index = datasets[index].data[0].label_index;
             // const color = data[data.length-2];
             // d3.select(this).style("fill", d3.rgb(color(0)).darker(2));
-            d3.select(this).attr("r", 4 );
+                d3.select(this).attr("r", 4 );
             // console.log("툴팁 확인 : radar");
             // const data = coordinates[index];
             // const name = data[data.length-1];
-                const name = dot_idx[index][1];
             // const color = data[data.length-2];
             // const avg = data[data.length-3];
-            const dot_data = dot_idx[index][0]
-            
-                
-
+                const dot_data = dot_idx[index][0]               
+                const name = dot_idx[index][1];
+                const labelName = labels[index % labels.length]
+                const color = dot_idx[index][2]
             // tooltop.innerText = "name : " + name +"\n" + "data: " + dot_data  + "\n" + "avg : " + avg +"\n" +"color : " + color(index); // 값 + 데이터 
-            tooltop.innerText = "name : " + name +"\n" + "data: " + dot_data; // 값 + 데이터 
-            tooltop.style.left = d3.event.pageX + 20 + "px";
-            tooltop.style.top = d3.event.pageY + 20 + "px";
-            tooltop.style.opacity = "1.0";
+                tooltop.innerHTML = `
+                    <text style="display: block; margin-bottom: 10px; font-size: 15px; font-weight: 900">${labelName}</text>
+                    <svg style="width: 10px; height: 10px">
+                        <rect width="10px" height="10px" fill="${color}" stroke="white" stroke-width="10%"></rect>
+                    </svg>
+                    <text style="font-size: 14px; font-weight: 600">${name} : ${dot_data}</text>
+                `
+                // tooltop.innerText = `name : ${name}\n` + `data: ${dot_data}`; // 값 + 데이터 
+                tooltop.style.left = d3.event.pageX + 20 + "px";
+                tooltop.style.top = d3.event.pageY + 20 + "px";
+                tooltop.style.opacity = "1.0";
+                const tooltipSvg = d3.select('#tooltip span').append('svg')
+                    tooltipSvg
+                        .append('rect')
+                        .attr('x', 0)
+                        .attr('y', 0)
+                        .attr('width', '2px')
+                        .attr('height', '2px')
+                        .attr('stroke', 'red')
+                        .attr('fill', 'red');
         })
             // .on("mousemove", function (d, index) {
                 
