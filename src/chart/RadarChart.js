@@ -11,12 +11,12 @@ export class RadarChart {
         for(var i = 0 ; i < labels.length ; i++){
             features.push(labels[i])
         }
-        console.log(poly)
+        // console.log(poly)
         this.color = color
         const datas = [];
         this.datasets = datasets;
         this.coordinates = [];
-
+        this.dot_idx = [];
 
         let defaultpoly = false;
         
@@ -93,30 +93,32 @@ export class RadarChart {
 
             const value = ticks[i];
 
-            console.log(radialScale(value)) // 반지름
+            // console.log(radialScale(value)) // 반지름
 
             if(defaultpoly == false){
                 this.ChartBody.append("circle")
                 .attr("cx", 0)
                 .attr("cy", 0)
                 .attr("fill", "none")
-                .attr("stroke", "black")
+                .attr("stroke", "#e2e2e2")
                 .attr("r", radialScale(value))
                 .attr("opacity" , 1)
             }
 
        
             this.ChartBody.append("text")
-            .attr("x" , -10)
-            .attr("y", -radialScale(value))
-            .attr("font-size" , 12)
-            .text(Math.round(value))
+                .attr("x" , 0)
+                .attr("y", -radialScale(value))
+                .attr("font-size", 12)
+                .attr("text-anchor", "middle")
+                .text(Math.round(value))
 
             var tmp = {"x": 0, "y": 0 };
             var start = {"x": 0, "y": 0 };
             
 
-            if(defaultpoly == true){
+            if (defaultpoly == true) {
+                
                 for(var j = 0 ; j < features.length ; j++){
                     const angle = (Math.PI / 2) + (2 * Math.PI * j / features.length); //각도
                     const poly_coordinates = angleToCoordinate(angle , ticks[i]);
@@ -129,7 +131,7 @@ export class RadarChart {
                         .attr("y1", tmp.y) // 중점 
                         .attr("x2",   poly_coordinates.x)
                         .attr("y2",   poly_coordinates.y)
-                        .attr("stroke","black")
+                        .attr("stroke","#e2e2e2")
                     }
 
                     if(j == features.length-1 ){
@@ -139,7 +141,7 @@ export class RadarChart {
                         .attr("y1", poly_coordinates.y) // 중점 
                         .attr("x2",  start.x )
                         .attr("y2",  start.y )
-                        .attr("stroke","black")
+                        .attr("stroke","#e2e2e2")
 
                     }
 
@@ -147,8 +149,8 @@ export class RadarChart {
 
                     if(j == 0){
                         start = tmp;
-                        console.log("start")
-                        console.log(start)
+                        // console.log("start")
+                        // console.log(start)
                     } 
                 }
             }
@@ -174,13 +176,14 @@ export class RadarChart {
             .attr("y1", 0) // 중점 
             .attr("x2", line_coordinate.x)
             .attr("y2", line_coordinate.y)
-            .attr("stroke","black")
+            .attr("stroke","#e2e2e2")
             .attr("opacity" , 1)
     
             this.ChartBody.append("text") // 축 이름 라벨링
-            .attr("x", label_coordinate.x)
-            .attr("y", label_coordinate.y)
-            .text(ft_name);
+                .attr("x", label_coordinate.x)
+                .attr("y", label_coordinate.y)
+                .attr("text-anchor", "middle")
+                .text(ft_name);
         }
     
 
@@ -213,11 +216,11 @@ export class RadarChart {
                 const ft_name = features[i];
                 const angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
                 coordinates.push(angleToCoordinate(angle, data_point[ft_name]));
-                }
+            }
+            coordinates.push(coordinates[0]);
             return coordinates;
         }
         
-
         for(var i = 0 ; i < datas.length ; i++){
             const d = datas[i];
             // console.log("Hi")
@@ -234,32 +237,48 @@ export class RadarChart {
             let avg =   Math.round(sum[i]/features.length); // 반올림한 평균값.
             // console.log(avg)
 
-
             this.ChartBody.append("path")
-            .datum(this.coordinates[i])
-            .attr("d",line)
-            .attr("class","data")
-            .attr("stroke-width", 3)
-            .attr("stroke",color(this.datasets[i].data[0].label_index))
-            .attr("fill", color(this.datasets[i].data[0].label_index))
-            .attr("class", "data")
-            .attr("stroke-opacity", 1)
-            .attr("opacity", 0.4)
+                .datum(this.coordinates[i])
+                .attr("d",line)
+                .attr("class","data")
+                .attr("stroke-width", 2.5)
+                .attr("stroke",color(this.datasets[i].data[0].label_index))
+                .attr("fill", color(this.datasets[i].data[0].label_index))
+                .attr("class", "data")
+                .attr("stroke-opacity", 1)
+                .attr("fill-opacity", 0.4)
             // .attr("name" , name)
             // .attr("avg" , avg)
             // .on("mouseover", this.mouseover.bind(this))
             // .on("mousemove", this.mousemove.bind(this))
             // .on("mouseout", this.mouseout.bind(this))
-
+            
             this.coordinates[i].push(avg)
             this.coordinates[i].push(color)
             this.coordinates[i].push(name)
             // console.log(coordinates);
             // console.log("레이더 차트 : ??" );
+            this.ChartBody.attr("pointer-events", "none");
+            const pos_list = this.coordinates[i]            
+            for (let j = 0; j < labels.length; j++) {                
+                this.ChartBody.append("circle")
+                    .data(this.coordinates[i])
+                    .attr("r", 3)
+                    .attr("cx", pos_list[j].x)
+                    .attr("cy", pos_list[j].y)
+                    .attr("fill", "white")
+                    .attr("stroke", color(this.datasets[i].data[0].label_index))
+                    .attr("stroke-width", 2)
+                    .attr("class", "dot")
+                    .attr("pointer-events", "all");
+                // dot_idx.push(labels.length * i + j)                
+            }
+            const object = datas[i];
+            for (const property in object) {
+                this.dot_idx.push([object[property], this.coordinates[i][this.coordinates[i].length - 1]])
+            }
         }
-
         chart_area.node();
-
         // this.tooltip = d3
         // .select("#circle")
         // .append("div")
@@ -273,30 +292,46 @@ export class RadarChart {
         const color = this.color;
         const datasets = this.datasets;
         const coordinates = this.coordinates;
-
-        this.ChartBody.selectAll(".data")
-        .on("mouseover", function(d,index){ 
-            const label_index = datasets[index].data[0].label_index;
+        const dot_idx = this.dot_idx
+        this.ChartBody.selectAll(".dot")
+            .on("mouseover", function (d, index) {           
+                // console.log(dot_idx[index])
+            // const label_index = datasets[index].data[0].label_index;
             // const color = data[data.length-2];
-            d3.select(this).style("fill", d3.rgb(color(label_index)).darker(2));
-            console.log("툴팁 확인 : radar");
-    
+            // d3.select(this).style("fill", d3.rgb(color(0)).darker(2));
+            d3.select(this).attr("r", 4 );
+            // console.log("툴팁 확인 : radar");
+            // const data = coordinates[index];
+            // const name = data[data.length-1];
+                const name = dot_idx[index][1];
+            // const color = data[data.length-2];
+            // const avg = data[data.length-3];
+            const dot_data = dot_idx[index][0]
+            
+                
+
+            // tooltop.innerText = "name : " + name +"\n" + "data: " + dot_data  + "\n" + "avg : " + avg +"\n" +"color : " + color(index); // 값 + 데이터 
+            tooltop.innerText = "name : " + name +"\n" + "data: " + dot_data; // 값 + 데이터 
+            tooltop.style.left = d3.event.pageX + 20 + "px";
+            tooltop.style.top = d3.event.pageY + 20 + "px";
             tooltop.style.opacity = "1.0";
         })
-        .on("mousemove", function(d,index){
-            const data = coordinates[index];
-            const name = data[data.length-1];
-            // const color = data[data.length-2];
-            const avg = data[data.length-3];
+            // .on("mousemove", function (d, index) {
+                
+        //     const data = coordinates[index];
+        //     const name = data[data.length-1];
+        //     // const color = data[data.length-2];
+        //     const avg = data[data.length-3];
     
-          tooltop.innerText = "name : " + name +"\n" + "avg : " + avg +"\n" +"color : " + color(index); // 값 + 데이터 
-          tooltop.style.left = d3.event.pageX + 20 + "px";
-          tooltop.style.top = d3.event.pageY + 20 + "px";
-        })
+        //   tooltop.innerText = "name : " + name +"\n" + "avg : " + avg +"\n" +"color : " + color(index); // 값 + 데이터 
+        //   tooltop.style.left = d3.event.pageX + 20 + "px";
+        //   tooltop.style.top = d3.event.pageY + 20 + "px";
+        // })
         .on("mouseout", function(d,index){ 
-            const label_index = datasets[index].data[0].label_index;
-            // const color = data[data.length-2];
-            d3.select(this).style("fill", color(label_index));
+            // const label_index = datasets[index].data[0].label_index;
+            // // const color = data[data.length-2];
+            // d3.select(this).style("fill", color(label_index));
+             d3.select(this).attr("r", 3);
             tooltop.style.opacity = "0";
         });
       }
