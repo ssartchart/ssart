@@ -33,8 +33,6 @@ function Chart(
     .style("height", height);
 
   console.log(`Hello, ${type}!`);
-  // console.log(data);
-  // console.log(data.labels);
   const labels = data.labels;
   
   let labelcolor;
@@ -44,12 +42,10 @@ function Chart(
   else{
     labelcolor = LabelColor({datasets: data.datasets});
   }
-  // console.log(label);
   
 
   const color = labelcolor.color;
   const legend_label = labelcolor.label;
-  console.log(type,"22",legend_label)
   const chart_area = svg
     .append("g")
     .style("width", width - 100)
@@ -89,7 +85,6 @@ function Chart(
       );
     }    
   }
-  console.log(type,"33",labelcolor.label)
   const chart_width = width - legend_box.width;
   const chart_height = height - legend_box.height;
   checkMargin(margin);
@@ -307,8 +302,6 @@ function Chart(
       data.datasets,
       "namevaluedataone"
     );
-    console.log(datasets)
-    console.log(data.datasets)
     drawCicleChart(datasets);
 
     createLegendToggle(
@@ -345,7 +338,6 @@ function Chart(
       "namevalue"
     );
     drawRadarChart(datasets);
-    console.log(legend_box)
     createLegendToggle(
       id,
       datasets,

@@ -108,8 +108,6 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, optio
             if (legendType === "rectRot") {
               return 'rotate(45)'
             } else if (legendType === "triangle") {
-              console.log(d3.select(`#${id}-legend-${i} > text`).node)
-              // console.log(d3.select(`#${legend.node().id} text`).node())
               return `translate(0, ${3})`
             } else if (legendType === "triangleRot") {
               return `translate(0, ${fontSize * -0.1}) rotate(180)`
@@ -336,6 +334,7 @@ export function createLegendToggle(id, datasets, items, chartArea, drawNewChart,
       d3.selectAll(`${id} > svg > .chartMenu`).remove();
       d3.selectAll(`${id} > svg > .dropDown`).remove();
       d3.selectAll(`${id} > svg > .legendDropDown`).remove();
+      d3.selectAll(`${id} > svg > .colorDropDown`).remove();
       const idx = tid[tid.length - 1]
       if (removedSet[idx] === undefined ) {
         removedSet[idx] = true;

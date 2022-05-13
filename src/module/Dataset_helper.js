@@ -158,30 +158,21 @@ export const Data_pre_processing = (labels, datasets, type="namevalue")=>{
             break;   
 
         case "namevaluedataone":
-            console.log(labels);
             if (datasets[0].data == null){
                 datasets.forEach((dataset,index) => {
                     const label_index = index;
-                    // if (dataset.name == null){
-                    //     dataset.name = "label_"+(label_index+1);
-                    // }
-                    // // console.log(typeof(dataset));
                     if (typeof(dataset) !== null && Array.isArray(dataset)){
-                        console.log(2);
                         dataset =  {name:dataset[0],value: dataset[1], label_index: index};
                     }
                         // 값으로 입력한 경우 object 로 변경
                     else if (typeof(dataset) !== null && typeof(dataset) !== 'object'){
                         
-                        console.log(dataset)
                         dataset = {name:labels[index],value: dataset, label_index: index};
                         
                     }
                     else {
                         let keys = Object.keys(dataset);
                         keys = keys.filter(d=>{return  d!== "color"})
-                        console.log(keys)
-                        console.log(dataset)
                         if(!keys.includes("name") && !keys.includes("value")){
                             if (keys.length > 2){
                                 let values = Object.values(dataset[index]);
@@ -193,17 +184,14 @@ export const Data_pre_processing = (labels, datasets, type="namevalue")=>{
                             }
                         }
                         else if(keys.includes("name") && keys.includes("value")){
-                            console.log(2)
                             let values = Object.values(dataset);
                             dataset =  {name:dataset["name"], value: dataset["value"], label_index: index};
                         }
                         else if(keys.includes("value")){
-                            console.log(3)
                             let values = Object.values(dataset);
                             dataset =  {name:labels[index], value: dataset["value"], label_index: index};
                         }
                         else{
-                            console.log(4)
                             dataset =  {name:labels[index], value: dataset['value'], label_index: index};
                         }
                     }
@@ -216,21 +204,17 @@ export const Data_pre_processing = (labels, datasets, type="namevalue")=>{
                 datasets[0].data.forEach((dataset,index) => {
                     const label_index = index;
                     if (typeof(dataset) !== null && Array.isArray(dataset)){
-                        console.log(2);
                         dataset =  {name:dataset[0],value: dataset[1], label_index: index};
                     }
                         // 값으로 입력한 경우 object 로 변경
                     else if (typeof(dataset) !== null && typeof(dataset) !== 'object'){
                         
-                        console.log(dataset)
                         dataset = {name:labels[index],value: dataset, label_index: index};
                         
                     }
                     else {
                         let keys = Object.keys(dataset);
                         keys = keys.filter(d=>{return  d!== "color"})
-                        console.log(keys)
-                        console.log(dataset)
                         if(!keys.includes("name") && !keys.includes("value")){
                             if (keys.length > 2){
                                 let values = Object.values(dataset[index]);
@@ -242,17 +226,14 @@ export const Data_pre_processing = (labels, datasets, type="namevalue")=>{
                             }
                         }
                         else if(keys.includes("name") && keys.includes("value")){
-                            console.log(2)
                             let values = Object.values(dataset);
                             dataset =  {name:dataset["name"], value: dataset["value"], label_index: index};
                         }
                         else if(keys.includes("value")){
-                            console.log(3)
                             let values = Object.values(dataset);
                             dataset =  {name:labels[index], value: dataset["value"], label_index: index};
                         }
                         else{
-                            console.log(4)
                             dataset =  {name:labels[index], value: dataset['value'], label_index: index};
                         }
                     }

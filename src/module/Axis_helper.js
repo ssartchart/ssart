@@ -77,7 +77,6 @@ export const Axis_Option = (labels, datasets, scales, f = 1) =>{
                 x_type = scales.xAxis.type;
                 if(scales.xAxis.ticks.max != null && scales.xAxis.ticks.min != null){
                     x_domain = [scales.xAxis.ticks.min,scales.xAxis.ticks.max];
-                    console.log(x_domain);
                 }
             }
         }
@@ -144,8 +143,7 @@ export const Axis_Option = (labels, datasets, scales, f = 1) =>{
         
         
     }       
-    // console.log(y_max)
-    
+
     const y_domain = [
         
         (y_min != null) ? y_min : d3.min(datasets, label=>{
@@ -175,7 +173,6 @@ export const Axis_Option = (labels, datasets, scales, f = 1) =>{
                 }
                 });            
     })];
-    // console.log(y_domain)
 
     return {
         x_domain: x_domain,
@@ -306,8 +303,7 @@ export const Set_Axis_reverse = ({chart_area,x_domain,y_domain,width,height,marg
         .attr("class", "yAxis")
         .attr('transform', `translate(${margin.left}, 0)`)
         .call(x_axis)
-        // .call(g => g.select('.domain').remove())
-        // .call(g => g.selectAll('line').remove());   
+
 
     const y_axis = d3.axisBottom(y);
         if (scales !=null && scales.yAxis && scales.yAxis.ticks && scales.yAxis.ticks.tick != null){
@@ -317,10 +313,6 @@ export const Set_Axis_reverse = ({chart_area,x_domain,y_domain,width,height,marg
         .attr("class", "xAxis")
         .attr('transform', `translate(0, ${height - margin.bottom})`)
         .call(y_axis)
-        // .call(g => g.select('.domain').remove())
-        // .call(g => g.selectAll('line')
-        //     .attr('x2', width)
-        //     .style('stroke', '#f5f5f5'));
             
     chart_area.append('g').call(xAxis);
     chart_area.append('g').call(yAxis);
