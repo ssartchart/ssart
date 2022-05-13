@@ -59,8 +59,8 @@ export const Axis_Option = (labels, datasets, scales, f = 1) =>{
     let x_domain = labels.map(d => d);     
     let x_type = "band";
     
-    let y_min = null;
-    let y_max = null;
+    let y_min = 0;
+    let y_max = 0;
     let r_min = 0;
     let r_max = null;
     let r_size_min = 10;
@@ -144,37 +144,30 @@ export const Axis_Option = (labels, datasets, scales, f = 1) =>{
         
         
     }       
-
-    const y_domain = [
-        
-        (y_min != null) ? y_min : d3.min(datasets, label=>{
-            
-            y_min = d3.min(label.data, d=>{
-                if (d.value){
-                    return d.value;
-                }else{
-                    return d.y;
-                }
-                }); 
-            if (y_min > 0){
-                y_min = 0
-                return 0
+    const d_y_min = d3.min(datasets, label=>{          
+        return d3.min(label.data, d=>{
+            if (d.value){
+                return d.value;
+            }else{
+                return d.y;
             }
-            else return y_min
-    }),
-            
-        
-        
-        (y_max != null) ? y_max : d3.max(datasets, label=>{
-            y_max = d3.max(label.data, d=>{
-                if (d.value){
-                    return d.value;
-                }else{
-                    return d.y;
-                }
-                }); 
-            return  y_max;          
-    })];
+            }); 
+    })
+
+    const d_y_max = d3.max(datasets, label=>{
+        return  d3.max(label.data, d=>{
+            if (d.value){
+                return d.value;
+            }else{
+                return d.y;
+            }
+            });          
+    })
+    if (d_y_min < y_min)
+        y_min = d_y_min
+    if (d_y_max > y_max)
+        y_max = d_y_max
+    const y_domain = [y_min , y_max];
 
     return {
         x_domain: x_domain,
