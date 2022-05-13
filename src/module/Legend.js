@@ -1,3 +1,4 @@
+import * as d3 from "https://cdn.skypack.dev/d3@7";
 export function drawLegend(id, svg, labels, width, height, chartContainer, options, margin, datasets, type) {    
   let { plugins, scales } = options;
   let opacity;

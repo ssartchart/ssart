@@ -1,3 +1,4 @@
+import * as d3 from "https://cdn.skypack.dev/d3@7";
 export const Set_Axis = ({chart_area,x_domain,y_domain,width,height,margin,scales,x_type="band"})=>{
     const x = Set_X(x_type,x_domain,margin,width);
 
@@ -167,13 +168,14 @@ export const Axis_Option = (labels, datasets, scales, f = 1) =>{
         
         
         (y_max != null) ? y_max : d3.max(datasets, label=>{
-            return d3.max(label.data, d=>{
+            y_max = d3.max(label.data, d=>{
                 if (d.value){
                     return d.value;
                 }else{
                     return d.y;
                 }
-                });            
+                }); 
+            return  y_max;          
     })];
     // console.log(y_domain)
 

@@ -32,7 +32,8 @@
     <div id="radar"></div>
     
     
-    <script src='https://d3js.org/d3.v5.min.js'></script>
+    <!-- <script src='https://d3js.org/d3.v5.min.js'></script> -->
+    <!-- <script type="text/javascript" src="node_modules/d3/build/d3.js"></script> -->
 
     <script>
         const data = {
@@ -396,7 +397,7 @@
                 },
                 scales: {
                     xAxis: {
-                        type: "number",
+                        // type: "number",
                         ticks: {
                             min: 0,
                             max: 10
@@ -515,7 +516,7 @@
                     },
                     yAxis: {
                         ticks: {
-
+                            max: 30
                         }
                     },
                     line: {
@@ -586,8 +587,7 @@
                         }
                     },
                     line :{
-                        width : 10,
-                        opacity : .5
+                        width : 10
                     },
                     dot :{
                         size : 0,
