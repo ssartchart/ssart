@@ -1,9 +1,9 @@
-
+import * as d3 from "https://cdn.skypack.dev/d3@7";
 // import {BarChart} from './BarChartfunction.js'
 import { axisOptions, xGrid as drawXGrid, yGrid as drawYGrid } from "./module/Axis_helper.js";
 import { LabelColor, LabelsColor } from "./module/Color_helper.js";
 import { Data_pre_processing } from "./module/Dataset_helper.js";
-import { drawTitle, drawXTitle, drawYTitle } from "./module/Title.js";
+import { drawTitle, drawXTitle, drawYTitle } from "./module/title.js";
 import { checkMargin } from "./module/CheckMargin.js";
 import { createCircleChartLegend, createLegendToggle, drawLegend } from "./module/Legend.js";
 import { menu as drawMenu } from "./module/Menu.js";
@@ -327,6 +327,7 @@ function Chart(
         options,
       });
       circleChart.tooltip();
+      circleChart.animation();
       renderOptions();
       
     }    
