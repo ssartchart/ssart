@@ -1,3 +1,4 @@
+import * as d3 from "https://cdn.skypack.dev/d3@7";
 export const Set_Axis = ({chart_area,x_domain,y_domain,width,height,margin,scales,x_type="band"})=>{
     const x = Set_X(x_type,x_domain,margin,width);
 
@@ -58,8 +59,8 @@ export const Axis_Option = (labels, datasets, scales, f = 1) =>{
     let x_domain = labels.map(d => d);     
     let x_type = "band";
     
-    let y_min = null;
-    let y_max = null;
+    let y_min = 0;
+    let y_max = 0;
     let r_min = 0;
     let r_max = null;
     let r_size_min = 10;
@@ -77,7 +78,6 @@ export const Axis_Option = (labels, datasets, scales, f = 1) =>{
                 x_type = scales.xAxis.type;
                 if(scales.xAxis.ticks.max != null && scales.xAxis.ticks.min != null){
                     x_domain = [scales.xAxis.ticks.min,scales.xAxis.ticks.max];
-                    console.log(x_domain);
                 }
             }
         }
@@ -144,38 +144,30 @@ export const Axis_Option = (labels, datasets, scales, f = 1) =>{
         
         
     }       
-    // console.log(y_max)
-    
-    const y_domain = [
-        
-        (y_min != null) ? y_min : d3.min(datasets, label=>{
-            
-            y_min = d3.min(label.data, d=>{
-                if (d.value){
-                    return d.value;
-                }else{
-                    return d.y;
-                }
-                }); 
-            if (y_min > 0){
-                y_min = 0
-                return 0
+    const d_y_min = d3.min(datasets, label=>{          
+        return d3.min(label.data, d=>{
+            if (d.value){
+                return d.value;
+            }else{
+                return d.y;
             }
-            else return y_min
-    }),
-            
-        
-        
-        (y_max != null) ? y_max : d3.max(datasets, label=>{
-            return d3.max(label.data, d=>{
-                if (d.value){
-                    return d.value;
-                }else{
-                    return d.y;
-                }
-                });            
-    })];
-    // console.log(y_domain)
+            }); 
+    })
+
+    const d_y_max = d3.max(datasets, label=>{
+        return  d3.max(label.data, d=>{
+            if (d.value){
+                return d.value;
+            }else{
+                return d.y;
+            }
+            });          
+    })
+    if (d_y_min < y_min)
+        y_min = d_y_min
+    if (d_y_max > y_max)
+        y_max = d_y_max
+    const y_domain = [y_min , y_max];
 
     return {
         x_domain: x_domain,
@@ -306,8 +298,7 @@ export const Set_Axis_reverse = ({chart_area,x_domain,y_domain,width,height,marg
         .attr("class", "yAxis")
         .attr('transform', `translate(${margin.left}, 0)`)
         .call(x_axis)
-        // .call(g => g.select('.domain').remove())
-        // .call(g => g.selectAll('line').remove());   
+
 
     const y_axis = d3.axisBottom(y);
         if (scales !=null && scales.yAxis && scales.yAxis.ticks && scales.yAxis.ticks.tick != null){
@@ -317,10 +308,6 @@ export const Set_Axis_reverse = ({chart_area,x_domain,y_domain,width,height,marg
         .attr("class", "xAxis")
         .attr('transform', `translate(0, ${height - margin.bottom})`)
         .call(y_axis)
-        // .call(g => g.select('.domain').remove())
-        // .call(g => g.selectAll('line')
-        //     .attr('x2', width)
-        //     .style('stroke', '#f5f5f5'));
             
     chart_area.append('g').call(xAxis);
     chart_area.append('g').call(yAxis);
