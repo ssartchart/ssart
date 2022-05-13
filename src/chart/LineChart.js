@@ -64,11 +64,7 @@ export class LineChart{
             .attr("stroke-opacity", line_opacity)
             .attr("d", line)
 
-        console.log(this.path.node())
-        console.log(this.path)
-        this.pathLength = this.path.node().getTotalLength();
-        console.log("p",this.pathLength)
-
+        this.pathLength = this.path.node() === null ? 0 : this.path.node().getTotalLength();
         this.slice.selectAll(".data")
             .data(datasets=>{return datasets.data;})
             .enter().append("circle")
@@ -105,8 +101,16 @@ export class LineChart{
                 const name =  d.y;
                 const key = d3.rgb(color(d.label_index));
 
-                tooltop.innerText = "x : " + value +"\n" + "y : " + name +"\n" + "label : " +key ; // 값 + 데이터 
-                
+                // tooltop.innerText = "x : " + value +"\n" + "y : " + name +"\n" + "label : " +key ; // 값 + 데이터 
+                tooltop.innerHTML = `
+                    <text style="display: block; font-size: 15px; font-weight: 600">${value}</text>
+                    <div style="margin-bottom: 3px">
+                        <svg style="width: 10px; height: 10px">
+                            <rect width="10px" height="10px" fill="${key}" stroke="white" stroke-width="10%"></rect>
+                        </svg>
+                        <text style="font-size: 14px; font-weight: 500;">${d.label} : ${name}</text>
+                    </div>
+                    `
                 tooltop.style.left = d3.event.pageX + 20 + "px";
                 tooltop.style.top = d3.event.pageY + 20 + "px";
             })

@@ -313,11 +313,13 @@ export class RadarChart {
                 const color = dot_idx[index][2]
             // tooltop.innerText = "name : " + name +"\n" + "data: " + dot_data  + "\n" + "avg : " + avg +"\n" +"color : " + color(index); // 값 + 데이터 
                 tooltop.innerHTML = `
-                    <text style="display: block; margin-bottom: 10px; font-size: 15px; font-weight: 900">${labelName}</text>
-                    <svg style="width: 10px; height: 10px">
-                        <rect width="10px" height="10px" fill="${color}" stroke="white" stroke-width="10%"></rect>
-                    </svg>
-                    <text style="font-size: 14px; font-weight: 600">${name} : ${dot_data}</text>
+                    <text style="display: block; margin-top: 3px; margin-bottom: 10px; font-size: 15px; font-weight: 600">${labelName}</text>
+                    <div style="margin-bottom: 3px">
+                        <svg style="width: 10px; height: 10px">
+                            <rect width="10px" height="10px" fill="${color}" stroke="white" stroke-width="10%"></rect>
+                        </svg>
+                        <text style="font-size: 14px; font-weight: 500;">${name} : ${dot_data}</text>
+                    </div>
                 `
                 // tooltop.innerText = `name : ${name}\n` + `data: ${dot_data}`; // 값 + 데이터 
                 tooltop.style.left = d3.event.pageX + 20 + "px";
