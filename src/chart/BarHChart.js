@@ -1,3 +1,4 @@
+import * as d3 from "https://cdn.skypack.dev/d3@7";
 import {Axis_Option, Set_Axis, Set_Axis_reverse, xGrid, yGrid} from '../module/Axis_helper.js';
 
 export class BarHClass{
@@ -19,9 +20,9 @@ export class BarHClass{
 
         const Axis = Set_Axis_reverse({chart_area,x_domain,y_domain,width,height,margin,padding,scales});
 
-        console.log(y_min)
         this.color = color;
         this.y_min = y_min;
+        this.y_max = y_max;
         this.x0 = Axis.x.padding(padding);
         this.y = Axis.y;
         this.x1 = d3.scaleBand()
@@ -30,11 +31,13 @@ export class BarHClass{
         
         this.ChartBody = chart_area
             .append("g")
+            .attr("class", "ssart")
             .attr("class", "chartBody")
 
         this.slice = this.ChartBody.selectAll(".slice")
             .data(datasets)
             .enter().append("g")
+            .attr("class", "ssart")
             .attr("class", "slice")
             .attr("id", (d, i) => `${id}-chart-legend-${i}`)
             .attr("transform",(d,index)=>{ return "translate(0," + this.x1(index) +")"; });
@@ -42,6 +45,7 @@ export class BarHClass{
         this.slice.selectAll("rect")
             .data(datasets=>{return datasets.data;})
             .enter().append("rect")
+            .attr("class", "ssart")
             .attr("class","data")
             .filter(d=>{return labels.includes(d.name);})   //labels에 없는값 필터링
             .attr("y",d=>{ return this.x0(d.name);})
@@ -72,13 +76,12 @@ export class BarHClass{
         const tooltop = document.getElementById('ssart-tooltip');
         const color = this.color;
         this.slice.selectAll("rect")
-        .on("mouseover", function(d){ 
+        .on("mouseover", function(event,d){ 
             d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));
-            console.log("툴팁 확인 BarHC");
 
             tooltop.style.opacity = "1.0";
         })
-        .on("mousemove", function(d,index){
+        .on("mousemove", function(event, d){
             const value = d.value;
             const name =  d.name;
             const key = d3.rgb(color(d.label_index));
@@ -87,17 +90,17 @@ export class BarHClass{
             // tooltop.innerText = "value : " + value +"\n" + "name : " + name +"\n" + "color : " +key ; // 값 + 데이터 
             tooltop.innerHTML = `
                 <text style="display: block; font-size: 15px; font-weight: 600">${name}</text>
-                <div style="margin-bottom: 3px">
+                <div>
                     <svg style="width: 10px; height: 10px">
                         <rect width="10px" height="10px" fill="${key}" stroke="white" stroke-width="10%"></rect>
                     </svg>
                     <text style="font-size: 14px; font-weight: 500;">${d.label} : ${value}</text>
                 </div>
                 `
-            tooltop.style.left = d3.event.pageX + 20 + "px";
-            tooltop.style.top = d3.event.pageY + 20 + "px";
+            tooltop.style.left = event.pageX + 20 + "px";
+            tooltop.style.top = event.pageY + 20 + "px";
         })
-        .on("mouseout", function(d){ 
+        .on("mouseout", function(event,d){ 
             d3.select(this).style("fill", color(d.label_index));
             tooltop.style.opacity = "0";
         });
@@ -105,7 +108,6 @@ export class BarHClass{
     }
     // 애니메이션 효과
     animation(delay=800, duration=800) {
-        console.log()
         this.slice.selectAll("rect")
             .attr("x", d=>{ return this.y(0); })
             .attr('width', '1')
@@ -128,7 +130,4 @@ export class BarHClass{
             })
     }
 
-    
 }
-
-    

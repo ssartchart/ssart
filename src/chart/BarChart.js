@@ -1,9 +1,9 @@
+import * as d3 from "https://cdn.skypack.dev/d3@7";
 import {Axis_Option, Set_Axis} from '../module/Axis_helper.js';
 
 export class BarChart{
     constructor({id,chart_area,labels,datasets,color,width,height,margin,padding,scales,position}){
-        console.log(datasets)
-        // chart_area.selectAll('*').remove();
+
         chart_area.selectAll('.chartBody').remove();
         chart_area.selectAll('.xAxis').remove();
         chart_area.selectAll('.yAxis').remove();
@@ -20,7 +20,6 @@ export class BarChart{
         
         const Axis = Set_Axis({chart_area,x_domain,y_domain,width,height,margin,padding,scales});
 
-        // console.log(y_)
         this.color = color;
         this.y_min = y_min;
         this.x0 = Axis.x.padding(padding);
@@ -49,8 +48,6 @@ export class BarChart{
             .attr("x",d=>{ return this.x0(d.name);})
             .style("fill",d=>{return this.color(d.label_index);})
             .style("fill-opacity", fillopacity)
-            // .attr("y", d=>{ return this.y(d.value); })
-            // .attr("height", d=>{ return this.y(this.y_min) - this.y(d.value); })
             .attr("y", d=>{
                 if (d.value < 0)
                     return this.y(Math.max(this.y_min,0)) 
@@ -86,19 +83,18 @@ export class BarChart{
         const tooltop = document.getElementById('ssart-tooltip');
         const color = this.color;
         this.slice.selectAll(".data")
-        .on("mouseover", function(d){ 
+        .on("mouseover", function(event,d){
             d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));
-            console.log("툴팁 확인 : BAR");
 
             tooltop.style.opacity = "1.0";
         })
-        .on("mousemove", function(d,index){
+        .on("mousemove", function(event,d){
             const value = d.value;
             const name =  d.name;
             const key = d3.rgb(color(d.label_index));
             tooltop.innerHTML = `
                 <text style="display: block; font-size: 15px; font-weight: 600">${name}</text>
-                <div style="margin-bottom: 3px">
+                <div>
                     <svg style="width: 10px; height: 10px">
                         <rect width="10px" height="10px" fill="${key}" stroke="white" stroke-width="10%"></rect>
                     </svg>
@@ -107,10 +103,10 @@ export class BarChart{
                 `
             // tooltop.innerText = "value : " + value +"\n" + "name : " + name +"\n" + "color : " +key ; // 값 + 데이터 
             
-            tooltop.style.left = d3.event.pageX + 20 + "px";
-            tooltop.style.top = d3.event.pageY + 20 + "px";
+            tooltop.style.left = event.pageX + 20 + "px";
+            tooltop.style.top = event.pageY + 20 + "px";
         })
-        .on("mouseout", function(d){ 
+        .on("mouseout", function(event,d){ 
             d3.select(this).style("fill", color(d.label_index));
             tooltop.style.opacity = "0";
         });
@@ -124,8 +120,6 @@ export class BarChart{
             .transition()
             .delay(d=>{return Math.random()*delay;})
             .duration(duration)
-            // .attr("y", d=>{ return this.y(d.value); })
-            // .attr("height", d=>{ return this.y(this.y_min) - this.y(d.value); })
             .attr("y", d=>{
                 if (d.value < 0)
                     return this.y(Math.max(this.y_min,0)) 

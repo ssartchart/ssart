@@ -1,3 +1,4 @@
+import * as d3 from "https://cdn.skypack.dev/d3@7";
 import {Axis_Option, Set_Axis} from '../module/Axis_helper.js';
 
 export class BubbleChart{
@@ -29,6 +30,7 @@ export class BubbleChart{
         
         this.color = color;
         this.y_min = y_min;
+        this.y_max - y_max;
         this.x = Axis.x;
         this.y = Axis.y;
 
@@ -38,13 +40,15 @@ export class BubbleChart{
 
         this.ChartBody = chart_area
             .append("g")
+            .attr("class","ssart")
             .attr("class", "chartBody")
         
         this.slice = this.ChartBody.selectAll(".slice")
             .data(datasets)
             .enter().append("g")
+            .attr("class","ssart")
             .attr("class", "slice")
-            .attr("id", (d, i) => `${id}-chart-legend-${i}`)
+            // .attr("id", (d, i) => `${id}-chart-legend-${i}`)
         if (x_type == "band"){
             this.slice.attr("transform", "translate(" + this.x.bandwidth()/2 + "," + 0 + ")")
         }
@@ -57,6 +61,7 @@ export class BubbleChart{
             .data(datasets=>{return datasets.data;})
             .enter().append("circle")
             .filter(d=>{return this.x(d.x)>= 0 && this.x(d.x) <= width - margin.left && this.y(d.y)>= 0 && this.y(d.y) <= height - margin.top;})
+            .attr("class","ssart")
             .attr("class","data")
             .attr("x",  d=> { return this.x(d.x); } )
             .attr("y", d=> { return this.y(d.y); } )
@@ -80,14 +85,13 @@ export class BubbleChart{
         const color = this.color;
         const r = this.r;
         this.ChartBody.selectAll(".data")
-        .on("mouseover", function(d){ 
+        .on("mouseover", function(event, d){ 
 
             d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));
-            console.log("툴팁 확인 : bubble");
 
             tooltop.style.opacity = "1.0";
         })
-            .on("mousemove", function (d, index) {
+            .on("mousemove", function (event, d) {
                 const name = d.label;
                 const x = d.x;
                 const y =  d.y;
@@ -97,13 +101,13 @@ export class BubbleChart{
                         <svg style="width: 16px; height: 16px">
                             <rect width="10px" height="10px" x="1" y="5" fill="${d3.rgb(color(d.label_index))}" stroke="white" stroke-width="10%"></rect>
                         </svg>
-                        <text style="font-size: 15px; font-weight: 700; margin-bottom: 3px;">${name} (${x}, ${y}, ${r(r_value)})</text>
+                        <text style="font-size: 15px; font-weight: 700; margin-bottom: 3px;">${name} (${x}, ${y}, ${r_value})</text>
                         `
-                tooltop.style.left = d3.event.pageX + 20 + "px";
-                tooltop.style.top = d3.event.pageY + 20 + "px";
+                tooltop.style.left = event.pageX + 20 + "px";
+                tooltop.style.top = event.pageY + 20 + "px";
                 d3.select(this).attr("r", r(r_value) * 1.3)
         })
-            .on("mouseout", function (d) { 
+            .on("mouseout", function (event, d) { 
                 const r_value = d.r;                
                 d3.select(this).style("fill", color(d.label_index));
                 d3.select(this).attr("r", r(r_value))

@@ -1,3 +1,4 @@
+import * as d3 from "https://cdn.skypack.dev/d3@7";
 function checkMargin(margin) {
   if (margin.top < 40) {
     margin.top = 40;
