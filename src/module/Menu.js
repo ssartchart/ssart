@@ -1,5 +1,6 @@
 import capture from "./SaveSvgAsPng.js";
 import { Chart } from "../function.js";
+import { clickLabel, createColorDiv } from "./ColorChange.js";
 
 // 메뉴 아이콘 생성
 function menuIcon(chart_width, width, margin, options, chart_area) {
@@ -67,7 +68,6 @@ function menuIcon(chart_width, width, margin, options, chart_area) {
 
   return chartMenu;
 }
-
 
 // dropdown 창 생성
 function createDropDown(
@@ -484,10 +484,53 @@ export function menu(
   }
 
   if (options.plugins.menu.color) {
+    createColorDiv();
+
     dropDownIndex += 1;
     const colorDropDownWidth = 120;
     const colorDropDownX = dropDownX - colorDropDownWidth;
     const colorDropDownY = margin.top + dropDownIndex * 25 - 10;
+
+    let labelGroup = document.querySelector(id + "-legend-group-0");
+
+    // 각 라벨 목록
+    colorDropDown
+      .append("rect")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", colorDropDownWidth)
+      .attr("height", 25 * labelGroup.childNodes.length + 15)
+      .attr("rx", 5)
+      .attr("ry", 5)
+      .style("fill", "white")
+      .style("opacity", 0.8)
+      .style("stroke", "black")
+      .style("stroke-width", "2");
+    colorDropDown
+      .attr("id", id + "-colorDropDown")
+      .attr(
+        "transform",
+        "translate(" + colorDropDownX + "," + colorDropDownY + ")"
+      );
+
+    for (let i = 0; i < labelGroup.childNodes.length; i++) {
+      let labelColor = labelGroup.childNodes[i].firstChild.getAttribute("fill");
+
+      colorDropDown
+        .append("text")
+        .attr("x", colorDropDownWidth - 8)
+        .attr("y", 25 * (i + 1))
+        .text(labelGroup.childNodes[i].__data__)
+        .attr("id", id + "-colorLabel-" + i)
+        .attr("text-anchor", "end")
+        .style("fill", labelColor)
+        .style("font-family", "sans-serif")
+        .style("cursor", "pointer")
+        .style("user-select", "none")
+        .on("click", () => {
+          clickLabel(labelColor, i, id, param);
+        });
+    }
 
     colorDropDown
       .style("visibility", "hidden")
@@ -504,55 +547,6 @@ export function menu(
       .style("user-select", "none")
       .on("click", function (event) {
         if (colorDropDown.property("visibility") === "hidden") {
-          let divId =
-            this.parentNode.parentNode.parentNode.parentNode.getAttribute("id");
-          let labelGroup = document.getElementById(divId + "-legend-group-0");
-
-          colorDropDown
-            .append("rect")
-            .attr("x", 0)
-            .attr("y", 0)
-            .attr("width", colorDropDownWidth)
-            .attr("height", 25 * labelGroup.childNodes.length + 15)
-            .attr("rx", 5)
-            .attr("ry", 5)
-            .style("fill", "white")
-            .style("opacity", 0.8)
-            .style("stroke", "black")
-            .style("stroke-width", "2");
-
-          colorDropDown
-            .attr("class", "colorDropDown")
-            .attr(
-              "transform",
-              "translate(" + colorDropDownX + "," + colorDropDownY + ")"
-            );
-
-          colorDropDown
-            .style("visibility", "hidden")
-            .property("visibility", "hidden");
-
-          for (let i = 0; i < labelGroup.childNodes.length; i++) {
-            let labelColor =
-              labelGroup.childNodes[i].firstChild.getAttribute("fill");
-            // console.log(labelColor);
-            colorDropDown
-              .append("text")
-              .attr("x", colorDropDownWidth - 8)
-              .attr("y", 25 * (i + 1))
-              .text(labelGroup.childNodes[i].__data__)
-              .attr("id", "colorLabel-" + i)
-              .attr("text-anchor", "end")
-              .style("fill", labelColor)
-              .style("font-family", "sans-serif")
-              .style("cursor", "pointer")
-              .style("user-select", "none")
-              .on("click", function (event) {
-                console.log(i);
-                console.log(labelGroup.childNodes[i].__data__);
-              });
-          }
-
           colorDropDown
             .style("visibility", "visible")
             .property("visibility", "visible");
@@ -560,8 +554,6 @@ export function menu(
             .style("visibility", "hidden")
             .property("visibility", "hidden");
         } else {
-          colorDropDown.selectAll("rect").remove();
-          colorDropDown.selectAll("text").remove();
           colorDropDown
             .style("visibility", "hidden")
             .property("visibility", "hidden");
