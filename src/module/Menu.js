@@ -1,3 +1,4 @@
+import * as d3 from "https://cdn.skypack.dev/d3@7";
 import capture from "./SaveSvgAsPng.js";
 import { Chart } from "../function.js";
 import { clickLabel, createColorDiv } from "./ColorChange.js";
@@ -131,8 +132,12 @@ export function menu(
     dropDownWidth,
     dropDownX
   );
-  const legendDropDown = chart_area.append("g");
-  const colorDropDown = chart_area.append("g");
+  const legendDropDown = chart_area
+    .append("g")
+    .attr("class", "legendDropDown");
+  const colorDropDown = chart_area
+    .append("g")
+    .attr("class", "colorDropDown");
 
   const yGridGroup = chart_area.select("g.yAxis");
   const xGridGroup = chart_area.select("g.xAxis");
@@ -288,8 +293,6 @@ export function menu(
     dropDownIndex += 1;
 
     const chartBackground = chart_area.select(".chartBackground rect");
-    // console.log(chart_area)
-    // console.log(chartBackground)
     let color = "#f1f3f5";
     if (options.plugins.background?.color) {
       color = options.plugins.background.color;
@@ -337,7 +340,6 @@ export function menu(
       .on("click", function (event) {
         // div 태그를 가져옴
         let divId = this.parentNode.parentNode.parentNode.getAttribute("id");
-        console.log(divId);
 
         // 클릭시 메뉴 닫음.
         if (dropDown.property("visibility") === "hidden") {
@@ -365,7 +367,6 @@ export function menu(
     const legendDropDownY = margin.top + dropDownIndex * 25 - 10;
 
     legendDropDown
-      .attr("class", "legendDropDown")
       .attr(
         "transform",
         "translate(" + legendDropDownX + "," + legendDropDownY + ")"

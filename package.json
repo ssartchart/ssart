@@ -1,6 +1,6 @@
 {
   "name": "ssart",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Simply crate and use various charts ",
   "main": "src/index.js",
   "scripts": {
@@ -14,10 +14,17 @@
     "url": "https://lab.ssafy.com/s06-final/S06P31S201.git"
   },
   "homepage": "https://oursites.com",
-  "keywords": ["chart", "svg", "opensource","d3", "data" , "visualization"],
+  "keywords": [
+    "chart",
+    "svg",
+    "opensource",
+    "d3",
+    "data",
+    "visualization"
+  ],
   "contributors": [
     {
-      "name":  "Lee JungHun",
+      "name": "Lee JungHun",
       "email": "your@email.com"
     },
     {
@@ -25,7 +32,7 @@
       "email": "your@email.com"
     },
     {
-      "name":  "Jo wonbin",
+      "name": "Jo wonbin",
       "email": "your@email.com"
     },
     {
@@ -33,7 +40,7 @@
       "email": "your@email.com"
     },
     {
-      "name":  "Ahn JaeYoung",
+      "name": "Ahn JaeYoung",
       "email": "your@email.com"
     },
     {

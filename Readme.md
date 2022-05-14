@@ -63,7 +63,7 @@ All contents of the library were created using JavaScript.
 <details>
   <summary>BarChart</summary>
   <br>
-    <img src= src\img\barchart.jpg width = "300px" height = "300px">
+    <img src=src\img\IndexImg\1.Bar.png width = "300px" height = "300px">
 
     barchart
 
@@ -73,7 +73,7 @@ All contents of the library were created using JavaScript.
  <details>
   <summary>CircleChart</summary>
   <br>
-    <img src= src\img\circlechart.jpg width = "300px" height = "300px">
+    <img src=src\img\IndexImg\8.Pie.png width = "300px" height = "300px">
 
     circlechart
 
@@ -83,7 +83,7 @@ All contents of the library were created using JavaScript.
   <details>
   <summary>LineChart</summary>
   <br>
-    <img src= src\img\linechart.jpg width = "300px" height = "300px">
+    <img src=src\img\IndexImg\3.Line.png width = "300px" height = "300px">
 
     linechart
 
@@ -93,7 +93,7 @@ All contents of the library were created using JavaScript.
   <details>
   <summary>RadarChart</summary>
   <br>
-    <img src= src\img\radarchart.jpg width = "300px" height = "300px">
+    <img src= src\img\IndexImg\9.Radar.png width = "300px" height = "300px">
 
     radarchart
 
@@ -104,7 +104,7 @@ All contents of the library were created using JavaScript.
   <details>
   <summary>ScatterChart</summary>
   <br>
-    <img src= src\img\scatterchart.jpg width = "300px" height = "300px">
+    <img src= src\img\IndexImg\5.Scatter.png width = "300px" height = "300px">
 
     scatterchart
 
