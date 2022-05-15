@@ -28,7 +28,7 @@ export class RadarChart {
         }
         
         let max = 0;
-        var sum = [] ;
+        var sum = [];
         for (var i = 0; i < this.datasets.length; i++){
             var point = {};
             var sumtemp = 0;
@@ -44,7 +44,6 @@ export class RadarChart {
             datas.push(point);
             this.data_idx[datasets[i].label] = i;
         }
-        
         chart_area.attr("width", width).attr("height", height);
         
         let key = Math.min(width, height)
@@ -148,14 +147,14 @@ export class RadarChart {
             const label_coordinate = angleToCoordinate(angle, max*1.1); // 축 이름
 
             this.ChartBody.append("line") // 십자선
-            .attr("x1", 0)
-            .attr("y1", 0) // 중점 
-            .attr("x2", line_coordinate.x)
-            .attr("y2", line_coordinate.y)
-            .attr("stroke","#e2e2e2")
-            .attr("opacity" , 1)
-            .attr("class", "ssart")
-            .attr("class", "line")
+                .attr("x1", 0)
+                .attr("y1", 0) // 중점 
+                .attr("x2", line_coordinate.x)
+                .attr("y2", line_coordinate.y)
+                .attr("stroke","#e2e2e2")
+                .attr("opacity" , 1)
+                .attr("class", "ssart")
+                .attr("class", "line")
 
     
             this.ChartBody.append("text") // 축 이름 라벨링
@@ -167,7 +166,7 @@ export class RadarChart {
     
 
         
-
+        this.ChartBody.attr("pointer-events", "none");
         const line = d3.line()
             .x(d => d.x)
             .y(d => d.y);
@@ -187,19 +186,20 @@ export class RadarChart {
             const d = datas[i];
             this.coordinates[i] = getPathCoordinates(d);
             let name = this.datasets[i].label;
-            let avg =   Math.round(sum[i]/features.length); // 반올림한 평균값.
+            let avg = Math.round(sum[i]/features.length); // 반올림한 평균값.
             this.ChartBody.append("path")
                 .datum(this.coordinates[i])
                 .attr("d", line)
                 .attr("class", "ssart")
-                .attr("class","data")
+                .attr("class", "data")
                 .attr("stroke-width", 2.5)
-                .attr("stroke",color(this.datasets[i].data[0].label_index))
+                .attr("stroke", color(this.datasets[i].data[0].label_index))
                 .attr("fill", color(this.datasets[i].data[0].label_index))
                 .attr("class", "data")
                 .attr("stroke-opacity", 1)
                 .attr("fill-opacity", 0.4)
-
+                .attr("pointer-events", "all");
+            
             this.coordinates[i].push(avg)
             this.coordinates[i].push(color)
             this.coordinates[i].push(name)
@@ -228,7 +228,6 @@ export class RadarChart {
             }
         }        
         chart_area.node();       
-        console.log(this.coordinates)
     }
     
     tooltip() {        
