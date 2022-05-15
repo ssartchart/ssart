@@ -6,10 +6,6 @@ export { drawTitle, drawXTitle, drawYTitle } from "./module/title.js";
 
 export { checkMargin } from "./module/CheckMargin.js";
 
-
-
-
-
 d3
 .select("body")
 .append("div")
