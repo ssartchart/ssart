@@ -1,6 +1,6 @@
 {
   "name": "ssart",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Simply crate and use various charts ",
   "main": "src/index.js",
   "scripts": {

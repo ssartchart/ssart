@@ -1,22 +1,23 @@
 import * as d3 from "https://cdn.skypack.dev/d3@7";
 // import {BarChart} from './BarChartfunction.js'
-import { axisOptions, xGrid as drawXGrid, yGrid as drawYGrid } from "./module/Axis_helper.js";
-import { LabelColor, LabelsColor } from "./module/Color_helper.js";
-import { Data_pre_processing } from "./module/Dataset_helper.js";
+import { axisOptions, xGrid as drawXGrid, yGrid as drawYGrid } from "./module/axis_helper.js";
+import { LabelColor, LabelsColor } from "./module/color_helper.js";
+import { Data_pre_processing } from "./module/dataset_helper.js";
 import { drawTitle, drawXTitle, drawYTitle } from "./module/title.js";
-import { checkMargin } from "./module/CheckMargin.js";
-import { createCircleChartLegend, createLegendToggle, drawLegend } from "./module/Legend.js";
-import { menu as drawMenu } from "./module/Menu.js";
-import { background as drawBackground } from "./module/Background.js";
+import { checkMargin } from "./module/checkMargin.js";
+import { createCircleChartLegend, createLegendToggle, drawLegend } from "./module/legend.js";
+import { menu as drawMenu } from "./module/menu.js";
+import { background as drawBackground } from "./module/background.js";
 
-import { BarChart } from "./chart/BarChart.js";
-import { BarHClass } from "./chart/BarHChart.js";
-import { ScatterChart } from "./chart/ScatterChart.js";
-import { BubbleChart } from "./chart/BubbleChart.js";
-import { CircleChart } from "./chart/CircleChart.js";
-import { RadarChart } from "./chart/RadarChart.js";
-import { LineChart } from "./chart/LineChart.js";
-import { AreaChart } from "./chart/AreaChart.js";
+import { BarChart } from "./chart/barChart.js";
+import { BarHClass } from "./chart/barHChart.js";
+import { ScatterChart } from "./chart/scatterChart.js";
+import { BubbleChart } from "./chart/bubbleChart.js";
+import { CircleChart } from "./chart/circleChart.js";
+import { RadarChart } from "./chart/radarChart.js";
+import { LineChart } from "./chart/lineChart.js";
+import { AreaChart } from "./chart/areaChart.js";
+import { PolarChart } from "./chart/polarChart.js";
 
 function Chart(
   id,
@@ -32,18 +33,15 @@ function Chart(
     .style("width", width)
     .style("height", height);
 
-  console.log(`Hello, ${type}!`);
   const labels = data.labels;
-  
   let labelcolor;
-  if(type == "donut"|| type == "pie"){
+  if(type == "donut"|| type == "pie" || type == "polar"){
     labelcolor = LabelsColor(data);
   }
   else{
     labelcolor = LabelColor({datasets: data.datasets});
   }
   
-
   const color = labelcolor.color;
   const legend_label = labelcolor.label;
   const chart_area = svg
@@ -57,7 +55,7 @@ function Chart(
     legendList: []
   }
   if (legend) {
-    if(type == "donut"|| type == "pie"){
+    if(type == "donut"|| type == "pie" || type == "polar"){
       legend_box = drawLegend(
         oid,
         svg,
@@ -296,24 +294,23 @@ function Chart(
   }
 
   if (type === "donut" || type === "pie") {
-    
     const datasets = Data_pre_processing(
       data.labels,
       data.datasets,
       "namevaluedataone"
-    );
-    drawCicleChart(datasets);
+      );
+    drawCircleChart(datasets);
 
     createLegendToggle(
       id,
       datasets,
       legend_box?.legendList,
       chart_area,
-      drawCicleChart,
+      drawCircleChart,
       {},
       renderBackground,
     );
-    function drawCicleChart(chartData) {      
+    function drawCircleChart(chartData) {      
       const circleChart = new CircleChart({
         id: oid,
         type,
@@ -365,6 +362,45 @@ function Chart(
       renderOptions();
     }
   }
+  
+
+  if (type === "polar") {
+    const datasets = Data_pre_processing(
+      data.labels,
+      data.datasets,
+      "namevaluedataone"
+      );
+    drawPolarChart(datasets);
+    createLegendToggle(
+      id,
+      datasets,
+      legend_box?.legendList,
+      chart_area,
+      drawPolarChart,
+      {},
+      renderBackground
+    );
+    function drawPolarChart(datasets) {
+      const polarChart = new PolarChart({
+        id: oid,
+        type,
+        chart_area: chart_area,
+        width : chart_width,
+        height : chart_height,
+        margin,
+        labels,
+        color: labelcolor.color,
+        datasets: datasets,
+        options,
+        scales,
+      });
+      polarChart.tooltip();
+      polarChart.animation();
+      renderOptions();
+    }
+  }
+
+
   function renderOptions() {
     if (title) {
       drawTitle(svg, options, width, chart_width, height, margin);      
@@ -423,170 +459,5 @@ function Chart(
     };
   }
 }
-
-// function ChartH(
-//   id,
-//   { type, width, height, margin, padding = 0, data, options, y_max, y_min = 0 }
-// ) {
-//   const { position } = legend;
-//   const legend = legend;
-//   const svg = d3
-//     .select(id)
-//     .append("svg")
-//     .style("width", width)
-//     .style("height", height);
-
-//   const datasets = Data_pre_processing(data.labels, data.datasets);
-
-//   const labelcolor = LabelColor(datasets);
-//   const oid = id.slice(1, id.length);
-//   const color = labelcolor.color;
-//   const legend_label = labelcolor.label;
-
-//   const labels = data.labels;
-//   const chart_area = svg
-//     .append("g")
-//     .style("width", width)
-//     .style("height", height);
-
-//   const legend_box = drawLegend(
-//     oid,
-//     svg,
-//     labelcolor,
-//     width,
-//     height,
-//     chart_area,
-//     legend,
-//     margin
-//   );
-//   const chart_width = width - legend_box.width;
-//   const chart_height = height - legend_box.height;
-
-//   if (type === "barH") {
-//     const barHchart = new BarHClass({
-//       chart_area,
-//       labels,
-//       datasets,
-//       color,
-//       width: chart_width,
-//       height: chart_height,
-//       margin,
-//       padding,
-//       y_max,
-//       y_min,
-//     });
-//     barHchart.tooltip();
-//     barHchart.animation();
-//   }
-
-//   drawTitle(svg, title.text, width, height, margin);
-//   drawXTitle(
-//     chart_area,
-//     xTitle.text,
-//     chart_width,
-//     chart_height,
-//     margin
-//   );
-//   drawYTitle(
-//     chart_area,
-//     yTitle.text,
-//     chart_width,
-//     chart_height,
-//     margin,
-//     yTitle.position
-//   );
-
-//   if (xGrid) {
-//     drawXGrid(
-//       chart_area,
-//       chart_height - margin.top - margin.bottom,
-//       xGrid
-//     );
-//   }
-
-//   if (yGrid) {
-//     drawYGrid(
-//       chart_area,
-//       chart_width - margin.left - margin.right,
-//       yGrid
-//     );
-//   }
-
-//   if (background) {
-//     drawBackground(
-//       chart_area,
-//       margin,
-//       chart_width,
-//       chart_height,
-//       background
-//     );
-//   }
-
-//   if (menu) {
-//     drawMenu(chart_width, width, margin, chart_area, options, id);
-//   }
-
-  /*
-    const Type = document.getElementsByTagName('rect'); // 타입으로 받아서 처리해야할것같아요
-    svg.node();
-
-  for (const el of Type) {
-    // 마우스 커서 기준 위치를 받아서 마우스 근처에 데이터 표시
-    el.addEventListener("mousemove", (event) => {
-      const x = event.pageX;
-      const y = event.pageY;
-      const target = event.target;
-      const positionLeft = x;
-      const positionTop = y;
-      // const color = target.dataset.color;
-      const value = target.dataset.y;
-      const name = target.dataset.x;
-      tooltop.innerText =
-        "\u00a0" +
-        " val : " +
-        value +
-        "\u00a0" +
-        "\n" +
-        "\u00a0" +
-        "data : " +
-        name +
-        "\u00a0" +
-        "\n" +
-        "\u00a0" +
-        "add : " +
-        "\u00a0" +
-        "" +
-        "\u00a0"; // 값 + 데이터 set
-      tooltop.style.background = "#ddd";
-      tooltop.style.top = positionTop - 30 + "px";
-      tooltop.style.left = positionLeft - 80 + "px";
-      // tooltip.style("left", (d3.event.pageX+10)+"px");
-      // tooltip.style("top",  (d3.event.pageY-10)+"px");
-      tooltop.style.opacity = "1.0";
-    });
-  }
-}
-
-    for(const el of Type) { // 마우스 커서 기준 위치를 받아서 마우스 근처에 데이터 표시     
-        el.addEventListener('mousemove', (event) => {
-            const x = event.pageX;
-            const y = event.pageY;
-            const target = event.target;
-            const positionLeft =x;
-            const positionTop = y;
-            // const color = target.dataset.color;
-            const value = target.dataset.y;
-            const name = target.dataset.x;
-            tooltop.innerText = "\u00a0"+" val : "+value+"\u00a0"+"\n" +"\u00a0"+"data : "+name +"\u00a0" +"\n" +"\u00a0"+"add : " + "\u00a0" + ""  +"\u00a0"; // 값 + 데이터 set
-            tooltop.style.background = '#ddd';
-            tooltop.style.top = positionTop -30+ 'px';
-            tooltop.style.left = positionLeft -80 + 'px';
-            // tooltip.style("left", (d3.event.pageX+10)+"px");
-            // tooltip.style("top",  (d3.event.pageY-10)+"px");
-            tooltop.style.opacity = "1.0";
-        });
-    }
-    */
-// }
 
 export { Chart};

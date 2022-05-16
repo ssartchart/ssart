@@ -81,6 +81,7 @@ export class CircleChart {
       .enter()
       .append("text")
       .attr("transform", (d) => `translate(${arcLabel.centroid(d)})`)
+      .attr("pointer-events", "none")
       .attr("dy", "0.35em");
 
     // 데이터 표시 부분
@@ -106,7 +107,7 @@ export class CircleChart {
   }
 
 
-  tooltip(){
+  tooltip(){    
     const tooltop = document.getElementById('ssart-tooltip');
     const color = this.color;
     const sum = this.sum;
@@ -114,13 +115,18 @@ export class CircleChart {
     .on("mouseover", function(event, d){ 
         d3.select(this).style("fill", d3.rgb(color(d.data.label_index)).darker(2));
 
-        tooltop.style.opacity = "1.0";
+      tooltop.style.opacity = "1.0";      
     })
     .on("mousemove", function(event, d){
       const name = d.data.name;
       const value = d.value;
-
-      tooltop.innerText = "name : " + name +"\n" + "value : " + value +"\n" + Math.round((value / sum) * 100, -3) + "%"; // 값 + 데이터 
+      tooltop.innerHTML = `
+        <svg style="width: 16px; height: 16px">
+          <rect width="10px" height="10px" x="1" y="5" fill="${d3.rgb(color(d.data.label_index))}" stroke="white" stroke-width="10%"></rect>
+        </svg>
+        <text style="font-size: 15px; font-weight: 700; margin-bottom: 5px;">${name} : ${value} (${Math.round((value / sum) * 100, -3)}%)</text>
+      `
+      // tooltop.innerText = "name : " + name +"\n" + "value : " + value +"\n" + Math.round((value / sum) * 100, -3) + "%"; // 값 + 데이터 
       tooltop.style.left = event.pageX + 20 + "px";
       tooltop.style.top = event.pageY + 20 + "px";
     })

@@ -1,8 +1,8 @@
 import * as d3 from "https://cdn.skypack.dev/d3@7";
-import {Axis_Option, Set_Axis} from '../module/Axis_helper.js';
+import {Axis_Option, Set_Axis} from '../module/axis_helper.js';
 
-export class LineChart{
-    constructor({id,chart_area,labels,datasets,color,width,height,margin,padding,scales}){
+export class ScatterChart{
+    constructor({id, chart_area,labels,datasets,color,width,height,margin,padding,scales}){
 
         chart_area.selectAll('.chartBody').remove();
         chart_area.selectAll('.xAxis').remove();
@@ -15,31 +15,18 @@ export class LineChart{
         const y_min = axis_option.y_min;
         const y_max = axis_option.y_max;
 
-        const y_domain = axis_option.y_domain
-
-        const line_width = axis_option.line_width;
-        const line_opacity = axis_option.line_opacity;
-        const dot_opacity = axis_option.dot_opacity;
-        const dot_size = axis_option.dot_size;
-
-
-        const Axis = Set_Axis({chart_area,x_domain,y_domain,width,height,margin,padding,scales,x_type});
-
+        
+        const { fillopacity, y_domain, dot_opacity, dot_size, line_opacity, line_width, line_color } = axis_option;
+        const Axis = Set_Axis({chart_area,x_domain,y_domain,width,height,margin,padding,scales,x_type});        
 
         this.color = color;
         this.y_min = y_min;
-        this.y_max = y_max
+        this.y_max = y_max;
         this.x = Axis.x;
         this.y = Axis.y;
-
-        const line = d3.line()
-            .defined(d => !isNaN(d.y))
-            .defined(d=>{return this.x(d.x)>= 0 && this.x(d.x) <= width - margin.left && (d.y)>= (this.y_min) && (d.y) <= (this.y_max);})
-            .x(d => this.x(d.x))
-            .y(d => this.y(d.y));
+        this.dot_size = dot_size;
 
         this.ChartBody = chart_area
-            .data(datasets)
             .append("g")
             .attr("class","ssart")
             .attr("class", "chartBody")
@@ -50,31 +37,13 @@ export class LineChart{
             .attr("class","ssart")
             .attr("class", "slice")
             // .attr("id", (d, i) => `${id}-chart-legend-${i}`)
-            
-            
-        if (x_type == "band"){
-            this.slice.attr("transform", "translate(" + this.x.bandwidth()/2 + "," + 0 + ")")
-        }
-        
-        this.path = this.slice
-            .append("path")    
-            .datum(datasets=>{
-                return datasets.data;})
-            .attr("class","ssart")
-            .attr("class","line")        
-            .attr("fill", "none")
-            .attr("stroke", (d)=>{return this.color(d[0].label_index)})
-            .attr("stroke-width", line_width)
-            .attr("stroke-opacity", line_opacity)
-            .attr("d", line)
 
-        this.pathLength = this.path.node().getTotalLength();
+        this.slice.attr("transform", "translate(" + 0 + "," + 0 + ")")
 
         this.slice.selectAll(".data")
             .data(datasets=>{return datasets.data;})
             .enter().append("circle")
-            .filter(d => !isNaN(d.y))
-            .filter(d=>{return this.x(d.x)>= 0 && this.x(d.x) <= width - margin.left && (d.y)>= (this.y_min) && (d.y) <= (this.y_max);})
+            .filter(d=>{return this.x(d.x)>= 0 && this.x(d.x) <= width - margin.left && this.y(d.y)>= 0 && this.y(d.y) <= height - margin.top;})
             .attr("class","ssart")
             .attr("class","data")
             .attr("x",  d=> { return this.x(d.x); } )
@@ -82,9 +51,12 @@ export class LineChart{
             .attr("transform", (d)=>{
                 return "translate(" + this.x(d.x) + "," + this.y(d.y) + ")";
             })
-            .attr("r", dot_size)
+            .attr("r", this.dot_size)
             .style("fill",d=>{return this.color(d.label_index);})
             .style("fill-opacity", dot_opacity)
+            .attr("stroke", line_color)
+            .attr("stroke-width", line_width)
+            .style("stroke-opacity", line_opacity)
 
         chart_area.node();
         
@@ -100,14 +72,19 @@ export class LineChart{
                 d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));
 
                 tooltop.style.opacity = "1.0";
-            })
-            .on("mousemove", function(event, d){
-                const value = d.x;
-                const name =  d.y;
+            }).on("mousemove", function(event, d){
+                const x = d.x;
+                const y =  d.y;
                 const key = d3.rgb(color(d.label_index));
-
-                tooltop.innerText = "x : " + value +"\n" + "y : " + name +"\n" + "label : " +key ; // 값 + 데이터 
+                const name = d.label;
                 
+                // tooltop.innerText = "x : " + value +"\n" + "y : " + name +"\n" + "label : " +key ; // 값 + 데이터 
+                tooltop.innerHTML = `
+                    <svg style="width: 16px; height: 16px">
+                        <rect width="10px" height="10px" x="1" y="5" fill="${key}" stroke="white" stroke-width="10%"></rect>
+                    </svg>
+                    <text style="font-size: 15px; font-weight: 700; margin-bottom: 3px;">(${x}, ${y})</text>
+                    `
                 tooltop.style.left = event.pageX + 20 + "px";
                 tooltop.style.top = event.pageY + 20 + "px";
             })
@@ -118,21 +95,15 @@ export class LineChart{
     }
 
     animation(delay=1000,duration=1000){
-        const transitionPath = d3
+        this.slice.selectAll(".data")
+            .attr("r", 0)
             .transition()
-            .ease(d3.easeSin)
             .delay(d=>{return Math.random()*delay;})
-            .duration(duration);
-
-        this.slice.selectAll("path")
-        .attr("stroke-dashoffset", function(d){
-            return this.getTotalLength()
-        })
-        .attr("stroke-dasharray", function(d){
-            return this.getTotalLength()
-        })
-        .transition(transitionPath)     
-        .attr("stroke-dashoffset",0)
-        
+            .duration(duration)
+            .attr("r", d=>{ return this.dot_size; })
     }
 }
+
+
+
+
