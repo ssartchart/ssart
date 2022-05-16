@@ -17,6 +17,7 @@ import { CircleChart } from "./chart/circleChart.js";
 import { RadarChart } from "./chart/radarChart.js";
 import { LineChart } from "./chart/lineChart.js";
 import { AreaChart } from "./chart/areaChart.js";
+import { PolarChart } from "./chart/polarChart.js";
 
 function Chart(
   id,
