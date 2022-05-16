@@ -92,7 +92,16 @@ export class BarChart{
             const value = d.value;
             const name =  d.name;
             const key = d3.rgb(color(d.label_index));
-            tooltop.innerText = "value : " + value +"\n" + "name : " + name +"\n" + "color : " +key ; // 값 + 데이터 
+            tooltop.innerHTML = `
+                <text style="display: block; font-size: 15px; font-weight: 600">${name}</text>
+                <div>
+                    <svg style="width: 10px; height: 10px">
+                        <rect width="10px" height="10px" fill="${key}" stroke="white" stroke-width="10%"></rect>
+                    </svg>
+                    <text style="font-size: 14px; font-weight: 500;">${d.label} : ${value}</text>
+                </div>
+                `
+            // tooltop.innerText = "value : " + value +"\n" + "name : " + name +"\n" + "color : " +key ; // 값 + 데이터 
             
             tooltop.style.left = event.pageX + 20 + "px";
             tooltop.style.top = event.pageY + 20 + "px";

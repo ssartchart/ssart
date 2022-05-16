@@ -51,7 +51,7 @@ export class AreaChart{
             .append("g")
             .attr("class","ssart")
             .attr("class", "chartBody")
-        
+            .attr("pointer-events", "none")
         this.slice = this.ChartBody.selectAll(".slice")
             .data(datasets)
             .enter().append("g")
@@ -76,8 +76,8 @@ export class AreaChart{
             .attr("stroke-opacity", line_opacity)
             .attr("d", line)
 
-        this.pathLength = this.path.node().getTotalLength();
-
+        this.pathLength = this.path.node() === null ? 0 : this.path.node().getTotalLength();
+            
         this.area_path = this.slice
             .append("path")    
             .datum(datasets=>{return datasets.data;})
@@ -99,7 +99,7 @@ export class AreaChart{
             .attr("class","data")
             .attr("x",  d=> { return this.x(d.x); } )
             .attr("y", d=> { return this.y(d.y); } )
-            .attr("transform", (d)=>{
+            .attr("transform", (d) => {
                 return "translate(" + this.x(d.x) + "," + this.y(d.y) + ")";
             })
             .attr("r", dot_size)
@@ -108,33 +108,43 @@ export class AreaChart{
             .attr("stroke", (d)=>{return this.color(d.label_index)})
             .attr("stroke-width", 0.2)
             .attr("stroke-opacity", 1)
-
+            .attr("pointer-events", "all")
+        
         chart_area.node();
         
     }
-
+    
     // 툴팁 효과
-    tooltip(){
-            const tooltop = document.getElementById('ssart-tooltip');
-            const color = this.color;
-            this.ChartBody.selectAll(".data")
-            .on("mouseover", function(event,d){ 
-                d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));
+    tooltip() {        
+        const tooltop = document.getElementById('ssart-tooltip');        
+        const color = this.color;        
+        this.ChartBody.selectAll(".data")                
+            .on("mouseover", function(event, d){ 
+                d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));                
                 tooltop.style.opacity = "1.0";
             })
             .on("mousemove", function(event, d){
-                const value = d.x;
-                const name =  d.y;
+                const name = d.x;
+                const value =  d.y;
                 const key = d3.rgb(color(d.label_index));
                 
-                tooltop.innerText = "x : " + value +"\n" + "y : " + name +"\n" + "label : " +key ; // 값 + 데이터 
+                // tooltop.innerText = "x : " + value +"\n" + "y : " + name +"\n" + "label : " +key ; // 값 + 데이터 
+                tooltop.innerHTML = `
+                    <text style="display: block; font-size: 15px; font-weight: 600">${name}</text>
+                    <div>
+                        <svg style="width: 10px; height: 10px">
+                            <rect width="10px" height="10px" fill="${key}" stroke="white" stroke-width="10%"></rect>
+                        </svg>
+                        <text style="font-size: 14px; font-weight: 500;">${d.label} : ${value}</text>
+                    </div>
+                    `
                 tooltop.style.left = event.pageX + 20 + "px";
                 tooltop.style.top = event.pageY + 20 + "px";
             })
             .on("mouseout", function(event,d){ 
                 d3.select(this).style("fill", "white");
                 tooltop.style.opacity = "0";
-            });
+            });        
     }
 
     animation(delay=1000,duration=1000){
