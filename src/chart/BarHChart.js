@@ -1,5 +1,5 @@
 import * as d3 from "https://cdn.skypack.dev/d3@7";
-import {Axis_Option, Set_Axis, Set_Axis_reverse, xGrid, yGrid} from '../module/Axis_helper.js';
+import {Axis_Option, Set_Axis, Set_Axis_reverse, xGrid, yGrid} from '../module/axis_helper.js';
 
 export class BarHClass{
     constructor({id,chart_area,labels,datasets,color,width,height,margin,padding,scales}){

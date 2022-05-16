@@ -1,7 +1,7 @@
 import * as d3 from "https://cdn.skypack.dev/d3@7";
-import capture from "./SaveSvgAsPng.js";
+import capture from "./saveSvgAsPng.js";
 import { Chart } from "../function.js";
-import { clickLabel, createColorDiv } from "./ColorChange.js";
+import { clickLabel, createColorDiv } from "./colorChange.js";
 
 // 메뉴 아이콘 생성
 function menuIcon(chart_width, width, margin, options, chart_area) {
