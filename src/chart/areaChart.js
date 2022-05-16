@@ -1,7 +1,7 @@
 import * as d3 from "https://cdn.skypack.dev/d3@7";
-import {Axis_Option, Set_Axis} from '../module/Axis_helper.js';
+import {Axis_Option, Set_Axis} from '../module/axis_helper.js';
 
-export class LineChart{
+export class AreaChart{
     constructor({id,chart_area,labels,datasets,color,width,height,margin,padding,scales}){
 
         chart_area.selectAll('.chartBody').remove();
@@ -38,12 +38,20 @@ export class LineChart{
             .x(d => this.x(d.x))
             .y(d => this.y(d.y));
 
+        const area = d3.area()
+            .defined(d => !isNaN(d.y))
+            .defined(d=>{return this.x(d.x)>= 0 && this.x(d.x) <= width - margin.left && (d.y)>= (this.y_min) && (d.y) <= (this.y_max);})
+            .x(d => this.x(d.x))
+            .y0(this.y(0))
+            .y1(d => this.y(d.y));
+
+
         this.ChartBody = chart_area
             .data(datasets)
             .append("g")
             .attr("class","ssart")
             .attr("class", "chartBody")
-        
+            .attr("pointer-events", "none")
         this.slice = this.ChartBody.selectAll(".slice")
             .data(datasets)
             .enter().append("g")
@@ -69,6 +77,19 @@ export class LineChart{
             .attr("d", line)
 
         this.pathLength = this.path.node() === null ? 0 : this.path.node().getTotalLength();
+            
+        this.area_path = this.slice
+            .append("path")    
+            .datum(datasets=>{return datasets.data;})
+            .attr("class","ssart")
+            .attr("class","area")        
+            .attr("fill", (d)=>{return this.color(d[0].label_index)})
+            .attr("fill-opacity", 0.5)
+            .attr("stroke-width", 0)
+            .attr("stroke-opacity", 0)
+            .attr("pointer-events", "none")
+            .attr("d", area)
+
         this.slice.selectAll(".data")
             .data(datasets=>{return datasets.data;})
             .enter().append("circle")
@@ -78,50 +99,52 @@ export class LineChart{
             .attr("class","data")
             .attr("x",  d=> { return this.x(d.x); } )
             .attr("y", d=> { return this.y(d.y); } )
-            .attr("transform", (d)=>{
+            .attr("transform", (d) => {
                 return "translate(" + this.x(d.x) + "," + this.y(d.y) + ")";
             })
             .attr("r", dot_size)
-            .style("fill",d=>{return this.color(d.label_index);})
+            .style("fill","white")
             .style("fill-opacity", dot_opacity)
-
+            .attr("stroke", (d)=>{return this.color(d.label_index)})
+            .attr("stroke-width", 0.2)
+            .attr("stroke-opacity", 1)
+            .attr("pointer-events", "all")
+        
         chart_area.node();
         
     }
-
+    
     // 툴팁 효과
-    tooltip(){
-            const tooltop = document.getElementById('ssart-tooltip');
-            const color = this.color;
-            this.ChartBody.selectAll(".data")
+    tooltip() {        
+        const tooltop = document.getElementById('ssart-tooltip');        
+        const color = this.color;        
+        this.ChartBody.selectAll(".data")                
             .on("mouseover", function(event, d){ 
-
-                d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));
-
+                d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));                
                 tooltop.style.opacity = "1.0";
             })
             .on("mousemove", function(event, d){
-                const value = d.x;
-                const name =  d.y;
+                const name = d.x;
+                const value =  d.y;
                 const key = d3.rgb(color(d.label_index));
-
+                
                 // tooltop.innerText = "x : " + value +"\n" + "y : " + name +"\n" + "label : " +key ; // 값 + 데이터 
                 tooltop.innerHTML = `
-                    <text style="display: block; font-size: 15px; font-weight: 600">${value}</text>
+                    <text style="display: block; font-size: 15px; font-weight: 600">${name}</text>
                     <div>
                         <svg style="width: 10px; height: 10px">
                             <rect width="10px" height="10px" fill="${key}" stroke="white" stroke-width="10%"></rect>
                         </svg>
-                        <text style="font-size: 14px; font-weight: 500;">${d.label} : ${name}</text>
+                        <text style="font-size: 14px; font-weight: 500;">${d.label} : ${value}</text>
                     </div>
                     `
                 tooltop.style.left = event.pageX + 20 + "px";
                 tooltop.style.top = event.pageY + 20 + "px";
             })
-            .on("mouseout", function(event, d){ 
-                d3.select(this).style("fill", color(d.label_index));
+            .on("mouseout", function(event,d){ 
+                d3.select(this).style("fill", "white");
                 tooltop.style.opacity = "0";
-            });
+            });        
     }
 
     animation(delay=1000,duration=1000){
@@ -131,15 +154,21 @@ export class LineChart{
             .delay(d=>{return Math.random()*delay;})
             .duration(duration);
 
-        this.slice.selectAll("path")
-        .attr("stroke-dashoffset", function(d){
-            return this.getTotalLength()
-        })
-        .attr("stroke-dasharray", function(d){
-            return this.getTotalLength()
-        })
-        .transition(transitionPath)     
-        .attr("stroke-dashoffset",0)
         
+
+        this.area_path
+        .attr("fill-opacity", 0)
+        .transition(transitionPath)
+        .attr("fill-opacity", 0.5)
+        
+        this.slice.selectAll("path")
+            .attr("stroke-dashoffset", function(d){
+                return this.getTotalLength()
+            })
+            .attr("stroke-dasharray", function(d){
+                return this.getTotalLength()
+            })
+            .transition(transitionPath)     
+            .attr("stroke-dashoffset",0)
     }
 }
