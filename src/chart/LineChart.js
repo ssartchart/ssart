@@ -1,5 +1,5 @@
 import * as d3 from "https://cdn.skypack.dev/d3@7";
-import {Axis_Option, Set_Axis} from '../module/Axis_helper.js';
+import {Axis_Option, Set_Axis} from '../module/axis_helper.js';
 
 export class LineChart{
     constructor({id,chart_area,labels,datasets,color,width,height,margin,padding,scales}){

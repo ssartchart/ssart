@@ -1,23 +1,22 @@
 import * as d3 from "https://cdn.skypack.dev/d3@7";
 // import {BarChart} from './BarChartfunction.js'
-import { axisOptions, xGrid as drawXGrid, yGrid as drawYGrid } from "./module/Axis_helper.js";
-import { LabelColor, LabelsColor } from "./module/Color_helper.js";
-import { Data_pre_processing } from "./module/Dataset_helper.js";
+import { axisOptions, xGrid as drawXGrid, yGrid as drawYGrid } from "./module/axis_helper.js";
+import { LabelColor, LabelsColor } from "./module/color_helper.js";
+import { Data_pre_processing } from "./module/dataset_helper.js";
 import { drawTitle, drawXTitle, drawYTitle } from "./module/title.js";
-import { checkMargin } from "./module/CheckMargin.js";
-import { createCircleChartLegend, createLegendToggle, drawLegend } from "./module/Legend.js";
-import { menu as drawMenu } from "./module/Menu.js";
-import { background as drawBackground } from "./module/Background.js";
+import { checkMargin } from "./module/checkMargin.js";
+import { createCircleChartLegend, createLegendToggle, drawLegend } from "./module/legend.js";
+import { menu as drawMenu } from "./module/menu.js";
+import { background as drawBackground } from "./module/background.js";
 
-import { BarChart } from "./chart/BarChart.js";
-import { BarHClass } from "./chart/BarHChart.js";
-import { ScatterChart } from "./chart/ScatterChart.js";
-import { BubbleChart } from "./chart/BubbleChart.js";
-import { CircleChart } from "./chart/CircleChart.js";
-import { RadarChart } from "./chart/RadarChart.js";
-import { LineChart } from "./chart/LineChart.js";
-import { AreaChart } from "./chart/AreaChart.js";
-import { PolarChart } from "./chart/PolarChart.js";
+import { BarChart } from "./chart/barChart.js";
+import { BarHClass } from "./chart/barHChart.js";
+import { ScatterChart } from "./chart/scatterChart.js";
+import { BubbleChart } from "./chart/bubbleChart.js";
+import { CircleChart } from "./chart/circleChart.js";
+import { RadarChart } from "./chart/radarChart.js";
+import { LineChart } from "./chart/lineChart.js";
+import { AreaChart } from "./chart/areaChart.js";
 
 function Chart(
   id,
