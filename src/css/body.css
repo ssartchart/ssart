@@ -38,10 +38,10 @@
   font-size: 5px;
   font-weight: bold;
   background-color: rgb(100, 100, 255);
-  display: inline-block; 
+  display: inline-block;
   pointer-events: none;
 }
-.ssart-tooltip{
+.ssart-tooltip {
   position: absolute;
   opacity: 1;
   max-width: 30%;
@@ -57,7 +57,7 @@
   font-size: 5px;
   font-weight: bold;
   background-color: rgb(100, 100, 255);
-  display: inline-block; 
+  display: inline-block;
   pointer-events: none;
 }
 
@@ -70,7 +70,7 @@
   pointer-events: none;
   box-shadow: 0 0 5px #999999;
   background-color: rgb(115, 114, 214);
-  display: inline-block; 
+  display: inline-block;
 }
 
 .svg-container {
@@ -105,4 +105,67 @@
 
 .yellow {
   fill: #f7b358;
+}
+
+.cir-field {
+  width: 210px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  margin: 1px 5px;
+  padding: 1px 5px;
+  align-items: center;
+  border-radius: 3px;
+  border: 1px solid silver;
+  background-color: #c4b9c46d;
+}
+
+#ssart-color-input {
+  width: 120px;
+  height: 25px;
+  text-align: center;
+  /* border-width: 1px; */
+  border: none;
+  margin: 3px;
+  border-radius: 3px;
+}
+
+.ssart-color-button-design {
+  width: 40px;
+  height: 25px;
+  color: #000;
+  border: #000;
+  /* border-style: 1px solid rgba(0, 0, 0, 0.7); */
+  background-color: white;
+  cursor: pointer;
+  border-width: 1px;
+  border-radius: 3px;
+  padding: 1px 1px;
+  margin: 2px;
+  display: inline-block;
+  text-align: center;
+}
+/* .ssart-color-button-design:after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 100%;
+  top: 0;
+  left: 0;
+  direction: rtl;
+  z-index: 1001;
+  box-shadow: -7px -7px 20px 0px #fff9, -4px -4px 5px 0px #fff9,
+    7px 7px 20px 0px #0002, 4px 4px 5px 0px #0001;
+  transition: all 0.3s ease;
+} */
+.ssart-color-button-design:hover {
+  color: #000;
+}
+.ssart-color-button-design:hover:after {
+  left: auto;
+  right: 0;
+  width: 100%;
+}
+.ssart-color-button-design:active {
+  top: 2px;
 }
