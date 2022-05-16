@@ -8,11 +8,7 @@ export class PolarChart {
             if (scales.depth != null){
                 depth = scales.depth
             }
-        }
-        for (let i = 0; i < datasets.length; i++) {
-            console.log(color(datasets[i].label_index))
-            // console.log(color)
-        }
+        }        
         this.color = color
         this.curr_data_set = {};
         this.datasets = datasets;
@@ -25,9 +21,8 @@ export class PolarChart {
             let tmp = datasets[i];
             point[tmp.name] = tmp.value;
             max_value = Math.max(max_value, tmp.value);
-            this.curr_data_set[tmp.label_index] = datasets[i];  
+            this.curr_data_set[tmp.label_index] = datasets[i];
         }        
-
         chart_area.attr("width", width).attr("height", height);
        
         let key = Math.min(width, height)
@@ -162,7 +157,6 @@ export class PolarChart {
             const label_index = curr_data_set[index].label_index;            
             d3.select(this).style("fill", d3.rgb(color(label_index)).darker(2));    
             tooltop.style.opacity = "1.0";
-            
             const labelName = d.data.name;
             const value = d.data.value;
             tooltop.innerHTML = `
@@ -186,5 +180,22 @@ export class PolarChart {
             d3.select(this).style("fill", color(label_index));
             tooltop.style.opacity = "0";
         });
-      }    
+    }
+    // 애니메이션 효과
+    animation(delay=1000,duration=1000){
+        const arc = this.arc;
+        this.ChartBody.selectAll(".data")
+
+        .attr("stroke", "white")    
+        .style("fill-opacity", .5)
+        .transition()
+        .duration(1500)
+        .attrTween("d", function (d) {
+            let i = d3.interpolate(d.startAngle, d.endAngle);
+            return function (t) {
+                d.endAngle = i(t);
+                return arc(d);
+            };
+        });
+    }
 }

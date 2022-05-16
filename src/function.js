@@ -396,6 +396,7 @@ function Chart(
         scales,
       });
       polarChart.tooltip();
+      polarChart.animation();
       renderOptions();
     }
   }
