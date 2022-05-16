@@ -72,13 +72,19 @@ export class ScatterChart{
                 d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));
 
                 tooltop.style.opacity = "1.0";
-            }).on("mousemove", function(event, d,){
-                const value = d.x;
-                const name =  d.y;
+            }).on("mousemove", function(event, d){
+                const x = d.x;
+                const y =  d.y;
                 const key = d3.rgb(color(d.label_index));
-
-                tooltop.innerText = "x : " + value +"\n" + "y : " + name +"\n" + "label : " +key ; // 값 + 데이터 
+                const name = d.label;
                 
+                // tooltop.innerText = "x : " + value +"\n" + "y : " + name +"\n" + "label : " +key ; // 값 + 데이터 
+                tooltop.innerHTML = `
+                    <svg style="width: 16px; height: 16px">
+                        <rect width="10px" height="10px" x="1" y="5" fill="${key}" stroke="white" stroke-width="10%"></rect>
+                    </svg>
+                    <text style="font-size: 15px; font-weight: 700; margin-bottom: 3px;">(${x}, ${y})</text>
+                    `
                 tooltop.style.left = event.pageX + 20 + "px";
                 tooltop.style.top = event.pageY + 20 + "px";
             })

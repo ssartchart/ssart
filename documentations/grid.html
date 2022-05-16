@@ -90,121 +90,92 @@
       <h1>SSART Documentation</h1>
       <br>
       <hr>
-      <h3>Title</h3>
+      <h3>Grid</h3>
       <br>
-      <p>title은 총 3가지로 나뉘며 xTitle, yTitle, 그리고 차트 전체 title이 있습니다.</p>
+      <p>grid 속성은 차트의 격자를 설정합니다.</p>
       <pre>
         options: {
           plugins: {
-            title: {
+            xGrid: {
               display: true,
-              text: 'This is Main Title',
-              size: "5px",
-              color: 'black',
-              align: 'center'
+              color: "#323233",
+              dash: "10,3",
+              weight: 1,
+              opacity: .5
             },
-            xTitle: {
+            yGrid: {
               display: true,
-              text: 'name',
-              size: "5px",
-              color: 'black',
-              align: 'center'
-            },
-            yTitle: {
-              display: true,
-              position: 'left'
-              rotate: true,
-              text: 'value',
-              size: "5px",
-              color: 'black',
-              align: 'center'
-            },
+              color: "#323233",
+              dash: "10,3",
+              weight: 1,
+              opacity: .5
+            }
           }
+        }
       </pre>
       <hr>
-      <p>title과, xTitle의 속성은 동일합니다.</p>
+      <p>xGrid, yGrid에는 총 5개의 속성이 있습니다.</p>
       <table>
         <tr>
           <th style="width: 10%;">속성</th>
           <td style="width: 20%;">역할</td>
           <td style="width: 10%;">required</td>
           <td style="width: 10%;">default</td>
-          <td style="width: 50%;">입력예시</td>
+          <td style="width: 50%;">입력</td>
         </tr>
         <tr>
           <th>display</th>
           <td>표시 여부</td>
           <td>false</td>
-          <td>true</td>
+          <td class="script-color1">true</td>
           <td class="script-color1">true, false</td>
-        </tr>
-        <tr>
-          <th>text</th>
-          <td>title 값</td>
-          <td>false</td>
-          <td></td>
-          <td class="script-color1">str</td>
-        </tr>
-        <tr>
-          <th>size</th>
-          <td>font size</td>
-          <td>false</td>
-          <td>"16px"</td>
-          <td>"5px"</td>
         </tr>
         <tr>
           <th>color</th>
-          <td>title 값</td>
+          <td>grid 색깔</td>
           <td>false</td>
           <td>"black"</td>
-          <td>"black", "rgb(55, 55, 55)", "rgba(55, 55, 55, .5)"</td>
+          <td>"#226262", "rgb(10, 50, 70)"</td>
         </tr>
         <tr>
-          <th>align</th>
-          <td>title 값</td>
+          <th>dash</th>
+          <td>grid 점선 설정</td>
           <td>false</td>
-          <td>"center"</td>
-          <td class="script-color1">"start", "end", "center"</td>
+          <td>"1,0"</td>
+          <td>"int, int"   ex)"10,3"</td>
         </tr>
+        <tr>
+          <th>weight</th>
+          <td>grid 두께</td>
+          <td>false</td>
+          <td>1</td>
+          <td>0보다 큰 숫자</td>
+        </tr>
+        <tr>
+          <th>opacity</th>
+          <td>right margin</td>
+          <td>false</td>
+          <td>1</td>
+          <td>0~1</td>
+        </tr>
+      </table>
 
-      </table>
-      <br>
-      <p>yTitle에 추가 속성이 있습니다.</p>
-      <table>
-        <tr>
-          <th style="width: 10%;">속성</th>
-          <td style="width: 20%;">역할</td>
-          <td style="width: 10%;">required</td>
-          <td style="width: 10%;">default</td>
-          <td style="width: 50%;">입력예시</td>
-        </tr>
-        <tr>
-          <th>rotate</th>
-          <td>가로, 세로 여부</td>
-          <td>false</td>
-          <td>true</td>
-          <td class="script-color1">true, false</td>
-        </tr>
-        <tr>
-          <th>position</th>
-          <td>yTitle 위치</td>
-          <td>false</td>
-          <td>"left"</td>
-          <td>"left", "right"</td>
-        </tr>
-      </table>
       <br>
       <hr>
       <br>
       <h4>notify</h4>
       <br>
-      <div>
-        yTitle에 rotate여부를 지정하지 않으면 차트 margin과 yTitle길이에 따라 자동으로 결정됩니다.
-      </div>
+      <h5>
+        display
+      </h5>
+      <p>display를 false로 설정하여 grid값만 설정해 놓고 차트에 표시하지 않을 수 있습니다.</p>
+      <p>설정된 grid값으로 menu 기능으로 사용자에게 grid를 그려줄 수 있습니다.</p>
       <br>
-      <div>
-        title, xTitle, yTitle이 위치할 충분한 margin을 입력해주세요.
-      </div>
+      <h5>
+        dash
+      </h5>
+      <p>점선의 "int1,int2"는 int1만큼 선을 그려주고, int2만큼 비워두는 것을 반복합니다.</p>
+      <p>예를 들어 입력값이 "10,3"일 경우 10,3,10,3,10,3과 같이 선 중간중간에 3의 공백이 들어갑니다.</p>
     </div>
 
 

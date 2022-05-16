@@ -33,16 +33,14 @@ function Chart(
     .style("height", height);
 
   const labels = data.labels;
-  
   let labelcolor;
-  if(type == "donut"|| type == "pie"){
+  if(type == "donut"|| type == "pie" || type == "polar"){
     labelcolor = LabelsColor(data);
   }
   else{
     labelcolor = LabelColor({datasets: data.datasets});
   }
   
-
   const color = labelcolor.color;
   const legend_label = labelcolor.label;
   const chart_area = svg
@@ -56,7 +54,7 @@ function Chart(
     legendList: []
   }
   if (legend) {
-    if(type == "donut"|| type == "pie"){
+    if(type == "donut"|| type == "pie" || type == "polar"){
       legend_box = drawLegend(
         oid,
         svg,
@@ -295,24 +293,23 @@ function Chart(
   }
 
   if (type === "donut" || type === "pie") {
-    
     const datasets = Data_pre_processing(
       data.labels,
       data.datasets,
       "namevaluedataone"
-    );
-    drawCicleChart(datasets);
+      );
+    drawCircleChart(datasets);
 
     createLegendToggle(
       id,
       datasets,
       legend_box?.legendList,
       chart_area,
-      drawCicleChart,
+      drawCircleChart,
       {},
       renderBackground,
     );
-    function drawCicleChart(chartData) {      
+    function drawCircleChart(chartData) {      
       const circleChart = new CircleChart({
         id: oid,
         type,
@@ -364,6 +361,45 @@ function Chart(
       renderOptions();
     }
   }
+  
+
+  if (type === "polar") {
+    const datasets = Data_pre_processing(
+      data.labels,
+      data.datasets,
+      "namevaluedataone"
+      );
+    drawPolarChart(datasets);
+    createLegendToggle(
+      id,
+      datasets,
+      legend_box?.legendList,
+      chart_area,
+      drawPolarChart,
+      {},
+      renderBackground
+    );
+    function drawPolarChart(datasets) {
+      const polarChart = new PolarChart({
+        id: oid,
+        type,
+        chart_area: chart_area,
+        width : chart_width,
+        height : chart_height,
+        margin,
+        labels,
+        color: labelcolor.color,
+        datasets: datasets,
+        options,
+        scales,
+      });
+      polarChart.tooltip();
+      polarChart.animation();
+      renderOptions();
+    }
+  }
+
+
   function renderOptions() {
     if (title) {
       drawTitle(svg, options, width, chart_width, height, margin);      

@@ -30,7 +30,7 @@
     <div id="circle"></div>
     <div id="barH"></div>
     <div id="radar"></div>
-    
+    <div id="polar"></div>
     
     <!-- <script src='https://d3js.org/d3.v5.min.js'></script> -->
     <!-- <script type="text/javascript" src="node_modules/d3/build/d3.js"></script> -->
@@ -724,6 +724,36 @@
                 }
             }
         }
+        const config_p = {
+            type: 'polar',
+            width: 500,
+            height: 500,
+            margin: { top: 40, left: 40, bottom: 40, right: 40 },
+            padding: 0.1,
+            data: data_r,
+            depth:7, // 구간 갯수
+            poly:true,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',// top bottom left right
+                    },
+                    title: {
+                        display: true,
+                        text: 'polar Chart'
+                    },
+                    sort: true,
+                    view: true,
+                    menu: {
+                        download: true
+                    }
+                },
+                scales:{
+                    depth : 7
+                }
+            }
+        }
         // 레이더 차트 데이터 입력 부분.
     </script>
     <script type="module">
@@ -741,6 +771,7 @@
 
 
         Chart.Chart('#radar', config_r);
+        Chart.Chart('#polar', config_p);
     </script>
 
     <br>
