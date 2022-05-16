@@ -1,0 +1,44 @@
+#title {
+  font-size: 16px;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+#xTitle {
+  font-size: 13px;
+  font-family: sans-serif;
+}
+
+#yTitle {
+  font-size: 13px;
+  font-family: sans-serif;
+}
+
+.legend-text {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  
+  /*
+       Introduced in Internet Explorer 10.
+       See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+     */
+  -ms-user-select: none;
+  user-select: none;
+}
+
+text {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+  supported by Chrome, Edge, Opera and Firefox */  
+}

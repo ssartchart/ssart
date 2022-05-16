@@ -1,0 +1,121 @@
+#bargraph {
+  position: relative;
+}
+
+/* #tooltip {
+  position: absolute;
+  opacity: 1;
+  max-width: 30%;
+  max-height: 30%;
+  min-width: 5%;
+  min-height: 5%;
+  line-height: 10px;
+  transition: all 0.3s;
+  border-radius: 5px;
+  padding: 5px 8px;
+  text-align: center;
+  color: rgb(0, 0, 0);
+  font-size: 5px;
+  font-weight: bold;
+  background-color: rgb(100, 100, 255);
+  display: inline-block; 
+  pointer-events: none;
+} */
+
+.tooltip {
+  position: absolute;
+  opacity: 1;
+  /* max-width: 30%;
+  max-height: 30%;
+  min-width: 5%;
+  min-height: 2%;   */
+  width: max-content;
+  line-height: 20px;
+  transition: all 0.3s;
+  border-radius: 5px;
+  padding: 5px 8px;  
+  color: rgb(255, 255, 255);
+  /* font-size: 4px; */  
+  background-color: rgb(0, 0, 0, .8);  
+  display: inline-block; 
+  pointer-events: none;
+}
+.tooltip p {
+  font-weight: 900;
+  /* margin: 3px; */
+  font-size: 14px;
+  margin: 0px 0px 0px 0px;
+  min-width: 100%;
+}
+.tooltip span {
+  text-align: center;
+  font-weight: 500;
+  font-size: 14px;
+  margin: 0px 20px 0px 20px;
+  min-width: 100%;
+}
+.ssart-tooltip{
+  position: absolute;
+  opacity: 1;
+  max-width: 30%;
+  /* max-height: 30%; */
+  min-width: 5%;
+  min-height: 2%;
+  line-height: 10px;
+  /* transition: all 0.3s; */
+  border-radius: 5px;
+  padding: 5px 8px;
+  text-align: center;
+  color: rgb(0, 0, 0);
+  font-size: 5px;
+  font-weight: bold;
+  background-color: rgb(100, 100, 255);
+  display: inline-block; 
+  pointer-events: none;
+}
+
+.tooltip2 {
+  background-color: rgba(0, 0, 0, 0.75);
+  padding: 15px;
+  border-radius: 2px;
+  font-family: sans-serif;
+  color: white;
+  pointer-events: none;
+  box-shadow: 0 0 5px #999999;
+  background-color: rgb(115, 114, 214);
+  display: inline-block; 
+}
+
+.svg-container {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  /* aspect ratio */
+  vertical-align: top;
+  overflow: hidden;
+}
+
+.svg-content-responsive {
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  left: 0;
+}
+
+/* 컬러 CSS를 스타일안에 미리 해놔야하는지 ..? */
+.blue {
+  fill: #5abae6;
+}
+
+.red {
+  fill: #d34e4e;
+}
+
+.green {
+  fill: #9dbb19;
+}
+
+.yellow {
+  fill: #f7b358;
+}

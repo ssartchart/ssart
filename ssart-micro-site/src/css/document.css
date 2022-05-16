@@ -1,0 +1,40 @@
+pre {
+  padding-top: 20px;
+  background: #f0f0f0;
+  border-radius: 10px;
+  width: 800px;
+  word-wrap: break-word;
+  font-family: "Fira Mono", Consolas, Menlo, Monaco, "Courier New", Courier, monospace;
+  font-variant-ligatures: no-common-ligatures;
+  text-rendering: optimizeSpeed;
+  color: #0C4B33;
+  font-size: 1em;
+}
+
+.tag {
+  color: blue;
+}
+
+.script-color1 {
+  color: blueviolet;
+}
+
+table {
+  border: 1px solid gray;
+  border-collapse: collapse;
+  vertical-align: middle;
+  width: 800px;
+}
+
+table td, table th {
+  border: 1px solid gray;
+  padding: 0.5rem 0.75rem;
+  vertical-align: middle;
+}
+
+table th {
+  background: #f0f0f0;
+  font-weight: var(--font-body-strong-weight);
+  line-height: 1.5;
+  text-align: left;
+}
