@@ -38,7 +38,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .top-pane {
   background-color: hsl(111, 6%, 25%);
 }
