@@ -76,10 +76,14 @@ export const Axis_Option = (labels, datasets, scales, f = 1) =>{
         if (scales.xAxis){
             if (scales.xAxis.type){
                 x_type = scales.xAxis.type;
-                if(scales.xAxis.ticks.max != null && scales.xAxis.ticks.min != null){
-                    x_domain = [scales.xAxis.ticks.min,scales.xAxis.ticks.max];
-                }
             }
+            else{
+                x_type = "number";
+            }
+            if(scales.xAxis.ticks.max != null && scales.xAxis.ticks.min != null){
+                x_domain = [scales.xAxis.ticks.min,scales.xAxis.ticks.max];
+            }
+            
         }
         if (scales.yAxis){                
             if(scales.yAxis.ticks){
