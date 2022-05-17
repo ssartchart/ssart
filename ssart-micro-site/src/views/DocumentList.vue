@@ -1,12 +1,12 @@
 <template>
   <div>
     <ul id="doculist">
-      <li>
-        <span class="ListSpan" @click="gettingStarted">Getting Started</span>
+      <li class="ListSpan" @click="gettingStarted">
+        <span id="gettingStarted" style="font-weight: bold;">Getting Started</span>
       </li>
       <li>
         <span class="ListSpan" @click="showChart">Charts</span>
-        <ul v-if="isShowChart">
+        <ul v-show="isShowChart">
           <li class="underList">
             <span class="underListSpan">Area</span>            
           </li>
@@ -38,27 +38,27 @@
       </li>
       <li>
         <span class="ListSpan" @click="showConfig">Configuration</span>
-        <ul v-if="isShowConfig">
-          <li class="underList">
-            <span class="underListSpan" @click="axis">Axis</span>
+        <ul v-show="isShowConfig">
+          <li class="underList" @click="axis">
+            <span class="underListSpan">Axis</span>
           </li>
-          <li class="underList">
-            <span class="underListSpan" @click="background">Background</span>
+          <li class="underList" @click="background">
+            <span class="underListSpan">Background</span>
           </li>
-          <li class="underList">
-            <span class="underListSpan" @click="grid">Grid</span>
+          <li class="underList" @click="grid">
+            <span class="underListSpan">Grid</span>
           </li>
-          <li class="underList">
-            <span class="underListSpan" @click="legend">Legend</span>
+          <li class="underList" @click="legend">
+            <span class="underListSpan">Legend</span>
           </li>
-          <li class="underList">
-            <span class="underListSpan" @click="margin">Margin</span>
+          <li class="underList" @click="margin">
+            <span class="underListSpan">Margin</span>
           </li>
-          <li class="underList">
-            <span class="underListSpan" @click="menu">Menu</span>
+          <li class="underList" @click="menu">
+            <span class="underListSpan">Menu</span>
           </li>
-          <li class="underList">
-            <span class="underListSpan" @click="title">Title</span>
+          <li class="underList" @click="title">
+            <span class="underListSpan">Title</span>
           </li>
         </ul>
       </li>
@@ -79,35 +79,93 @@ export default {
     }
   },
   methods: {
-    showChart: function() {
+    showChart: function(e) {
       this.isShowChart = !this.isShowChart
+      if (e.target.style.fontWeight === "bold") {
+        e.target.style.fontWeight = "normal"
+      } else {
+        e.target.style.fontWeight = "bold"
+      }
     },
-    showConfig: function() {
+    showConfig: function(e) {
       this.isShowConfig = !this.isShowConfig
+      if (e.target.style.fontWeight === "bold") {
+        e.target.style.fontWeight = "normal"
+      } else {
+        e.target.style.fontWeight = "bold"
+      }
     },
-    axis: function() {
+    allNormal: function() {
+      const underList = document.getElementsByClassName("underList")
+      const underListSpan = document.getElementsByClassName("underListSpan")
+      for (let i = 0; i < underList.length; i++) {
+        underListSpan[i].style.fontWeight = "normal"
+      }
+      for (let i = 0; i < underListSpan.length; i++) {
+        underListSpan[i].style.fontWeight = "normal"
+      }
+      document.getElementById("gettingStarted").style.fontWeight = "normal"
+    },
+    axis: function(e) {
+      this.allNormal()
       this.$emit('axis')
+      e.target.style.fontWeight = "bold"
+      if (e.target.firstChild.className==="underListSpan") {
+        e.target.firstChild.style.fontWeight = "bold"
+      }
     },
     gettingStarted: function() {
+      this.allNormal()
       this.$emit('gettingStarted')
+      document.getElementById("gettingStarted").style.fontWeight = "bold"
     },
-    background: function() {
+    background: function(e) {
+      this.allNormal()
       this.$emit('background')
+      e.target.style.fontWeight = "bold"
+      if (e.target.firstChild.className==="underListSpan") {
+        e.target.firstChild.style.fontWeight = "bold"
+      }
     },
-    grid: function() {
+    grid: function(e) {
+      this.allNormal()
       this.$emit('grid')
+      e.target.style.fontWeight = "bold"
+      if (e.target.firstChild.className==="underListSpan") {
+        e.target.firstChild.style.fontWeight = "bold"
+      }
     },
-    legend: function() {
+    legend: function(e) {
+      this.allNormal()
       this.$emit('legend')
+      e.target.style.fontWeight = "bold"
+      if (e.target.firstChild.className==="underListSpan") {
+        e.target.firstChild.style.fontWeight = "bold"
+      }
     },
-    margin: function() {
+    margin: function(e) {
+      this.allNormal()
       this.$emit('margin')
+      e.target.style.fontWeight = "bold"
+      if (e.target.firstChild.className==="underListSpan") {
+        e.target.firstChild.style.fontWeight = "bold"
+      }
     },
-    menu: function() {
+    menu: function(e) {
+      this.allNormal()
       this.$emit('menu')
+      e.target.style.fontWeight = "bold"
+      if (e.target.firstChild.className==="underListSpan") {
+        e.target.firstChild.style.fontWeight = "bold"
+      }
     },
-    title: function() {
+    title: function(e) {
+      this.allNormal()
       this.$emit('title')
+      e.target.style.fontWeight = "bold"
+      if (e.target.firstChild.className==="underListSpan") {
+        e.target.firstChild.style.fontWeight = "bold"
+      }
     }
   }
   
@@ -145,9 +203,13 @@ li {
 
 .ListSpan {
   margin-left: 20px;
+  user-select: none;
+  cursor: pointer;
 }
 
 .underListSpan {
   margin-left: 70px;
+  user-select: none;
+  cursor: pointer;
 }
 </style>
