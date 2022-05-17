@@ -9,7 +9,7 @@
                       <p class="lead text-white-50 mb-4">..............부연 설명..............</p>
                       <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
                           
-                          <a class="btn btn-outline-light btn-lg px-4 me-sm-5" href="./documentations/getting_started.html">메뉴얼</a>
+                          <a class="btn btn-outline-light btn-lg px-4 me-sm-5" @click="goToDocumentation">메뉴얼</a>
                           <a class="btn btn-outline-light btn-lg px-4 me-sm-5" href="./sample.html">차트 샘플</a>
                           <a class="btn btn-outline-light btn-lg px-4 me-sm-5" href="#!">GitHub</a>
 
@@ -245,6 +245,11 @@ export default {
   data () {
     return {
       Bar, BarH, Line, Area, Scatter, Bubble, Donut, Pie, Radar, areaIco, bubbleIco, donutIco, scatterIco,
+    }
+  },
+  methods: {
+    goToDocumentation: function () {
+        this.$router.push('document')
     }
   }
 }
