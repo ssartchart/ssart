@@ -1,5 +1,4 @@
 // chart title
-import * as d3 from "https://cdn.skypack.dev/d3@7";
 export function drawTitle(svg, options, width, chart_width, height, margin) {
   let xTitle = chart_width/2
   if (options.plugins.legend?.position && options.plugins.legend.position == "left"){
