@@ -38,7 +38,7 @@ function createColorDiv() {
     .on("click", () => {
       const color = document.querySelector("#ssart-color-input");
       const inputValue = color.value;
-      // console.log(currentParam.data.datasets[currentIndex].label_index.color);
+
       let colorIndex = [];
       if (currentParam.type === "donut" || currentParam.type === "pie") {
         const circleColor = d3.select(currentId + "-circle-chartBody");
