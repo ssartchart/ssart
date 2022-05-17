@@ -1,4 +1,3 @@
-import * as d3 from "https://cdn.skypack.dev/d3@7";
 export const Data_pre_processing = (labels, datasets, type="namevalue")=>{
 
     switch(type){

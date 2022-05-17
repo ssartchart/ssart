@@ -1,4 +1,4 @@
-import * as d3 from "https://cdn.skypack.dev/d3@7";
+
 // import {BarChart} from './BarChartfunction.js'
 import { axisOptions, xGrid as drawXGrid, yGrid as drawYGrid } from "./module/axis_helper.js";
 import { LabelColor, LabelsColor } from "./module/color_helper.js";
