@@ -50,7 +50,7 @@
 <script>
 import Axis from './documentations/Axis.vue'
 import DocumentList from './DocumentList.vue'
-import GettingStarted from './documentations/gettingStarted.vue'
+import GettingStarted from './documentations/GettingStarted.vue'
 import Background from './documentations/Background.vue'
 import Grid from './documentations/Grid.vue'
 import Margin from './documentations/Margin.vue'
