@@ -50,27 +50,26 @@
 <script>
 import Axis from './documentations/Axis.vue'
 import DocumentList from './DocumentList.vue'
-import GettingStarted from './documentations/GettingStarted.vue'
 import Background from './documentations/Background.vue'
 import Grid from './documentations/Grid.vue'
 import Margin from './documentations/Margin.vue'
 import TitleDocument from './documentations/TitleDocument.vue'
 import MenuDocument from './documentations/MenuDocument.vue'
 import LegendDocument from './documentations/LegendDocument.vue'
+import GettingStarted from './documentations/GettingStarted.vue'
 
 export default {
   name: 'Documentation',
   components: {
     DocumentList,
     Axis,
-    GettingStarted,
     Background,
     Grid,
     Margin,
     TitleDocument,
     MenuDocument,
     LegendDocument,
-
+    GettingStarted,
   },
   data() {
     return {
