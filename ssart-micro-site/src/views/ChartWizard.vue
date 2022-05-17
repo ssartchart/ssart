@@ -590,7 +590,7 @@ p {
 }
 #header {
   background-color: #fff;
-  height: $heading-inner-height;
+  height: heading-inner-height;
   padding: 10px 60px;
   position: relative;
   z-index: 2;
