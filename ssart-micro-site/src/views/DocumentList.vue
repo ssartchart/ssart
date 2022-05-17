@@ -172,7 +172,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #doculist {
   min-height: 850px;
   margin: 0;

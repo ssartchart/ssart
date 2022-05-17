@@ -210,15 +210,7 @@
           </div>
         <br><!-- 3개씩 container 나누기 -->
 
-        </section>
-        
-       
-    
-    <!-- Footer-->
-    <footer class="py-5 bg-dark">
-        <div class="container px-5"><p class="m-0 text-center text-white"> Footer 섹션 </p></div>
-    </footer>
-    
+        </section>    
   </div>
 </template>
 

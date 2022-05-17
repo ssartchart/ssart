@@ -132,12 +132,8 @@ export function menu(
     dropDownWidth,
     dropDownX
   );
-  const legendDropDown = chart_area
-    .append("g")
-    .attr("class", "legendDropDown");
-  const colorDropDown = chart_area
-    .append("g")
-    .attr("class", "colorDropDown");
+  const legendDropDown = chart_area.append("g").attr("class", "legendDropDown");
+  const colorDropDown = chart_area.append("g").attr("class", "colorDropDown");
 
   const yGridGroup = chart_area.select("g.yAxis");
   const xGridGroup = chart_area.select("g.xAxis");
@@ -366,11 +362,10 @@ export function menu(
     const legendDropDownX = dropDownX - legendDropDownWidth;
     const legendDropDownY = margin.top + dropDownIndex * 25 - 10;
 
-    legendDropDown
-      .attr(
-        "transform",
-        "translate(" + legendDropDownX + "," + legendDropDownY + ")"
-      );
+    legendDropDown.attr(
+      "transform",
+      "translate(" + legendDropDownX + "," + legendDropDownY + ")"
+    );
     legendDropDown
       .append("rect")
       .attr("x", 0)
@@ -485,7 +480,11 @@ export function menu(
   }
 
   if (options.plugins.menu.color) {
-    createColorDiv();
+    console.log(id);
+    const colorDiv = document.getElementById("ssart-color-div");
+    if (colorDiv === null) {
+      createColorDiv();
+    }
 
     dropDownIndex += 1;
     const colorDropDownWidth = 120;
