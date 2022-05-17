@@ -18,6 +18,9 @@ pre {
 .script-color1 {
   color: blueviolet;
 }
+.annotation {
+  color: rgb(52, 116, 69);
+}
 
 table {
   border: 1px solid gray;
