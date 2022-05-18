@@ -8,12 +8,17 @@
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">                        
                         <a @click.prevent="$router.push({name: 'ChartWizard'}).catch(err => {})" class="nav-link active" aria-current="page" href="#!">
-                            메뉴 탭1
+                            메뉴 탭1(차트 코드)
                         </a>
                     </li>
                     <li class="nav-item"><a @click.prevent="$router.push({name: 'Sample'}).catch(err => {})" class="nav-link" href="#!">메뉴 탭2</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#!">메뉴 탭3</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#!">메뉴 탭4</a></li>
+                    <li class="nav-item"><a @click.prevent="$router.push({name: 'Documentation'}).catch(err => {})" class="nav-link active" aria-current="page" href="#!">
+                            Documentation
+                        </a></li>
+                       <li class="nav-item"><a @click.prevent="$router.push({name: 'Licensed'}).catch(err => {})" class="nav-link active" aria-current="page" href="#!">
+                            Licensed
+                        </a></li>
+                    <li class="nav-item"><a class="nav-link" href="#!">Contact Us</a></li>
                 </ul>
             </div>
         </div>

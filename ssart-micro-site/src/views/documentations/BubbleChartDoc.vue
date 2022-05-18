@@ -1,7 +1,7 @@
 <template>
     
     <div>
-        <h3> BubbleChart (산점도 그래프)</h3>
+        <h3> BubbleChart (거품 차트)</h3>
         <br>        
         <div class="chart-text">            
             <p>This chart displays three dimensions of data.</p>
