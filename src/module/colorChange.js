@@ -1,4 +1,3 @@
-import * as d3 from "https://cdn.skypack.dev/d3@7";
 import { Chart } from "../function.js";
 import cis from "./coloris.min.js";
 
@@ -39,38 +38,9 @@ function createColorDiv() {
       const color = document.querySelector("#ssart-color-input");
       const inputValue = color.value;
 
-      let colorIndex = [];
-      if (currentParam.type === "donut" || currentParam.type === "pie") {
-        const circleColor = d3.select(currentId + "-circle-chartBody");
-        let a = circleColor.selectAll(".data");
-        for (let i = 0; i < a._groups[0].length; i++) {
-          if (currentIndex === i) continue;
-          let path = a._groups[0][i];
-          let col = path.getAttribute("fill");
-          colorIndex[i] = col;
-        }
-
-        currentParam.data.datasets[currentIndex].color = inputValue;
-        Chart(currentId, currentParam);
-        color.style.color = inputValue;
-
-        const afterColor = d3.select(currentId + "-circle-chartBody");
-        let b = afterColor.selectAll(".data");
-        for (let i = 0; i < b._groups[0].length; i++) {
-          if (currentIndex === i) continue;
-          let path = b._groups[0][i];
-          path.setAttribute("fill", colorIndex[i]);
-
-          const labelColor = document.getElementById(
-            "circle-legend-" + i
-          ).firstChild;
-          labelColor.setAttribute("fill", colorIndex[i]);
-        }
-      } else {
-        currentParam.data.datasets[currentIndex].backgroundColor = inputValue;
-        Chart(currentId, currentParam);
-        color.style.color = inputValue;
-      }
+      currentParam.data.datasets[currentIndex].backgroundColor = inputValue;
+      Chart(currentId, currentParam);
+      color.style.color = inputValue;
     });
   colorButton
     .append("img")

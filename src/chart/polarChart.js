@@ -1,4 +1,3 @@
-import * as d3 from "https://cdn.skypack.dev/d3@7";
 
 export class PolarChart {
     constructor({ id, type, chart_area, width, height, margin, datasets, options, labels, color, scales }) {
@@ -152,7 +151,7 @@ export class PolarChart {
         const curr_data_set = this.curr_data_set;
         let index;
         this.ChartBody.selectAll(".data")
-        .on("mouseover", function(event, d){            
+        .on("mouseover", function(d){            
             index = d.data.label_index;           
             const label_index = curr_data_set[index].label_index;            
             d3.select(this).style("fill", d3.rgb(color(label_index)).darker(2));    
@@ -169,7 +168,7 @@ export class PolarChart {
                     </div>
                 `
         })
-        .on("mousemove", function(event, d){
+        .on("mousemove", function(d){
             tooltop.style.left = event.pageX + 20 + "px";
             tooltop.style.top = event.pageY + 20 + "px";        
         })

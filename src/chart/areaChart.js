@@ -1,4 +1,3 @@
-import * as d3 from "https://cdn.skypack.dev/d3@7";
 import {Axis_Option, Set_Axis} from '../module/axis_helper.js';
 
 export class AreaChart{
@@ -119,11 +118,11 @@ export class AreaChart{
         const tooltop = document.getElementById('ssart-tooltip');        
         const color = this.color;        
         this.ChartBody.selectAll(".data")                
-            .on("mouseover", function(event, d){ 
+            .on("mouseover", function(d){ 
                 d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));                
                 tooltop.style.opacity = "1.0";
             })
-            .on("mousemove", function(event, d){
+            .on("mousemove", function(d){
                 const name = d.x;
                 const value =  d.y;
                 const key = d3.rgb(color(d.label_index));
@@ -141,7 +140,7 @@ export class AreaChart{
                 tooltop.style.left = event.pageX + 20 + "px";
                 tooltop.style.top = event.pageY + 20 + "px";
             })
-            .on("mouseout", function(event,d){ 
+            .on("mouseout", function(d){ 
                 d3.select(this).style("fill", "white");
                 tooltop.style.opacity = "0";
             });        

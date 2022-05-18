@@ -1,4 +1,3 @@
-import * as d3 from "https://cdn.skypack.dev/d3@7";
 export function background(chart_area, margin, width, height, options) {
 
   let color = "black"
