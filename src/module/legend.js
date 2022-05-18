@@ -6,7 +6,7 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, optio
   } else {
     if (scales.fillopacity) {
       opacity = scales.fillopacity;
-    } else if (scales.dot?.opacity) {
+    } else if (scales.dot && scales.dot.opacity) {
       opacity = scales.dot.opacity;
     } else {
       opacity = .7
@@ -21,7 +21,7 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, optio
     opacity = legendOpacity;
   }
   if (typeof fontSize !== "number") {
-    if (fontSize?.includes("px")) {
+    if (fontSize && fontSize.includes("px")) {
       fontSize = fontSize.slice(0, fontSize.length - 2)
     }
   }
@@ -54,11 +54,7 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, optio
       .attr("width", fontSize)
       .attr("height", fontSize)
       .attr('fill', (d, i) => labelsColor(i))      
-      .style("fill-opacity", opacity)
-      .attr("stroke-width", (d, i) => datasets[i]?.borderWidth)
-      .attr("stroke", (d, i) => datasets[i]?.borderColor)
-      .attr("rx", (d, i) => datasets[i]?.borderRadius)
-      .attr("ry", (d, i) => datasets[i]?.borderRadius)
+      .style("fill-opacity", opacity)      
     
     legend
       .append("text")
@@ -98,8 +94,6 @@ export function drawLegend(id, svg, labels, width, height, chartContainer, optio
       .attr("d", pointStyle)
       .attr('fill', (d, i) => labelsColor(i))
       .style("fill-opacity", opacity)
-      .attr("stroke-width", (d, i) => datasets[i]?.borderWidth)
-      .attr("stroke", (d, i) => datasets[i]?.borderColor)
       .attr("transform", (d, i) => {
             if (legendType === "rectRot") {
               return 'rotate(45)'
