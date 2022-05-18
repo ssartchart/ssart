@@ -1,15 +1,8 @@
 <template>
-  <div>
-        <main>
-            <div class="container px-5 my-5">
-                <div class="container-fluid px-5">
-                    <h1> PolarChart (극지방 차트)</h1>
-                    <br>
-                    
-                    <hr>
+    <div>
+        <h3>PolarChart (극지방 차트)</h3>
+                        <br>  
                     <div class="chart-text">
-                        <h4>Description</h4>
-                        <br>
                         <p>Polar charts are similar to pie charts, but each dataset has the same angle.  </p>
                         <p>Each data set has a different radius size depending on the value. Useful when displaying comparison data similar to pie charts.</p>
                         <p>극지방 차트는 원 차트와 비슷하지만 각 데이터셋이 같은 각을 가집니다.</p>
@@ -86,13 +79,8 @@
         &lt;div id="polar">&lt;/div><span class="annotation">// 해당 차트를 만드는 명령어</span>
         </pre>
             </details>
-
-
-
-                </div>
-            </div>
-        </main>
     </div>
+
 </template>
 
 <script>

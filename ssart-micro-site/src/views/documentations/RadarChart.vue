@@ -1,15 +1,10 @@
 <template>
   <div>
-        <main>
-            <div class="container px-5 my-5">
-                <div class="container-fluid px-5">
-                    <h1> RadarChart (레이더 차트)</h1>
+        
+                    <h3> RadarChart (레이더 차트)</h3>
                     <br>
                     
-                    <hr>
                     <div class="chart-text">
-                        <h4>Description</h4>
-                        <br>
                         <p>This is a diagram that divides various evaluation items into polygons according to the number of items, </p>
                         <p>draws points according to the score of the items, and connects the points to form a line so that the balance between items can be seen at a glance.</p>
                         <p>레이다 차트(Radar Chart)는 어떤 측정 목표에 대한 평가항목이 여러 개일 때 항목 수에 따라 원을 같은 간격으로 나누고, </p>
@@ -88,12 +83,6 @@
         &lt;div id="radar">&lt;/div><span class="annotation">// 해당 차트를 만드는 명령어</span>
         </pre>
             </details>
-
-
-
-                </div>
-            </div>
-        </main>
     </div>
 </template>
 

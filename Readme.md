@@ -1,8 +1,7 @@
 <p align="center">
   <a href="our micro sites" target="_blank">
-    <img src="https://www.chartjs.org/media/logo-title.svg" alt="https://www.chartjs.org/"><br/>
+    <img src="ssart-micro-site/src/assets/logo.png" alt="https://www.chartjs.org/" width="300px" height="300px"><br/>
   </a>
-   use our team logo ssart
 </p>
 
  <img src= src\img\sample.jpg width = "100%" height = "300px">
