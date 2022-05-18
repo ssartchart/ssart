@@ -16,13 +16,13 @@
           <li class="underList" @click="bar2">
             <span class="underListSpan">Bar2</span>
           </li>
-          <li class="underList">
+          <li class="underList" @click="bubble">
             <span class="underListSpan">Bubble</span>
           </li>
-          <li class="underList">
+          <li class="underList" @click="circle">
             <span class="underListSpan">Circle</span>
           </li>
-          <li class="underList">
+          <li class="underList" @click="line">
             <span class="underListSpan">Line</span>
           </li>
           <li class="underList" @click="polar">
@@ -162,6 +162,30 @@ export default {
     title: function(e) {
       this.allNormal()
       this.$emit('title')
+      e.target.style.fontWeight = "bold"
+      if (e.target.firstChild.className==="underListSpan") {
+        e.target.firstChild.style.fontWeight = "bold"
+      }
+    },
+    bubble: function(e) {
+      this.allNormal()
+      this.$emit('bubble')
+      e.target.style.fontWeight = "bold"
+      if (e.target.firstChild.className==="underListSpan") {
+        e.target.firstChild.style.fontWeight = "bold"
+      }
+    },
+    circle: function(e) {
+      this.allNormal()
+      this.$emit('circle')
+      e.target.style.fontWeight = "bold"
+      if (e.target.firstChild.className==="underListSpan") {
+        e.target.firstChild.style.fontWeight = "bold"
+      }
+    },
+    line: function(e) {
+      this.allNormal()
+      this.$emit('line')
       e.target.style.fontWeight = "bold"
       if (e.target.firstChild.className==="underListSpan") {
         e.target.firstChild.style.fontWeight = "bold"

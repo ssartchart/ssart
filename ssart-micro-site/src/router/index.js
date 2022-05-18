@@ -25,13 +25,26 @@ const routes = [
     component: Documentation
   },
   {
+    path: '/document/bubble-chart',
+    name: 'BubbleChartDoc',
+    component: () => import(/* webpackChunkName: "BubbleChartDoc" */ '../views/documentations/BubbleChartDoc.vue')
+  },
+  {
     path: '/chart-wizard',
     name: 'ChartWizard',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/ChartWizard.vue')
-  }
+  },
+  // {
+  //   path: '/code-generator',
+  //   name: 'CodeGenerator',
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: () => import(/* webpackChunkName: "about" */ '../views/CodeGenerator.vue')
+  // }
 ]
 
 const router = new VueRouter({

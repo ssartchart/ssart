@@ -10,6 +10,9 @@
         @margin="showMargin"
         @menu="showMenu"
         @title="showTitle"
+        @bubble="showBubble"
+        @circle="showCircle"               
+        @line="showLine"
         @area="showArea"
         @bar1="showBar1"
         @bar2="showBar2"
@@ -48,6 +51,15 @@
         <title-document
           v-if="isShowTitle"
         />
+        <bubble-chart-doc
+          v-if="isShowBubble"
+        />
+        <circle-chart-doc
+          v-if="isShowCircle"
+        />
+        <line-chart-doc
+          v-if="isShowLine"
+        />
         <area-chart
           v-if="isShowArea"
         />
@@ -81,6 +93,7 @@ import TitleDocument from './documentations/TitleDocument.vue'
 import MenuDocument from './documentations/MenuDocument.vue'
 import LegendDocument from './documentations/LegendDocument.vue'
 import GettingStarted from './documentations/GettingStarted.vue'
+import BubbleChartDoc from './documentations/BubbleChartDoc.vue'
 import AreaChart from './documentations/AreaChart.vue'
 import Bar1 from './documentations/Bar1.vue'
 import Bar2 from './documentations/Bar2.vue'
@@ -88,6 +101,8 @@ import Bar2 from './documentations/Bar2.vue'
 import PolarChart from './documentations/PolarChart.vue'
 import RadarChart from './documentations/RadarChart.vue'
 import ScatterChart from './documentations/ScatterChart.vue'
+import CircleChartDoc from './documentations/CircleChartDoc.vue'
+import LineChartDoc from './documentations/LineChartDoc.vue'
 
 export default {
   name: 'Documentation',
@@ -101,6 +116,9 @@ export default {
     MenuDocument,
     LegendDocument,
     GettingStarted,
+    BubbleChartDoc,
+    CircleChartDoc,
+    LineChartDoc,
     AreaChart,
     Bar1,
     Bar2,
@@ -109,7 +127,7 @@ export default {
     ScatterChart,
   },
   data() {
-    return {
+  return {
       isShowAxis: false,
       isShowGettingStarted: true,
       isShowBackground: false,
@@ -118,6 +136,9 @@ export default {
       isShowMargin: false,
       isShowMenu: false,
       isShowTitle: false,
+      isShowBubble: false,
+      isShowCircle: false,
+      isShowLine: false,
       isShowArea : false,
       isShowBar1 : false,
       isShowBar2 : false,
@@ -136,6 +157,9 @@ export default {
       this.isShowMargin = false
       this.isShowMenu = false
       this.isShowTitle = false
+      this.isShowBubble = false
+      this.isShowCircle = false
+      this.isShowLine = false
       this.isShowArea = false
       this.isShowBar1 = false
       this.isShowBar2 = false
@@ -175,7 +199,18 @@ export default {
       this.hiddenAll()
       this.isShowTitle = true
     },
-
+    showBubble: function() {
+      this.hiddenAll()
+      this.isShowBubble = true
+    },
+    showCircle: function() {
+      this.hiddenAll()
+      this.isShowCircle = true
+    },
+    showLine: function() {
+      this.hiddenAll()
+      this.isShowLine = true
+    },
     showArea: function() {
       this.hiddenAll()
       this.isShowArea = true
