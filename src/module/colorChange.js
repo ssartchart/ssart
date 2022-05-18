@@ -44,7 +44,10 @@ function createColorDiv() {
     });
   colorButton
     .append("img")
-    .attr("src", "./ico/drawing.png")
+    .attr(
+      "src",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTIBfJ62RBY2Lt-KTt4hMuiiXuQp0ju4dRRWvSuix_xYRO2GNAIEDgfJm7r21FQ9vpWWA&usqp=CAU"
+    )
     .style("width", "28px")
     .style("height", "22px");
 
@@ -57,7 +60,10 @@ function createColorDiv() {
     });
   closeButton
     .append("img")
-    .attr("src", "./ico/close.png")
+    .attr(
+      "src",
+      "https://cdn3.iconfinder.com/data/icons/pyconic-icons-1-2/512/close-512.png"
+    )
     .style("width", "28px")
     .style("height", "22px");
 }

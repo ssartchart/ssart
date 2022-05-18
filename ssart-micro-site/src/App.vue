@@ -4,7 +4,14 @@
     <router-view/>
     <!-- Footer-->
     <footer class="py-5 bg-dark">
-        <div class="container px-5"><p class="m-0 text-center text-white"> Footer 섹션 </p></div>
+        <div class="container px-5">
+          <div class="m-0 text-center text-white">
+          <p >Copyright (c) 2022 ssart </p>
+          <p>Library released under <a href="https://opensource.org/licenses/MIT">MIT license</a> </p>
+          <p>Mail : npm_ssart@naver.com </p>
+          <p>Git : ourgitaddress </p>
+          </div>
+        </div>
     </footer>
   </div>
 </template>
