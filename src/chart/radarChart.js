@@ -1,4 +1,3 @@
-import * as d3 from "https://cdn.skypack.dev/d3@7";
 export class RadarChart {
     constructor({ id, type, chart_area, width, height, margin, datasets, labels,color, scales,poly}){
         chart_area.selectAll('.chartBody').remove();
@@ -242,13 +241,13 @@ export class RadarChart {
         let index;
         // 레이더 너비
         this.ChartBody.selectAll(".data")
-            .on("mouseover", function (event, d) {                
+            .on("mouseover", function (d) {                
                 index = data_idx[d[d.length - 1]];                
                 const label_index = datasets[index].data[0].label_index;
                 d3.select(this).style("fill", d3.rgb(color(label_index)).darker(2));        
                 tooltop.style.opacity = "1.0";
             })
-            .on("mousemove", function (event, d, index) {
+            .on("mousemove", function (d, index) {
                 index = data_idx[d[d.length - 1]];
                 const label_index = datasets[index].data[0].label_index;
                 const fill = d3.rgb(color(label_index));
@@ -269,7 +268,7 @@ export class RadarChart {
                 tooltop.style.left = event.pageX + 20 + "px";
                 tooltop.style.top = event.pageY + 20 + "px";
             })
-            .on("mouseout", function (event, d, index) {
+            .on("mouseout", function (d, index) {
                 index = data_idx[d[d.length - 1]];
                 const label_index = datasets[index].data[0].label_index;
                 d3.select(this).style("fill", color(label_index));  
@@ -277,7 +276,7 @@ export class RadarChart {
             })
         // 레이더 꼭지점
         this.ChartBody.selectAll(".dot")
-            .on("mouseover", function (event, d) {
+            .on("mouseover", function (d) {
                 let index = dot_idx.get(this);
                 d3.select(this).attr("r", 4 );
                 const dot_value = dot_data[index][0];              
@@ -308,7 +307,7 @@ export class RadarChart {
                         .attr('stroke', 'red')
                         .attr('fill', 'red');
         })
-        .on("mouseout", function(event, d, index){ 
+        .on("mouseout", function(d, index){ 
             d3.select(this).attr("r", 3);
             tooltop.style.opacity = "0";
         });

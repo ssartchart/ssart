@@ -1,4 +1,3 @@
-import * as d3 from "https://cdn.skypack.dev/d3@7";
 import {Axis_Option, Set_Axis} from '../module/axis_helper.js';
 
 export class BubbleChart{
@@ -85,13 +84,13 @@ export class BubbleChart{
         const color = this.color;
         const r = this.r;
         this.ChartBody.selectAll(".data")
-        .on("mouseover", function(event, d){ 
+        .on("mouseover", function(d){ 
 
             d3.select(this).style("fill", d3.rgb(color(d.label_index)).darker(2));
 
             tooltop.style.opacity = "1.0";
         })
-            .on("mousemove", function (event, d) {
+            .on("mousemove", function (d) {
                 const name = d.label;
                 const x = d.x;
                 const y =  d.y;
@@ -107,7 +106,7 @@ export class BubbleChart{
                 tooltop.style.top = event.pageY + 20 + "px";
                 d3.select(this).attr("r", r(r_value) * 1.3)
         })
-            .on("mouseout", function (event, d) { 
+            .on("mouseout", function (d) { 
                 const r_value = d.r;                
                 d3.select(this).style("fill", color(d.label_index));
                 d3.select(this).attr("r", r(r_value))

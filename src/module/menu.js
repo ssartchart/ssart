@@ -1,4 +1,3 @@
-import * as d3 from "https://cdn.skypack.dev/d3@7";
 import capture from "./saveSvgAsPng.js";
 import { Chart } from "../function.js";
 import { clickLabel, createColorDiv } from "./colorChange.js";

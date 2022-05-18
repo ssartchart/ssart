@@ -6,7 +6,7 @@
               <div class="col-lg-8">
                   <div class="text-center my-5">
                       <h1 class="display-5 fw-bolder text-white mb-2">SSART OPENSOURCE LIBRARY </h1>
-                      <p class="lead text-white-50 mb-4">..............부연 설명..............</p>
+                      <p class="lead text-white-50 mb-4" style="font-size: 1.2rem;">This Library helps you visualize your data in an easy and simple way.  </p>
                       <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
                           
                           <a class="btn btn-outline-light btn-lg px-4 me-sm-5" @click="goToDocumentation">메뉴얼</a>
@@ -22,21 +22,23 @@
 
     <!-- Chart Feature 섹션-->
         <section class="py-4 border-bottom" id="features">
-          <div class="container px-3 my-4">
-              <div class="row gx-5">
-                  <div class="col-lg-4 mb-lg-0">
-                      <div class="row" style="display: flex; align-items: center;">
-                          <div class="col-sm-3">
-                              <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
-                                  <i class="bi bi-bar-chart-line-fill"></i>                            
-                              </div>
-                          </div>
-                          <div class="col-sm-9" style="display: table-cell; vertical-align: middle;">
-                              <h2 class="h4 fw-bolder" style="display: flex; align-items: center;">Bar Chart - Vertical</h2>
-                          </div>
-                      </div>
-                      <p>..............................막대 그래프 대략 설명..........................................</p>
-                          <img class="card-img-top" :src='Bar' alt="Card image cap">
+            <div class="container px-3 my-4">
+                <div class="row gx-5">
+                    <div class="col-lg-4 mb-lg-0">
+                        <div class="row" style="display: flex; align-items: center;">
+                            <div class="col-sm-3">
+                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
+                                    <i class="bi bi-bar-chart-line-fill"></i>                            
+                                </div>
+                            </div>
+                            <div class="col-sm-9" style="display: table-cell; vertical-align: middle;">
+                                <h2 class="h4 fw-bolder" style="display: flex; align-items: center;">Bar Chart - Vertical</h2>
+                            </div>
+                        </div>
+                        <div>
+                        <p class="text-secondary">This chart that represents categorical data as vertical rectangular bars with height and length proportional to the representation values.</p>
+                        </div>
+                            <img class="card-img-top" :src='Bar' alt="Card image cap">
                         <a class="text-decoration-none" href="#!">
                             Bar Chart Detail
                             <i class="bi bi-arrow-right"></i>
@@ -54,8 +56,10 @@
                                 <h2 class="h4 fw-bolder" style="display: flex; align-items: center;">Bar Chart - Horizontal</h2>
                             </div>
                         </div>
-                        <p>..............................막대 그래프 대략 설명..........................................</p>
-                            <img class="card-img-top" :src="BarH" alt="Card image cap">
+                        <div>
+                        <p class="text-secondary">This chart that represents categorical data as horizontal rectangular bars with height and length proportional to the representation values.</p>
+                        </div>
+                            <img class="card-img-top" :src='BarH' alt="Card image cap">
                         <a class="text-decoration-none" href="#!">
                             Bar chart Detail
                             <i class="bi bi-arrow-right"></i>
@@ -72,8 +76,11 @@
                             <div class="col-sm-9" style="display: table-cell; vertical-align: middle;">
                                 <h2 class="h4 fw-bolder" style="display: flex; align-items: center;">Line Chart</h2>
                         </div>
-                        <p>..............................라인 그래프 대략 설명..........................................</p>
-                        <img class="card-img-top" :src="Line" alt="Card image cap">
+                        <div>
+                            <p class="text-secondary">This chart that uses lines to show how different pieces of information are related to each other.</p><br>
+                        </div>
+                        <img class="card-img-top" :src='Line' alt="Card image cap"/>
+                        <br/>
                         <a class="text-decoration-none" href="#!">
                             Line Chart Detail
                             <i class="bi bi-arrow-right"></i>
@@ -82,7 +89,7 @@
                 </div>
 
             </div>
-          </div>
+            </div>
         <br><!-- 3개씩 container 나누기 -->
             <div class="container px-3 my-4">
                 <div class="row gx-5">
@@ -98,8 +105,10 @@
                                 <h2 class="h4 fw-bolder" style="display: flex; align-items: center;">Area Chart</h2>
                             </div>
                         </div>
-                        <p>..............................area 그래프 대략 설명..........................................</p>
-                            <img class="card-img-top" :src="Area" alt="Card image cap">
+                        <div>
+                        <p class="text-secondary">This chart which is based on the line chart displays graphically quantitative data. The area between axis and line are commonly emphasized with colors, textures and hatchings. Commonly one compares two or more quantities with an area chart.</p>
+                        </div>
+                            <img class="card-img-top" :src='Area' alt="Card image cap">
                         <a class="text-decoration-none" href="#!">
                             Area Chart Detail
                             <i class="bi bi-arrow-right"></i>
@@ -110,15 +119,17 @@
                         <div class="row" style="display: flex; align-items: center;">
                             <div class="col-sm-3">
                                 <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
-                                    <i class="bi"><img :src="scatterIco" alt="" style="display: block; width: 60px; height: auto;" ></i>
+                                    <i class="bi"><img :src="scatterIco" alt="" style="display: block; width: 100%; height: auto;" ></i>
                                 </div>
                             </div>
                             <div class="col-sm-9" style="display: table-cell; vertical-align: middle;">
                                 <h2 class="h4 fw-bolder" style="display: flex; align-items: center;">Scatter Chart</h2>
                             </div>
                         </div>
-                        <p>..............................scatter 그래프 대략 설명..........................................</p>
-                            <img class="card-img-top" :src="Scatter" alt="Card image cap">
+                        <div>
+                            <p class="text-secondary">This chart is a type of plot or mathematical diagram using coordinates to display values for typically two variables for a set of data. The data are displayed as a collection of points on the horizontal axis and the vertical axis.</p>
+                        </div>
+                            <img class="card-img-top" :src='Scatter' alt="Card image cap">
                         <a class="text-decoration-none" href="#!">
                             Scatter Chart Detail
                             <i class="bi bi-arrow-right"></i>
@@ -129,14 +140,18 @@
                         <div class="row" style="display: flex; align-items: center;">
                             <div class="col-sm-3">
                                 <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
-                                    <i class="bi"><img :src="bubbleIco" alt="" style="display: block; width: 60px; height: auto;" ></i>
+                                    <i class="bi"><img :src="bubbleIco" alt="" style="display: block; width: 100%; height: auto;" ></i>
                                 </div>
                             </div>
                             <div class="col-sm-9" style="display: table-cell; vertical-align: middle;">
                                 <h2 class="h4 fw-bolder" style="display: flex; align-items: center;">Bubble Chart</h2>
                         </div>
-                        <p>..............................bubble 그래프 대략 설명..........................................</p>
-                        <img class="card-img-top" :src="Bubble" alt="Card image cap">
+                        <div>
+                            <p class="text-secondary">This chart displays three dimensions of data. Each entity is plotted as a disk that express two of the values through the disk's x-axis and y-axis and the thrid thrugh its size.</p>
+                            <br/>
+                        </div>
+
+                        <img class="card-img-top" :src='Bubble' alt="Card image cap">
                         <a class="text-decoration-none" href="#!">
                             Bubble Chart Detail
                             <i class="bi bi-arrow-right"></i>
@@ -145,29 +160,12 @@
                 </div>
 
             </div>
-          </div>
+            </div>
         <br><!-- 3개씩 container 나누기 -->
+
             <div class="container px-3 my-4">
                 <div class="row gx-5">
-                    <div class="col-lg-4 mb-lg-0">
-                        <div class="row" style="display: flex; align-items: center;">
-                            <div class="col-sm-3">
-                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
-                                    <i class="bi"><img :src="donutIco" alt="" style="display: block; width: 60px; height: auto;" ></i>                        
-                                </div>
-                            </div>
-                            <div class="col-sm-9" style="display: table-cell; vertical-align: middle;">
-                                <h2 class="h4 fw-bolder" style="display: flex; align-items: center;">Donut Chart</h2>
-                            </div>
-                        </div>
-                        <p>..............................donut 그래프 대략 설명..........................................</p>
-                            <img class="card-img-top" :src="Donut" alt="Card image cap">
-                        <a class="text-decoration-none" href="#!">
-                            Donut Chart Detail
-                            <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div>
-
+                    
                     <div class="col-lg-4 mb-lg-0">
                         <div class="row" style="display: flex; align-items: center;">
                             <div class="col-sm-3">
@@ -179,13 +177,43 @@
                                 <h2 class="h4 fw-bolder" style="display: flex; align-items: center;">Pie Chart</h2>
                             </div>
                         </div>
-                        <p>......pie 그래프 대략 설명..........................................</p>
-                            <img class="card-img-top" :src="Pie" alt="Card image cap">
+                        <div>
+                            <p class="text-secondary">This chart is a graph showing the ratio of each part to the whole as a percentage in a fan shape. The central angle of each sector represents the proportion of the total, and has the advantage of being able to see the ratio at a glance. </p>
+                            <br/>
+                        </div>
+
+                            <img class="card-img-top" :src='Pie' alt="Card image cap">
                         <a class="text-decoration-none" href="#!">
                             Pie Chart Detail
                             <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
+
+                    <div class="col-lg-4 mb-lg-0">
+                        <div class="row" style="display: flex; align-items: center;">
+                            <div class="col-sm-3">
+                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
+                                    <i class="bi"><img :src="donutIco" alt="" style="display: block; width: 100%; height: auto;" ></i>                        
+                                </div>
+                            </div>
+                            <div class="col-sm-9" style="display: table-cell; vertical-align: middle;">
+                                <h2 class="h4 fw-bolder" style="display: flex; align-items: center;">Donut Chart</h2>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-secondary">This chart is shaped like a donut with a hole in the middle. All its functions and characteristics are based on pie chart. </p>
+                            <br/>
+                            <br/>
+                            <br/>
+                        </div>
+
+                            <img class="card-img-top" :src='Donut' alt="Card image cap">
+                        <a class="text-decoration-none" href="#!">
+                            Donut Chart Detail
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+
 
                     <div class="col-lg-4 mb-lg-0">
                         <div class="row" style="display: flex; align-items: center;">
@@ -197,8 +225,12 @@
                             <div class="col-sm-9" style="display: table-cell; vertical-align: middle;">
                                 <h2 class="h4 fw-bolder" style="display: flex; align-items: center;">Radar Chart</h2>
                         </div>
-                        <p>..............................radar 그래프 대략 설명..........................................</p>
-                        <img class="card-img-top" :src="Radar" alt="Card image cap">
+                        <div>
+                            <p class="text-secondary">This is a diagram that divides various evaluation items into polygons according to the number of items, draws points according to the score of the items, and connects the points to form a line so that the balance between items can be seen at a glance.</p>
+                            
+                        </div>
+
+                        <img class="card-img-top" :src='Radar' alt="Card image cap">
                         <a class="text-decoration-none" href="#!">
                             Radar Chart Detail
                             <i class="bi bi-arrow-right"></i>
@@ -207,10 +239,10 @@
                 </div>
 
             </div>
-          </div>
+            </div>
         <br><!-- 3개씩 container 나누기 -->
 
-        </section>    
+        </section>
   </div>
 </template>
 
