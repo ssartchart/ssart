@@ -11,6 +11,9 @@
         @menu="showMenu"
         @title="showTitle"
         @bubbleChartDoc="showBubbleChartDoc"
+        @polar="showPolar"
+        @radar="showRadar"
+        @scatter="showScatter"
       />
     </aside>
     
@@ -46,6 +49,15 @@
         <bubble-chart-doc
           v-if="isShowBubbleChartDoc"
         />
+        <polar-chart
+          v-if="isShowPolar"
+        />
+        <radar-chart
+          v-if="isShowRadar"
+        />
+        <scatter-chart
+          v-if="isShowScatter"
+        />
       </div>
     </div>
   </div>
@@ -62,6 +74,9 @@ import MenuDocument from './documentations/MenuDocument.vue'
 import LegendDocument from './documentations/LegendDocument.vue'
 import GettingStarted from './documentations/GettingStarted.vue'
 import BubbleChartDoc from './documentations/BubbleChartDoc.vue'
+import PolarChart from './documentations/PolarChart.vue'
+import RadarChart from './documentations/RadarChart.vue'
+import ScatterChart from './documentations/ScatterChart.vue'
 
 export default {
   name: 'Documentation',
@@ -76,6 +91,9 @@ export default {
     LegendDocument,
     GettingStarted,
     BubbleChartDoc,
+    PolarChart,
+    RadarChart,
+    ScatterChart,
   },
   data() {
     return {
@@ -88,6 +106,9 @@ export default {
       isShowMenu: false,
       isShowTitle: false,
       isShowBubbleChartDoc: false,
+      isShowPolar: false,
+      isShowRadar: false,
+      isShowScatter: false
     }
   },
   methods: {
@@ -101,6 +122,9 @@ export default {
       this.isShowMenu = false
       this.isShowTitle = false
       this.isShowBubbleChartDoc = false
+      this.isShowPolar = false
+      this.isShowRadar = false
+      this.isShowScatter = false
     },
     showAxis: function() {
       this.hiddenAll()
@@ -137,6 +161,18 @@ export default {
     showBubbleChartDoc: function() {
       this.hiddenAll()
       this.isShowBubbleChartDoc = true
+    },
+    showPolar: function() {
+      this.hiddenAll()
+      this.isShowPolar = true
+    },
+    showRadar: function() {
+      this.hiddenAll()
+      this.isShowRadar = true
+    },
+    showScatter: function() {
+      this.hiddenAll()
+      this.isShowScatter = true
     }
   }
 }
