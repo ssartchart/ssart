@@ -92,7 +92,7 @@ export default {
   data() {
     return {
       isShowAxis: false,
-      isShowGettingStarted: true,
+      isShowGettingStarted: false,
       isShowBackground: false,
       isShowGrid: false,
       isShowLegend: false,
@@ -124,7 +124,7 @@ export default {
     },
     showGettingStarted: function() {
       this.hiddenAll()
-      this.isShowGettingStarted = true
+      this.isShowScatter = true
     },
     showBackground: function() {
       this.hiddenAll()
@@ -161,6 +161,31 @@ export default {
     showScatter: function() {
       this.hiddenAll()
       this.isShowScatter = true
+    }
+  },
+  created() {
+    const field = this.$route.query.field
+
+    if(field == "Area") {
+      this.isShowArea = true
+    } else if(field == "Bar1") {
+      this.isShowScatter = true
+    } else if(field == "Bar2") {
+      this.isShowScatter = true
+    } else if(field == "Bubble") {
+      this.isShowScatter = true
+    } else if(field == "Circle") {
+      this.isShowScatter = true
+    } else if(field == "Line") {
+      this.isShowScatter = true
+    } else if(field == "Polar") {
+      this.isShowScatter = true
+    } else if(field == "Radar") {
+      this.isShowScatter = true
+    } else if(field == "Scatter") {
+      this.isShowScatter = true
+    } else {
+      this.isShowGettingStarted = true
     }
   }
 }
