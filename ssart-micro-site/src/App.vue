@@ -7,11 +7,9 @@
         <div class="container px-5">
           <div class="m-0 text-center text-white">
           <p >Copyright (c) 2022 ssart </p>
-          <p>our git </p>
-          <p>our git </p>
-          <p>our git </p>
-          <p>our git </p>
-          <p>our git </p>
+          <p>Library released under <a href="https://opensource.org/licenses/MIT">MIT license</a> </p>
+          <p>Mail : npm_ssart@naver.com </p>
+          <p>Git : ourgitaddress </p>
           </div>
         </div>
     </footer>
