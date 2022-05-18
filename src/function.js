@@ -108,7 +108,7 @@ function Chart(
     createLegendToggle(
       id,
       datasets,
-      legend_box?.legendList,
+      legend_box.legendList,
       chart_area,
       drawBarChart,
       {},
@@ -140,7 +140,7 @@ function Chart(
     createLegendToggle(
       id,
       datasets,
-      legend_box?.legendList,
+      legend_box.legendList,
       chart_area,
       drawScatterChart,
       {},
@@ -171,7 +171,7 @@ function Chart(
     createLegendToggle(
       id,
       datasets,
-      legend_box?.legendList,
+      legend_box.legendList,
       chart_area,
       drawBubbleChart,
       {},
@@ -202,7 +202,7 @@ function Chart(
     createLegendToggle(
       id,
       datasets,
-      legend_box?.legendList,
+      legend_box.legendList,
       chart_area,
       drawLineChart,
       {},
@@ -233,7 +233,7 @@ function Chart(
     createLegendToggle(
       id,
       datasets,
-      legend_box?.legendList,
+      legend_box.legendList,
       chart_area,
       drawAreaChart,
       {},
@@ -268,7 +268,7 @@ function Chart(
     createLegendToggle(
       id,
       datasets,
-      legend_box?.legendList,
+      legend_box.legendList,
       chart_area,
       drawbarHChart,
       {},
@@ -304,7 +304,7 @@ function Chart(
     createLegendToggle(
       id,
       datasets,
-      legend_box?.legendList,
+      legend_box.legendList,
       chart_area,
       drawCircleChart,
       {},
@@ -339,7 +339,7 @@ function Chart(
     createLegendToggle(
       id,
       datasets,
-      legend_box?.legendList,
+      legend_box.legendList,
       chart_area,
       drawRadarChart,
       {},
@@ -374,7 +374,7 @@ function Chart(
     createLegendToggle(
       id,
       datasets,
-      legend_box?.legendList,
+      legend_box.legendList,
       chart_area,
       drawPolarChart,
       {},

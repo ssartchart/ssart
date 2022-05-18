@@ -1,8 +1,10 @@
 // chart title
 export function drawTitle(svg, options, width, chart_width, height, margin) {
-  let xTitle = chart_width/2
-  if (options.plugins.legend?.position && options.plugins.legend.position == "left"){
-    xTitle = width - chart_width/2
+  let xTitle = chart_width / 2
+  if (options.plugins.legend) {
+    if (options.plugins.legend.position && options.plugins.legend.position == "left"){
+      xTitle = width - chart_width/2
+    }
   }
 
   const title = svg
