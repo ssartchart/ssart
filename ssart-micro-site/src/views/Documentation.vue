@@ -22,7 +22,7 @@
       />
     </aside>
     
-    <div style="width: 1000px; text-align: start; margin-bottom: 100px; margin-left: 200px;">
+    <div style="width: 1000px; text-align: start; margin-bottom: 100px; margin-left: 200px; margin-top:100px;">
       <div style="padding-left: 150px;">
         <h1>SSART Documentation</h1>
         <br>
@@ -242,19 +242,19 @@ export default {
     if(field == "Area") {
       this.isShowArea = true
     } else if(field == "Bar1") {
-      this.isShowScatter = true
+      this.isShowBar1 = true
     } else if(field == "Bar2") {
-      this.isShowScatter = true
+      this.isShowBar2 = true
     } else if(field == "Bubble") {
-      this.isShowScatter = true
+      this.isShowBubble = true
     } else if(field == "Circle") {
-      this.isShowScatter = true
+      this.isShowCircle = true
     } else if(field == "Line") {
-      this.isShowScatter = true
+      this.isShowLine = true
     } else if(field == "Polar") {
-      this.isShowScatter = true
+      this.isShowPolar = true
     } else if(field == "Radar") {
-      this.isShowScatter = true
+      this.isShowRadar = true
     } else if(field == "Scatter") {
       this.isShowScatter = true
     } else {

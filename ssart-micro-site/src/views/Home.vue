@@ -183,7 +183,7 @@
                         </div>
 
                             <img class="card-img-top" :src='Pie' alt="Card image cap">
-                        <a class="text-decoration-none" @click="goToPieDocumentation">
+                        <a class="text-decoration-none" @click="goToCircleDocumentation">
                             Pie Chart Detail
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -208,7 +208,7 @@
                         </div>
 
                             <img class="card-img-top" :src='Donut' alt="Card image cap">
-                        <a class="text-decoration-none" @click="goToDonutDocumentation">
+                        <a class="text-decoration-none" @click="goToCircleDocumentation">
                             Donut Chart Detail
                             <i class="bi bi-arrow-right"></i>
                         </a>

@@ -32,5 +32,10 @@ export default {
 </script>
 
 <style>
-
+nav {
+    position: fixed !important;
+    top: 0;
+    width: 100%;
+    height: 4.25rem;
+}
 </style>
