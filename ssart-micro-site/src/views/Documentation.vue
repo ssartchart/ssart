@@ -10,6 +10,7 @@
         @margin="showMargin"
         @menu="showMenu"
         @title="showTitle"
+        @bubbleChartDoc="showBubbleChartDoc"
       />
     </aside>
     
@@ -42,6 +43,9 @@
         <title-document
           v-if="isShowTitle"
         />
+        <bubble-chart-doc
+          v-if="isShowBubbleChartDoc"
+        />
       </div>
     </div>
   </div>
@@ -57,6 +61,7 @@ import TitleDocument from './documentations/TitleDocument.vue'
 import MenuDocument from './documentations/MenuDocument.vue'
 import LegendDocument from './documentations/LegendDocument.vue'
 import GettingStarted from './documentations/GettingStarted.vue'
+import BubbleChartDoc from './documentations/BubbleChartDoc.vue'
 
 export default {
   name: 'Documentation',
@@ -70,6 +75,7 @@ export default {
     MenuDocument,
     LegendDocument,
     GettingStarted,
+    BubbleChartDoc,
   },
   data() {
     return {
@@ -80,7 +86,8 @@ export default {
       isShowLegend: false,
       isShowMargin: false,
       isShowMenu: false,
-      isShowTitle: false
+      isShowTitle: false,
+      isShowBubbleChartDoc: false,
     }
   },
   methods: {
@@ -93,6 +100,7 @@ export default {
       this.isShowMargin = false
       this.isShowMenu = false
       this.isShowTitle = false
+      this.isShowBubbleChartDoc = false
     },
     showAxis: function() {
       this.hiddenAll()
@@ -126,6 +134,10 @@ export default {
       this.hiddenAll()
       this.isShowTitle = true
     },
+    showBubbleChartDoc: function() {
+      this.hiddenAll()
+      this.isShowBubbleChartDoc = true
+    }
   }
 }
 </script>

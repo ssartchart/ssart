@@ -16,7 +16,7 @@
           <li class="underList">
             <span class="underListSpan">Bar2</span>
           </li>
-          <li class="underList">
+          <li class="underList" @click="bubbleChartDoc">
             <span class="underListSpan">Bubble</span>
           </li>
           <li class="underList">
@@ -166,6 +166,14 @@ export default {
       if (e.target.firstChild.className==="underListSpan") {
         e.target.firstChild.style.fontWeight = "bold"
       }
+    },
+    bubbleChartDoc: function() {
+      this.allNormal()
+      this.$emit('bubbleChartDoc')
+      // e.target.style.fontWeight = "bold"
+      // if (e.target.firstChild.className==="underListSpan") {
+      //   e.target.firstChild.style.fontWeight = "bold"
+      // }
     }
   }
   
