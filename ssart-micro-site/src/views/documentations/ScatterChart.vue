@@ -1,16 +1,9 @@
 <template>
   <div>
-    <div>
-        <main>
-            <div class="container px-5 my-5">
-                <div class="container-fluid px-5">
-                    <h1> ScatterChart (산점도 차트)</h1>
+    
+                    <h3> ScatterChart (산점도 차트)</h3>
                     <br>
-                    
-                    <hr>
                     <div class="chart-text">
-                        <h4>Description</h4>
-                        <br>
                         <p>This chart is a type of plot or mathematical diagram using coordinates to display values for typically two variables for a set of data. </p>
                         <p>The data are displayed as a collection of points on the horizontal axis and the vertical axis.</p>
                         <p>산점도 차트(Scatter chart)는 직교 좌표계 (도표) 를 이용해 좌표상의 점을 표시함으로써 두 개 변수간의 관계를 나타내는 방법입니다.</p>
@@ -149,10 +142,6 @@
 
 
 
-                </div>
-            </div>
-        </main>
-    </div>
 
         
     
