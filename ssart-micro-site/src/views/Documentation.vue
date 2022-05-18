@@ -10,6 +10,15 @@
         @margin="showMargin"
         @menu="showMenu"
         @title="showTitle"
+        @bubble="showBubble"
+        @circle="showCircle"               
+        @line="showLine"
+        @area="showArea"
+        @bar1="showBar1"
+        @bar2="showBar2"
+        @polar="showPolar"
+        @radar="showRadar"
+        @scatter="showScatter"
       />
     </aside>
     
@@ -42,6 +51,33 @@
         <title-document
           v-if="isShowTitle"
         />
+        <bubble-chart-doc
+          v-if="isShowBubble"
+        />
+        <circle-chart-doc
+          v-if="isShowCircle"
+        />
+        <line-chart-doc
+          v-if="isShowLine"
+        />
+        <area-chart
+          v-if="isShowArea"
+        />
+        <bar-1
+          v-if="isShowBar1"
+        />
+        <bar-2
+          v-if="isShowBar2"
+        />
+        <polar-chart
+          v-if="isShowPolar"
+        />
+        <radar-chart
+          v-if="isShowRadar"
+        />
+        <scatter-chart
+          v-if="isShowScatter"
+        />
       </div>
     </div>
   </div>
@@ -57,6 +93,16 @@ import TitleDocument from './documentations/TitleDocument.vue'
 import MenuDocument from './documentations/MenuDocument.vue'
 import LegendDocument from './documentations/LegendDocument.vue'
 import GettingStarted from './documentations/GettingStarted.vue'
+import BubbleChartDoc from './documentations/BubbleChartDoc.vue'
+import AreaChart from './documentations/AreaChart.vue'
+import Bar1 from './documentations/Bar1.vue'
+import Bar2 from './documentations/Bar2.vue'
+
+import PolarChart from './documentations/PolarChart.vue'
+import RadarChart from './documentations/RadarChart.vue'
+import ScatterChart from './documentations/ScatterChart.vue'
+import CircleChartDoc from './documentations/CircleChartDoc.vue'
+import LineChartDoc from './documentations/LineChartDoc.vue'
 
 export default {
   name: 'Documentation',
@@ -70,9 +116,18 @@ export default {
     MenuDocument,
     LegendDocument,
     GettingStarted,
+    BubbleChartDoc,
+    CircleChartDoc,
+    LineChartDoc,
+    AreaChart,
+    Bar1,
+    Bar2,
+    PolarChart,
+    RadarChart,
+    ScatterChart,
   },
   data() {
-    return {
+  return {
       isShowAxis: false,
       isShowGettingStarted: true,
       isShowBackground: false,
@@ -80,7 +135,16 @@ export default {
       isShowLegend: false,
       isShowMargin: false,
       isShowMenu: false,
-      isShowTitle: false
+      isShowTitle: false,
+      isShowBubble: false,
+      isShowCircle: false,
+      isShowLine: false,
+      isShowArea : false,
+      isShowBar1 : false,
+      isShowBar2 : false,
+      isShowPolar: false,
+      isShowRadar: false,
+      isShowScatter: false
     }
   },
   methods: {
@@ -93,6 +157,15 @@ export default {
       this.isShowMargin = false
       this.isShowMenu = false
       this.isShowTitle = false
+      this.isShowBubble = false
+      this.isShowCircle = false
+      this.isShowLine = false
+      this.isShowArea = false
+      this.isShowBar1 = false
+      this.isShowBar2 = false
+      this.isShowPolar = false
+      this.isShowRadar = false
+      this.isShowScatter = false
     },
     showAxis: function() {
       this.hiddenAll()
@@ -126,6 +199,42 @@ export default {
       this.hiddenAll()
       this.isShowTitle = true
     },
+    showBubble: function() {
+      this.hiddenAll()
+      this.isShowBubble = true
+    },
+    showCircle: function() {
+      this.hiddenAll()
+      this.isShowCircle = true
+    },
+    showLine: function() {
+      this.hiddenAll()
+      this.isShowLine = true
+    },
+    showArea: function() {
+      this.hiddenAll()
+      this.isShowArea = true
+    },
+    showBar1: function() {
+      this.hiddenAll()
+      this.isShowBar1 = true
+    },
+    showBar2: function() {
+      this.hiddenAll()
+      this.isShowBar2 = true
+    },
+    showPolar: function() {
+      this.hiddenAll()
+      this.isShowPolar = true
+    },
+    showRadar: function() {
+      this.hiddenAll()
+      this.isShowRadar = true
+    },
+    showScatter: function() {
+      this.hiddenAll()
+      this.isShowScatter = true
+    }
   }
 }
 </script>
