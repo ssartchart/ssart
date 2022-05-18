@@ -39,7 +39,7 @@
                         <p class="text-secondary">This chart that represents categorical data as vertical rectangular bars with height and length proportional to the representation values.</p>
                         </div>
                             <img class="card-img-top" :src='Bar' alt="Card image cap">
-                        <a class="text-decoration-none" href="#!">
+                        <a class="text-decoration-none" @click="goToBar1Documentation">
                             Bar Chart Detail
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -60,7 +60,7 @@
                         <p class="text-secondary">This chart that represents categorical data as horizontal rectangular bars with height and length proportional to the representation values.</p>
                         </div>
                             <img class="card-img-top" :src='BarH' alt="Card image cap">
-                        <a class="text-decoration-none" href="#!">
+                        <a class="text-decoration-none" @click="goToBar2Documentation">
                             Bar chart Detail
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -81,7 +81,7 @@
                         </div>
                         <img class="card-img-top" :src='Line' alt="Card image cap"/>
                         <br/>
-                        <a class="text-decoration-none" href="#!">
+                        <a class="text-decoration-none" @click="goToLineDocumentation">
                             Line Chart Detail
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -109,7 +109,7 @@
                         <p class="text-secondary">This chart which is based on the line chart displays graphically quantitative data. The area between axis and line are commonly emphasized with colors, textures and hatchings. Commonly one compares two or more quantities with an area chart.</p>
                         </div>
                             <img class="card-img-top" :src='Area' alt="Card image cap">
-                        <a class="text-decoration-none" href="#!">
+                        <a class="text-decoration-none" @click="goToAreaDocumentation">
                             Area Chart Detail
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -130,7 +130,7 @@
                             <p class="text-secondary">This chart is a type of plot or mathematical diagram using coordinates to display values for typically two variables for a set of data. The data are displayed as a collection of points on the horizontal axis and the vertical axis.</p>
                         </div>
                             <img class="card-img-top" :src='Scatter' alt="Card image cap">
-                        <a class="text-decoration-none" href="#!">
+                        <a class="text-decoration-none" @click="goToScatterDocumentation">
                             Scatter Chart Detail
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -152,7 +152,7 @@
                         </div>
 
                         <img class="card-img-top" :src='Bubble' alt="Card image cap">
-                        <a class="text-decoration-none" href="#!">
+                        <a class="text-decoration-none" @click="goToBubbleDocumentation">
                             Bubble Chart Detail
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -183,7 +183,7 @@
                         </div>
 
                             <img class="card-img-top" :src='Pie' alt="Card image cap">
-                        <a class="text-decoration-none" href="#!">
+                        <a class="text-decoration-none" @click="goToCircleDocumentation">
                             Pie Chart Detail
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -208,7 +208,7 @@
                         </div>
 
                             <img class="card-img-top" :src='Donut' alt="Card image cap">
-                        <a class="text-decoration-none" href="#!">
+                        <a class="text-decoration-none" @click="goToCircleDocumentation">
                             Donut Chart Detail
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -231,7 +231,7 @@
                         </div>
 
                         <img class="card-img-top" :src='Radar' alt="Card image cap">
-                        <a class="text-decoration-none" href="#!">
+                        <a class="text-decoration-none" @click="goToRadarDocumentation">
                             Radar Chart Detail
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -261,6 +261,7 @@ import areaIco from "@/ico/area.png"
 import bubbleIco from "@/ico/bubble.png"
 import donutIco from "@/ico/donut.png"
 import scatterIco from "@/ico/scatter.png"
+
 export default {
   name: 'Home',
   components: {
@@ -274,6 +275,33 @@ export default {
   methods: {
     goToDocumentation: function () {
         this.$router.push('document')
+    },
+    goToAreaDocumentation: function () {
+        this.$router.push('document?field=Area')
+    },
+    goToBar1Documentation: function () {
+        this.$router.push('document?field=Bar1')
+    },
+    goToBar2Documentation: function () {
+        this.$router.push('document?field=Bar2')
+    },
+    goToBubbleDocumentation: function () {
+        this.$router.push('document?field=Bubble')
+    },
+    goToCircleDocumentation: function () {
+        this.$router.push('document?field=Circle')
+    },
+    goToLineDocumentation: function () {
+        this.$router.push('document?field=Line')
+    },
+    goToPolarDocumentation: function () {
+        this.$router.push('document?field=Polar')
+    },
+    goToRadarDocumentation: function () {
+        this.$router.push('document?field=Radar')
+    },
+    goToScatterDocumentation: function () {
+        this.$router.push('document?field=Scatter')
     }
   }
 }

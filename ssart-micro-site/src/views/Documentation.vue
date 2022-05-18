@@ -22,7 +22,7 @@
       />
     </aside>
     
-    <div style="width: 1000px; text-align: start; margin-bottom: 100px; margin-left: 200px;">
+    <div style="width: 1000px; text-align: start; margin-bottom: 100px; margin-left: 200px; margin-top:100px;">
       <div style="padding-left: 150px;">
         <h1>SSART Documentation</h1>
         <br>
@@ -129,7 +129,7 @@ export default {
   data() {
   return {
       isShowAxis: false,
-      isShowGettingStarted: true,
+      isShowGettingStarted: false,
       isShowBackground: false,
       isShowGrid: false,
       isShowLegend: false,
@@ -166,6 +166,8 @@ export default {
       this.isShowPolar = false
       this.isShowRadar = false
       this.isShowScatter = false
+
+      window.scrollTo(0, 0);
     },
     showAxis: function() {
       this.hiddenAll()
@@ -173,7 +175,7 @@ export default {
     },
     showGettingStarted: function() {
       this.hiddenAll()
-      this.isShowGettingStarted = true
+      this.isShowScatter = true
     },
     showBackground: function() {
       this.hiddenAll()
@@ -235,6 +237,33 @@ export default {
       this.hiddenAll()
       this.isShowScatter = true
     }
+  },
+  created() {
+    const field = this.$route.query.field
+
+    if(field == "Area") {
+      this.isShowArea = true
+    } else if(field == "Bar1") {
+      this.isShowBar1 = true
+    } else if(field == "Bar2") {
+      this.isShowBar2 = true
+    } else if(field == "Bubble") {
+      this.isShowBubble = true
+    } else if(field == "Circle") {
+      this.isShowCircle = true
+    } else if(field == "Line") {
+      this.isShowLine = true
+    } else if(field == "Polar") {
+      this.isShowPolar = true
+    } else if(field == "Radar") {
+      this.isShowRadar = true
+    } else if(field == "Scatter") {
+      this.isShowScatter = true
+    } else {
+      this.isShowGettingStarted = true
+    }
+
+    window.scrollTo(0, 0)
   }
 }
 </script>
