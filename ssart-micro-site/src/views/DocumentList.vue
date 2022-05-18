@@ -25,13 +25,13 @@
           <li class="underList">
             <span class="underListSpan">Line</span>
           </li>
-          <li class="underList">
+          <li class="underList" @click="polar">
             <span class="underListSpan">Polar</span>
           </li>
-          <li class="underList">
+          <li class="underList" @click="radar">
             <span class="underListSpan">Radar</span>
           </li>
-          <li class="underList">
+          <li class="underList" @click="scatter">
             <span class="underListSpan">Scatter</span>
           </li>
         </ul>
@@ -162,6 +162,30 @@ export default {
     title: function(e) {
       this.allNormal()
       this.$emit('title')
+      e.target.style.fontWeight = "bold"
+      if (e.target.firstChild.className==="underListSpan") {
+        e.target.firstChild.style.fontWeight = "bold"
+      }
+    },
+    polar: function(e) {
+      this.allNormal()
+      this.$emit('polar')
+      e.target.style.fontWeight = "bold"
+      if (e.target.firstChild.className==="underListSpan") {
+        e.target.firstChild.style.fontWeight = "bold"
+      }
+    },
+    radar: function(e) {
+      this.allNormal()
+      this.$emit('radar')
+      e.target.style.fontWeight = "bold"
+      if (e.target.firstChild.className==="underListSpan") {
+        e.target.firstChild.style.fontWeight = "bold"
+      }
+    },
+    scatter: function(e) {
+      this.allNormal()
+      this.$emit('scatter')
       e.target.style.fontWeight = "bold"
       if (e.target.firstChild.className==="underListSpan") {
         e.target.firstChild.style.fontWeight = "bold"
