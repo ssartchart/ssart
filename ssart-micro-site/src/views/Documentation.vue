@@ -166,6 +166,8 @@ export default {
       this.isShowPolar = false
       this.isShowRadar = false
       this.isShowScatter = false
+
+      window.scrollTo(0, 0);
     },
     showAxis: function() {
       this.hiddenAll()
@@ -260,6 +262,8 @@ export default {
     } else {
       this.isShowGettingStarted = true
     }
+
+    window.scrollTo(0, 0)
   }
 }
 </script>
