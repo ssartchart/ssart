@@ -10,6 +10,9 @@
         @margin="showMargin"
         @menu="showMenu"
         @title="showTitle"
+        @area="showArea"
+        @bar1="showBar1"
+        @bar2="showBar2"
       />
     </aside>
     
@@ -42,6 +45,15 @@
         <title-document
           v-if="isShowTitle"
         />
+        <area-chart
+          v-if="isShowArea"
+        />
+        <bar-1
+          v-if="isShowBar1"
+        />
+        <bar-2
+          v-if="isShowBar2"
+        />
       </div>
     </div>
   </div>
@@ -57,6 +69,10 @@ import TitleDocument from './documentations/TitleDocument.vue'
 import MenuDocument from './documentations/MenuDocument.vue'
 import LegendDocument from './documentations/LegendDocument.vue'
 import GettingStarted from './documentations/GettingStarted.vue'
+import AreaChart from './documentations/AreaChart.vue'
+import Bar1 from './documentations/Bar1.vue'
+import Bar2 from './documentations/Bar2.vue'
+
 
 export default {
   name: 'Documentation',
@@ -70,6 +86,9 @@ export default {
     MenuDocument,
     LegendDocument,
     GettingStarted,
+    AreaChart,
+    Bar1,
+    Bar2,
   },
   data() {
     return {
@@ -80,7 +99,10 @@ export default {
       isShowLegend: false,
       isShowMargin: false,
       isShowMenu: false,
-      isShowTitle: false
+      isShowTitle: false,
+      isShowArea : false,
+      isShowBar1 : false,
+      isShowBar2 : false,
     }
   },
   methods: {
@@ -93,6 +115,9 @@ export default {
       this.isShowMargin = false
       this.isShowMenu = false
       this.isShowTitle = false
+      this.isShowArea = false
+      this.isShowBar1 = false
+      this.isShowBar2 = false
     },
     showAxis: function() {
       this.hiddenAll()
@@ -125,6 +150,18 @@ export default {
     showTitle: function() {
       this.hiddenAll()
       this.isShowTitle = true
+    },
+    showArea: function() {
+      this.hiddenAll()
+      this.isShowArea = true
+    },
+    showBar1: function() {
+      this.hiddenAll()
+      this.isShowBar1 = true
+    },
+    showBar2: function() {
+      this.hiddenAll()
+      this.isShowBar2 = true
     },
   }
 }

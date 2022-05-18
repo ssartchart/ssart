@@ -7,13 +7,13 @@
       <li>
         <span class="ListSpan" @click="showChart">Charts</span>
         <ul v-show="isShowChart">
-          <li class="underList">
+          <li class="underList" @click="area">
             <span class="underListSpan">Area</span>            
           </li>
-          <li class="underList">
+          <li class="underList" @click="bar1">
             <span class="underListSpan">Bar1</span>
           </li>
-          <li class="underList">
+          <li class="underList" @click="bar2">
             <span class="underListSpan">Bar2</span>
           </li>
           <li class="underList">
@@ -166,7 +166,32 @@ export default {
       if (e.target.firstChild.className==="underListSpan") {
         e.target.firstChild.style.fontWeight = "bold"
       }
-    }
+    },
+    area: function(e) {
+      this.allNormal()
+      // console.log("chk")
+      this.$emit('area')
+      e.target.style.fontWeight = "bold"
+      if (e.target.firstChild.className==="underListSpan") {
+        e.target.firstChild.style.fontWeight = "bold"
+      }
+    },
+    bar1: function(e) {
+      this.allNormal()
+      this.$emit('bar1')
+      e.target.style.fontWeight = "bold"
+      if (e.target.firstChild.className==="underListSpan") {
+        e.target.firstChild.style.fontWeight = "bold"
+      }
+    },
+    bar2: function(e) {
+      this.allNormal()
+      this.$emit('bar2')
+      e.target.style.fontWeight = "bold"
+      if (e.target.firstChild.className==="underListSpan") {
+        e.target.firstChild.style.fontWeight = "bold"
+      }
+    },
   }
   
 }
