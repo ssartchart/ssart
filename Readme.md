@@ -1,10 +1,10 @@
 <p align="center">
   <a href="our micro sites" target="_blank">
-    <img src="ssart-micro-site/src/assets/logo.png" alt="https://www.chartjs.org/" width="300px" height="300px"><br/>
+    <img src="src/assets/logo.png" alt="https://www.ssart.org/" width="300px" height="300px"><br/>
   </a>
 </p>
 
- <img src= src\img\sample.jpg width = "100%" height = "300px">
+ <img src= src/img/sample.jpg width = "100%" height = "300px">
 
 ![npm](https://img.shields.io/npm/v/ssart) <!-- 배포하면 버전이 찍힘  -->
 ![dependencies](https://img.shields.io/badge/dependencies-d3-brightengreen)
@@ -62,7 +62,7 @@ All contents of the library were created using JavaScript.
 <details>
   <summary>BarChart</summary>
   <br>
-    <img src=src\img\IndexImg\1.Bar.png width = "300px" height = "300px">
+    <img src=src/img/IndexImg/1.Bar.png width = "300px" height = "300px">
 
     barchart
 
@@ -72,7 +72,7 @@ All contents of the library were created using JavaScript.
  <details>
   <summary>CircleChart</summary>
   <br>
-    <img src=src\img\IndexImg\8.Pie.png width = "300px" height = "300px">
+    <img src=src/img/IndexImg/8.Pie.png width = "300px" height = "300px">
 
     circlechart
 
@@ -82,7 +82,7 @@ All contents of the library were created using JavaScript.
   <details>
   <summary>LineChart</summary>
   <br>
-    <img src=src\img\IndexImg\3.Line.png width = "300px" height = "300px">
+    <img src=src/img/IndexImg/3.Line.png width = "300px" height = "300px">
 
     linechart
 
@@ -92,7 +92,7 @@ All contents of the library were created using JavaScript.
   <details>
   <summary>RadarChart</summary>
   <br>
-    <img src= src\img\IndexImg\9.Radar.png width = "300px" height = "300px">
+    <img src= src/img/IndexImg/9.Radar.png width = "300px" height = "300px">
 
     radarchart
 
@@ -103,7 +103,7 @@ All contents of the library were created using JavaScript.
   <details>
   <summary>ScatterChart</summary>
   <br>
-    <img src= src\img\IndexImg\5.Scatter.png width = "300px" height = "300px">
+    <img src= src/img/IndexImg/5.Scatter.png width = "300px" height = "300px">
 
     scatterchart
 
