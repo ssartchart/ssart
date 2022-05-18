@@ -14,11 +14,8 @@
                     <li class="nav-item"><a @click.prevent="$router.push({name: 'Sample'}).catch(err => {})" class="nav-link" href="#!">메뉴 탭2</a></li>
                     <li class="nav-item"><a @click.prevent="$router.push({name: 'Documentation'}).catch(err => {})" class="nav-link active" aria-current="page" href="#!">
                             Documentation
-                        </a></li>
-                       <li class="nav-item"><a @click.prevent="$router.push({name: 'Licensed'}).catch(err => {})" class="nav-link active" aria-current="page" href="#!">
-                            Licensed
-                        </a></li>
-                    <li class="nav-item"><a class="nav-link" href="#!">Contact Us</a></li>
+                    </a></li>
+                    <li class="nav-item"><a @click="contact"  class="nav-link" href="#!"> Contact </a></li>
                 </ul>
             </div>
         </div>
@@ -27,7 +24,12 @@
 
 <script>
 export default {
-  name: "Navbar",    
+  name: "Navbar", 
+  methods:{
+      contact:function(){
+          window.scrollTo(0, document.body.scrollHeight)
+      }
+  }
 }
 </script>
 
