@@ -15,8 +15,8 @@
     <div class="pane top-pane">
       <div class="editor-title">
         <button @click="selectLanguage('HTML')" :class="displayName == 'HTML' ? 'active' : ''">HTML</button>
-        <button @click="selectLanguage('CSS')" :class="displayName == 'CSS' ? 'active' : ''">CSS</button>
-        <button @click="selectLanguage('Javascript')" :class="displayName == 'Javascript' ? 'active' : ''">Javascript</button>
+        <button @click="selectLanguage('Config')" :class="displayName == 'Config' ? 'active' : ''">Config</button>
+        <button @click="selectLanguage('Data')" :class="displayName == 'Data' ? 'active' : ''">Data</button>
         <button
           type="button"
           class="expand-collapse-btn"
@@ -37,19 +37,19 @@
           @input="onCmCodeChange"
         ></codemirror>
         <codemirror 
-          v-if="displayName == 'CSS'" 
+          v-if="displayName == 'Config'" 
           class="css"
-          :options="cssOptions" 
-          :value="cssCode"
+          :options="configOptions" 
+          :value="configCode"
           @ready="onCmReady"
           @focus="onCmFocus"
           @input="onCmCodeChange" 
         ></codemirror>
         <codemirror 
-          v-if="displayName == 'Javascript'" 
+          v-if="displayName == 'Data'" 
           class="javascript"
-          :options="jsOptions"  
-          :value="jsCode"
+          :options="dataOptions"  
+          :value="dataCode"
           @ready="onCmReady"
           @focus="onCmFocus"
           @input="onCmCodeChange" 
@@ -77,10 +77,156 @@ export default {
   data () {
     return {
       srcdoc:``,
-      displayName: 'Javascript',
-      htmlCode: ``,
-      cssCode: ``,
-      jsCode: ``,
+      displayName: 'Config',
+      htmlCode: `<div id="ssart" style="width: 100%; height: 100%"></div>`,
+      configCode: `const config = {
+            type: 'bar',
+            width: 500,
+            height: 500,
+            margin: { top: 40, left: 40, bottom: 40, right: 40 },
+            padding: 0.1,
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'left',// top bottom left right
+                        fontSize: '10px',
+                        fontWeight: 'normal',
+                        fontFamily: 'comic sans ms',
+                        legendType: 'rect', // rect(default), circle,
+                    },
+                    title: {
+                        display: true,
+                        text: 'Bar Chart'
+                    },
+                    xTitle: {
+                        display: true,
+                        text: 'name'
+                    },
+                    yTitle: {
+                        display: true,
+                        text: 'value'
+                    },
+                    xGrid: {
+                        // color: "rgb(255, 0, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
+                        // dash: "10,3",
+                        // weight: 5,
+                        // opacity: .5,
+                    },
+                    yGrid: {
+                        // color: "#323233", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
+                        // dash: "10,3",     // 점선, 10만큼 칠하고 3만큼 빈공간
+                        // weight: 1,        // 선 두께
+                        // opacity: .5,      // 선 투명도
+                    },
+                    // background: {
+
+                    // },
+                    menu: {
+                        grid: true,
+                        xGrid: true,
+                        yGrid: true,
+                        background: true,
+                        download: true,
+                        legend: true
+                    },
+                    axis: {
+                        color: "rgb(255, 0, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
+                        weight: 5,
+                        opacity: .5,
+                        dots: {
+                            display: false,
+                            color: "rgb(255, 0, 255)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
+                            weight: 5,
+                            opacity: .5
+                        },
+                        xAxis: {
+                            color: "rgb(0, 255, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
+                            weight: 5,
+                            opacity: 1,
+                            dots: {
+                                display: false,
+                                color: "rgb(255, 0, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
+                                weight: 5,
+                                opacity: 1
+                            }
+                        },
+                        yAxis: {
+                            color: "rgb(255, 0, 255)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
+                            weight: 1,
+                            opacity: .5,
+                            dots: {
+                                display: false,
+                                color: "rgb(0, 0, 255)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
+                                weight: 5,
+                                opacity: .5
+                            }
+                        }
+                    },
+                },
+                scales: {
+                    yAxis: {
+                        ticks: {
+                            // min: -20,
+                            max: 40
+                        }
+                    },
+                    fillopacity: 0.5
+                }
+            },
+        };`,
+      dataCode: `const data = {
+            labels: ['a', 'b', 'c', 'd', 'e', 'f'],
+            datasets: [
+                {
+                    label: '데이터 1',
+                    data: [
+                        { name: 'a', value: -10 },
+                        { name: 'b', value: -29 },
+                        { name: 'c', value: -32 },
+                        { name: 'd', value: 25 },
+                        { name: 'e', value: 23 },
+                        { name: 'f', value: 15 }
+                    ],
+                    // backgroundColor: "red",
+
+                },
+                {
+                    label: '데이터 2',
+                    data: [1, 2, 3, 4, 5, 6, -7, -8, -9, -10]
+                    ,
+                    // backgroundColor: "blue",
+                },
+                {
+                    label: '데이터 3',
+                    data:
+                        [
+                            { name: 'a', value: 15 },
+                            { name: 'b', value: 23 },
+                            { name: 'c', value: 25 },
+                            { name: 'd', value: -32 },
+                            { name: 'e', value: -29 },
+                            { name: 'f', value: -12 },
+                            { name: 'g', value: -15 },
+                            { name: 'ㅎ', value: 1 },
+                            { name: 't', value: 12 }
+                        ],
+                },
+                // {
+                //     label: 'Small Radius',
+                //     data : [
+                //         {name: 'a', value: 15},
+                //         {name: 'b', value: 23},
+                //         {name: 'c', value: 25},
+                //         {name: 'd', value: 32},
+                //         {name: 'e', value: 29},
+                //         {name: 'f', value: 13},
+                //         {name: 'g', value: 15},
+                //     ],
+                // }
+            ]
+        };`,
       htmlOptions: {
         // codemirror options
         tabSize: 4,
@@ -90,16 +236,16 @@ export default {
         line: true,
         // more codemirror options, 更多 codemirror 的高级配置...
       },
-      cssOptions: {
+      configOptions: {
         // codemirror options
         tabSize: 4,
-        mode: 'text/css',
+        mode: 'javascript',
         theme: 'base16-dark',
         lineNumbers: true,
         line: true,
         // more codemirror options, 更多 codemirror 的高级配置...
       },
-      jsOptions: {
+      dataOptions: {
         // codemirror options
         tabSize: 4,
         mode: 'text/javascript',
@@ -124,13 +270,12 @@ export default {
       if (this.displayName === "HTML") {
         // console.log('this is new html code', newCode)
         this.htmlCode = newCode
-        this.srcdoc = newCode
-      } else if (this.displayName === "CSS") {
+      } else if (this.displayName === "Config") {
         // console.log('this is new css code', newCode)
-        this.cssCode = newCode
-      } else if (this.displayName === "Javascript") {
+        this.configCode = newCode
+      } else if (this.displayName === "Data") {
         // console.log('this is new js code', newCode)
-        this.jsCode = newCode
+        this.dataCode = newCode
         // console.log('javascript', this.srcdoc)
       }
       // let script = `<html><body>${this.htmlCode}</body><style>${this.cssCode}</style><scr` + `ipt>${this.jsCode}</scr` + `ipt></html>`
@@ -145,7 +290,16 @@ export default {
       return this.$refs.myCm.codemirror
     },
     renderSrc() {      
-      return `<html><body>${this.htmlCode}</body><style>${this.cssCode}</style><scr` + `ipt>${this.jsCode}</scr` + `ipt></html>`
+      return `<html><body>${this.htmlCode}</body><style>@import "https://cdn.jsdelivr.net/npm/ssart@1.0.5/src/css/index.css"</style>` +
+      `<scr` + `ipt src="https://d3js.org/d3.v5.min.js"></scr` + `ipt>` +
+      `<scr` + `ipt src="https://cdn.jsdelivr.net/npm/ssart@1.0.5"></scr` + `ipt>` +
+      `<scr` + `ipt type="module">` +      
+      `      
+      import {Chart} from "https://cdn.jsdelivr.net/npm/ssart@1.0.5/src/index.js"      
+      ${this.dataCode}
+      ${this.configCode}` +
+      `</scr` + `ipt>`      
+      + `</html>`
     }
   },
   mounted() {
@@ -156,10 +310,10 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped> 
 .wizard-container {
   /* background-color: hsl(225, 6%, 25%); */
-  max-height: 1000px;
+  /* max-height: 1000px; */
 }
 .top-pane {
   /* background-color: hsl(225, 6%, 25%);   */

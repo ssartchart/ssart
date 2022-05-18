@@ -1,8 +1,9 @@
 <template>
-  <div>
+  <div class="licensed">
         <main>
             <div class="container px-5 my-5">
                 <div class="container-fluid px-5">
+                  <br><br>
     <h1>Mit licensed</h1>
     <hr>
     <br>
@@ -55,8 +56,10 @@
 <script>
 
 export default {
-   
-  }    
+  created() {
+    window.scrollTo(0, 0)
+  }
+}
 
 
 </script>

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Documentation from '../views/Documentation.vue'
 import Licensed from '../views/Licensed.vue'
+import Contributing from '../views/Contributing.vue'
 
 Vue.use(VueRouter)
 
@@ -16,6 +17,11 @@ const routes = [
     path: '/licensed',
     name: 'Licensed',
     component: Licensed
+  },
+  {
+    path: '/contributing',
+    name: 'Contributing',
+    component: Contributing
   },
   // {
   //   path: '/about',

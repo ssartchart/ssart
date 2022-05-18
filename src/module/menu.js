@@ -289,8 +289,10 @@ export function menu(
 
     const chartBackground = chart_area.select(".chartBackground rect");
     let color = "#f1f3f5";
-    if (options.plugins.background?.color) {
-      color = options.plugins.background.color;
+    if (options.plugins.background) {
+      if (options.plugins.background.color) {
+        color = options.plugins.background.color;
+      }
     }
 
     const bgButton = dropDown
