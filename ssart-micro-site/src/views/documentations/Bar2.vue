@@ -1,17 +1,17 @@
 <template>
   <div>
-    <h3> BarChart 2 (가로막대 차트)</h3>
+    <h3 class="bold"> BarChart 2 (가로막대 차트)</h3>
     <br>
       <p>This chart that represents categorical data as vertical rectangular bars with height and length proportional to the representation values. </p>
       <p>막대 차트(bar chart) 는 표현 값에 비례한 높이와 길이를 가진 막대로 범주형 데이터를 표현하는 차트를 말합니다.</p>
       <p>자료의 대소관계를 한눈에 알아보기 쉽고 직관적입니다.</p>
     <hr>
-    <h4>Example</h4>
+    <h4 class="bold">Example</h4>
     <img :src="Bar2img" width="500px" height="500px">
 
     <hr>
     <details>
-                        <summary>Try It</summary>
+                        <summary class="bold">Try It</summary>
                         <pre style="color: #000">
     <span class="script-color1">const</span> data = {
                 labels: ['a', 'b', 'c', 'd', 'e'],

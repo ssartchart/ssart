@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Getting started</h3>
+    <h3 class="bold">Getting started</h3>
       <br>
       <p>ssart는 npm 라이브러리 입니다.</p>
       <p>아래 명령어를 통해 설치해주세요.</p>

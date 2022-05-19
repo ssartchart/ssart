@@ -24,7 +24,7 @@
     
     <div style="width: 1000px; text-align: start; margin-bottom: 100px; margin-left: 200px; margin-top:100px;">
       <div style="padding-left: 150px;">
-        <h1>SSART Documentation</h1>
+        <h1 class="bold">SSART Documentation</h1>
         <br>
         <hr>
         <getting-started
@@ -175,7 +175,7 @@ export default {
     },
     showGettingStarted: function() {
       this.hiddenAll()
-      this.isShowScatter = true
+      this.isShowGettingStarted = true
     },
     showBackground: function() {
       this.hiddenAll()

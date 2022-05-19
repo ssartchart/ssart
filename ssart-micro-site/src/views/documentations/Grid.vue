@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Grid</h3>
+    <h3 class="bold">Grid</h3>
     <br>
     <p>grid 속성은 차트의 격자를 설정합니다.</p>
     <pre>
@@ -73,15 +73,15 @@
     <br>
     <hr>
     <br>
-    <h4>notify</h4>
+    <h4 class="bold">notify</h4>
     <br>
-    <h5>
+    <h5 class="bold">
       display
     </h5>
     <p>display를 false로 설정하여 grid값만 설정해 놓고 차트에 표시하지 않을 수 있습니다.</p>
     <p>설정된 grid값으로 menu 기능으로 사용자에게 grid를 그려줄 수 있습니다.</p>
     <br>
-    <h5>
+    <h5 class="bold">
       dash
     </h5>
     <p>점선의 "int1,int2"는 int1만큼 선을 그려주고, int2만큼 비워두는 것을 반복합니다.</p>
