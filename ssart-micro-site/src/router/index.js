@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Documentation from '../views/Documentation.vue'
 import Licensed from '../views/Licensed.vue'
+import ChartSample from '../views/ChartSample.vue'
 
 Vue.use(VueRouter)
 
@@ -17,23 +18,15 @@ const routes = [
     name: 'Licensed',
     component: Licensed
   },
-  // {
-  //   path: '/about',
-  //   name: 'About',
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  // }
   {
     path: '/document',
     name: 'Documentation',
     component: Documentation
   },
   {
-    path: '/document/bubble-chart',
-    name: 'BubbleChartDoc',
-    component: () => import(/* webpackChunkName: "BubbleChartDoc" */ '../views/documentations/BubbleChartDoc.vue')
+    path: '/sample',
+    name: 'ChartSample',
+    component: ChartSample
   },
   {
     path: '/chart-wizard',

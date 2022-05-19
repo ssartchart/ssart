@@ -127,7 +127,7 @@ export default {
     ScatterChart,
   },
   data() {
-  return {
+    return {
       isShowAxis: false,
       isShowGettingStarted: false,
       isShowBackground: false,
@@ -175,7 +175,7 @@ export default {
     },
     showGettingStarted: function() {
       this.hiddenAll()
-      this.isShowScatter = true
+      this.isShowGettingStarted = true
     },
     showBackground: function() {
       this.hiddenAll()

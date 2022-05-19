@@ -11,7 +11,7 @@
                             메뉴 탭1(차트 코드)
                         </a>
                     </li>
-                    <li class="nav-item"><a @click.prevent="$router.push({name: 'Sample'}).catch(err => {})" class="nav-link" href="#!">메뉴 탭2</a></li>
+                    <li class="nav-item"><a @click.prevent="$router.push({name: 'ChartSample'}).catch(err => {})" class="nav-link">Chart Sample</a></li>
                     <li class="nav-item"><a @click.prevent="$router.push({name: 'Documentation'}).catch(err => {})" class="nav-link active" aria-current="page" href="#!">
                             Documentation
                     </a></li>
