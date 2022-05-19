@@ -457,7 +457,7 @@ Chart.Chart('#ssart', config3)`
 const circleChart = {
     data: `const data = {
     labels: ['dd', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
-        datasets: [{    
+    datasets: [{    
             data : [
             { name: 'AAAA', value: 1000, color: '#efa86b' },
             { name: 'BBB', value: 1500, color: '#c1484f' },
@@ -608,222 +608,217 @@ const lineChart = {
 Chart.Chart('#ssart', config)`
 }
 const polarChart = {
-    data: `const data_r = {
-            labels: ['ability1', 'ability2', 'ability3', 'ability4' ,'ability5'],
-            datasets: [
-                { 
-                    label: 'A',
-                    data : [270,270,120,1,140]
-                },
-                { 
-                    label: 'B', 
-                    data :[140,100,280,250,120],
-                },
-                { 
-                    label: 'C',
-                    data : [100,190,140,12,270],
-                },
-                { 
-                    label : 'D',
-                    data : [20,200,200,52,230],
-                }
-            ],        
-        };`,
+    data: `const data = {
+        labels: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
+        datasets: [{    
+            data : [
+            { name: 'John', value: 1000, backgroundColor: '#efa86b' },
+            { name: 'Abraham', value: 1500, backgroundColor: '#c1484f' },
+            { name: 'Jack', value: 1300 },
+            { name: 'Madison', value: 900, backgroundColor: '#f4c17c' },
+            { name: 'Olivia', value: 700, backgroundColor: '#fae8a4' },
+            { name: 'Quincy', value: 1200, backgroundColor: '#df7454' },
+            { name: 'Talan', value: 1100, backgroundColor: '#e88d5d' },
+            { name: 'Wendy', value: 600, backgroundColor: '#f8d690' },            
+            ]
+        }        
+    ]
+};`,
     config: `const config = {
-            type: 'polar',
-            width: 500,
-            height: 500,
-            margin: { top: 40, left: 40, bottom: 40, right: 40 },
-            padding: 0.1,
-            data: data_r,
-            depth:7, // 구간 갯수
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',// top bottom left right
-                    },
-                    title: {
-                        display: true,
-                        text: 'polar Chart'
-                    },
-                    sort: true,
-                    view: true,
-                    menu: {
-                        download: true
-                    }
-                },
-                scales:{
-                    depth : 7
-                }
+    type: 'polar',
+    width: 500,
+    height: 500,
+    margin: { top: 40, left: 40, bottom: 40, right: 40 },
+    padding: 0.1,
+    data: data,
+    depth:7, // 구간 갯수
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',// top bottom left right
+            },
+            title: {
+                display: true,
+                text: 'polar Chart'
+            },
+            sort: true,
+            view: true,
+            menu: {
+                download: true
             }
+        },
+        scales:{
+            depth : 7
         }
-    Chart.Chart('#ssart', config)`
+    }
+}
+Chart.Chart('#ssart', config)`
 }
 const radarChart = {
     data: `const data_r = {
-            labels: ['ability1', 'ability2', 'ability3', 'ability4' ,'ability5'],
-            datasets: [
-                { 
-                    label: 'A',
-                    data : [270,270,120,1,140]
-                },
-                { 
-                    label: 'B', 
-                    data :[140,100,280,250,120],
-                },
-                { 
-                    label: 'C',
-                    data : [100,190,140,12,270],
-                },
-                { 
-                    label : 'D',
-                    data : [20,200,200,52,230],
-                }
-            ],        
-        };`,
-    config: `const config_r = {
-            type: 'radar',
-            width: 500,
-            height: 500,
-            margin: { top: 40, left: 40, bottom: 40, right: 40 },
-            padding: 0.1,
-            data: data_r,
-            depth:7, // 구간 갯수
-            poly:true,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',// top bottom left right
-                    },
-                    title: {
-                        display: true,
-                        text: 'Radar Chart'
-                    },
-                    sort: true,
-                    view: true,
-                    menu: {
-                        download: true
-                    }
-                },
-                scales:{
-                    depth : 7
-                }
-            }
+    labels: ['ability1', 'ability2', 'ability3', 'ability4' ,'ability5'],
+    datasets: [
+        { 
+            label: 'A',
+            data : [270,270,120,1,140]
+        },
+        { 
+            label: 'B', 
+            data :[140,100,280,250,120],
+        },
+        { 
+            label: 'C',
+            data : [100,190,140,12,270],
+        },
+        { 
+            label : 'D',
+            data : [20,200,200,52,230],
         }
+    ],        
+};`,
+    config: `const config_r = {
+    type: 'radar',
+    width: 500,
+    height: 500,
+    margin: { top: 40, left: 40, bottom: 40, right: 40 },
+    padding: 0.1,
+    data: data_r,
+    depth:7, // 구간 갯수
+    poly:true,
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',// top bottom left right
+            },
+            title: {
+                display: true,
+                text: 'Radar Chart'
+            },
+            sort: true,
+            view: true,
+            menu: {
+                download: true
+            }
+        },
+        scales:{
+            depth : 7
+        }
+    }
+}
 Chart.Chart('#ssart', config_r)`
 }
 const scatterChart = {
     data: `const data2 = {
-            labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-            datasets: [
-                {
-                    label: 'Fully Rounded',
-                    data: [
-                        { name: 1, value: 10 },
-                        { name: 2, value: 29 },
-                        { name: 3, value: 32 },
-                        { name: 4, value: 25 },
-                        { name: 5, value: 23 },
-                        { name: 10, value: 15 }
-                    ],
-                    backgroundColor: "red",
+    labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    datasets: [
+        {
+            label: 'Fully Rounded',
+            data: [
+                { name: 1, value: 10 },
+                { name: 2, value: 29 },
+                { name: 3, value: 32 },
+                { name: 4, value: 25 },
+                { name: 5, value: 23 },
+                { name: 10, value: 15 }
+            ],
+            backgroundColor: "red",
 
-                },
-                {
-                    label: 'Small Radius',
-                    data: [1, 3, 3, 4, 5, 6, 7, 8, 9, 10]
-                    ,
-                    backgroundColor: "blue",
-                },
-                {
-                    label: 'Small Radius',
-                    data:
-                        [
-                            [1.5, 1], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2]
-                        ],
-                },
-                {
-                    label: 'Small Radius',
-                    data: [
-                        { x: 1, y: 15 },
-                        { x: 2, y: 23 },
-                        { x: 3, y: 25 },
-                        { x: 4, y: 32 },
-                        { x: 5, y: 29 },
-                        { x: -6, y: 13 },
-                        { x: 7, y: 15 },
-                    ],
-                }
-            ]
-        };`,
+        },
+        {
+            label: 'Small Radius',
+            data: [1, 3, 3, 4, 5, 6, 7, 8, 9, 10]
+            ,
+            backgroundColor: "blue",
+        },
+        {
+            label: 'Small Radius',
+            data:
+                [
+                    [1.5, 1], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2]
+                ],
+        },
+        {
+            label: 'Small Radius',
+            data: [
+                { x: 1, y: 15 },
+                { x: 2, y: 23 },
+                { x: 3, y: 25 },
+                { x: 4, y: 32 },
+                { x: 5, y: 29 },
+                { x: -6, y: 13 },
+                { x: 7, y: 15 },
+            ],
+        }
+    ]
+};`,
     config: `const config2 = {
-            type: 'scatter',
-            width: 500,
-            height: 500,
-            margin: { top: 40, left: 40, bottom: 40, right: 40 },
-            padding: 0.1,
-            data: data2,
-            options: {
-                responsive: true,
-                plugins: {
-                    // legend: {
-                    //     // position: 'right',// top bottom left right
-                    // },
-                    title: {
-                        display: true,
-                        text: 'Scatter Chart'
-                    },
-                    xTitle: {
-                        display: true,
-                        text: 'y'
-                    },
-                    yTitle: {
-                        display: true,
-                        text: 'x'
-                    },
-                    xGrid: {
-                        color: "#323233", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
-                        dash: "10,3",
-                        weight: 2,
-                        opacity: .5
-                    },
-                    yGrid: {
-                        display: true,
-                        color: "#323233", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
-                        dash: "10,3",     // 점선, 10만큼 칠하고 3만큼 빈공간
-                        weight: 2,        // 선 두께
-                        opacity: .5       // 선 투명도
-                    },
-                    background: {
+    type: 'scatter',
+    width: 500,
+    height: 500,
+    margin: { top: 40, left: 40, bottom: 40, right: 40 },
+    padding: 0.1,
+    data: data2,
+    options: {
+        responsive: true,
+        plugins: {
+            // legend: {
+            //     // position: 'right',// top bottom left right
+            // },
+            title: {
+                display: true,
+                text: 'Scatter Chart'
+            },
+            xTitle: {
+                display: true,
+                text: 'y'
+            },
+            yTitle: {
+                display: true,
+                text: 'x'
+            },
+            xGrid: {
+                color: "#323233", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
+                dash: "10,3",
+                weight: 2,
+                opacity: .5
+            },
+            yGrid: {
+                display: true,
+                color: "#323233", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
+                dash: "10,3",     // 점선, 10만큼 칠하고 3만큼 빈공간
+                weight: 2,        // 선 두께
+                opacity: .5       // 선 투명도
+            },
+            background: {
 
-                    },
-                    menu: {
-                        grid: true,
-                        xGrid: true,
-                        yGrid: true,
-                        background: true,
-                        download: true
-                    },
+            },
+            menu: {
+                grid: true,
+                xGrid: true,
+                yGrid: true,
+                background: true,
+                download: true
+            },
 
-                },
-                
-                scales: {
-                    xAxis: {
-                        type: "number",
-                        ticks: {
-                            min: -10,
-                            max: 10
-                        }
-                    },
-                    dot: {
-                        size: 10,
-                        opacity: 1
-                    }
+        },
+        
+        scales: {
+            xAxis: {
+                type: "number",
+                ticks: {
+                    min: -10,
+                    max: 10
                 }
             },
-        };
+            dot: {
+                size: 10,
+                opacity: 1
+            }
+        }
+    },
+};
 Chart.Chart('#ssart', config2)`
 }
 export {verticalBarChart, horizontalBarChart, areaChart, bubbleChart, circleChart, lineChart, polarChart, radarChart, scatterChart}
