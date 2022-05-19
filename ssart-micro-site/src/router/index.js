@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Documentation from '../views/Documentation.vue'
 import Licensed from '../views/Licensed.vue'
 import ChartSample from '../views/ChartSample.vue'
+import Contributing from '../views/Contributing.vue'
 
 Vue.use(VueRouter)
 
@@ -19,6 +20,11 @@ const routes = [
     component: Licensed
   },
   {
+    path: '/contributing',
+    name: 'Contributing',
+    component: Contributing
+  },
+  {
     path: '/document',
     name: 'Documentation',
     component: Documentation
@@ -29,7 +35,7 @@ const routes = [
     component: ChartSample
   },
   {
-    path: '/chart-wizard',
+    path: '/chart-wizard/:chartname',
     name: 'ChartWizard',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route

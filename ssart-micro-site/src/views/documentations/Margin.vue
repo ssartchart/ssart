@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Margin</h3>
+    <h3 class="bold">Margin</h3>
     <br>
     <p>margin 속성은 차트 영역 외부에 여유공간을 설정합니다.</p>
     <pre>
@@ -53,7 +53,7 @@
     <br>
     <hr>
     <br>
-    <h4>notify</h4>
+    <h4 class="bold">notify</h4>
     <br>
     <p>margin을 입력하지 않거나, 40미만의 값을 입력할 경우 자동으로 40으로 지정됩니다.</p>
     <p>title, xTitle, yTitle이 위치할 충분한 margin을 입력해주세요.</p>

@@ -67,7 +67,7 @@ export const Axis_Option = (labels, datasets, scales, f = 1) =>{
     let fillopacity = f;
     let line_width = 0.5;
     let line_opacity = 1;
-    let line_color = "red";
+    let line_color = "black";
     let dot_opacity = 0.7;
     let dot_size = 3;
     let dot_color = false;

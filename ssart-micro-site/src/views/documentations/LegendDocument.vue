@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Legend</h3>
+    <h3 class="bold">Legend</h3>
     <br>
     <p>Legend 옵션은 차트의 범례를 설정합니다.</p>
     <pre>
@@ -65,7 +65,7 @@
     </table>
     
     <br>
-    <h4>notify</h4>
+    <h4 class="bold">notify</h4>
     <br>
     <div>
       legend 옵션을 지정하지 않아도 자동으로 생성됩니다.

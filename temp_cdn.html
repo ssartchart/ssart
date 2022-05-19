@@ -17,24 +17,20 @@
 
 <body> 
 
-    <div id="bargraph">
-    </div>
-
-    <div id="bargraph2"></div>
-    <div id="bargraph3"></div>
-    <div id="bargraph4"></div>
-    <div id="bargraph5"></div>
-    
+    <div id="bar"></div>
+    <div id="barH"></div>
+    <div id="scatter"></div>
+    <div id="bubble"></div>
+    <div id="line"></div>    
     <div id="area"></div>
     <div id="circle"></div>
-    <div id="barH"></div>
     <div id="radar"></div>
     <div id="polar"></div>
     
     <script src='https://d3js.org/d3.v5.min.js'></script>
 
     <script>
-        const data = {
+        const data_bar = {
             labels: ['a', 'b', 'c', 'd', 'e', 'f'],
             datasets: [
                 {
@@ -47,14 +43,12 @@
                         { name: 'e', value: 23 },
                         { name: 'f', value: 15 }
                     ],
-                    // backgroundColor: "red",
 
                 },
                 {
                     label: '데이터 2',
                     data: [1, 2, 3, 4, 5, 6, -7, -8, -9, -10]
                     ,
-                    // backgroundColor: "blue",
                 },
                 {
                     label: '데이터 3',
@@ -71,32 +65,20 @@
                             { name: 't', value: 12 }
                         ],
                 },
-                // {
-                //     label: 'Small Radius',
-                //     data : [
-                //         {name: 'a', value: 15},
-                //         {name: 'b', value: 23},
-                //         {name: 'c', value: 25},
-                //         {name: 'd', value: 32},
-                //         {name: 'e', value: 29},
-                //         {name: 'f', value: 13},
-                //         {name: 'g', value: 15},
-                //     ],
-                // }
             ]
         };
-        const config = {
+        const config_bar = {
             type: 'bar',
             width: 500,
             height: 500,
             margin: { top: 40, left: 40, bottom: 40, right: 40 },
             padding: 0.1,
-            data: data,
+            data: data_bar,
             options: {
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'left',// top bottom left right
+                        position: 'right',// top bottom left right
                         fontSize: '10px',
                         fontWeight: 'normal',
                         fontFamily: 'comic sans ms',
@@ -115,27 +97,19 @@
                         text: 'value'
                     },
                     xGrid: {
-                        // color: "rgb(255, 0, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
-                        // dash: "10,3",
-                        // weight: 5,
-                        // opacity: .5,
+
                     },
                     yGrid: {
-                        // color: "#323233", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
-                        // dash: "10,3",     // 점선, 10만큼 칠하고 3만큼 빈공간
-                        // weight: 1,        // 선 두께
-                        // opacity: .5,      // 선 투명도
-                    },
-                    // background: {
 
-                    // },
+                    },
                     menu: {
                         grid: true,
                         xGrid: true,
                         yGrid: true,
                         background: true,
                         download: true,
-                        legend: true
+                        legend: true,
+                        color: true
                     },
                     axis: {
                         color: "rgb(255, 0, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
@@ -174,7 +148,6 @@
                 scales: {
                     yAxis: {
                         ticks: {
-                            // min: -20,
                             max: 40
                         }
                     },
@@ -183,7 +156,7 @@
             },
         };
 
-        const data2 = {
+        const data_scatter = {
             labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
             datasets: [
                 {
@@ -220,20 +193,20 @@
                         { x: 3, y: 25 },
                         { x: 4, y: 32 },
                         { x: 5, y: 29 },
-                        { x: -6, y: 13 },
+                        { x: 6, y: 13 },
                         { x: 7, y: 15 },
                     ],
                 }
             ]
         };
 
-        const config2 = {
+        const config_scatter = {
             type: 'scatter',
             width: 500,
             height: 500,
             margin: { top: 40, left: 40, bottom: 40, right: 40 },
             padding: 0.1,
-            data: data2,
+            data: data_scatter,
             options: {
                 responsive: true,
                 plugins: {
@@ -282,51 +255,29 @@
                     xAxis: {
                         type: "number",
                         ticks: {
-                            min: -10,
                             max: 10
                         }
                     },
                     dot: {
                         size: 10,
-                        opacity: 1
+                        opacity: 0.5
+                    },
+                    line:{
+                        color: "black"
                     }
                 }
             },
         };
 
-        const data3 = {
+        const data_bubble = {
             labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
             datasets: [
                 {
                     label: 'Small Radius',
                     data:
                         [
-                            [1, -10, 1], [20, 20, 2], [3, 20, 3], [4, 20, 4], [5, 20, 5], [6, 20, 6]
+                            [1, 10, 10], [20, 20, 20], [3, 55, 30], [4, 30, 40], [5, 66, 50], [6, 10, 60]
                         ],
-                },
-                {
-                    label: 'Small Radius',
-                    data: [
-                        { x: 1, y: 15, r: 10 },
-                        { x: 2, y: 23, r: 20 },
-                        { x: 3, y: 25, r: 30 },
-                        { x: 4, y: 32, r: 30 },
-                        { x: 5, y: 29, r: 100 },
-                        { x: 6, y: 13, r: 20 },
-                        { x: 7, y: 15, r: 50 },
-                    ],
-                },
-                {
-                    label: 'Small Radius',
-                    data: [
-                        { x: 10, y: 150, r: 10 },
-                        { x: 5, y: 230, r: 20 },
-                        { x: 6, y: 250, r: 30 },
-                        { x: 7, y: 32, r: 30 },
-                        { x: 8, y: 29, r: 100 },
-                        { x: 9, y: 13, r: 20 },
-                        { x: 10, y: 15, r: 50 },
-                    ],
                 },
                 {
                     label: 'Small Radius',
@@ -343,13 +294,13 @@
             ]
         };
 
-        const config3 = {
+        const config_bubble = {
             type: 'bubble',
             width: 500,
             height: 500,
             margin: { top: 40, left: 40, bottom: 40, right: 40 },
             padding: 0.1,
-            data: data3,
+            data: data_bubble,
             options: {
                 responsive: true,
                 plugins: {
@@ -396,7 +347,7 @@
                 },
                 scales: {
                     xAxis: {
-                        // type: "number",
+                        type: "number",
                         ticks: {
                             min: 0,
                             max: 10
@@ -419,7 +370,7 @@
             },
         };
 
-        const data4 = {
+        const data_line = {
             labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
             datasets: [
                 {
@@ -441,13 +392,6 @@
                     ,
                     backgroundColor: "blue",
                 },
-                // {
-                //     label: '라인 데이터3',
-                //     data:
-                //         [
-                //             [1, 1], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2]
-                //         ],
-                // },
                 {
                     label: '라인 데이터3',
                     data: [
@@ -464,13 +408,13 @@
             ]
         };
 
-        const config4 = {
+        const config_line = {
             type: 'line',
             width: 500,
             height: 500,
             margin: { top: 40, left: 40, bottom: 40, right: 40 },
             padding: 0.1,
-            data: data4,
+            data: data_line,
             options: {
                 responsive: true,
                 plugins: {
@@ -538,13 +482,13 @@
             },
         };
 
-        const config5 = {
+        const config_area = {
             type: 'area',
             width: 500,
             height: 500,
             margin: { top: 40, left: 40, bottom: 40, right: 40 },
             padding: 0.1,
-            data: data4,
+            data: data_line,
             options: {
                 responsive: true,
                 plugins: {
@@ -613,7 +557,7 @@
             },
         };
 
-        const data6 = {
+        const data_circle = {
             labels: ['dd', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
             datasets: [{    
                 data : [
@@ -633,13 +577,13 @@
                 
             ]
         };
-        const config6 = {
+        const config_circle = {
             type: 'donut',
             width: 500,
             height: 500,
             margin: { top: 40, left: 40, bottom: 40, right: 40 },
             padding: 0.1,
-            data: data6,
+            data: data_circle,
             options: {
                 responsive: true,
                 plugins: {
@@ -655,23 +599,7 @@
                 },
             }
         }
-// 레이더 차트 데이터 입력 부분.
-        // const data_r2 = {
-        //     labels: ['A', 'B', 'C', 'D' ,'E' ,'F'],
-        //     datasets: [
-        //         { name: 'AAA' },
-        //         { name: 'BBB' },
-        //         { name: 'CC' },
-        //         { name : 'DDDDD'}
-        //     ],
-        //     data:[
-        //         [2700,2700,1200,13,1400,1700],
-        //         [1400,100,2800,2500,1200,2100],
-        //         [1200,1900,1400,12,2700,1600],
-        //         [20,2200,2000,520,2300,200],
-        //     ]            
-        // };
-        const data_r = {
+        const data_radar = {
             labels: ['ability1', 'ability2', 'ability3', 'ability4' ,'ability5'],
             datasets: [
                 { 
@@ -692,14 +620,13 @@
                 }
             ],        
         };
-        const config_r = {
+        const config_radar = {
             type: 'radar',
             width: 500,
             height: 500,
             margin: { top: 40, left: 40, bottom: 40, right: 40 },
             padding: 0.1,
-            data: data_r,
-            depth:7, // 구간 갯수
+            data: data_radar,
             poly:true,
             options: {
                 responsive: true,
@@ -722,14 +649,30 @@
                 }
             }
         }
-        const config_p = {
+        const data_polar = {
+            labels: ['A', 'B', 'C', 'D'],
+            datasets: [{    
+                data : [
+                { name: 'A', value: 1000, color: '#efa86b' },
+                { name: 'B', value: 1500, color: '#c1484f' },
+                // { name: 'C', value: 1300, color: '#d35d50' },
+                { name: 'C', value: 900 },
+                { name: 'D', value: 1300, color: '#f4c17c' },
+
+                
+                
+                ]
+            }
+                
+            ]
+        };
+        const config_polar = {
             type: 'polar',
             width: 500,
             height: 500,
             margin: { top: 40, left: 40, bottom: 40, right: 40 },
             padding: 0.1,
-            data: data_r,
-            depth:7, // 구간 갯수
+            data: data_polar,
             options: {
                 responsive: true,
                 plugins: {
@@ -747,34 +690,10 @@
                     }
                 },
                 scales:{
-                    depth : 7
+                    depth : 10
                 }
             }
         }
-        // 레이더 차트 데이터 입력 부분.
-    </script>
-    <script type="module">
-
-        import * as Chart from './src/index.js';
-
-
-        // Chart.Chart("bar",'#bargraph',dataset,width2,height2,margin2);
-        //Chart.Chart2("bar",'#bargraph',labels,dataset,width2,height2,margin2,padding);
-        Chart.Chart('#bargraph2', config);
-        Chart.Chart('#bargraph3', config2);
-        Chart.Chart('#bargraph4', config3);
-        Chart.Chart('#bargraph5', config4);
-        Chart.Chart('#area', config5);
-
-
-        Chart.Chart('#radar', config_r);
-        Chart.Chart('#polar', config_p);
-    </script>
-
-    <br>
-    <div id="barH"></div>
-
-    <script>
         const dataH = {
             labels: ['a', 'b', 'c', 'd', 'e'],
             datasets: [
@@ -807,7 +726,7 @@
             ]
         };
 
-        const configH = {
+        const config_barH = {
             type: 'barH',
             width: 500,
             height: 500,
@@ -861,29 +780,21 @@
 
     </script>
 
-    </svg>
-    <script>
-        // var color = ['red', 'blue', 'yellow','green'];
-        // var widthH = 500;
-        // var heightH = 500;
-        // var marginH = {top: 40, left: 40, bottom: 40, right: 40};
-
-    </script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ssart@1.0.6/src/css/index.css">
+<!-- 차트 생성 부분 -->
     <script type="module">
-        import * as Chart from './src/index.js';
+        import * as Chart from 'https://cdn.jsdelivr.net/npm/ssart@1.0.6/src/index.min.js';
 
-        Chart.Chart('#barH', configH);
+        Chart.Chart('#bar', config_bar);
+        Chart.Chart('#barH', config_barH);
+        Chart.Chart('#scatter', config_scatter);
+        Chart.Chart('#bubble', config_bubble);
+        Chart.Chart('#line', config_line);
+        Chart.Chart('#area', config_area);
+        Chart.Chart('#circle', config_circle);
+        Chart.Chart('#radar', config_radar);
+        Chart.Chart('#polar', config_polar);
 
-    </script>
-    <script type="module">
-        import * as Chart from './src/index.js';
-
-        Chart.Chart('#circle', config6);
-        // Chart.Chart('#radar', config7);
-    </script>
-<!-- 레이더 차트 생성 부분 -->
-    <script type="module">
-        import * as Chart from './src/index.js';
         // Chart.Chart('#radar', config_r);
     </script>
 <!-- 레이더 차트 생성 부분 -->

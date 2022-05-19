@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Background</h3>
+    <h3 class="bold">Background</h3>
     <br>
     <p>background plugin은 차트 영역 내부의 배경 설정합니다.</p>
     <pre>
@@ -70,7 +70,7 @@
     <br>
     <hr>
     <br>
-    <h4>notify</h4>
+    <h4 class="bold">notify</h4>
     <br>
   </div>
 </template>

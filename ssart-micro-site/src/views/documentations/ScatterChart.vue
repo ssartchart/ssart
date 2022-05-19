@@ -1,7 +1,7 @@
 <template>
   <div>
     
-                    <h3> ScatterChart (산점도 차트)</h3>
+                    <h3 class="bold"> ScatterChart (산점도 차트)</h3>
                     <br>
                     <div class="chart-text">
                         <p>This chart is a type of plot or mathematical diagram using coordinates to display values for typically two variables for a set of data. </p>
@@ -10,13 +10,13 @@
                         <p>두 변수 사이의 관계를 알 수 있습니다.</p>
                     </div>
                     <hr>
-                    <h4>Example</h4>
+                    <h4 class="bold">Example</h4>
                     <img src="@/img/IndexImg/5.Scatter.png" width="400px" height="400px"/>
                     <hr>
                     
                     
                     <details>
-                        <summary>Try It</summary>
+                        <summary class="bold">Try It</summary>
                         <pre style="color: #000">
     <span class="script-color1">const</span> data = {
         labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
