@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Title</h3>
+    <h3 class="bold">Title</h3>
     <br>
     <p>title은 총 3가지로 나뉘며 xTitle, yTitle, 그리고 차트 전체 title이 있습니다.</p>
     <pre>
@@ -107,7 +107,7 @@
     <br>
     <hr>
     <br>
-    <h4>notify</h4>
+    <h4 class="bold">notify</h4>
     <br>
     <div>
       yTitle에 rotate여부를 지정하지 않으면 차트 margin과 yTitle길이에 따라 자동으로 결정됩니다.

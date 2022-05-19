@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>AreaChart (영역 차트)</h3>
+    <h3 class="bold">AreaChart (영역 차트)</h3>
     <br>
       <p>This chart which is based on the line chart displays graphically quantitative data. </p>
       <p>The area between axis and line are commonly emphasized with colors, textures and hatchings. 
@@ -8,12 +8,12 @@
       <p>영역 차트 (Araa chart) 는 도형의 넓이를 이용하여 데이터의 정량적 크기를 나타냅니다.</p>
       <p>면적 그래프는 두개 이상의 자료를 비교하는데 용이하게 사용됩니다.</p>
     <hr>
-    <h4>Example</h4>
+    <h4 class="bold">Example</h4>
     <img :src="Areaimg" width="500px" height="500px">
 
     <hr>
     <details>
-                        <summary>Try It</summary>
+                        <summary class="bold">Try It</summary>
                         <pre style="color: #000">
     <span class="script-color1">const</span> data = {
         labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],

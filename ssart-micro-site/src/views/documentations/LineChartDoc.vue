@@ -1,7 +1,7 @@
 <template>
   
                 <div>
-                    <h3> LineChart (선 차트)</h3>
+                    <h3 class="bold"> LineChart (선 차트)</h3>
                     <br>
                     
                     <div class="chart-text">
@@ -10,13 +10,13 @@
                         <p>데이터 값이 변화하는 모양과 정도를 쉽게 알 수 있습니다.</p>
                     </div>
                     <hr>
-                    <h4>Example</h4>
+                    <h4 class="bold">Example</h4>
                     <img src="@/img/IndexImg/3.Line.png" width="500px" height="500px"/>
                     <hr>
                     
                     
                     <details>
-                        <summary>Try It</summary>
+                        <summary class="bold">Try It</summary>
                         <pre style="color: #000">
         <span class="script-color1">const</span> data = {
             labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],

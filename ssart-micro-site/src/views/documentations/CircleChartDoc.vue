@@ -1,6 +1,6 @@
 <template>
                 <div>
-                    <h3> CircleChart (원형 차트)  (PIE / DONUT)</h3>
+                    <h3 class="bold"> CircleChart (원형 차트)  (PIE / DONUT)</h3>
                     <br>                
                     <p>This chart is a graph showing the ratio of each part to the whole as a percentage in a fan shape. </p>                    
                     <p>원형 차트(Circle chart)는 전체에 대한 각 부분의 비율을 부채꼴 모양으로 백분률로 나타낸 그래프입니다.</p>
@@ -9,14 +9,14 @@
                     
                                                 
                     <hr>
-                    <h4>Example</h4>
+                    <h4 class="bold">Example</h4>
                     <img src="@/img/IndexImg/8.Pie.png" width="400px" height="400px">
                     <img src="@/img/IndexImg/7.Donut.png" width="400px" height="400px">
                     <hr>
                     
                     
                     <details>
-                        <summary>Try It</summary>
+                        <summary class="bold">Try It</summary>
                         <pre style="color: #000">
         <span class="script-color1">const</span> data = {
             labels: ['dd', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],

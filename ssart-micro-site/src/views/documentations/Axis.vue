@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Axis</h3>
+    <h3 class="bold">Axis</h3>
     <br>
     <p>axis는 scales에서 각 axis의 최대, 최소, tick분할을 설정하고,</p>
     <p>plugins에서 design요소를 설정합니다.</p>
@@ -239,7 +239,7 @@
     <br>
     <hr>
     <br>
-    <h4>notify</h4>
+    <h4 class="bold">notify</h4>
     <br>
     <p>axis에서 x, y축을 동시에 설정한 값보다 xAxis, yAxis의 개별 설정 값이 우선 적용됩니다.</p>
 
