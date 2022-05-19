@@ -122,14 +122,6 @@ export default {
               display: true,
               text: 'Chart'
             },
-            xTitle: {
-              display: true,
-              text: 'y'
-            },
-            yTitle: {
-              display: true,
-              text: 'x'
-            },
             menu: {
               download: true
             }
