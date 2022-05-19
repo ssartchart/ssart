@@ -4,10 +4,10 @@
             <div class="container px-5 my-5">
                 <div class="container-fluid px-5">
                   <br><br>
-    <h1>Mit licensed</h1>
+    <h1 class="bold">Mit licensed</h1>
     <hr>
     <br>
-      <h3>The MIT License (MIT)</h3>
+      <h3 class="bold">The MIT License (MIT)</h3>
       
       <br>
       <h6>Copyright (c) 2022 ssart</h6>
@@ -33,7 +33,7 @@
     <br>
     <hr>
     <details>
-            <summary>Description</summary>
+            <summary class="bold">Description</summary>
             <br>
       <p>The MIT License is a permissive free software license originating at the Massachusetts Institute of Technology (MIT) in the late 1980s.</p>
       <p> As a permissive license, it puts only very limited restriction on reuse and has, therefore, high license compatibility.</p> 
@@ -66,5 +66,7 @@ export default {
 
 
 <style>
-
+.bold{
+  font-weight: bold;
+}
 </style>

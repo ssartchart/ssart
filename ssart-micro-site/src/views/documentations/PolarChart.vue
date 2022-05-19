@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>PolarChart (극지방 차트)</h3>
+        <h3 class="bold">PolarChart (극지방 차트)</h3>
                         <br>  
                     <div class="chart-text">
                         <p>Polar charts are similar to pie charts, but each dataset has the same angle.  </p>
@@ -10,13 +10,13 @@
                         <p>원형차트와 유사한 비교 데이터를 표시할 때 유용합니다. 단 해당 데이터셋의 값 또한 표시합니다</p>
                     </div>
                     <hr>
-                    <h4>Example</h4>
+                    <h4 class="bold">Example</h4>
                     <img src="@/img/IndexImg/10.Polar.png" width="400px" height="400px"/>
                     <hr>
                     
                     
                     <details>
-                        <summary>Try It</summary>
+                        <summary class="bold">Try It</summary>
                         <pre style="color: #000">
     <span class="script-color1">const</span> data = {
         labels: ['ability1', 'ability2', 'ability3', 'ability4' ,'ability5'],

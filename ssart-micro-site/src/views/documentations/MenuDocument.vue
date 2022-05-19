@@ -1,6 +1,6 @@
 <template>
     <div>
-    <h3>Menu</h3>
+    <h3 class="bold">Menu</h3>
     <br>
     <p>Menu 옵션을 지정하여 사용자가 차트에 변화를 줄 수 있습니다.</p>
     <pre>
@@ -80,7 +80,7 @@
     </table>
     
     <br>
-    <h4>notify</h4>
+    <h4 class="bold">notify</h4>
     <br>
     <div>
       굳이 false로 입력할 필요없이 원하는 속성만 true로 입력할 수 있습니다.

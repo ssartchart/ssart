@@ -39,7 +39,7 @@
                         <p class="text-secondary">This chart that represents categorical data as vertical rectangular bars with height and length proportional to the representation values.</p>
                         </div>
                             <img class="card-img-top" :src='Bar' alt="Card image cap">
-                        <a class="text-decoration-none" @click="goToBar1Documentation">
+                        <a class="text-decoration-none" @click="goToBar1Documentation" href="#!">
                             Bar Chart Detail
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -60,7 +60,7 @@
                         <p class="text-secondary">This chart that represents categorical data as horizontal rectangular bars with height and length proportional to the representation values.</p>
                         </div>
                             <img class="card-img-top" :src='BarH' alt="Card image cap">
-                        <a class="text-decoration-none" @click="goToBar2Documentation">
+                        <a class="text-decoration-none" @click="goToBar2Documentation" href="#!">
                             Bar chart Detail
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -81,7 +81,7 @@
                         </div>
                         <img class="card-img-top" :src='Line' alt="Card image cap"/>
                         <br/>
-                        <a class="text-decoration-none" @click="goToLineDocumentation">
+                        <a class="text-decoration-none" @click="goToLineDocumentation" href="#!">
                             Line Chart Detail
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -109,7 +109,7 @@
                         <p class="text-secondary">This chart which is based on the line chart displays graphically quantitative data. The area between axis and line are commonly emphasized with colors, textures and hatchings. Commonly one compares two or more quantities with an area chart.</p>
                         </div>
                             <img class="card-img-top" :src='Area' alt="Card image cap">
-                        <a class="text-decoration-none" @click="goToAreaDocumentation">
+                        <a class="text-decoration-none" @click="goToAreaDocumentation" href="#!">
                             Area Chart Detail
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -130,7 +130,7 @@
                             <p class="text-secondary">This chart is a type of plot or mathematical diagram using coordinates to display values for typically two variables for a set of data. The data are displayed as a collection of points on the horizontal axis and the vertical axis.</p>
                         </div>
                             <img class="card-img-top" :src='Scatter' alt="Card image cap">
-                        <a class="text-decoration-none" @click="goToScatterDocumentation">
+                        <a class="text-decoration-none" @click="goToScatterDocumentation" href="#!">
                             Scatter Chart Detail
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -152,7 +152,7 @@
                         </div>
 
                         <img class="card-img-top" :src='Bubble' alt="Card image cap">
-                        <a class="text-decoration-none" @click="goToBubbleDocumentation">
+                        <a class="text-decoration-none" @click="goToBubbleDocumentation" href="#!">
                             Bubble Chart Detail
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -183,7 +183,7 @@
                         </div>
 
                             <img class="card-img-top" :src='Pie' alt="Card image cap">
-                        <a class="text-decoration-none" @click="goToCircleDocumentation">
+                        <a class="text-decoration-none" @click="goToCircleDocumentation" href="#!">
                             Pie Chart Detail
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -193,7 +193,7 @@
                         <div class="row" style="display: flex; align-items: center;">
                             <div class="col-sm-3">
                                 <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
-                                    <i class="bi"><img :src="donutIco" alt="" style="display: block; width: 100%; height: auto;" ></i>                        
+                                    <i class="bi"><img :src="donutIco" alt="" style="display: block; width: 90%; height: 90%;" ></i>                        
                                 </div>
                             </div>
                             <div class="col-sm-9" style="display: table-cell; vertical-align: middle;">
@@ -208,7 +208,7 @@
                         </div>
 
                             <img class="card-img-top" :src='Donut' alt="Card image cap">
-                        <a class="text-decoration-none" @click="goToCircleDocumentation">
+                        <a class="text-decoration-none" @click="goToCircleDocumentation" href="#!">
                             Donut Chart Detail
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -230,8 +230,8 @@
                             
                         </div>
 
-                        <img class="card-img-top" :src='Radar' alt="Card image cap">
-                        <a class="text-decoration-none" @click="goToRadarDocumentation">
+                        <img class="card-img-top" :src='Radar' alt="Card image cap" >
+                        <a class="text-decoration-none" @click="goToRadarDocumentation" href="#!">
                             Radar Chart Detail
                             <i class="bi bi-arrow-right"></i>
                         </a>

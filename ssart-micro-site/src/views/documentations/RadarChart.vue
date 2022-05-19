@@ -1,7 +1,7 @@
 <template>
   <div>
         
-                    <h3> RadarChart (레이더 차트)</h3>
+                    <h3 class="bold"> RadarChart (레이더 차트)</h3>
                     <br>
                     
                     <div class="chart-text">
@@ -13,13 +13,13 @@
                         <p>여러 측정 목표를 함께 겹쳐 놓아 비교하기에도 편리합니다. 각 항목 간 비율뿐만 아니라 균형과 경향을 직관적으로 알 수 있습니다.</p>
                     </div>
                     <hr>
-                    <h4>Example</h4>
+                    <h4 class="bold">Example</h4>
                     <img src="@/img/IndexImg/9.Radar.png" width="400px" height="400px"/>
                     <hr>
                     
                     
                     <details>
-                        <summary>Try It</summary>
+                        <summary class="bold">Try It</summary>
                         <pre style="color: #000">
     <span class="script-color1">const</span> data = {
         labels: ['ability1', 'ability2', 'ability3', 'ability4' ,'ability5'],

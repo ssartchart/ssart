@@ -1,61 +1,71 @@
-<template> 
-  <div class="wizard-container">
-    <div className="pane">
-        <iframe
-          ref="iframe"
-          title="output"
-          sandbox="allow-scripts allow-modals allow-same-origin"
-          frameBorder="0"
-          width="100%"
-          height="100%"
-          :srcdoc="renderSrc"
-        />
+<template>
+  <div>
+    <aside class="sidebar">
+      <chart-list
+        
+      />
+    </aside>
+    <chart-wizart-information v-if="isShowInformation" />
+    <div v-else class="wizard-container" style="text-align: start; margin-bottom: 100px; margin-left: 260px;">
+      <div style="margin-top: 100px">
+        <h1># {{chartName}} Chart</h1>
+          <iframe
+            ref="iframe"
+            title="output"
+            sandbox="allow-scripts allow-modals allow-same-origin"
+            frameBorder="0"
+            width="100%"
+            height="100%"
+            :srcdoc="renderSrc"
+            @load="resizeIframe"                     
+          />        
+      </div>
+      <!-- <div class="row"><div class="col-1-2"><div class="form-input"><label for="spaceInput">Slide space</label> <input type="number" id="spaceInput" placeholder="Type number"></div> <div class="form-input"><label for="widthInput">Slide width</label> <input type="number" id="widthInput" placeholder="Type number"></div> <div class="form-input"><label for="heightInput">Slide height</label> <input type="number" id="heightInput" placeholder="Type number"></div> <div class="form-input"><label for="borderInput">Slide border</label> <input type="number" id="borderInput" placeholder="Type number"></div> <div class="form-input"><label for="perspectiveInput">Slide perspective</label> <input type="number" id="perspectiveInput" placeholder="Type number"></div> <div class="form-input"><label for="scalingInput">Slide scaling</label> <input type="number" id="scalingInput" placeholder="Type number"></div></div> <div class="col-1-2"><div class="form-input"><button class="button">Add Slide</button> <button class="button">Remove Slide</button></div> <div class="form-input"><button class="button">Show/hide Navigation</button></div> <div class="form-input"><label for="visibleInput">Number of visible</label> <input type="number" id="visibleInput" placeholder="Type number"></div> <div class="form-input"><label for="infiniteCheckbox">Infinite loop</label> <input type="checkbox" id="infiniteCheckbox"></div> <div class="form-input"><label for="disable3dCheckbox">Disable 3d</label> <input type="checkbox" id="disable3dCheckbox"></div> <div class="form-input"><label for="animationSpeedInput">Animation speed</label> <input type="number" id="animationSpeedInput" placeholder="Type number"></div> <div class="form-input"><label for="dirSelect">Direction</label> <select id="dirSelect"><option value="ltr">LTR</option> <option value="rtl">RTL</option></select></div></div></div> -->
+      <div class="pane top-pane">
+        <div class="editor-title" style="display:flex; justify-content: space-between">
+          <div>
+            <button @click="selectLanguage('HTML')" :class="displayName == 'HTML' ? 'active' : ''">HTML</button>
+            <button @click="selectLanguage('Config')" :class="displayName == 'Config' ? 'active' : ''">Config</button>
+            <button @click="selectLanguage('Data')" :class="displayName == 'Data' ? 'active' : ''">Data</button>
+          </div>
+          <div style="margin-right: 2rem; cursor: pointer" @click="doCopy">
+            <i class="fa-solid fa-copy fa-2x" style="color:rgba(255, 255, 255, 0.55); margin-top: 5px" title="Copy"></i>
+          </div>
+        </div>
+        <div class="editor-container">    
+          <codemirror
+            ref="HTML"
+            v-if="displayName == 'HTML'" 
+            class="html" 
+            :options="htmlOptions"     
+            :value="htmlCode"
+            @ready="onCmReady"
+            @focus="onCmFocus"
+            @input="onCmCodeChange"
+          ></codemirror>
+          <codemirror
+            ref="Config"
+            v-if="displayName == 'Config'" 
+            class="css"
+            :options="configOptions" 
+            :value="configCode"
+            @ready="onCmReady"
+            @focus="onCmFocus"
+            @input="onCmCodeChange" 
+          ></codemirror>
+          <codemirror 
+            ref="Data"
+            v-if="displayName == 'Data'" 
+            class="javascript"
+            :options="dataOptions"  
+            :value="dataCode"
+            @ready="onCmReady"
+            @focus="onCmFocus"
+            @input="onCmCodeChange" 
+          ></codemirror>
+        </div>
+      </div>       
     </div>
-    <!-- <div class="row"><div class="col-1-2"><div class="form-input"><label for="spaceInput">Slide space</label> <input type="number" id="spaceInput" placeholder="Type number"></div> <div class="form-input"><label for="widthInput">Slide width</label> <input type="number" id="widthInput" placeholder="Type number"></div> <div class="form-input"><label for="heightInput">Slide height</label> <input type="number" id="heightInput" placeholder="Type number"></div> <div class="form-input"><label for="borderInput">Slide border</label> <input type="number" id="borderInput" placeholder="Type number"></div> <div class="form-input"><label for="perspectiveInput">Slide perspective</label> <input type="number" id="perspectiveInput" placeholder="Type number"></div> <div class="form-input"><label for="scalingInput">Slide scaling</label> <input type="number" id="scalingInput" placeholder="Type number"></div></div> <div class="col-1-2"><div class="form-input"><button class="button">Add Slide</button> <button class="button">Remove Slide</button></div> <div class="form-input"><button class="button">Show/hide Navigation</button></div> <div class="form-input"><label for="visibleInput">Number of visible</label> <input type="number" id="visibleInput" placeholder="Type number"></div> <div class="form-input"><label for="infiniteCheckbox">Infinite loop</label> <input type="checkbox" id="infiniteCheckbox"></div> <div class="form-input"><label for="disable3dCheckbox">Disable 3d</label> <input type="checkbox" id="disable3dCheckbox"></div> <div class="form-input"><label for="animationSpeedInput">Animation speed</label> <input type="number" id="animationSpeedInput" placeholder="Type number"></div> <div class="form-input"><label for="dirSelect">Direction</label> <select id="dirSelect"><option value="ltr">LTR</option> <option value="rtl">RTL</option></select></div></div></div> -->
-    <div class="pane top-pane">
-      <div class="editor-title">
-        <button @click="selectLanguage('HTML')" :class="displayName == 'HTML' ? 'active' : ''">HTML</button>
-        <button @click="selectLanguage('Config')" :class="displayName == 'Config' ? 'active' : ''">Config</button>
-        <button @click="selectLanguage('Data')" :class="displayName == 'Data' ? 'active' : ''">Data</button>
-        <button
-          type="button"
-          class="expand-collapse-btn"
-          @click="1"
-        >
-          I/O
-        </button>
-      </div>
-      <div class="editor-container">    
-        <codemirror
-          ref="cmEditor"
-          v-if="displayName == 'HTML'" 
-          class="html" 
-          :options="htmlOptions"     
-          :value="htmlCode"
-          @ready="onCmReady"
-          @focus="onCmFocus"
-          @input="onCmCodeChange"
-        ></codemirror>
-        <codemirror 
-          v-if="displayName == 'Config'" 
-          class="css"
-          :options="configOptions" 
-          :value="configCode"
-          @ready="onCmReady"
-          @focus="onCmFocus"
-          @input="onCmCodeChange" 
-        ></codemirror>
-        <codemirror 
-          v-if="displayName == 'Data'" 
-          class="javascript"
-          :options="dataOptions"  
-          :value="dataCode"
-          @ready="onCmReady"
-          @focus="onCmFocus"
-          @input="onCmCodeChange" 
-        ></codemirror>
-      </div>
-    </div>       
   </div>
 </template>
 
@@ -69,164 +79,37 @@ import 'codemirror/theme/base16-dark.css'
 import 'codemirror/mode/xml/xml'
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/mode/css/css'
+import 'codemirror/addon/scroll/simplescrollbars'
+import 'codemirror/addon/scroll/simplescrollbars.css'
+import ChartList from './ChartList.vue'
+import {
+  verticalBarChart, 
+  horizontalBarChart, 
+  areaChart, 
+  bubbleChart, 
+  circleChart,
+  lineChart,
+  polarChart,
+  radarChart,
+  scatterChart,
+  } from './chartScript'  
+import ChartWizartInformation from './ChartWizartInformation.vue'
 // component
 export default {
   components: {
-    codemirror
+    codemirror,
+    ChartList,
+    ChartWizartInformation,    
   },
   data () {
     return {
+      isShowInformation: false,
+      chartName: "",
       srcdoc:``,
       displayName: 'Config',
-      htmlCode: `<div id="ssart" style="width: 100%; height: 100%"></div>`,
-      configCode: `const config = {
-            type: 'bar',
-            width: 500,
-            height: 500,
-            margin: { top: 40, left: 40, bottom: 40, right: 40 },
-            padding: 0.1,
-            data: data,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'left',// top bottom left right
-                        fontSize: '10px',
-                        fontWeight: 'normal',
-                        fontFamily: 'comic sans ms',
-                        legendType: 'rect', // rect(default), circle,
-                    },
-                    title: {
-                        display: true,
-                        text: 'Bar Chart'
-                    },
-                    xTitle: {
-                        display: true,
-                        text: 'name'
-                    },
-                    yTitle: {
-                        display: true,
-                        text: 'value'
-                    },
-                    xGrid: {
-                        // color: "rgb(255, 0, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
-                        // dash: "10,3",
-                        // weight: 5,
-                        // opacity: .5,
-                    },
-                    yGrid: {
-                        // color: "#323233", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)"
-                        // dash: "10,3",     // 점선, 10만큼 칠하고 3만큼 빈공간
-                        // weight: 1,        // 선 두께
-                        // opacity: .5,      // 선 투명도
-                    },
-                    // background: {
-
-                    // },
-                    menu: {
-                        grid: true,
-                        xGrid: true,
-                        yGrid: true,
-                        background: true,
-                        download: true,
-                        legend: true
-                    },
-                    axis: {
-                        color: "rgb(255, 0, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
-                        weight: 5,
-                        opacity: .5,
-                        dots: {
-                            display: false,
-                            color: "rgb(255, 0, 255)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
-                            weight: 5,
-                            opacity: .5
-                        },
-                        xAxis: {
-                            color: "rgb(0, 255, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
-                            weight: 5,
-                            opacity: 1,
-                            dots: {
-                                display: false,
-                                color: "rgb(255, 0, 0)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
-                                weight: 5,
-                                opacity: 1
-                            }
-                        },
-                        yAxis: {
-                            color: "rgb(255, 0, 255)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
-                            weight: 1,
-                            opacity: .5,
-                            dots: {
-                                display: false,
-                                color: "rgb(0, 0, 255)", // "rgb(255, 0, 0)" "rgba(255, 0, 0, 0.3)",
-                                weight: 5,
-                                opacity: .5
-                            }
-                        }
-                    },
-                },
-                scales: {
-                    yAxis: {
-                        ticks: {
-                            // min: -20,
-                            max: 40
-                        }
-                    },
-                    fillopacity: 0.5
-                }
-            },
-        };`,
-      dataCode: `const data = {
-            labels: ['a', 'b', 'c', 'd', 'e', 'f'],
-            datasets: [
-                {
-                    label: '데이터 1',
-                    data: [
-                        { name: 'a', value: -10 },
-                        { name: 'b', value: -29 },
-                        { name: 'c', value: -32 },
-                        { name: 'd', value: 25 },
-                        { name: 'e', value: 23 },
-                        { name: 'f', value: 15 }
-                    ],
-                    // backgroundColor: "red",
-
-                },
-                {
-                    label: '데이터 2',
-                    data: [1, 2, 3, 4, 5, 6, -7, -8, -9, -10]
-                    ,
-                    // backgroundColor: "blue",
-                },
-                {
-                    label: '데이터 3',
-                    data:
-                        [
-                            { name: 'a', value: 15 },
-                            { name: 'b', value: 23 },
-                            { name: 'c', value: 25 },
-                            { name: 'd', value: -32 },
-                            { name: 'e', value: -29 },
-                            { name: 'f', value: -12 },
-                            { name: 'g', value: -15 },
-                            { name: 'ㅎ', value: 1 },
-                            { name: 't', value: 12 }
-                        ],
-                },
-                // {
-                //     label: 'Small Radius',
-                //     data : [
-                //         {name: 'a', value: 15},
-                //         {name: 'b', value: 23},
-                //         {name: 'c', value: 25},
-                //         {name: 'd', value: 32},
-                //         {name: 'e', value: 29},
-                //         {name: 'f', value: 13},
-                //         {name: 'g', value: 15},
-                //     ],
-                // }
-            ]
-        };`,
+      htmlCode: `<div id="ssart"></div>`,
+      configCode: ``,
+      dataCode: ``,
       htmlOptions: {
         // codemirror options
         tabSize: 4,
@@ -234,20 +117,29 @@ export default {
         theme: 'base16-dark',
         lineNumbers: true,
         line: true,
+        styleActiveLine: true,
+        foldGutter: true,
+        lineWrapping: true,
+        lint: true,
         // more codemirror options, 更多 codemirror 的高级配置...
       },
       configOptions: {
         // codemirror options
-        tabSize: 4,
-        mode: 'javascript',
+        tabSize: 2,
+        mode: 'text/javascript',
         theme: 'base16-dark',
         lineNumbers: true,
         line: true,
+        styleActiveLine: true,
+        foldGutter: true,
+        lineWrapping: true,
+        lint: true,
+        scrollbarStyle: 'simple'
         // more codemirror options, 更多 codemirror 的高级配置...
       },
       dataOptions: {
         // codemirror options
-        tabSize: 4,
+        tabSize: 2,
         mode: 'text/javascript',
         theme: 'base16-dark',
         lineNumbers: true,
@@ -284,33 +176,146 @@ export default {
     selectLanguage (language) {
       this.displayName = language
     },
+    resizeIframe () {
+      let iframe = this.$refs.iframe      
+      if (iframe.contentWindow.document.body.scrollHeight < 500) {
+        iframe.height = 500 + "px"
+      } else {
+        iframe.height = iframe.contentWindow.document.body.scrollHeight + 20 + "px";
+      }
+    },
+    doCopy: function () {
+      const content = this.$refs[this.displayName].codemirror.getDoc().getValue()
+      this.$copyText(content).then(function (e) {
+        alert('Copied')
+        console.log(e)
+      }, function (e) {
+        alert('Can not copy')
+        console.log(e)
+      })
+    }
   },
   computed: {
     codemirror() {
       return this.$refs.myCm.codemirror
     },
     renderSrc() {      
-      return `<html><body>${this.htmlCode}</body><style>@import "https://cdn.jsdelivr.net/npm/ssart@1.0.5/src/css/index.css"</style>` +
+      return `<html><body>${this.htmlCode}</body><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ssart@1.0.6/src/css/index.css"></link><style>#ssart{width: 100%; height: 100%; display: flex; justify-content: center;}</style>` +
       `<scr` + `ipt src="https://d3js.org/d3.v5.min.js"></scr` + `ipt>` +
-      `<scr` + `ipt src="https://cdn.jsdelivr.net/npm/ssart@1.0.5"></scr` + `ipt>` +
-      `<scr` + `ipt type="module">` +      
-      `      
-      import {Chart} from "https://cdn.jsdelivr.net/npm/ssart@1.0.5/src/index.js"      
+      `<scr` + `ipt type="module">` +
+      `import * as Chart from "https://cdn.jsdelivr.net/npm/ssart@1.0.6/src/index.js"
       ${this.dataCode}
       ${this.configCode}` +
-      `</scr` + `ipt>`      
+      `</scr` + `ipt>`
       + `</html>`
     }
   },
-  mounted() {
+  created() {
+    this.$watch(
+      () => this.$route.params,
+      (toParams) => {
+        // react to route changes...
+        if (toParams.chartname === "information") {
+          this.isShowInformation = true
+          return
+        } else {
+          this.isShowInformation = false          
+        }
+        if (toParams.chartname === "vertical-bar-charts") {
+          this.chartName = 'Vertical Bar'
+          this.dataCode = verticalBarChart.data
+          this.configCode = verticalBarChart.config
+        } else if (toParams.chartname === "horizontal-bar-charts") {
+          this.chartName = 'Horizontal Bar'
+          this.dataCode = horizontalBarChart.data
+          this.configCode = horizontalBarChart.config
+        } else if (toParams.chartname === "area-charts") {
+          this.chartName = 'Area'
+          this.dataCode = areaChart.data
+          this.configCode = areaChart.config
+        } else if (toParams.chartname === "bubble-charts") {
+          this.chartName = 'Bubble'
+          this.dataCode = bubbleChart.data
+          this.configCode = bubbleChart.config
+        } else if (toParams.chartname === "circle-charts") {
+          this.chartName = 'Circle'
+          this.dataCode = circleChart.data
+          this.configCode = circleChart.config
+        } else if (toParams.chartname === "line-charts") {
+          this.chartName = 'Line'
+          this.dataCode = lineChart.data
+          this.configCode = lineChart.config
+        } else if (toParams.chartname === "polar-charts") {
+          // console.log('Polar')
+          this.chartName = 'Polar'
+          this.dataCode = polarChart.data
+          this.configCode = polarChart.config
+        } else if (toParams.chartname === "radar-charts") {
+          this.chartName = 'Radar'
+          this.dataCode = radarChart.data
+          this.configCode = radarChart.config
+        } else if (toParams.chartname === "scatter-charts") {
+          this.chartName = 'Scatter'
+          this.dataCode = scatterChart.data
+          this.configCode = scatterChart.config
+        }
+        return
+      }
+    )
     // console.log('this is current codemirror object', this.codemirror)
     // you can use this.codemirror to do something...
-    // this.$refs.iframe.contentWindow.onerror = () => alert('hi')
+    if (this.$route.params.chartname === "information") {
+        this.isShowInformation = true
+        return
+      } else {
+        this.isShowInformation = false          
+      } 
+    if (this.$route.params.chartname === "vertical-bar-charts") {      
+      this.chartName = 'Vertical Bar'
+      this.dataCode = verticalBarChart.data
+      this.configCode = verticalBarChart.config
+    } else if (this.$route.params.chartname === "horizontal-bar-charts") {
+      this.chartName = 'Horizontal Bar'
+      this.dataCode = horizontalBarChart.data
+      this.configCode = horizontalBarChart.config
+    } else if (this.$route.params.chartname === "area-charts") {
+      this.chartName = 'Area'
+      this.dataCode = areaChart.data
+      this.configCode = areaChart.config
+    } else if (this.$route.params.chartname === "bubble-charts") {
+      this.chartName = 'Bubble'
+      this.dataCode = bubbleChart.data
+      this.configCode = bubbleChart.config
+    } else if (this.$route.params.chartname === "circle-charts") {
+      this.chartName = 'Circle'
+      this.dataCode = circleChart.data
+      this.configCode = circleChart.config
+    } else if (this.$route.params.chartname === "line-charts") {
+      this.chartName = 'Line'
+      this.dataCode = lineChart.data
+      this.configCode = lineChart.config
+    } else if (this.$route.params.chartname === "polar-charts") {
+      this.chartName = 'Polar'
+      // console.log('Polar')
+      this.dataCode = polarChart.data
+      this.configCode = polarChart.config
+    } else if (this.$route.params.chartname === "radar-charts") {
+      this.chartName = 'Radar'
+      this.dataCode = radarChart.data
+      this.configCode = radarChart.config
+    } else if (this.$route.params.chartname === "scatter-charts") {
+      this.chartName = 'Scatter'
+      this.dataCode = scatterChart.data
+      this.configCode = scatterChart.config
+    }
   },
 }
 </script>
 
 <style scoped> 
+.CodeMirror-simplescroll-vertical {
+  background: black; 
+}
 .wizard-container {
   /* background-color: hsl(225, 6%, 25%); */
   /* max-height: 1000px; */
@@ -376,955 +381,24 @@ export default {
   border-bottom-color: #3080d0ed;
   border-width: 3px;
 }
-
-.CodeMirror {
-  height: 100% !important;
-}
-
 .code-mirror-wrapper {
   flex-grow: 1;
   border-bottom-right-radius: .5rem;
   border-bottom-left-radius: .5rem;
   overflow: hidden;
 }
-.gutter pre {
-  color: #999;
-}
-pre {
-  color: #525252;
-}
-pre .function .keyword,
-pre .constant {
-  color: #0092db;
-}
-pre .keyword,
-pre .attribute {
-  color: #e96900;
-}
-pre .number,
-pre .literal {
-  color: #ae81ff;
-}
-pre .tag,
-pre .tag .title,
-pre .change,
-pre .winutils,
-pre .flow,
-pre .lisp .title,
-pre .clojure .built_in,
-pre .nginx .title,
-pre .tex .special {
-  color: #2973b7;
-}
-pre .class .title {
-  color: #fff;
-}
-pre .symbol,
-pre .symbol .string,
-pre .value,
-pre .regexp {
-  color: #42b983;
-}
-pre .title {
-  color: #a6e22e;
-}
-pre .tag .value,
-pre .string,
-pre .subst,
-pre .haskell .type,
-pre .preprocessor,
-pre .ruby .class .parent,
-pre .built_in,
-pre .sql .aggregate,
-pre .django .template_tag,
-pre .django .variable,
-pre .smalltalk .class,
-pre .javadoc,
-pre .django .filter .argument,
-pre .smalltalk .localvars,
-pre .smalltalk .array,
-pre .attr_selector,
-pre .pseudo,
-pre .addition,
-pre .stream,
-pre .envvar,
-pre .apache .tag,
-pre .apache .cbracket,
-pre .tex .command,
-pre .prompt {
-  color: #42b983;
-}
-pre .comment,
-pre .java .annotation,
-pre .python .decorator,
-pre .template_comment,
-pre .pi,
-pre .doctype,
-pre .deletion,
-pre .shebang,
-pre .apache .sqbracket,
-pre .tex .formula {
-  color: #b3b3b3;
-}
-pre .coffeescript .javascript,
-pre .javascript .xml,
-pre .tex .formula,
-pre .xml .javascript,
-pre .xml .vbscript,
-pre .xml .css,
-pre .xml .cdata {
-  opacity: 0.5;
-}
-body {
-  font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
-  font-size: 15px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #36485f;
-  background-color: #fff;
-  margin: 0;
-}
-body.docs {
-  padding-top: 61px;
-}
-@media screen and (max-width: 900px) {
-  body.docs {
-    padding-top: 0;
-  }
-}
-a {
-  text-decoration: none;
-  color: #36485f;
-}
-img {
-  border: none;
-}
-h1,
-h2,
-h3,
-h4,
-strong {
-  font-weight: 600;
-  color: #2c3e50;
-}
-code,
-pre {
-  font-family: 'Roboto Mono', Monaco, courier, monospace;
-  font-size: 0.8em;
-  background-color: #f8f8f8;
-  -webkit-font-smoothing: initial;
-  -moz-osx-font-smoothing: initial;
-}
-code {
-  color: #e96900;
-  padding: 3px 5px;
-  margin: 0 2px;
-  border-radius: 2px;
-  white-space: nowrap;
-}
-em {
-  color: #7f8c8d;
-}
-hr.sep {
-  height: 1px;
-  background-color: #e5e5e5;
-  border: 0;
-  margin: 20px 0 20px 0;
-}
-p {
-  word-spacing: 0.05em;
-}
-.button {
-  padding: 0.75em 2em;
-  border-radius: 2em;
-  display: inline-block;
-  cursor: pointer;
-  color: #fff;
-  background-color: #405671;
-  transition: all 0.15s ease;
-  box-sizing: border-box;
-  border: 1px solid #405671;
-}
-.button.white {
-  background-color: #fff;
-  color: #36485f;
-}
-.highlight {
-  overflow-x: auto;
-  position: relative;
-  padding: 0;
-  background-color: #f8f8f8;
-  padding: 0.8em 0.8em 0.4em;
-  line-height: 1.1em;
-  border-radius: 2px;
-}
-.highlight table,
-.highlight tr,
-.highlight td {
-  width: 100%;
-  border-collapse: collapse;
-  padding: 0;
-  margin: 0;
-}
-.highlight .gutter {
-  width: 1.5em;
-}
-.highlight .code pre {
-  padding: 1.2em 1.4em;
-  line-height: 1.5em;
-  margin: 0;
-}
-.highlight .code .line {
-  min-height: 1.5em;
-}
-.highlight.html .code:after,
-.highlight.js .code:after,
-.highlight.bash .code:after,
-.highlight.css .code:after {
-  position: absolute;
-  top: 0;
-  right: 0;
-  color: #ccc;
-  text-align: right;
-  font-size: 0.75em;
-  padding: 5px 10px 0;
-  line-height: 15px;
-  height: 15px;
-  font-weight: 600;
-}
-.highlight.html .code:after {
-  content: 'HTML';
-}
-.highlight.js .code:after {
-  content: 'JS';
-}
-.highlight.bash .code:after {
-  content: 'Shell';
-}
-.highlight.css .code:after {
-  content: 'CSS';
-}
-#main {
-  position: relative;
-  z-index: 1;
-  padding: 0 60px 30px;
-  overflow-x: hidden;
-}
-#ad {
-  width: 125px;
-  position: fixed;
-  z-index: 99;
-  bottom: 10px;
-  right: 10px;
-  padding: 10px;
-  background-color: #fff;
-  border-radius: 3px;
-  font-size: 13px;
-}
-#ad a {
-  display: inline-block;
-  color: #7f8c8d;
-  font-weight: normal;
-}
-#ad span {
-  color: #7f8c8d;
-  display: inline-block;
-  margin-bottom: 5px;
-}
-#ad img {
-  width: 125px;
-}
-#ad .carbon-img,
-#ad .carbon-text {
-  display: block;
-  margin-bottom: 6px;
-  font-weight: normal;
-  color: #36485f;
-}
-#ad .carbon-poweredby {
-  color: #aaa;
-  font-weight: normal;
-}
-#nav .nav-link {
-  cursor: pointer;
-}
-#nav .nav-dropdown-container .nav-link:hover {
-  border-bottom: none;
-}
-#nav .nav-dropdown-container:hover .nav-dropdown {
-  display: block;
-}
-#nav .nav-dropdown-container.language {
-  margin-left: 20px;
-}
-#nav .nav-dropdown-container .arrow {
-  pointer-events: none;
-}
-#nav .nav-dropdown {
-  display: none;
-  box-sizing: border-box;
-  max-height: calc(100vh - 61px);
-  overflow-y: scroll;
-  position: absolute;
-  top: 100%;
-  right: -15px;
-  background-color: #fff;
-  padding: 10px 0;
-  border: 1px solid #ddd;
-  border-bottom-color: #ccc;
-  text-align: left;
-  border-radius: 4px;
-  white-space: nowrap;
-}
-#nav .nav-dropdown li {
-  line-height: 1.8em;
-  margin: 0;
-  display: block;
-}
-#nav .nav-dropdown li > ul {
-  padding-left: 0;
-}
-#nav .nav-dropdown li:first-child h4 {
-  margin-top: 0;
-  padding-top: 0;
-  border-top: 0;
-}
-#nav .nav-dropdown a,
-#nav .nav-dropdown h4 {
-  padding: 0 24px 0 20px;
-}
-#nav .nav-dropdown h4 {
-  margin: 0.45em 0 0;
-  padding-top: 0.45em;
-  border-top: 1px solid #eee;
-}
-#nav .nav-dropdown a {
-  color: #3a5169;
-  font-size: 0.9em;
-  display: block;
-}
-#nav .nav-dropdown a:hover {
-  color: #42b983;
-}
-#nav .arrow {
-  display: inline-block;
-  vertical-align: middle;
-  margin-top: -1px;
-  margin-left: 6px;
-  margin-right: -14px;
-  width: 0;
-  height: 0;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 5px solid #ccc;
-}
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-.row .col-1-2 {
-  float: left;
-  box-sizing: border-box;
-  width: 50%;
-  padding: 10px;
-}
-.form-input {
-  display: block;
-  margin-bottom: 10px;
-}
-.form-input label {
-  display: inline-block;
-  min-width: 150px;
-}
-.form-input input {
-  display: inline-block;
-  padding: 5px 10px;
-  min-width: 150px;
-}
-#header {
-  background-color: #fff;
-  height: heading-inner-height;
-  padding: 10px 60px;
-  position: relative;
-  z-index: 2;
-}
-#header a {
-  cursor: pointer;
-}
-body.docs #header {
-  position: fixed;
-  width: 100%;
-  top: 0;
-}
-body.docs #nav {
-  position: fixed;
-}
-#nav {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  right: 60px;
-  top: 10px;
-  height: 50px;
-  line-height: 50px;
-}
-#nav .break {
-  display: none;
-}
-#nav li {
-  display: inline-block;
-  position: relative;
-  margin: 0 0.6em;
-}
-#nav a {
-  cursor: pointer;
-}
-.nav-link {
-  padding-bottom: 3px;
-}
-.nav-link:hover,
-.nav-link.current {
-  border-bottom: 3px solid #42b983;
-}
-.search-query {
-  height: 30px;
-  line-height: 30px;
-  box-sizing: border-box;
-  padding: 0 15px 0 30px;
-  border: 1px solid #e3e3e3;
-  color: #2c3e50;
-  outline: none;
-  border-radius: 15px;
-  margin-right: 10px;
-  transition: border-color 0.2s ease;
-  background: #fff url("/images/search.png") 8px 5px no-repeat;
-  background-size: 20px;
-  vertical-align: middle !important;
-}
-.search-query:focus {
-  border-color: #42b983;
-}
-#logo {
-  display: inline-block;
-  font-size: 1.6em;
-  line-height: 50px;
-  color: #2c3e50;
-  font-family: 'Dosis', 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
-  font-weight: 500;
-}
-#logo img {
-  vertical-align: middle;
-  margin-right: 6px;
-  width: auto;
-  height: 50px;
-}
-#mobile-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 40px;
-  background-color: #fff;
-  z-index: 9;
-  display: none;
-  box-shadow: 0 0 2px rgba(0,0,0,0.25);
-}
-#mobile-bar .menu-button {
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  top: 8px;
-  left: 12px;
-  /* background: url("../images/menu.png") center center no-repeat; */
-  background-size: 24px;
-}
-#mobile-bar .logo {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  /* background: url("../images/logo.png") center center no-repeat; */
-  top: 5px;
-  left: 50%;
-  margin-left: -15px;
-  background-size: 30px;
-}
-#demo,
-.demo {
-  border: 1px solid #eee;
-  border-radius: 2px;
-  padding: 25px 35px;
-  margin-top: 1em;
-  margin-bottom: 40px;
-  font-size: 1.2em;
-  line-height: 1.5em;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  overflow-x: auto;
-}
-#demo h1,
-.demo h1 {
-  margin: 0 0 0.5em;
-  font-size: 1.8em;
-}
-#demo ul,
-.demo ul,
-#demo ol,
-.demo ol {
-  padding-left: 1.5em;
-  padding-bottom: 0.2em !important;
-}
-#demo ul:first-child,
-.demo ul:first-child,
-#demo ol:first-child,
-.demo ol:first-child {
-  margin-top: 0;
-}
-#demo ul:last-child,
-.demo ul:last-child,
-#demo ol:last-child,
-.demo ol:last-child {
-  margin-bottom: 0;
-}
-#demo li,
-.demo li {
-  color: #36485f;
-}
-#demo li.done,
-.demo li.done {
-  color: #7f8c8d;
-  text-decoration: line-through;
-}
-#demo p,
-.demo p {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-#demo p:first-child,
-.demo p:first-child {
-  margin-top: 0;
-}
-#demo p:last-child,
-.demo p:last-child {
-  margin-bottom: 0;
-}
-#demo textarea,
-.demo textarea {
-  width: 100%;
-  resize: vertical;
-}
-ul#demo li,
-ul.demo li {
-  margin-left: 1.5em;
-}
-@media screen and (max-width: 900px) {
-  #demo,
-  .demo {
-    margin-left: 0;
-  }
-}
-.benchmark-table {
-  margin: 0 auto;
-  text-align: center;
-}
-.benchmark-table tbody > tr > th {
-  text-align: right;
-}
-.benchmark-table th,
-.benchmark-table td {
-  padding: 3px 7px;
-}
-.content.guide[class*="migration"] h2 > sup,
-.content.guide[class*="migration"] h3 > sup {
-  margin-left: 0.3em;
-  color: #b9465c;
-}
-.content.guide[class*="migration"] .upgrade-path {
-  padding: 2em;
-  background: rgba(73,195,140,0.1);
-  border-radius: 2px;
-}
-.content.guide[class*="migration"] .upgrade-path > h4 {
-  margin-top: 0;
-}
-.content.guide[class*="migration"] .upgrade-path > p:last-child {
-  margin-bottom: 0;
-}
+
 .sidebar {
-  position: absolute;
+  background-color: #fff;
+  width: 15rem;
+  position: fixed;
   z-index: 10;
-  top: 61px;
+  margin: 0;
+  top: 4.25rem;
   left: 0;
   bottom: 0;
-  padding: 40px 0 30px 60px;
-  width: 260px;
-  margin-right: 20px;
-  overflow-x: hidden;
+  box-sizing: border-box;
+  border-right: 1px solid #eaecef;
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: none;
 }
-.sidebar h2 {
-  margin-top: 0.2em;
-}
-.sidebar ul {
-  list-style-type: none;
-  margin: 0;
-  line-height: 1.8em;
-  padding-left: 1em;
-}
-.sidebar .version-select {
-  vertical-align: middle;
-  margin-left: 5px;
-}
-.sidebar .menu-root {
-  padding-left: 0;
-}
-.sidebar .menu-sub {
-  font-size: 0.85em;
-}
-.sidebar .sidebar-link {
-  color: #7f8c8d;
-}
-.sidebar .sidebar-link.current {
-  font-weight: 600;
-  color: #42b983;
-}
-.sidebar .sidebar-link.new:after {
-  content: "NEW";
-  display: inline-block;
-  font-size: 10px;
-  font-weight: 600;
-  color: #fff;
-  background-color: #42b983;
-  line-height: 14px;
-  padding: 0 4px;
-  border-radius: 3px;
-  margin-left: 5px;
-  vertical-align: middle;
-  position: relative;
-  top: -1px;
-}
-.sidebar .sidebar-link:hover {
-  border-bottom: 2px solid #42b983;
-}
-.sidebar .section-link.active {
-  font-weight: bold;
-  color: #42b983;
-}
-.sidebar .main-menu {
-  margin-bottom: 20px;
-  display: none;
-  padding-left: 0;
-}
-.sidebar .main-sponsor {
-  color: #7f8c8d;
-  font-size: 0.85em;
-}
-.sidebar .main-sponsor a {
-  margin: 10px 0;
-}
-.sidebar .main-sponsor img,
-.sidebar .main-sponsor a {
-  width: 125px;
-  display: inline-block;
-}
-.sidebar .become-backer {
-  border: 1px solid #42b983;
-  border-radius: 2em;
-  display: inline-block;
-  color: #42b983;
-  font-size: 0.8em;
-  width: 125px;
-  padding: 4px 0;
-  text-align: center;
-  margin-bottom: 20px;
-}
-.sidebar .nav-dropdown h4 {
-  font-weight: normal;
-  margin: 0;
-}
-@media screen and (max-width: 900px) {
-  .sidebar {
-    position: fixed;
-    z-index: 8;
-    background-color: #f9f9f9;
-    height: 100%;
-    top: 0;
-    left: 0;
-    padding: 60px 30px 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    box-sizing: border-box;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0, 1);
-    -webkit-transform: translate(-280px, 0);
-    transform: translate(-280px, 0);
-  }
-  .sidebar .search-query {
-    width: 200px;
-    margin-bottom: 10px;
-  }
-  .sidebar .main-menu {
-    display: block;
-  }
-  .sidebar.open {
-    -webkit-transform: translate(0, 0);
-    transform: translate(0, 0);
-  }
-}
-#header {
-  box-shadow: 0 0 1px rgba(0,0,0,0.25);
-  transition: background-color 0.3s ease-in-out;
-}
-.content {
-  position: relative;
-  padding: 2.2em 0;
-  max-width: 1050px;
-  margin: 0 auto;
-}
-.content.api > a:first-of-type > h2 {
-  margin-top: 0;
-  padding-top: 0;
-}
-.content.api ul {
-  padding-left: 1.25em;
-  line-height: 1.4em;
-}
-.content.api ul ul,
-.content.api ul p {
-  margin: 0.6em 0;
-}
-.content a.button {
-  font-size: 0.9em;
-  color: #fff;
-  margin: 0.2em 0;
-  width: 180px;
-  text-align: center;
-  padding: 12px 24px;
-  display: inline-block;
-  vertical-align: middle;
-}
-.content img {
-  max-width: 100%;
-}
-.content span.light {
-  color: #7f8c8d;
-}
-.content span.info {
-  font-size: 0.85em;
-  display: inline-block;
-  vertical-align: middle;
-  width: 280px;
-  margin-left: 20px;
-}
-.content h1 {
-  margin: 0 0 1em;
-}
-.content h2:before,
-.content h3:before {
-  content: '';
-  display: block;
-  margin-top: -91px;
-  height: 91px;
-  visibility: hidden;
-}
-.content h2 {
-  margin: 45px 0 0.8em;
-  padding-bottom: 0.7em;
-  border-bottom: 1px solid #ddd;
-  z-index: -1;
-}
-.content h3 {
-  margin: 52px 0 1.2em;
-  position: relative;
-  z-index: -1;
-}
-.content h3:after {
-  content: "#";
-  color: #42b983;
-  position: absolute;
-  left: -0.7em;
-  bottom: -2px;
-  font-size: 1.2em;
-  font-weight: bold;
-}
-.content figure {
-  margin: 1.2em 0;
-}
-.content p,
-.content ul,
-.content ol {
-  line-height: 1.6em;
-  margin: 1.2em 0 -1.2em;
-  padding-bottom: 1.2em;
-  position: relative;
-  z-index: 1;
-}
-.content ul,
-.content ol {
-  padding-left: 1.5em;
-}
-.content a {
-  color: #42b983;
-  font-weight: 600;
-}
-.content blockquote {
-  margin: 2em 0;
-  padding-left: 20px;
-  border-left: 4px solid #42b983;
-}
-.content blockquote p {
-  font-weight: 600;
-  margin-left: 0;
-}
-.content iframe {
-  margin: 1em 0;
-}
-.content > table {
-  border: 2px solid white;
-  margin: 1.2em auto;
-  padding: 1em;
-}
-.content > table td,
-.content > table th {
-  line-height: 1.6em;
-  padding: 0.5em 1.4em;
-  border: none;
-}
-.content > table td {
-  background-color: #fcfcfc;
-}
-.content > table th {
-  background-color: #42b983;
-  color: #fff;
-  padding-top: 0.85em;
-  padding-bottom: 0.85em;
-  text-align: left;
-}
-.content > table tbody code {
-  background-color: #efefef;
-}
-.content p.tip {
-  padding: 12px 24px 12px 30px;
-  margin: 2em 0;
-  border-left: 4px solid #f66;
-  background-color: #f8f8f8;
-  position: relative;
-  border-bottom-right-radius: 2px;
-  border-top-right-radius: 2px;
-}
-.content p.tip:before {
-  position: absolute;
-  top: 14px;
-  left: -12px;
-  background-color: #f66;
-  color: #fff;
-  content: "!";
-  width: 20px;
-  height: 20px;
-  border-radius: 100%;
-  text-align: center;
-  line-height: 20px;
-  font-weight: bold;
-  font-family: 'Dosis', 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
-  font-size: 14px;
-}
-.content p.tip code {
-  background-color: #efefef;
-}
-.content p.tip em {
-  color: #36485f;
-}
-.guide-links {
-  margin-top: 2em;
-  height: 1em;
-}
-.footer {
-  color: #7f8c8d;
-  margin-top: 2em;
-  padding-top: 2em;
-  border-top: 1px solid #e5e5e5;
-  font-size: 0.9em;
-}
-#main.fix-sidebar .sidebar {
-  position: fixed;
-}
-@media screen and (min-width: 1590px) {
-  #header {
-    background-color: rgba(255,255,255,0.4);
-  }
-}
-@media screen and (max-width: 1300px) {
-  .content.with-sidebar {
-    margin-left: 290px;
-  }
-  #ad {
-    z-index: 7;
-    position: relative;
-    padding: 0;
-    bottom: 0;
-    right: 0;
-    float: right;
-    padding: 0 0 20px 30px;
-  }
-}
-@media screen and (max-width: 900px) {
-  body {
-    -webkit-text-size-adjust: none;
-    font-size: 14px;
-  }
-  #header {
-    display: none;
-  }
-  #logo {
-    display: none;
-  }
-  .nav-link {
-    padding-bottom: 1px;
-  }
-  .nav-link:hover,
-  .nav-link.current {
-    border-bottom: 2px solid #42b983;
-  }
-  #mobile-bar {
-    display: block;
-  }
-  #main {
-    padding: 2em 1.4em 0;
-  }
-  .highlight pre {
-    padding: 1.2em 1em;
-  }
-  .content.with-sidebar {
-    margin: auto;
-  }
-  .content h2:before,
-  .content h3:before {
-    content: '';
-    display: block;
-    margin-top: -70px;
-    height: 70px;
-    visibility: hidden;
-  }
-  .footer {
-    margin-left: 0;
-    text-align: center;
-  }
-}
-@media screen and (max-width: 560px) {
-  #downloads {
-    text-align: center;
-    margin-bottom: 25px;
-  }
-  #downloads .info {
-    margin-top: 5px;
-    margin-left: 0;
-  }
-  iframe {
-    margin: 0 !important;
-  }
-}
-
 </style>

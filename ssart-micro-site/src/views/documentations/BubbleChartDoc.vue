@@ -1,7 +1,7 @@
 <template>
     
     <div>
-        <h3> BubbleChart (거품 차트)</h3>
+        <h3 class="bold"> BubbleChart (거품 차트)</h3>
         <br>        
         <div class="chart-text">            
             <p>This chart displays three dimensions of data.</p>
@@ -10,12 +10,12 @@
             <p>거품형 차트는 사회, 경제, 의료 및 기타 과학적 관계에 대한 이해를 용이하게 할 수 있습니다.</p>
         </div>
         <hr>
-        <h4>Example</h4>
+        <h4 class="bold">Example</h4>
         <img src="@/img/IndexImg/6.Bubble.png" width="400px" height="400px"/>
         <hr>        
         
                     <details>
-                        <summary>Try It</summary>
+                        <summary class="bold">Try It</summary>
                         <pre style="color: #000">
         <span class="script-color1">const</span> data = {
             labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
