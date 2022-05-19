@@ -1,6 +1,6 @@
 {
   "name": "ssart",
-  "version": "1.0.9",
+  "version": "1.0.11",
   "description": "Simply crate and use various charts ",
   "main": "src/index.js",
   "scripts": {
@@ -11,16 +11,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://lab.ssafy.com/s06-final/S06P31S201.git"
+    "url": "https://github.com/ssartchart/ssart"
   },
-  "homepage": "https://oursites.com",
+  "homepage": "https://ssart-chart.netlify.app",
   "keywords": [
     "chart",
     "svg",
     "opensource",
     "d3",
     "data",
-    "visualization"
+    "visualization",
+    "JavaScript"
   ],
   "contributors": [
     {
