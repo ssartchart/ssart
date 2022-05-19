@@ -105,9 +105,9 @@
       <br>
       <h4>notify</h4>
       <br>
-      <p>ssart의 css를 추가로 import합니다.(위치: index.html)</p>
+      <p>d3를 추가로 import합니다.</p>
       <pre>
-        <span class="tag"><xmp><</xmp>link</span> rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ssart@1.0.6/src/css/index.css"<span class="tag">><xmp><</xmp>/link></span>
+        <span class="tag"><xmp><</xmp>script</span> src='https://d3js.org/d3.v5.min.js'<span class="tag">><xmp><</xmp>/script></span>
       </pre>
   </div>
 </template>
