@@ -193,7 +193,6 @@ export default {
     },
     area: function(e) {
       this.allNormal()
-      // console.log("chk")
       this.$emit('area')
       e.target.style.fontWeight = "bold"
       if (e.target.firstChild.className==="underListSpan") {
