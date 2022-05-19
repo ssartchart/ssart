@@ -9,7 +9,7 @@
                 <ul class="navbar-nav ms-auto ">
                     <li class="nav-item">                        
                         <a @click.prevent="$router.push({path: '/chart-wizard/information'}).catch(err => {}); scrollTop();" :class="{'nav-link': true, 'active': currentPageName == 'ChartWizard'}" aria-current="page" href="#!">
-                            메뉴 탭1(차트 코드)
+                            Chart Maker
                         </a>
                     </li>
                     <li class="nav-item"><a @click.prevent="$router.push({name: 'Documentation'}).catch(err => {}); scrollTop();" :class="{'nav-link': true, 'active': currentPageName == 'Documentation'}" aria-current="page" href="#!">

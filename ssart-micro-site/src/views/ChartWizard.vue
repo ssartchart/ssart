@@ -211,7 +211,6 @@ export default {
     }
   },
   created() {
-    console.log('생성', this.$route.params)
     this.$watch(
       () => this.$route.params,
       (toParams) => {
@@ -247,7 +246,7 @@ export default {
           this.dataCode = lineChart.data
           this.configCode = lineChart.config
         } else if (toParams.chartname === "polar-charts") {
-          console.log('폴라?')
+          // console.log('Polar')
           this.chartName = 'Polar'
           this.dataCode = polarChart.data
           this.configCode = polarChart.config
@@ -297,7 +296,7 @@ export default {
       this.configCode = lineChart.config
     } else if (this.$route.params.chartname === "polar-charts") {
       this.chartName = 'Polar'
-      console.log('폴라 시작')
+      // console.log('Polar')
       this.dataCode = polarChart.data
       this.configCode = polarChart.config
     } else if (this.$route.params.chartname === "radar-charts") {
