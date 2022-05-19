@@ -550,7 +550,7 @@ if you want to see more Examples , plz visit our sites and see more chart [SSART
   <br>
     
 ```js
-  const data3 = {
+  const data = {
     labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
     datasets: [
         {
@@ -601,13 +601,13 @@ if you want to see more Examples , plz visit our sites and see more chart [SSART
 ```
 
 ```js
-  const config3 = {
+  const config = {
     type: 'bubble',
     width: 500,
     height: 500,
     margin: { top: 40, left: 40, bottom: 40, right: 40 },
     padding: 0.1,
-    data: data3,
+    data: data,
     options: {
         responsive: true,
         plugins: {
