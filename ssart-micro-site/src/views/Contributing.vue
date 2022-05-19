@@ -55,6 +55,7 @@
         <p> If there is a problem, please share it in detail (There is a problem that I can't Y even though I did X !)
         <p> Rather than fixing it right away, please share or discuss the problem with others
         <p> If you have any additional sharing or questions, please contact the development team via email </p>
+  <a href="https://github.com/ssartchart/ssart"><span class="script-color1">OurGit</span></a>
   </div>
             </div>
         </main>
