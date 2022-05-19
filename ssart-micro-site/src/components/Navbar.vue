@@ -15,7 +15,7 @@
                     <li class="nav-item"><a @click.prevent="$router.push({name: 'Documentation'}).catch(err => {}); scrollTop();" :class="{'nav-link': true, 'active': currentPageName == 'Documentation'}" aria-current="page" href="#!">
                             Documentation
                     </a></li>
-                    <li class="nav-item"><a @click.prevent="$router.push({name: 'Sample'}).catch(err => {}); scrollTop();" :class="{'nav-link': true, 'active': currentPageName == 'Sample'}" href="#!">Sample</a></li>
+                    <li class="nav-item"><a @click.prevent="$router.push({name: 'ChartSample'}).catch(err => {}); scrollTop();" :class="{'nav-link': true, 'active': currentPageName == 'ChartSample'}" href="#!">Sample</a></li>
                     <li class="nav-item"><a @click.prevent="$router.push({name: 'Contributing'}).catch(err => {}); scrollTop();" :class="{'nav-link': true, 'active': currentPageName == 'Contributing'}" href="#!">Contributing</a></li>
                     
                     <li class="nav-item"><a @click="contact" class="nav-link" href="#!"> Contact </a></li>

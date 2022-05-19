@@ -10,8 +10,8 @@
                       <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
                           
                           <a class="btn btn-outline-light btn-lg px-4 me-sm-5" @click="goToDocumentation">메뉴얼</a>
-                          <a class="btn btn-outline-light btn-lg px-4 me-sm-5" href="./sample.html">차트 샘플</a>
-                          <a class="btn btn-outline-light btn-lg px-4 me-sm-5" href="#!">GitHub</a>
+                          <a class="btn btn-outline-light btn-lg px-4 me-sm-5" @click="goToSample">차트 샘플</a>
+                          <a class="btn btn-outline-light btn-lg px-4 me-sm-5" href="https://github.com/ssartchart">GitHub</a>
 
                       </div>
                   </div>
@@ -275,6 +275,9 @@ export default {
   methods: {
     goToDocumentation: function () {
         this.$router.push('document')
+    },
+    goToSample: function () {
+        this.$router.push('sample')
     },
     goToAreaDocumentation: function () {
         this.$router.push('document?field=Area')

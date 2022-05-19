@@ -19,7 +19,7 @@
       <hr>
       <p>ssart를 import합니다</p>
       <pre>
-      <span class="script-color1">import</span> ssart
+      <span class="script-color1">import</span> * as ssart from 'ssart'
       </pre>
       <hr>
       <p>java script로 차트로 나타낼 data를 준비하고 data config를 작성합니다.</p>
@@ -100,8 +100,15 @@
       <pre>
         ssart.Chart('#my-chart', config);
       </pre>
-      <p>차트를 감상합니다.</p>
-      <div id="my-chart"></div>
+      <br>
+      <hr>
+      <br>
+      <h4>notify</h4>
+      <br>
+      <p>d3를 추가로 import합니다.</p>
+      <pre>
+        <span class="tag"><xmp><</xmp>script</span> src='https://d3js.org/d3.v5.min.js'<span class="tag">><xmp><</xmp>/script></span>
+      </pre>
   </div>
 </template>
 

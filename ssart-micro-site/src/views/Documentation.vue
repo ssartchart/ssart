@@ -127,7 +127,7 @@ export default {
     ScatterChart,
   },
   data() {
-  return {
+    return {
       isShowAxis: false,
       isShowGettingStarted: false,
       isShowBackground: false,
