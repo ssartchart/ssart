@@ -9,7 +9,7 @@
           <p >Copyright (c) 2022 ssart </p>
           <p>Library released under <a href="https://opensource.org/licenses/MIT">MIT license</a> </p>
           <p>Mail : npm_ssart@naver.com </p>
-          <p>Git : ourgitaddress </p>
+          <p>Git : <a href="https://github.com/ssartchart/ssart">ssart git</a></p>
           </div>
         </div>
     </footer>
