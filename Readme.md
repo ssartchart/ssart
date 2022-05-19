@@ -1112,14 +1112,14 @@ Latest ✔ | Latest ✔ | Latest ✔ |
 
 ## Developers
 
-[ssart microsites](https://naver.com) <br>
+[ssart microsites](https://ssart-chart.netlify.app) <br>
 
 * Lee JungHun : person00333@gmail.com<br>
 * Kim YoungJin : kimyj1288@gmail.com<br>
 * Bae YongHan : byh5112@naver.com<br>
 * Ahn JaeYoung : abogado2113@gmail.com<br>
 * Jeong HaeYun : godbs98@naver.com<br>
-* Jo wonbin : <br>
+* Jo wonbin : jwb7214@gmail.com<br>
 
 개인 깃헙 링크 혹은 마이크로 사이트에서 정리
 
