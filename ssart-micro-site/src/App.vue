@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Navbar />    
+    <Navbar :currentPageName="currentPageName" />    
     <router-view/>
     <!-- Footer-->
     <footer class="py-5 bg-dark">
@@ -20,6 +20,17 @@ import Navbar from "./components/Navbar.vue"
 export default {
   components: {
     Navbar,
+  },
+  data () {
+    return {
+      currentPageName: null
+    }
+  },
+  beforeUpdate () {    
+    this.currentPageName = this.$route.name
+  },
+  created () {    
+    this.currentPageName = this.$route.name
   }
 }
 </script>

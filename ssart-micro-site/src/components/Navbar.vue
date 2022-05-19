@@ -8,18 +8,18 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto ">
                     <li class="nav-item">                        
-                        <a @click.prevent="$router.push({name: 'ChartWizard'}).catch(err => {})" class="nav-link active" aria-current="page" href="#!">
-                            메뉴 탭1(차트 코드)
+                        <a @click.prevent="$router.push({path: '/chart-wizard/information'}).catch(err => {}); scrollTop();" :class="{'nav-link': true, 'active': currentPageName == 'ChartWizard'}" aria-current="page" href="#!">
+                            Chart Maker
                         </a>
                     </li>
-                    <li class="nav-item"><a @click.prevent="$router.push({name: 'Documentation'}).catch(err => {})" class="nav-link active" aria-current="page" href="#!">
+                    <li class="nav-item"><a @click.prevent="$router.push({name: 'Documentation'}).catch(err => {}); scrollTop();" :class="{'nav-link': true, 'active': currentPageName == 'Documentation'}" aria-current="page" href="#!">
                             Documentation
                     </a></li>
-                    <li class="nav-item"><a @click.prevent="$router.push({name: 'Sample'}).catch(err => {})" class="nav-link" href="#!">Sample</a></li>
-                    <li class="nav-item"><a @click.prevent="$router.push({name: 'Contributing'}).catch(err => {})" class="nav-link" href="#!">Contributing</a></li>
+                    <li class="nav-item"><a @click.prevent="$router.push({name: 'Sample'}).catch(err => {}); scrollTop();" :class="{'nav-link': true, 'active': currentPageName == 'Sample'}" href="#!">Sample</a></li>
+                    <li class="nav-item"><a @click.prevent="$router.push({name: 'Contributing'}).catch(err => {}); scrollTop();" :class="{'nav-link': true, 'active': currentPageName == 'Contributing'}" href="#!">Contributing</a></li>
                     
                     <li class="nav-item"><a @click="contact" class="nav-link" href="#!"> Contact </a></li>
-                    <li class="nav-item"><a @click.prevent="$router.push({name: 'Licensed'}).catch(err => {})" class="nav-link" aria-current="page" href="#!">
+                    <li class="nav-item"><a @click.prevent="$router.push({name: 'Licensed'}).catch(err => {}); scrollTop();" :class="{'nav-link': true, 'active': currentPageName == 'Licensed'}" aria-current="page" href="#!">
                             Licensed
                     </a></li>
                 </ul>
@@ -31,16 +31,22 @@
 <script>
 export default {
   name: "Navbar", 
+  props: {
+      currentPageName: String
+  },
   methods:{
       contact:function(){
           window.scrollTo(0, document.body.scrollHeight)
+      },
+      scrollTop:function() {
+          window.scrollTo(0, 0)
       }
   },
   data() {
     return {
-        HomeImg : HomeImg,
+        HomeImg : HomeImg,        
     }
-  }    
+  }
 }
 import HomeImg from "@/img/SSART-logo.png";
 </script>
