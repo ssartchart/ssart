@@ -1,8 +1,8 @@
 <template>
   <div style="display: flex; flex-direction: row; justify-content: space-between;">
     <div class="card mb-4" style="position: static; width: 600px;">
-      <div class="card-body bg-primary text-white ">Bar Chart </div>
-        <p class="m-3"> Bar 차트 데이터 형식</p>
+      <div class="card-body bg-primary text-white ">Circle Chart </div>
+        <p class="m-3"> Circle 차트 데이터 형식</p>
         <div class="row" style="margin-bottom: 5px;">
           <div class="col-sm-6">
               &nbsp;&nbsp;&nbsp; <input class="form-check-input" type="radio" name="circleFormat" value="1" checked style="margin: 5px; margin-top: 5px;"/>Donut
