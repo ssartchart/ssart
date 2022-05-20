@@ -137,7 +137,7 @@ All contents of the library were created using JavaScript.
   <details>
   <summary>Polar Chart</summary>
   <br>
-    <img src=https://github.com/kid1493/ssart/blob/develop/src/img/IndexImg/10.Polar.png?raw=true width = "300px" height = "300px">
+    <img src=https://raw.githubusercontent.com/kid1493/ssart/develop/ssart-micro-site/src/img/IndexImg/10.Polar.png width = "300px" height = "300px">
     <br>
     <p>Polar charts are similar to pie charts, but each dataset has the same angle.  </p>
     <p>Each data set has a different radius size depending on the value. Useful when displaying comparison data similar to pie charts.</p>
