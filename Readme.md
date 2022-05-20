@@ -182,7 +182,7 @@ All contents of the library were created using JavaScript.
 
 <br>
 
-if you want to see more Examples , plz visit our sites and see more chart [SSART](ssart).
+if you want to see more Examples , plz visit our sites and see more chart [SSART](https://ssart-chart.netlify.app).
 
 <br>
 
