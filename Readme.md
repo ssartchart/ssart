@@ -76,7 +76,6 @@ All contents of the library were created using JavaScript.
     <p>면적 그래프는 두개 이상의 자료를 비교하는데 용이하게 사용됩니다.</p>
   <br>
   
-  [Area Details](https://naver.com) 
   </details>
 <br>
 <details>
@@ -90,7 +89,6 @@ All contents of the library were created using JavaScript.
     <p>자료의 대소관계를 한눈에 알아보기 쉽고 직관적입니다.
   <br>
   
-  [Bar Details](https://naver.com) 
 </details>
   <br>
   <details>
@@ -104,7 +102,6 @@ All contents of the library were created using JavaScript.
     <p>거품형 차트는 사회, 경제, 의료 및 기타 과학적 관계에 대한 이해를 용이하게 할 수 있습니다.</p>
   <br>
   
-  [Bar Details](https://naver.com) 
 </details>
  <br>
  <details>
@@ -119,7 +116,6 @@ All contents of the library were created using JavaScript.
   <p>각 부채꼴의 중심각이 전체에서 차지하는 비율을 나타내며, 비율을 한눈에 볼 수 있습니다.</p>
   <p>전체적인 비율을 쉽게 파악할 수 있어서 언론사에서 통계 수치를 공개할 때 자주 활용됩니다.</p>
 
-  [Circle Details](https://naver.com) 
   <br>
   </details>
   <br>
@@ -130,7 +126,6 @@ All contents of the library were created using JavaScript.
       <p>This chart that uses lines to show how different pieces of information are related to each other.</p>
       <p>각 데이터를 점으로 표시하고 그 점들을 선분으로 이어 그린 차트입니다.</p>
       <p>데이터 값이 변화하는 모양과 정도를 쉽게 알 수 있습니다.</p>
-  [Line Details](https://naver.com)
   <br>
   </details>
   <br>
@@ -146,7 +141,6 @@ All contents of the library were created using JavaScript.
     <p>원형차트와 유사한 비교 데이터를 표시할 때 유용합니다. 단 해당 데이터셋의 값 또한 표시합니다</p>
   <br>
 
-  [Polar Details](https://naver.com) 
   </details>
     </details>
   <br>
@@ -162,7 +156,6 @@ All contents of the library were created using JavaScript.
       <p>그 위치에 점을 찍고 평가항목간 점을 이어 선으로 만들어 항목 간 균형을 한눈에 볼 수 있도록 해주는 차트입니다.</p>
       <p>여러 측정 목표를 함께 겹쳐 놓아 비교하기에도 편리합니다. 각 항목 간 비율뿐만 아니라 균형과 경향을 직관적으로 알 수 있습니다.</p>
 
-  [Radar Details](https://naver.com)
   <br>
   </details>
   <br>
@@ -176,7 +169,6 @@ All contents of the library were created using JavaScript.
       <p>산점도 차트(Scatter chart)는 직교 좌표계 (도표) 를 이용해 좌표상의 점을 표시함으로써 두 개 변수간의 관계를 나타내는 방법입니다.</p>
       <p>두 변수 사이의 관계를 알 수 있습니다.</p>
 
-  [Scatter Details](https://naver.com)
 <br>
   </details>
 
