@@ -46,4 +46,4 @@ import 'https://cdn.jsdelivr.net/npm/ssart@1.0.12/src/index.min.js'
 
 자세한 사용 방법은 micro-site를 통해 확인해 주세요
 
-[ssart microsite](https://ssart-chart.netlify.app)
+[ssart microsite](https://ssart-library.netlify.app)

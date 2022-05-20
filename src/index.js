@@ -8,7 +8,7 @@ window.onload = function(){
 
     let myLink = document.createElement("link");
     myLink.setAttribute("rel", "stylesheet");
-    myLink.setAttribute("href", "https://cdn.jsdelivr.net/npm/ssart@1.0.11/src/css/index.css");
+    myLink.setAttribute("href", "https://cdn.jsdelivr.net/npm/ssart@1.0.12/src/css/index.css");
     document.head.appendChild(myLink);
 }
 d3
