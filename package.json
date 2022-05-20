@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bugs": {
-    "email": "hostname@hostname.com"
+    "email": "npm_ssart@naver.com"
   },
   "repository": {
     "type": "git",
@@ -26,27 +26,27 @@
   "contributors": [
     {
       "name": "Lee JungHun",
-      "email": "your@email.com"
+      "email": "person00333@gmail.com"
     },
     {
       "name": "Kim YoungJin",
-      "email": "your@email.com"
+      "email": "kimyj1288@gmail.com"
     },
     {
       "name": "Jo wonbin",
-      "email": "your@email.com"
+      "email": "jwb7214@gmail.com"
     },
     {
       "name": "Jeong HaeYun",
-      "email": "your@email.com"
+      "email": "godbs98@naver.com"
     },
     {
       "name": "Ahn JaeYoung",
-      "email": "your@email.com"
+      "email": "abogado2113@gmail.com"
     },
     {
       "name": "Bae YongHan",
-      "email": "your@email.com"
+      "email": "byh5112@naver.com"
     }
   ],
   "license": "MIT",

@@ -8,11 +8,9 @@
                       <h1 class="display-5 fw-bolder text-white mb-2">SSART OPENSOURCE LIBRARY </h1>
                       <p class="lead text-white-50 mb-4" style="font-size: 1.2rem;">This Library helps you visualize your data in an easy and simple way.  </p>
                       <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
-                          
                           <a class="btn btn-outline-light btn-lg px-4 me-sm-5" @click="goToDocumentation">Manual</a>
                           <a class="btn btn-outline-light btn-lg px-4 me-sm-5" @click="goToSample">Samples</a>
                           <a class="btn btn-outline-light btn-lg px-4 me-sm-5" href="https://github.com/ssartchart">GitHub</a>
-
                       </div>
                   </div>
               </div>
@@ -241,7 +239,49 @@
             </div>
             </div>
         <br><!-- 3개씩 container 나누기 -->
+        <div class="container px-3 my-4">
+                <div class="row gx-5">
+                    <div class="col-lg-4 mb-lg-0">
+                        <div class="row" style="display: flex; align-items: center;">
+                            <div class="col-sm-3">
+                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
+                                    <i class="bi"><img :src="polarIco" alt="" style="display: block; width: 100%; height: auto;" ></i>
+                                </div>
+                            </div>
+                            <div class="col-sm-9" style="display: table-cell; vertical-align: middle;">
+                                <h2 class="h4 fw-bolder" style="display: flex; align-items: center;">Polar Chart</h2>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-secondary">Polar charts are similar to pie charts, but each dataset has the same angle. Each data set has a different radius size depending on the value. Useful when displaying comparison data similar to pie charts.</p>
+                        </div>
+                            <img class="card-img-top" :src='Polar' alt="Card image cap">
+                        <a class="text-decoration-none" @click="goToPolarDocumentation" href="#!">
+                            Polar Chart Detail
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
 
+                    <div class="col-lg-4 mb-lg-0">
+                        <div class="row" style="display: flex; align-items: center;">
+                            <div class="col-sm-3">
+                                <div class="feature bg-gradient text-white rounded-3 mb-3">
+                                    <i class="bi"></i>
+                                </div>
+                            </div>
+                            <div class="col-sm-9" style="display: table-cell; vertical-align: middle;">
+                                <h2 class="h4 fw-bolder" style="display: flex; align-items: center;"></h2>
+                        </div>
+                        <div>
+                             <br/>
+                        </div>
+
+                        
+                    </div>
+                </div>
+
+            </div>
+            </div>
         </section>
   </div>
 </template>
@@ -261,6 +301,9 @@ import areaIco from "@/ico/area.png"
 import bubbleIco from "@/ico/bubble.png"
 import donutIco from "@/ico/donut.png"
 import scatterIco from "@/ico/scatter.png"
+import Polar from "@/img/IndexImg/10.Polar.png"
+import polarIco from "@/ico/polar.png"
+
 
 export default {
   name: 'Home',
@@ -269,7 +312,7 @@ export default {
   },
   data () {
     return {
-      Bar, BarH, Line, Area, Scatter, Bubble, Donut, Pie, Radar, areaIco, bubbleIco, donutIco, scatterIco,
+      Bar, BarH, Line, Area, Scatter, Bubble, Donut, Pie, Radar, areaIco, bubbleIco, donutIco, scatterIco,Polar ,polarIco
     }
   },
   methods: {
@@ -305,7 +348,10 @@ export default {
     },
     goToScatterDocumentation: function () {
         this.$router.push('document?field=Scatter')
-    }
+    },
+    goToPolar: function () {
+        this.$router.push('document?field=Polar')
+    },
   }
 }
 </script>
