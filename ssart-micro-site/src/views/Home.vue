@@ -117,7 +117,7 @@
                         <div class="row" style="display: flex; align-items: center;">
                             <div class="col-sm-3">
                                 <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
-                                    <i class="bi"><img :src="scatterIco" alt="" style="display: block; width: 100%; height: auto;" ></i>
+                                    <i class="bi"><img :src="scatterIco" alt="" style="display: block; width: 95%; height: 95%;" ></i>
                                 </div>
                             </div>
                             <div class="col-sm-9" style="display: table-cell; vertical-align: middle;">
@@ -138,7 +138,7 @@
                         <div class="row" style="display: flex; align-items: center;">
                             <div class="col-sm-3">
                                 <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
-                                    <i class="bi"><img :src="bubbleIco" alt="" style="display: block; width: 100%; height: auto;" ></i>
+                                    <i class="bi"><img :src="bubbleIco" alt="" style="display: block; width: 95%; height: 95%;" ></i>
                                 </div>
                             </div>
                             <div class="col-sm-9" style="display: table-cell; vertical-align: middle;">
@@ -191,7 +191,7 @@
                         <div class="row" style="display: flex; align-items: center;">
                             <div class="col-sm-3">
                                 <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
-                                    <i class="bi"><img :src="donutIco" alt="" style="display: block; width: 90%; height: 90%;" ></i>                        
+                                    <i class="bi"><img :src="donutIco" alt="" style="display: block; width: 95%; height: 95%;" ></i>                        
                                 </div>
                             </div>
                             <div class="col-sm-9" style="display: table-cell; vertical-align: middle;">

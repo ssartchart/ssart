@@ -6,19 +6,25 @@
       />
     </aside>
     <chart-wizart-information v-if="isShowInformation" />
-    <div v-else class="wizard-container" style="text-align: start; margin-bottom: 100px; margin-left: 260px;">
+    <div v-else class="wizard-container" style="text-align: start; margin-left: 260px;">
       <div style="margin-top: 100px">
-        <h1># {{chartName}} Chart</h1>
+        <h1># {{chartName}} Chart</h1>        
           <iframe
             ref="iframe"
             title="output"
-            sandbox="allow-scripts allow-modals allow-same-origin"
+            sandbox="allow-scripts allow-same-origin"
             frameBorder="0"
             width="100%"
-            height="100%"
+            height="100%"        
             :srcdoc="renderSrc"
             @load="resizeIframe"                     
-          />        
+          />
+          <div style="margin-bottom: 2rem; margin-left: 80%">            
+            <a class="text-decoration-none" @click.prevent="goToDocumentation" href="#!" style="margin-left: 2rem; margin-top: 15px">
+              Detail Docs
+              <i class="bi bi-arrow-right"></i>
+            </a>        
+          </div>
       </div>
       <!-- <div class="row"><div class="col-1-2"><div class="form-input"><label for="spaceInput">Slide space</label> <input type="number" id="spaceInput" placeholder="Type number"></div> <div class="form-input"><label for="widthInput">Slide width</label> <input type="number" id="widthInput" placeholder="Type number"></div> <div class="form-input"><label for="heightInput">Slide height</label> <input type="number" id="heightInput" placeholder="Type number"></div> <div class="form-input"><label for="borderInput">Slide border</label> <input type="number" id="borderInput" placeholder="Type number"></div> <div class="form-input"><label for="perspectiveInput">Slide perspective</label> <input type="number" id="perspectiveInput" placeholder="Type number"></div> <div class="form-input"><label for="scalingInput">Slide scaling</label> <input type="number" id="scalingInput" placeholder="Type number"></div></div> <div class="col-1-2"><div class="form-input"><button class="button">Add Slide</button> <button class="button">Remove Slide</button></div> <div class="form-input"><button class="button">Show/hide Navigation</button></div> <div class="form-input"><label for="visibleInput">Number of visible</label> <input type="number" id="visibleInput" placeholder="Type number"></div> <div class="form-input"><label for="infiniteCheckbox">Infinite loop</label> <input type="checkbox" id="infiniteCheckbox"></div> <div class="form-input"><label for="disable3dCheckbox">Disable 3d</label> <input type="checkbox" id="disable3dCheckbox"></div> <div class="form-input"><label for="animationSpeedInput">Animation speed</label> <input type="number" id="animationSpeedInput" placeholder="Type number"></div> <div class="form-input"><label for="dirSelect">Direction</label> <select id="dirSelect"><option value="ltr">LTR</option> <option value="rtl">RTL</option></select></div></div></div> -->
       <div class="pane top-pane">
@@ -177,11 +183,12 @@ export default {
       this.displayName = language
     },
     resizeIframe () {
-      let iframe = this.$refs.iframe      
-      if (iframe.contentWindow.document.body.scrollHeight < 500) {
+      let iframe = this.$refs.iframe         
+      console.log(iframe.contentWindow.document.body.scrollHeight)
+      if (iframe.contentWindow.document.body.scrollHeight < 650) {
         iframe.height = 500 + "px"
       } else {
-        iframe.height = iframe.contentWindow.document.body.scrollHeight + 20 + "px";
+        iframe.height = iframe.contentWindow.document.body.scrollHeight - 150 + 20 + "px";
       }
     },
     doCopy: function () {
@@ -193,17 +200,38 @@ export default {
         alert('Can not copy')
         console.log(e)
       })
-    }
+    },
+    goToDocumentation: function () {
+      if (this.$route.params.chartname === "vertical-bar-charts") {      
+        this.$router.push('/document?field=Bar1')
+      } else if (this.$route.params.chartname === "horizontal-bar-charts") {
+        this.$router.push('/document?field=Bar2')
+      } else if (this.$route.params.chartname === "area-charts") {
+        this.$router.push('/document?field=Area')
+      } else if (this.$route.params.chartname === "bubble-charts") {
+        this.$router.push('/document?field=Bubble')
+      } else if (this.$route.params.chartname === "circle-charts") {
+        this.$router.push('/document?field=Circle')
+      } else if (this.$route.params.chartname === "line-charts") {
+        this.$router.push('/document?field=Line')
+      } else if (this.$route.params.chartname === "polar-charts") {
+        this.$router.push('/document?field=Polar')
+      } else if (this.$route.params.chartname === "radar-charts") {
+        this.$router.push('/document?field=Radar')
+      } else if (this.$route.params.chartname === "scatter-charts") {
+        this.$router.push('/document?field=Scatter')
+      }
+    },
   },
   computed: {
     codemirror() {
       return this.$refs.myCm.codemirror
     },
     renderSrc() {      
-      return `<html><body>${this.htmlCode}</body><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ssart@1.0.6/src/css/index.css"></link><style>#ssart{width: 100%; height: 100%; display: flex; justify-content: center;}</style>` +
+      return `<html><body>${this.htmlCode}</body><style>#ssart{width: 100%; height: 100%; display: flex; justify-content: center;}</style>` +
       `<scr` + `ipt src="https://d3js.org/d3.v5.min.js"></scr` + `ipt>` +
       `<scr` + `ipt type="module">` +
-      `import * as Chart from "https://cdn.jsdelivr.net/npm/ssart@1.0.6/src/index.js"
+      `import * as Chart from "https://cdn.jsdelivr.net/npm/ssart@1.0.11/src/index.js"
       ${this.dataCode}
       ${this.configCode}` +
       `</scr` + `ipt>`
