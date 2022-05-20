@@ -9,8 +9,8 @@
                       <p class="lead text-white-50 mb-4" style="font-size: 1.2rem;">This Library helps you visualize your data in an easy and simple way.  </p>
                       <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
                           
-                          <a class="btn btn-outline-light btn-lg px-4 me-sm-5" @click="goToDocumentation">메뉴얼</a>
-                          <a class="btn btn-outline-light btn-lg px-4 me-sm-5" @click="goToSample">차트 샘플</a>
+                          <a class="btn btn-outline-light btn-lg px-4 me-sm-5" @click="goToDocumentation">Manual</a>
+                          <a class="btn btn-outline-light btn-lg px-4 me-sm-5" @click="goToSample">Samples</a>
                           <a class="btn btn-outline-light btn-lg px-4 me-sm-5" href="https://github.com/ssartchart">GitHub</a>
 
                       </div>
