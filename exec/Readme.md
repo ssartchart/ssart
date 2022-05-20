@@ -37,7 +37,7 @@ import "ssart" ;
 2. cdn
 
 ``` javascript
-import 'https://cdn.jsdelivr.net/npm/ssart@1.0.6/src/index.min.js'
+import 'https://cdn.jsdelivr.net/npm/ssart@1.0.12/src/index.min.js'
 ```
 
 
