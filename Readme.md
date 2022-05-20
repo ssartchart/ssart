@@ -182,7 +182,7 @@ All contents of the library were created using JavaScript.
 
 <br>
 
-if you want to see more Examples , plz visit our sites and see more chart [SSART](https://ssart-chart.netlify.app).
+if you want to see more Examples , plz visit our sites and see more chart [SSART](https://ssart-library.netlify.app).
 
 <br>
 
@@ -1112,7 +1112,7 @@ Latest ✔ | Latest ✔ | Latest ✔ |
 
 ## Developers
 
-[ssart microsites](https://ssart-chart.netlify.app) <br>
+[ssart microsites](https://ssart-library.netlify.app) <br>
 
 * Lee JungHun : person00333@gmail.com<br>
 * Kim YoungJin : kimyj1288@gmail.com<br>
