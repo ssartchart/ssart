@@ -10,7 +10,7 @@
                       <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
                           <a class="btn btn-outline-light btn-lg px-4 me-sm-5" @click="goToDocumentation">Manual</a>
                           <a class="btn btn-outline-light btn-lg px-4 me-sm-5" @click="goToSample">Samples</a>
-                          <a class="btn btn-outline-light btn-lg px-4 me-sm-5" href="https://github.com/ssartchart">GitHub</a>
+                          <a class="btn btn-outline-light btn-lg px-4 me-sm-5" target="_blank" rel="noopener noreferrer" href="https://github.com/ssartchart">GitHub</a>
                       </div>
                   </div>
               </div>
